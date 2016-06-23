@@ -9,47 +9,50 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 	Const Timeout = 5
-	
+
 	dim strInFile, strOutFile
-	
+
 	'|----------------------------------------------------------------------------------------------------------|
 	'|  Author: Siggi Bjarnason                                                                                 |
 	'|  Authored: 06/23/16                                                                                      |
 	'|  Copyright: Siggi Bjarnason 2016                                                                         |
 	'|----------------------------------------------------------------------------------------------------------|
-	
+
 	' User Spefified values, specify values here per your needs
-	
+
 	strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\AGC_cleanup_and_add.csv"
 	strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit.txt"
-	
+
 	'Nothing below here is user configurable proceed at your own risk.
-	
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, cmd, fso, nError, strErr, strResult, x, strResultParts, strNextHop
-	
+
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, cmd, fso, nError, strErr, strResult, x, strResultParts, strNextHop, objDel
+
 	crt.screen.synchronous = true
 	crt.screen.IgnoreEscape = True
-	
+
 	' Creating a File System Object to interact with the File System
 	Set fso = CreateObject("Scripting.FileSystemObject")
-	
+
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
 	Set objFileIn = fso.OpenTextFile(strInFile, ForReading, false)
+	set objDel = CreateObject("Scripting.Dictionary")
+
 	strLine = objFileIn.readline
 	While not objFileIn.atendofstream
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(1)
-		
+		objDel.RemoveAll
+
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
 		end if
-		
+
 		ConCmd = "/SSH2 "  & host
 		on error resume next
 		crt.Session.Connect ConCmd
 		on error goto 0
-		
+
 		If crt.Session.Connected Then
 			crt.Screen.Synchronous = True
 			crt.Screen.WaitForString "#",Timeout
@@ -69,9 +72,21 @@ Sub Main
 				else
 					strNextHop = ""
 				end if
+				if x<5 then
+					strResult = "(D)" & strResult
+					if not objDel.Exists (strParts(x)) then
+						objDel.add strParts(x),x
+					end if
+				else
+					if objDel.Exists (strParts(x)) then
+						strResult = "(X)" & strResult
+					else
+						strResult = "(A)" & strResult
+					end if
+				end if
 				objFileOut.writeline host & "," & strParts(x) & "," & strResult  & "," & strNextHop
 				crt.Screen.WaitForString "#", Timeout
-			next 
+			next
 			crt.Session.Disconnect
 		else
 			nError = crt.GetLastError
@@ -79,11 +94,11 @@ Sub Main
 			objFileOut.writeline host & ",Not Connected,Error " & nError & ": " & strErr
 		end if
 	wend
-	
+
 	Set objFileIn  = Nothing
 	Set objFileOut = Nothing
 	Set fso = Nothing
-	
+
 	msgbox "All Done, Cleanup complete"
 end sub
 

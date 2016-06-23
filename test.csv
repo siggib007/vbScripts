@@ -1,0 +1,11 @@
+Device,Status
+bay-f6b-msgr-2a, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-2b, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-4a, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-4b, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-5b, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1a, FAILED, Active=disable Standby=disable
+bay-f6f-abch-1c, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1d, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1e, PASS
+bay-f6f-abch-1f, PASS

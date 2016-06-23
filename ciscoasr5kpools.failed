@@ -1,0 +1,355 @@
+Option Explicit
+Dim FileObj, strLine, fso, f, fc, f1, strParts, FolderSpec, strOutFileName, objFileOut, strAPN, row4, row6, rowAPN, strTemp
+Dim app, wb, ws4, ws6, wsAPN, strPCFName, strContext, strPoolGroup, iPoolPri, bExcelMode, dictSubnets, strAPN_Map, x
+
+'-------------------------------------------------------------------------------------------------'
+'  This script will loop through all the files in the provided input directory of Cisco ASR 5000  '
+'  GGSN configurations and parse out all the important details about handset pool configurations  '
+'                                                                                                 '
+'  Author: Siggi Bjarnason                                                                        '
+'  Date: 8/27/2012                                                                                '
+'  Usage:  parser inpath outfilename                                                              '
+'          parser: The name of this script                                                        '
+'          inpath: The complete path of the folder where the ASR 5000 configurations are stored   '
+'          outfilename: The name of the file you want the results saved to, with complete path    '
+'  Example: cscript parser.vbs C:\Cisco5KCfg c:\temp\ASR5KPools.xlsx                                  '
+'-------------------------------------------------------------------------------------------------'
+
+Const xlHAlignCenter  = -4108
+Const xlHAlignGeneral = 1
+Const xlHAlignJustify = -4130
+Const xlHAlignLeft = -4131
+Const xlHAlignRight = -4152
+Const xlVAlignBottom  = -4107
+Const xlVAlignCenter = -4108
+Const xlVAlignTop = -4160
+Const xlExcel8 = 56
+
+'If WScript.Arguments.Count <> 2 Then
+'  WScript.Echo "Usage: cscript " & wscript.scriptname & " inpath outfilename"
+'  wscript.echo "        inpath: The complete path of the folder where the ASR 5000 configurations are stored"
+'  wscript.echo "        outfilename: The name of the file you want the results saved to, with complete path."
+'  WScript.Quit
+'End If
+
+
+FolderSpec = "C:\Cisco5KCfg" 'WScript.Arguments(0)
+strOutFileName = "C:\temp\ASR5KPools.xlsx"  'WScript.Arguments(1)
+strParts = split(strOutFileName,".")
+Set fso = CreateObject("Scripting.FileSystemObject")
+set dictSubnets = CreateObject("Scripting.Dictionary")
+strAPN_Map = "GGSN, Context, APN, Pool Group" & vbcrlf
+row4 = 2
+row6 = 2
+rowAPN = 2
+
+initializeSubnetsDict
+
+if left(strParts(ubound(strParts)),3) = "xls" then
+	Set app = CreateObject("Excel.Application")
+	Set wb = app.Workbooks.Add
+	Set ws4 = wb.Worksheets(1)
+	app.visible = True
+	ws4.name = "IPv4"
+	ws4.Cells(1, 1).value = "GGSN"
+	ws4.Cells(1, 2).value = "Context"
+	ws4.Cells(1, 3).value = "Name"
+	ws4.Cells(1, 4).value = "Address"
+	ws4.Cells(1, 5).value = "Type"
+	ws4.Cells(1, 6).value = "Group"
+	ws4.Cells(1, 7).value = "APN"
+	With ws4.Range(ws4.Cells(1, 1), ws4.Cells(1, 7))
+  	  With .Font
+    		.Name = "Calibri"
+    		.Size = 12
+    		.Bold = True
+    		.Strikethrough = False
+    		.Superscript = False
+    		.Subscript = False
+    		.OutlineFont = False
+    		.Shadow = False
+    		.Color = 0
+    	End With
+		  .HorizontalAlignment = xlHAlignCenter
+  	  .VerticalAlignment = xlVAlignCenter
+  	  .WrapText = False
+  End With	
+
+	wb.Sheets.Add ,wb.Worksheets(wb.Worksheets.Count)
+	Set ws6 = wb.Worksheets(2)
+	ws6.name = "IPv6"
+	ws6.Cells(1, 1).value = "GGSN"
+	ws6.Cells(1, 2).value = "Context"
+	ws6.Cells(1, 3).value = "Name"
+	ws6.Cells(1, 4).value = "Address"
+	ws6.Cells(1, 5).value = "Type"
+	ws6.Cells(1, 6).value = "Group"
+	ws6.Cells(1, 7).value = "APN"
+	With ws6.Range(ws6.Cells(1, 1), ws6.Cells(1, 7))
+  	  With .Font
+    		.Name = "Calibri"
+    		.Size = 12
+    		.Bold = True
+    		.Strikethrough = False
+    		.Superscript = False
+    		.Subscript = False
+    		.OutlineFont = False
+    		.Shadow = False
+    		.Color = 0
+    	End With
+		  .HorizontalAlignment = xlHAlignCenter
+  	  .VerticalAlignment = xlVAlignCenter
+  	  .WrapText = False
+  End With	
+
+	wb.Sheets.Add ,wb.Worksheets(wb.Worksheets.Count)
+	Set wsAPN = wb.Worksheets(3)
+	wsAPN.name = "APN"
+	wsAPN.Cells(1, 1).value = "GGSN"
+	wsAPN.Cells(1, 2).value = "Context"
+	wsAPN.Cells(1, 3).value = "APN"
+	wsAPN.Cells(1, 4).value = "Pool Group"
+	With wsAPN.Range(wsAPN.Cells(1, 1), wsAPN.Cells(1, 7))
+  	  With .Font
+    		.Name = "Calibri"
+    		.Size = 12
+    		.Bold = True
+    		.Strikethrough = False
+    		.Superscript = False
+    		.Subscript = False
+    		.OutlineFont = False
+    		.Shadow = False
+    		.Color = 0
+    	End With
+		  .HorizontalAlignment = xlHAlignCenter
+  	  .VerticalAlignment = xlVAlignCenter
+  	  .WrapText = False
+  End With	
+	bExcelMode = True
+else
+on error resume next
+	Set objFileOut = fso.createtextfile(strOutFileName)
+	If Err.Number <> 0 Then		
+    WScript.Echo "Unable to save to " & strOutFileName
+    on error goto 0
+    strParts = split(strOutFileName,".")
+    strTemp = strParts(ubound(strParts)-1)
+    x = 1
+    strParts(ubound(strParts)-1) = strTemp & x
+    strOutFileName = join(strParts,".")
+    while fso.fileexists(strOutFileName)
+    	x = x + 1
+    	strParts(ubound(strParts)-1) = strTemp & x
+    	strOutFileName = join(strParts,".")
+    wend
+    Err.Clear
+    wscript.echo "saving to " & strOutFileName & " instead"
+		Set objFileOut = fso.createtextfile(strOutFileName)
+	End If
+	objFileOut.writeline "IP Version, GGSN, Context,Name, Address, Type, Group"
+end if
+
+Set f = fso.GetFolder(folderspec)
+Set fc = f.Files
+
+For Each f1 in fc
+	If f1.name <> strOutFileName Then
+		Set FileObj = fso.opentextfile(folderspec & "\" & f1.name)
+		While not fileobj.atendofstream
+			strLine = Trim(FileObj.readline)
+			if left(strline,15) = "system hostname" then
+				strPCFName = mid(strline,17)
+				'wscript.echo "Found Hostname: " & strPCFName
+			end if
+			if left(strline,7) = "context" then
+				strContext = ucase(mid(strline,9))
+				'wscript.echo "in context " & strContext
+			end if
+			if left(strline, 7) = "ip pool" then
+				strParts = split(strline," ")
+				if strParts(5) = "static" then
+					strPoolGroup = strParts(7)
+				else
+					strPoolGroup = strParts(8)
+				end if
+				if strParts(3) = "range" then
+					if bExcelMode then
+						ws4.activate
+						ws4.Cells(row4, 1).value = strPCFName
+						ws4.Cells(row4, 2).value = strContext
+						ws4.Cells(row4, 3).value = strParts(2)
+						ws4.Cells(row4, 4).value = strParts(4) & "-" & strParts(5)
+						ws4.Cells(row4, 5).value = strParts(6)
+						ws4.Cells(row4, 6).value = strParts(8)
+						'ws4.Cells(row4, 7).value = "=VLOOKUP(F" & row4 & ",APN!C:D,2,FALSE)"
+						row4 = row4 + 1
+					else
+						objFileOut.writeline "IPV4," & strPCFName & "," & strContext & "," & strParts(2) & "," & strParts(4) & "-" & strParts(5) & "," & strParts(6) & "," & strParts(8)
+					end if
+				else
+					if bExcelMode then
+						ws4.activate
+						ws4.Cells(row4, 1).value = strPCFName
+						ws4.Cells(row4, 2).value = strContext
+						ws4.Cells(row4, 3).value = strParts(2)
+						ws4.Cells(row4, 4).value = strParts(3) & dictSubnets.Item(strParts(4))
+						ws4.Cells(row4, 5).value = strParts(5)
+						ws4.Cells(row4, 6).value = strPoolGroup
+						'ws4.Cells(row4, 7).value = "=VLOOKUP(F" & row4 & ",APN!C:D,2,FALSE)"
+						row4 = row4 + 1
+					else
+						objFileOut.writeline "IPV4," & strPCFName & "," & strContext & "," & strParts(2) & "," & strParts(3) & dictSubnets.Item(strParts(4)) & "," & strParts(5) & ","  & strPoolGroup
+					end if
+				end if
+				'wscript.echo strContext & "," & strParts(2) & "," & strParts(3) & "," & strParts(4)
+			end if
+			if left(strline,9)="ipv6 pool" then
+				strParts = split(strline," ")
+				if bExcelMode then
+					ws6.activate
+					ws6.Cells(row6, 1).value = strPCFName
+					ws6.Cells(row6, 2).value = strContext
+					ws6.Cells(row6, 3).value = strParts(2)
+					ws6.Cells(row6, 4).value = strParts(4)
+					ws6.Cells(row6, 5).value = strParts(5)
+					ws6.Cells(row6, 6).value = strParts(8)
+					'ws6.Cells(row6, 7).value = "=VLOOKUP(F" & row6 & ",APN!C:D,2,FALSE)"
+					row6 = row6 + 1
+				else
+					objFileOut.writeline "IPV6," & strPCFName & "," & strContext & "," & strParts(2) & "," & strParts(4) & "," & strParts(5) & "," & strParts(8)
+				end if
+				'wscript.echo strContext & "," & strParts(2) & "," & strParts(4) & "," & strParts(5)
+			end if
+			if left(strline,4)="apn " then
+				strAPN = mid(strline,5)
+			end if
+			if left(strline,20)="ip address pool name" then
+				if bExcelMode then
+					wsAPN.activate
+					wsAPN.Cells(rowAPN, 1).value = strPCFName
+					wsAPN.Cells(rowAPN, 2).value = strContext
+					wsAPN.Cells(rowAPN, 3).value = strAPN
+					wsAPN.Cells(rowAPN, 4).value = mid(strline,22)
+					rowAPN = rowAPN + 1
+				else
+					strAPN_Map = strAPN_Map & strPCFName & "," & strContext & "," & strAPN  & "," &  mid(strline,22)&vbcrlf
+				end if
+				'wscript.echo strPCFName & "," & strContext & "," & "," &  mid(strline,22) & strAPN
+			end if
+			if left(strline,24) = "ipv6 address prefix-pool" then
+				if bExcelMode then
+					wsAPN.activate
+					wsAPN.Cells(rowAPN, 1).value = strPCFName
+					wsAPN.Cells(rowAPN, 2).value = strContext
+					wsAPN.Cells(rowAPN, 3).value = strAPN
+					wsAPN.Cells(rowAPN, 4).value = mid(strline,26)
+					rowAPN = rowAPN + 1
+				else
+					strAPN_Map = strAPN_Map & strPCFName & "," & strContext & "," & strAPN  & "," &  mid(strline,26) & vbcrlf
+				end if
+				'wscript.echo strPCFName & "," & strContext & "," & "," &  mid(strline,22) & strAPN
+			end if				
+		Wend
+		FileObj.close
+	End If
+Next
+
+if bExcelMode = false then objFileOut.write vbcrlf & strAPN_Map
+
+if bExcelMode then
+	row4 = 2
+	while ws4.cells(row4,6).value <> ""
+		rowAPN=2
+		ws4.activate
+		while wsAPN.cells(rowAPN,4).value <> ""
+			if wsAPN.Cells(rowAPN,4).value = ws4.cells(row4,6).value _
+			 and wsAPN.Cells(rowAPN,1).value = ws4.cells(row4,1).value _
+			 and wsAPN.Cells(rowAPN,2).value = ws4.cells(row4,2).value then
+				if ws4.cells(row4,7).value = "" then
+					ws4.cells(row4,7) = wsAPN.cells(rowAPN,3).value
+				else
+					'wscript.echo "APN value:" & ws4.cells(row4,7).value
+					ws4.cells(row4,7) = ws4.cells(row4,7) & ", " & wsAPN.cells(rowAPN,3).value
+				end if
+			end if
+			rowAPN = rowAPN + 1
+		wend
+		row4 = row4 + 1
+	wend
+	ws4.Range(ws4.Cells(1, 1), ws4.Cells(1, 7)).EntireColumn.AutoFit
+	ws6.Range(ws6.Cells(1, 1), ws6.Cells(1, 7)).EntireColumn.AutoFit
+	wsAPN.Range(wsAPN.Cells(1, 1), wsAPN.Cells(1, 4)).EntireColumn.AutoFit
+	ws4.activate
+	ws4.cells(1,1).activate
+	on error resume next
+	if right(strOutFileName,5) = ".xlsx" then wb.SaveAs strOutFileName
+	if right(strOutFileName,4) = ".xls" then wb.SaveAs strOutFileName, xlExcel8
+	If Err.Number <> 0 Then		
+    WScript.Echo "Unable to save to " & strOutFileName
+    on error goto 0
+    strParts = split(strOutFileName,".")
+    strTemp = strParts(ubound(strParts)-1)
+    x = 1
+    strParts(ubound(strParts)-1) = strTemp & x
+    strOutFileName = join(strParts,".")
+    while fso.fileexists(strOutFileName)
+    	x = x + 1
+    	strParts(ubound(strParts)-1) = strTemp & x
+    	strOutFileName = join(strParts,".")
+    wend
+    Err.Clear
+    wscript.echo "saving to " & strOutFileName & " instead"
+		if right(strOutFileName,5) = ".xlsx" then wb.SaveAs strOutFileName
+		if right(strOutFileName,4) = ".xls" then wb.SaveAs strOutFileName, xlExcel8
+	End If
+'	wb.Close
+'	app.Quit
+	Set ws4 = Nothing
+	Set wb = Nothing
+	Set app = Nothing
+else
+	objFileOut.close
+	Set objFileOut = nothing
+end if
+
+Set FileObj = nothing
+Set fc = nothing
+Set f = nothing
+Set fso = nothing
+
+wscript.echo "Done"
+
+sub initializeSubnetsDict
+dictSubnets.add "255.255.255.255", "/32"
+dictSubnets.add "255.255.255.254", "/31"
+dictSubnets.add "255.255.255.252", "/30"
+dictSubnets.add "255.255.255.248", "/29"
+dictSubnets.add "255.255.255.240", "/28"
+dictSubnets.add "255.255.255.224", "/27"
+dictSubnets.add "255.255.255.192", "/26"
+dictSubnets.add "255.255.255.128", "/25"
+dictSubnets.add "255.255.255.0", "/24"
+dictSubnets.add "255.255.254.0", "/23"
+dictSubnets.add "255.255.252.0", "/22"
+dictSubnets.add "255.255.248.0", "/21"
+dictSubnets.add "255.255.240.0", "/20"
+dictSubnets.add "255.255.224.0", "/19"
+dictSubnets.add "255.255.192.0", "/18"
+dictSubnets.add "255.255.128.0", "/17"
+dictSubnets.add "255.255.0.0", "/16"
+dictSubnets.add "255.254.0.0", "/15"
+dictSubnets.add "255.252.0.0", "/14"
+dictSubnets.add "255.248.0.0", "/13"
+dictSubnets.add "255.240.0.0", "/12"
+dictSubnets.add "255.224.0.0", "/11"
+dictSubnets.add "255.192.0.0", "/10"
+dictSubnets.add "255.128.0.0", "/9"
+dictSubnets.add "255.0.0.0", "/8"
+dictSubnets.add "254.0.0.0", "/7"
+dictSubnets.add "252.0.0.0", "/6"
+dictSubnets.add "248.0.0.0", "/5"
+dictSubnets.add "240.0.0.0", "/4"
+dictSubnets.add "224.0.0.0", "/3"
+dictSubnets.add "192.0.0.0", "/2"
+dictSubnets.add "128.0.0.0", "/1"
+end sub

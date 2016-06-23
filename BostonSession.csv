@@ -1,0 +1,9 @@
+hostname,session_name,protocol,folder
+10.41.80.3,MA-BOSW1-CIS-7609-1,SSH2,Massachusetts
+10.41.80.4,MA-BOSW1-CIS-7609-2,SSH2,Massachusetts
+10.41.80.31,MA-BOSW1-HPB-SYSLOG-1,SSH2,Massachusetts
+10.41.80.32,MA-BOSW1-HPB-SYSLOG-2,SSH2,Massachusetts
+10.41.80.48,MA-BOSW1-CIENA-5305-1,Telnet,Massachusetts
+10.41.80.49,MA-BOSW1-CIENA-5305-2,Telnet,Massachusetts
+10.41.80.233,MA-BOSW1-Cisco7609-3,SSH2,Massachusetts
+10.41.80.234,MA-BOSW1-Cisco7609-4,SSH2,Massachusetts

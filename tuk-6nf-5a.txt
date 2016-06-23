@@ -1,0 +1,5747 @@
+Config
+       Collected: 4/6/2006 1:56:36 PM 
+
+ !
+ ! Last configuration change at 21:55:47 UTC Thu Apr 6 2006 by truecontrol
+ ! NVRAM config last updated at 21:55:59 UTC Thu Apr 6 2006 by truecontrol
+ !
+ version 12.1
+ service nagle
+ no service pad
+ service timestamps debug datetime msec localtime show-timezone
+ service timestamps log datetime localtime show-timezone
+ service password xxxxx
+ service counters max age 10
+ !
+ hostname tuk-6nf-5a
+ !
+ boot system sup-bootflash:c6sup22-pk2sv-mz.121-23.E.bin
+ boot system slot0:c6sup22-pk2sv-mz.121-13.E8
+ logging buffered 65535 informational
+ no logging console
+ logging monitor errors
+ aaa new-model
+ aaa authentication xxxxx
+ aaa authentication xxxxx
+ aaa authorization exec default group tacacs+ if-authenticated
+ aaa authorization commands 1 default group tacacs+ if-authenticated
+ aaa authorization commands 15 default group tacacs+ if-authenticated
+ aaa accounting exec default start-stop group tacacs+
+ aaa accounting commands 1 default start-stop group tacacs+
+ aaa accounting commands 15 default start-stop group tacacs+
+ aaa accounting network default start-stop group tacacs+
+ aaa accounting connection default start-stop group tacacs+
+ aaa accounting system default start-stop group tacacs+
+ enable secret xxxxx
+ !
+ clock summer-time UTC recurring
+ clock calendar-valid
+ vtp domain tuk2f5
+ vtp mode transparent
+ udld enable
+ 
+ ip subnet-zero
+ no ip source-route
+ !
+ !
+ ip tftp source-interface Loopback0
+ ip domain-list ntwk.msn.net
+ ip domain-name ntwk.msn.net
+ ip name-server 209.1.113.3
+ ip name-server 10.20.208.24
+ ip name-server 10.20.192.41
+ !
+ ip ssh time-out 120
+ ip ssh authentication xxxxx
+ no dss interface-purge
+ no dss range-purge
+ no dss mac-purge
+ no mls netflow
+ mls flow ip destination
+ mls flow ipx destination
+ !
+ no crypto isakmp enable
+ !
+ errdisable recovery cause udld
+ errdisable recovery cause bpduguard
+ errdisable recovery cause channel-misconfig
+ errdisable recovery cause pagp-flap
+ errdisable recovery cause dtp-flap
+ errdisable recovery cause link-flap
+ errdisable recovery interval 60
+ !
+ spanning-tree mode pvst
+ spanning-tree loopguard default
+ spanning-tree portfast bpduguard default
+ spanning-tree vlan 1-1005 priority 8192
+ module ContentSwitchingModule 1 
+  serverfarm B_ENTMNT_443
+  nat server 
+  no nat client
+  real 207.68.181.218 443
+  inservice
+  real 207.68.181.219 443
+  inservice
+  real 207.68.181.220 443
+  inservice
+  real 207.68.181.221 443
+  inservice
+  real 207.68.181.222 443
+  inservice
+  real 207.68.181.223 443
+  inservice
+  real 207.68.181.224 443
+  inservice
+ !
+ module ContentSwitchingModule 2 
+  variable DEST_UNREACHABLE_MASK 0x0
+ !
+  ft group 10 vlan 50 
+  priority 150 
+  heartbeat-time 3 
+  failover 10 
+  preempt 
+ !
+  vlan 150 client
+  ip address 65.54.140.5 255.255.255.192
+  gateway 65.54.140.1
+ !
+  vlan 151 server
+  ip address 65.54.140.5 255.255.255.192
+ !
+  vlan 300 client
+  ip address 207.68.166.5 255.255.255.128
+  gateway 207.68.166.1
+ !
+  vlan 303 server
+  ip address 207.68.166.5 255.255.255.128
+ !
+  vlan 650 client
+  ip address 65.54.202.229 255.255.255.224
+  gateway 65.54.202.225
+ !
+  vlan 651 server
+  ip address 65.54.202.229 255.255.255.224
+ !
+  vlan 222 client
+  ip address 65.54.134.165 255.255.255.224
+  gateway 65.54.134.161
+ !
+  vlan 223 server
+  ip address 65.54.134.165 255.255.255.224
+ !
+  vlan 940 client
+  ip address 65.54.135.85 255.255.255.240
+  gateway 65.54.135.83
+ !
+  vlan 941 server
+  ip address 65.54.135.85 255.255.255.240
+ !
+  vlan 160 client
+  ip address 207.68.181.133 255.255.255.128
+  gateway 207.68.181.129
+ !
+  vlan 161 server
+  ip address 207.68.181.133 255.255.255.128
+ !
+  vlan 120 client
+  ip address 65.54.213.70 255.255.255.224
+  gateway 65.54.213.65
+ !
+  vlan 121 server
+  ip address 65.54.213.70 255.255.255.224
+ !
+  vlan 51 client
+  ip address 10.20.64.77 255.255.255.248
+  gateway 10.20.64.73
+  route 10.20.5.0 255.255.255.0 gateway 10.20.64.73
+  route 10.20.6.0 255.255.255.0 gateway 10.20.64.73
+ !
+  vlan 100 client
+  ip address 65.54.147.165 255.255.255.224
+  gateway 65.54.147.161
+ !
+  vlan 101 server
+  ip address 65.54.147.165 255.255.255.224
+ !
+  vlan 280 client
+  ip address 65.54.192.5 255.255.255.0
+  gateway 65.54.192.1
+ !
+  vlan 281 server
+  ip address 65.54.192.5 255.255.255.0
+ !
+  natpool VLAN100-NAT 65.54.147.185 65.54.147.186 netmask 255.255.255.224
+ !
+  probe ENT_80P http
+  request method get url /keepalive/probe.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe ESHP_P http
+  request method get url /connection.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+ !
+  probe ESHP_TCP_P tcp
+  interval 5 
+  failed 5 
+ !
+  probe MEMBERS_80P http
+  request method get url /w3c/c.gif 
+  expect status 200 
+  interval 5 
+  failed 5 
+ !
+  probe S-MEMBERS_80P http
+  request method get url /w3c/c.gif 
+  expect status 200 
+  interval 5 
+  failed 5 
+ !
+  probe PRIVACY_80P http
+  request method get url /ld/test.asp 
+  expect status 200 
+  interval 5 
+  failed 5 
+ !
+  probe GROUPS_ACS_80P http
+  request method get url /w3c/c.gif 
+  expect status 200 
+  interval 5 
+  failed 5 
+ !
+  probe TCP-PROBE tcp
+  interval 5 
+  failed 5 
+ !
+  probe MSID_80P tcp
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe MSID_443P tcp
+  interval 5 
+  failed 5 
+  port 443 
+ !
+  probe ENT-FTP-P tcp
+  interval 5 
+  retries 2 
+  failed 5 
+  port 21 
+ !
+  probe MSGR_ILM_80P http
+  request method get url /w3c/probe.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe RATEADMIN_80P http
+  request method get url /connection.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe RATEWEB_80P http
+  request method get url /RRWebService/Connection.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe ENT_443P tcp
+  interval 5 
+  failed 5 
+  port 443 
+ !
+  probe ADV-80P http
+  request method get url /keepalive/probe.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe RATE_81P http
+  request method get url /connection.aspx 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 81 
+ !
+  probe G_UAT_P http
+  request method get url /w3c/c.gif 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  probe RATEWEB_443P tcp
+  interval 5 
+  failed 5 
+  port 443 
+ !
+  probe MSID_443_P tcp
+  interval 5 
+  failed 5 
+  port 443 
+ !
+  probe ADVANTAGE http
+  request method get url /asia.advertising.msn.com 
+  expect status 200 
+  interval 5 
+  failed 5 
+  port 80 
+ !
+  serverfarm A-DADK_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.157 443
+  inservice
+  real 65.54.192.158 443
+  inservice
+ !
+  serverfarm A-DADK_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.157 80
+  inservice
+  real 65.54.192.158 80
+  inservice
+ !
+  serverfarm A-ENSG_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.172 443
+  inservice
+  real 65.54.192.173 443
+  inservice
+ !
+  serverfarm A-ENSG_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.172 80
+  inservice
+  real 65.54.192.173 80
+  inservice
+ !
+  serverfarm A-ENUK_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.178 443
+  inservice
+  real 65.54.192.184 443
+  inservice
+ !
+  serverfarm A-ENUK_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.178 80
+  inservice
+  real 65.54.192.184 80
+  inservice
+ !
+  serverfarm A-ESES_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.174 443
+  inservice
+  real 65.54.192.175 443
+  inservice
+ !
+  serverfarm A-ESES_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.174 80
+  inservice
+  real 65.54.192.175 80
+  inservice
+ !
+  serverfarm A-FRBE_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.155 443
+  inservice
+  real 65.54.192.156 443
+  inservice
+ !
+  serverfarm A-FRBE_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.155 80
+  inservice
+  real 65.54.192.156 80
+  inservice
+ !
+  serverfarm A-FRFR_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.159 443
+  inservice
+  real 65.54.192.160 443
+  inservice
+ !
+  serverfarm A-FRFR_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.159 80
+  inservice
+  real 65.54.192.160 80
+  inservice
+ !
+  serverfarm A-ITIT_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.161 443
+  inservice
+  real 65.54.192.162 443
+  inservice
+ !
+  serverfarm A-ITIT_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.161 80
+  inservice
+  real 65.54.192.162 80
+  inservice
+ !
+  serverfarm A-NBNO_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.170 443
+  inservice
+  real 65.54.192.171 443
+  inservice
+ !
+  serverfarm A-NBNO_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.170 80
+  inservice
+  real 65.54.192.171 80
+  inservice
+ !
+  serverfarm A-NLBE_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.153 443
+  inservice
+  real 65.54.192.154 443
+  inservice
+ !
+  serverfarm A-NLBE_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.153 80
+  inservice
+  real 65.54.192.154 80
+  inservice
+ !
+  serverfarm A-NLNL_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.164 443
+  inservice
+  real 65.54.192.169 443
+  inservice
+ !
+  serverfarm A-NLNL_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.164 80
+  inservice
+  real 65.54.192.169 80
+  inservice
+ !
+  serverfarm A-SVSE_SSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.176 443
+  inservice
+  real 65.54.192.177 443
+  inservice
+ !
+  serverfarm A-SVSE_SSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.176 80
+  inservice
+  real 65.54.192.177 80
+  inservice
+ !
+  serverfarm ADV-ASIA-443R
+  nat server 
+  no nat client
+  real 65.54.192.136 443
+  inservice
+  real 65.54.192.138 443
+  inservice
+ !
+  serverfarm ADV-ASIA-80R
+  nat server 
+  no nat client
+  real 65.54.192.136 80
+  inservice
+  real 65.54.192.138 80
+  inservice
+ !
+  serverfarm ADV-DADK-443R
+  nat server 
+  no nat client
+  real 65.54.192.143 443
+  inservice
+  real 65.54.192.193 443
+  inservice
+ !
+  serverfarm ADV-DADK-80R
+  nat server 
+  no nat client
+  real 65.54.192.143 80
+  inservice
+  real 65.54.192.193 80
+  inservice
+ !
+  serverfarm ADV-DEDE-443R
+  nat server 
+  no nat client
+  real 65.54.192.186 443
+  inservice
+  real 65.54.192.187 443
+  inservice
+ !
+  serverfarm ADV-DEDE-80R
+  nat server 
+  no nat client
+  real 65.54.192.186 80
+  inservice
+  real 65.54.192.187 80
+  inservice
+ !
+  serverfarm ADV-DESSO-443R
+  nat server 
+  no nat client
+  real 65.54.192.189 443
+  inservice
+  real 65.54.192.190 443
+  inservice
+ !
+  serverfarm ADV-DESSO-80R
+  nat server 
+  no nat client
+  real 65.54.192.189 80
+  inservice
+  real 65.54.192.190 80
+  inservice
+ !
+  serverfarm ADV-ENGB-443R
+  nat server 
+  no nat client
+  real 65.54.192.151 443
+  inservice
+  real 65.54.192.201 443
+  inservice
+ !
+  serverfarm ADV-ENGB-80R
+  nat server 
+  no nat client
+  real 65.54.192.151 80
+  inservice
+  real 65.54.192.201 80
+  inservice
+ !
+  serverfarm ADV-ENSG-443R
+  nat server 
+  no nat client
+  real 65.54.192.148 443
+  inservice
+  real 65.54.192.198 443
+  inservice
+ !
+  serverfarm ADV-ENSG-80R
+  nat server 
+  no nat client
+  real 65.54.192.148 80
+  inservice
+  real 65.54.192.198 80
+  inservice
+ !
+  serverfarm ADV-ESES-443R
+  nat server 
+  no nat client
+  real 65.54.192.149 443
+  inservice
+  real 65.54.192.199 443
+  inservice
+ !
+  serverfarm ADV-ESES-80R
+  nat server 
+  no nat client
+  real 65.54.192.149 80
+  inservice
+  real 65.54.192.199 80
+  inservice
+ !
+  serverfarm ADV-EURO-443R
+  nat server 
+  no nat client
+  real 65.54.192.152 443
+  inservice
+  real 65.54.192.202 443
+  inservice
+ !
+  serverfarm ADV-EURO-80R
+  nat server 
+  no nat client
+  real 65.54.192.152 80
+  inservice
+  real 65.54.192.202 80
+  inservice
+ !
+  serverfarm ADV-FRBE-443R
+  nat server 
+  no nat client
+  real 65.54.192.142 443
+  inservice
+  real 65.54.192.192 443
+  inservice
+ !
+  serverfarm ADV-FRBE-80R
+  nat server 
+  no nat client
+  real 65.54.192.142 80
+  inservice
+  real 65.54.192.192 80
+  inservice
+ !
+  serverfarm ADV-FRFR-443R
+  nat server 
+  no nat client
+  real 65.54.192.144 443
+  inservice
+  real 65.54.192.194 443
+  inservice
+ !
+  serverfarm ADV-FRFR-80R
+  nat server 
+  no nat client
+  real 65.54.192.144 80
+  inservice
+  real 65.54.192.194 80
+  inservice
+ !
+  serverfarm ADV-ITIT-443R
+  nat server 
+  no nat client
+  real 65.54.192.145 443
+  inservice
+  real 65.54.192.195 443
+  inservice
+ !
+  serverfarm ADV-ITIT-80R
+  nat server 
+  no nat client
+  real 65.54.192.145 80
+  inservice
+  real 65.54.192.195 80
+  inservice
+ !
+  serverfarm ADV-NBNO-443R
+  nat server 
+  no nat client
+  real 65.54.192.147 443
+  inservice
+  real 65.54.192.197 443
+  inservice
+ !
+  serverfarm ADV-NBNO-80R
+  nat server 
+  no nat client
+  real 65.54.192.147 80
+  inservice
+  real 65.54.192.197 80
+  inservice
+ !
+  serverfarm ADV-NLBE-443R
+  nat server 
+  no nat client
+  real 65.54.192.141 443
+  inservice
+  real 65.54.192.191 443
+  inservice
+ !
+  serverfarm ADV-NLBE-80R
+  nat server 
+  no nat client
+  real 65.54.192.141 80
+  inservice
+  real 65.54.192.191 80
+  inservice
+ !
+  serverfarm ADV-NLNL-443R
+  nat server 
+  no nat client
+  real 65.54.192.146 443
+  inservice
+  real 65.54.192.196 443
+  inservice
+ !
+  serverfarm ADV-NLNL-80R
+  nat server 
+  no nat client
+  real 65.54.192.146 80
+  inservice
+  real 65.54.192.196 80
+  inservice
+ !
+  serverfarm ADV-PGY-443R
+  nat server 
+  no nat client
+  real 65.54.192.135 443
+  inservice
+  real 65.54.192.137 443
+  inservice
+ !
+  serverfarm ADV-PGY-80R
+  nat server 
+  no nat client
+  real 65.54.192.135 80
+  inservice
+  real 65.54.192.137 80
+  inservice
+ !
+  serverfarm ADV-SVSE-443R
+  nat server 
+  no nat client
+  real 65.54.192.150 443
+  inservice
+  real 65.54.192.200 443
+  inservice
+ !
+  serverfarm ADV-SVSE-80R
+  nat server 
+  no nat client
+  real 65.54.192.150 80
+  inservice
+  real 65.54.192.200 80
+  inservice
+ !
+  serverfarm ADVANTAGE_443
+  nat server 
+  no nat client
+  real 65.54.192.167 443
+  inservice
+  real 65.54.192.168 443
+  inservice
+  probe MSID_443P
+ !
+  serverfarm ADVANTAGE_80
+  nat server 
+  no nat client
+  real 65.54.192.167 80
+  inservice
+  real 65.54.192.168 80
+  inservice
+  probe MSID_80P
+ !
+  serverfarm ADV_PRES_443S
+  nat server 
+  no nat client
+  real 65.54.192.139 443
+  inservice
+  probe MSID_443_P
+ !
+  serverfarm ADV_PUB_443S
+  nat server 
+  no nat client
+  real 65.54.192.140 443
+  inservice
+  probe MSID_443_P
+ !
+  serverfarm B_ENTMNT_443
+  nat server 
+  no nat client
+  real 207.68.181.181 443
+  weight 14
+  inservice
+  real 207.68.181.182 443
+  weight 14
+  inservice
+  real 207.68.181.183 443
+  weight 14
+  inservice
+  real 207.68.181.184 443
+  weight 14
+  inservice
+  real 207.68.181.148 443
+  weight 14
+  inservice
+  real 207.68.181.149 443
+  weight 14
+  inservice
+  real 207.68.181.150 443
+  weight 14
+  inservice
+  real 207.68.181.151 443
+  weight 14
+  inservice
+  real 207.68.181.152 443
+  weight 14
+  inservice
+  real 207.68.181.175 443
+  weight 14
+  inservice
+  real 207.68.181.176 443
+  weight 14
+  inservice
+  real 207.68.181.177 443
+  weight 14
+  inservice
+  real 207.68.181.178 443
+  weight 14
+  inservice
+  real 207.68.181.169 443
+  weight 14
+  inservice
+  real 207.68.181.170 443
+  weight 14
+  inservice
+  real 207.68.181.171 443
+  weight 14
+  inservice
+  real 207.68.181.172 443
+  weight 14
+  inservice
+  real 207.68.181.173 443
+  weight 14
+  inservice
+  real 207.68.181.174 443
+  weight 14
+  inservice
+  real 207.68.181.157 443
+  weight 14
+  inservice
+  real 207.68.181.158 443
+  weight 14
+  inservice
+  real 207.68.181.159 443
+  weight 14
+  inservice
+  real 207.68.181.160 443
+  weight 14
+  inservice
+  real 207.68.181.161 443
+  weight 14
+  inservice
+  real 207.68.181.162 443
+  weight 14
+  inservice
+  real 207.68.181.163 443
+  weight 14
+  inservice
+  real 207.68.181.164 443
+  weight 14
+  inservice
+  real 207.68.181.165 443
+  weight 14
+  inservice
+  real 207.68.181.166 443
+  weight 14
+  inservice
+  real 207.68.181.167 443
+  weight 14
+  inservice
+  real 207.68.181.168 443
+  weight 14
+  inservice
+  real 207.68.181.143 443
+  inservice
+  real 207.68.181.144 443
+  inservice
+  real 207.68.181.145 443
+  inservice
+  real 207.68.181.146 443
+  inservice
+  real 207.68.181.147 443
+  inservice
+  real 207.68.181.215 443
+  inservice
+  real 207.68.181.217 443
+  inservice
+  real 207.68.181.218 443
+  inservice
+  real 207.68.181.219 443
+  inservice
+  real 207.68.181.220 443
+  inservice
+  real 207.68.181.221 443
+  inservice
+  probe ENT_443P
+ !
+  serverfarm B_ENTMNT_80
+  nat server 
+  no nat client
+  real 207.68.181.181 80
+  weight 14
+  inservice
+  real 207.68.181.182 80
+  weight 14
+  inservice
+  real 207.68.181.183 80
+  weight 14
+  inservice
+  real 207.68.181.184 80
+  weight 14
+  inservice
+  real 207.68.181.148 80
+  weight 14
+  inservice
+  real 207.68.181.149 80
+  weight 14
+  inservice
+  real 207.68.181.150 80
+  weight 14
+  inservice
+  real 207.68.181.151 80
+  weight 14
+  inservice
+  real 207.68.181.152 80
+  weight 14
+  inservice
+  real 207.68.181.175 80
+  weight 14
+  inservice
+  real 207.68.181.176 80
+  weight 14
+  inservice
+  real 207.68.181.177 80
+  weight 14
+  inservice
+  real 207.68.181.178 80
+  weight 14
+  inservice
+  real 207.68.181.169 80
+  weight 14
+  inservice
+  real 207.68.181.170 80
+  weight 14
+  inservice
+  real 207.68.181.171 80
+  weight 14
+  inservice
+  real 207.68.181.172 80
+  weight 14
+  inservice
+  real 207.68.181.173 80
+  weight 14
+  inservice
+  real 207.68.181.174 80
+  weight 14
+  inservice
+  real 207.68.181.157 80
+  weight 14
+  inservice
+  real 207.68.181.158 80
+  weight 14
+  inservice
+  real 207.68.181.159 80
+  weight 14
+  inservice
+  real 207.68.181.160 80
+  weight 14
+  inservice
+  real 207.68.181.161 80
+  weight 14
+  inservice
+  real 207.68.181.162 80
+  weight 14
+  inservice
+  real 207.68.181.163 80
+  weight 14
+  inservice
+  real 207.68.181.164 80
+  weight 14
+  inservice
+  real 207.68.181.165 80
+  weight 14
+  inservice
+  real 207.68.181.166 80
+  weight 14
+  inservice
+  real 207.68.181.167 80
+  weight 14
+  inservice
+  real 207.68.181.168 80
+  weight 14
+  inservice
+  real 207.68.181.143 80
+  inservice
+  real 207.68.181.144 80
+  inservice
+  real 207.68.181.145 80
+  inservice
+  real 207.68.181.146 80
+  inservice
+  real 207.68.181.147 80
+  inservice
+  real 207.68.181.215 80
+  inservice
+  real 207.68.181.217 80
+  inservice
+  real 207.68.181.218 80
+  inservice
+  real 207.68.181.219 80
+  inservice
+  real 207.68.181.220 80
+  no inservice
+  real 207.68.181.221 80
+  no inservice
+  probe ENT_80P
+ !
+  serverfarm DOLLARS_449
+  nat server 
+  no nat client
+  real 207.68.166.49 449
+  inservice
+  real 207.68.166.20 449
+  no inservice
+ !
+  serverfarm DOLLARS_80
+  nat server 
+  no nat client
+  real 207.68.166.49 80
+  inservice
+  real 207.68.166.20 80
+  no inservice
+ !
+  serverfarm ENT-FTP
+  nat server 
+  no nat client
+  real 207.68.181.238
+  no inservice
+  real 207.68.181.240
+  inservice
+  probe ENT-FTP-P
+ !
+  serverfarm ENT_SSH_22
+  nat server 
+  no nat client
+  real 207.68.181.138 22
+  no inservice
+  real 207.68.181.139 22
+  inservice
+ !
+  serverfarm ENT_SUP_443
+  nat server 
+  no nat client
+  real 207.68.181.179 443
+  inservice
+  real 207.68.181.180 443
+  inservice
+  probe ENT_80P
+ !
+  serverfarm ENT_SUP_80
+  nat server 
+  no nat client
+  real 207.68.181.179 80
+  inservice
+  real 207.68.181.180 80
+  inservice
+  probe ENT_80P
+ !
+  serverfarm ESHWB1_443
+  nat server 
+  no nat client
+  real 207.68.166.49 443
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB1_444
+  nat server 
+  no nat client
+  real 207.68.166.49 444
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB1_446
+  nat server 
+  no nat client
+  real 207.68.166.49 446
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB1_80
+  nat server 
+  no nat client
+  real 207.68.166.49 80
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB1_8083
+  nat server 
+  no nat client
+  real 207.68.166.49 8083
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB1_81
+  nat server 
+  no nat client
+  real 207.68.166.49 81
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB2_443
+  nat server 
+  no nat client
+  real 207.68.166.20 443
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB2_444
+  nat server 
+  no nat client
+  real 207.68.166.20 444
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB2_446
+  nat server 
+  no nat client
+  real 207.68.166.20 446
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB2_80
+  nat server 
+  no nat client
+  real 207.68.166.20 80
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB2_8083
+  nat server 
+  no nat client
+  real 207.68.166.20 8083
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm ESHWB2_81
+  nat server 
+  no nat client
+  real 207.68.166.20 81
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm GROUPS_ACS
+  nat server 
+  no nat client
+  real 65.54.134.171 80
+  inservice
+  real 65.54.134.172 80
+  inservice
+  real 65.54.134.173 80
+  inservice
+  real 65.54.134.174 80
+  inservice
+  real 65.54.134.175 80
+  inservice
+  real 65.54.134.178 80
+  no inservice
+  probe GROUPS_ACS_80P
+ !
+  serverfarm GROUPS_FE-SP5
+  nat server 
+  no nat client
+  real 65.54.134.180 80
+  inservice
+  real 65.54.134.181 80
+  inservice
+  real 65.54.134.182 80
+  inservice
+  real 65.54.134.183 80
+  inservice
+  real 65.54.134.184 80
+  inservice
+  probe GROUPS_ACS_80P
+ !
+  serverfarm G_UAT_443S
+  nat server 
+  no nat client
+  real 65.54.134.187 443
+  inservice
+  real 65.54.134.179 443
+  no inservice
+  probe G_UAT_P
+ !
+  serverfarm G_UAT_80S
+  nat server 
+  no nat client
+  real 65.54.134.187 80
+  inservice
+  real 65.54.134.179 80
+  no inservice
+  probe G_UAT_P
+ !
+  serverfarm ILM-MSGR-R
+  nat server 
+  no nat client
+  real 65.54.213.76
+  inservice
+  real 65.54.213.77
+  inservice
+  real 65.54.213.78
+  no inservice
+  real 65.54.213.79
+  inservice
+  real 65.54.213.80
+  inservice
+  real 65.54.213.81
+  inservice
+  probe MSGR_ILM_80P
+ !
+  serverfarm MEMBERS_80
+  nat server 
+  no nat client
+  real 65.54.202.233 80
+  inservice
+  real 65.54.202.234 80
+  inservice
+  real 65.54.202.235 80
+  inservice
+  real 65.54.202.236 80
+  inservice
+  real 65.54.202.237 80
+  inservice
+  real 65.54.202.238 80
+  inservice
+  probe MEMBERS_80P
+ !
+  serverfarm MSID_80
+  nat server 
+  no nat client
+  real 65.54.192.163 80
+  inservice
+  real 65.54.192.165 80
+  inservice
+  real 65.54.192.166 80
+  inservice
+  probe MSID_80P
+ !
+  serverfarm MSNSALES2_80
+  nat server 
+  no nat client
+  real 65.54.192.140 80
+  inservice
+  real 65.54.192.134 80
+  no inservice
+  probe MSID_80P
+ !
+  serverfarm MSNSALES_80
+  nat server 
+  no nat client
+  real 65.54.192.139 80
+  inservice
+  real 65.54.192.133 80
+  no inservice
+  probe MSID_80P
+ !
+  serverfarm PRIVACY_80
+  nat server 
+  no nat client
+  real 65.54.135.87 80
+  inservice
+  real 65.54.135.88 80
+  inservice
+  real 65.54.135.89 80
+  inservice
+  real 65.54.135.90 80
+  inservice
+  real 65.54.135.91 80
+  no inservice
+  real 65.54.135.92 80
+  no inservice
+  probe PRIVACY_80P
+ !
+  serverfarm RATEADMIN_80R
+  nat server 
+  nat client VLAN100-NAT 
+  real 65.54.147.183 80
+  inservice
+  real 65.54.147.184 80
+  inservice
+  probe RATEADMIN_80P
+ !
+  serverfarm RATEADMIN_81R
+  nat server 
+  no nat client
+  real 65.54.147.183 81
+  inservice
+  real 65.54.147.184 81
+  inservice
+  probe RATE_81P
+ !
+  serverfarm RATEWEB_443R
+  nat server 
+  no nat client
+  real 65.54.147.167 443
+  inservice
+  real 65.54.147.168 443
+  inservice
+  real 65.54.147.169 443
+  inservice
+  real 65.54.147.170 443
+  inservice
+  real 65.54.147.171 443
+  inservice
+  real 65.54.147.172 443
+  inservice
+  real 65.54.147.173 443
+  inservice
+  real 65.54.147.174 443
+  inservice
+  real 65.54.147.175 443
+  inservice
+  real 65.54.147.176 443
+  inservice
+  real 65.54.147.177 443
+  inservice
+  real 65.54.147.178 443
+  inservice
+  real 65.54.147.179 443
+  inservice
+  real 65.54.147.180 443
+  inservice
+  real 65.54.147.181 443
+  inservice
+  real 65.54.147.182 443
+  inservice
+  probe RATEWEB_443P
+  probe RATEWEB_80P
+ !
+  serverfarm RATEWEB_80R
+  nat server 
+  no nat client
+  real 65.54.147.167 80
+  inservice
+  real 65.54.147.168 80
+  inservice
+  real 65.54.147.169 80
+  inservice
+  real 65.54.147.170 80
+  inservice
+  real 65.54.147.171 80
+  inservice
+  real 65.54.147.172 80
+  inservice
+  real 65.54.147.173 80
+  inservice
+  real 65.54.147.174 80
+  inservice
+  real 65.54.147.175 80
+  inservice
+  real 65.54.147.176 80
+  inservice
+  real 65.54.147.177 80
+  inservice
+  real 65.54.147.178 80
+  inservice
+  real 65.54.147.179 80
+  inservice
+  real 65.54.147.180 80
+  inservice
+  real 65.54.147.181 80
+  inservice
+  real 65.54.147.182 80
+  inservice
+  probe RATEWEB_80P
+ !
+  serverfarm RRWEB_443R
+  nat server 
+  no nat client
+  real 65.54.147.167 443
+  inservice
+  real 65.54.147.168 443
+  inservice
+  real 65.54.147.169 443
+  inservice
+  real 65.54.147.170 443
+  inservice
+  real 65.54.147.171 443
+  inservice
+  real 65.54.147.172 443
+  inservice
+  real 65.54.147.173 443
+  inservice
+  real 65.54.147.174 443
+  inservice
+  real 65.54.147.175 443
+  inservice
+  real 65.54.147.176 443
+  inservice
+  real 65.54.147.177 443
+  inservice
+  real 65.54.147.178 443
+  inservice
+  real 65.54.147.179 443
+  inservice
+  real 65.54.147.180 443
+  inservice
+  real 65.54.147.181 443
+  inservice
+  real 65.54.147.182 443
+  inservice
+  probe RATEWEB_443P
+ !
+  serverfarm S-MEMBERS_80
+  nat server 
+  no nat client
+  real 65.54.202.239 80
+  inservice
+  real 65.54.202.240 80
+  inservice
+  real 65.54.202.245 80
+  no inservice
+  real 65.54.202.241 80
+  inservice
+  real 65.54.202.242 80
+  inservice
+  real 65.54.202.246 80
+  no inservice
+  real 65.54.202.247 80
+  no inservice
+  real 65.54.202.248 80
+  no inservice
+  real 65.54.202.243 80
+  no inservice
+  real 65.54.202.244 80
+  no inservice
+  real 65.54.202.231 80
+  no inservice
+  real 65.54.202.232 80
+  no inservice
+  real 65.54.202.249 80
+  inservice
+  real 65.54.202.250 80
+  inservice
+  real 65.54.202.251 80
+  inservice
+  probe S-MEMBERS_80P
+ !
+  serverfarm S-MEMBERS_81
+  nat server 
+  no nat client
+  real 65.54.202.239 81
+  inservice
+  real 65.54.202.240 81
+  inservice
+  real 65.54.202.245 81
+  no inservice
+  real 65.54.202.241 81
+  inservice
+  real 65.54.202.242 81
+  inservice
+  real 65.54.202.243 81
+  no inservice
+  real 65.54.202.244 81
+  no inservice
+  real 65.54.202.246 81
+  no inservice
+  real 65.54.202.247 81
+  no inservice
+  real 65.54.202.248 81
+  no inservice
+  real 65.54.202.231 81
+  no inservice
+  real 65.54.202.232 81
+  no inservice
+  real 65.54.202.249 81
+  inservice
+  real 65.54.202.250 81
+  inservice
+  real 65.54.202.251 81
+  inservice
+ !
+  serverfarm SHOPCAPART_447
+  nat server 
+  no nat client
+  real 207.68.166.49 447
+  inservice
+ !
+  serverfarm SHOPCAPART_450
+  nat server 
+  no nat client
+  real 207.68.166.49 450
+  inservice
+ !
+  serverfarm SHOPCAPART_8085
+  nat server 
+  no nat client
+  real 207.68.166.49 8085
+  inservice
+ !
+  serverfarm SHOPFRCA_451
+  nat server 
+  no nat client
+  real 207.68.166.49 451
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm SHOPFRCA_8081
+  nat server 
+  no nat client
+  real 207.68.166.49 8081
+  inservice
+  probe ESHP_TCP_P
+ !
+  serverfarm SHOPFRCA_81
+  nat server 
+  no nat client
+  real 207.68.166.13 81
+  inservice
+  real 207.68.166.14 81
+  inservice
+  real 207.68.166.17 81
+  inservice
+  real 207.68.166.18 81
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHOPFRCA_81_4
+  nat server 
+  no nat client
+  probe ESHP_P
+ !
+  serverfarm SHOPFRPART_8084
+  nat server 
+  no nat client
+  real 207.68.166.49 8084
+  inservice
+ !
+  serverfarm SHPCA_80
+  nat server 
+  no nat client
+  real 207.68.166.13 80
+  inservice
+  real 207.68.166.14 80
+  inservice
+  real 207.68.166.17 80
+  inservice
+  real 207.68.166.18 80
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHPIMGCA_81
+  nat server 
+  no nat client
+  real 207.68.166.45 81
+  inservice
+  real 207.68.166.46 81
+  inservice
+  real 207.68.166.47 81
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHPIMGFR_8081
+  nat server 
+  no nat client
+  real 207.68.166.45 8081
+  inservice
+  real 207.68.166.46 8081
+  inservice
+  real 207.68.166.47 8081
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHPIMG_80
+  nat server 
+  no nat client
+  real 207.68.166.45 80
+  inservice
+  real 207.68.166.46 80
+  inservice
+  real 207.68.166.47 80
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHPWB2_80
+  nat server 
+  no nat client
+  real 207.68.166.19 80
+  inservice
+  real 207.68.166.21 80
+  inservice
+  real 207.68.166.33 80
+  inservice
+  real 207.68.166.34 80
+  inservice
+  real 207.68.166.35 80
+  inservice
+  real 207.68.166.36 80
+  no inservice
+  real 207.68.166.37 80
+  no inservice
+  real 207.68.166.42 80
+  inservice
+  real 207.68.166.43 80
+  inservice
+  real 207.68.166.44 80
+  inservice
+  real 207.68.166.15 80
+  inservice
+  real 207.68.166.16 80
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHPXML2_8081
+  nat server 
+  no nat client
+  real 207.68.166.19 8081
+  inservice
+  real 207.68.166.21 8081
+  inservice
+  real 207.68.166.33 8081
+  inservice
+  real 207.68.166.34 8081
+  inservice
+  real 207.68.166.35 8081
+  inservice
+  real 207.68.166.36 8081
+  inservice
+  real 207.68.166.37 8081
+  no inservice
+  real 207.68.166.42 8081
+  inservice
+  real 207.68.166.43 8081
+  inservice
+  real 207.68.166.44 8081
+  inservice
+  real 207.68.166.15 8081
+  inservice
+  real 207.68.166.16 8081
+  inservice
+  probe ESHP_P
+ !
+  serverfarm SHPYP2_86
+  nat server 
+  no nat client
+  real 207.68.166.19 86
+  inservice
+  real 207.68.166.21 86
+  inservice
+  real 207.68.166.33 86
+  inservice
+  real 207.68.166.34 86
+  inservice
+  real 207.68.166.35 86
+  inservice
+  real 207.68.166.36 86
+  no inservice
+  real 207.68.166.37 86
+  no inservice
+  real 207.68.166.42 86
+  inservice
+  real 207.68.166.43 86
+  inservice
+  real 207.68.166.44 86
+  inservice
+  real 207.68.166.15 86
+  inservice
+  real 207.68.166.16 86
+  inservice
+  probe ESHP_P
+ !
+  sticky 1 netmask 255.255.255.0 address source timeout 2
+ !
+  policy RATEADMIN
+  client-group 50
+  serverfarm RATEADMIN_80R
+ !
+  vserver A-DADK_SSO-443V
+  virtual 65.54.192.237 tcp https
+  serverfarm A-DADK_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-DADK_SSO-80V
+  virtual 65.54.192.237 tcp www
+  serverfarm A-DADK_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ENSG_SSO-443V
+  virtual 65.54.192.242 tcp https
+  serverfarm A-ENSG_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ENSG_SSO-80V
+  virtual 65.54.192.242 tcp www
+  serverfarm A-ENSG_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ENUK_SSO-443V
+  virtual 65.54.192.245 tcp https
+  serverfarm A-ENUK_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ENUK_SSO-80V
+  virtual 65.54.192.245 tcp www
+  serverfarm A-ENUK_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ESES_SSO-443V
+  virtual 65.54.192.243 tcp https
+  serverfarm A-ESES_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ESES_SSO-80V
+  virtual 65.54.192.243 tcp www
+  serverfarm A-ESES_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-FRBE_SSO-443V
+  virtual 65.54.192.236 tcp https
+  serverfarm A-FRBE_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-FRBE_SSO-80V
+  virtual 65.54.192.236 tcp www
+  serverfarm A-FRBE_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-FRFR_SSO-443V
+  virtual 65.54.192.238 tcp https
+  serverfarm A-FRFR_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-FRFR_SSO-80V
+  virtual 65.54.192.238 tcp www
+  serverfarm A-FRFR_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ITIT_SSO-443V
+  virtual 65.54.192.239 tcp https
+  serverfarm A-ITIT_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-ITIT_SSO-80V
+  virtual 65.54.192.239 tcp www
+  serverfarm A-ITIT_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-NBNO_SSO-443V
+  virtual 65.54.192.241 tcp https
+  serverfarm A-NBNO_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-NBNO_SSO-80V
+  virtual 65.54.192.241 tcp www
+  serverfarm A-NBNO_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-NLBE_SSO-443V
+  virtual 65.54.192.235 tcp https
+  serverfarm A-NLBE_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-NLBE_SSO-80V
+  virtual 65.54.192.235 tcp www
+  serverfarm A-NLBE_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-NLNL_SSO-443V
+  virtual 65.54.192.240 tcp https
+  serverfarm A-NLNL_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-NLNL_SSO-80V
+  virtual 65.54.192.240 tcp www
+  serverfarm A-NLNL_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-SVSE_SSO-443V
+  virtual 65.54.192.244 tcp https
+  serverfarm A-SVSE_SSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver A-SVSE_SSO-80V
+  virtual 65.54.192.244 tcp www
+  serverfarm A-SVSE_SSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ASIA-443V
+  virtual 65.54.192.229 tcp https
+  serverfarm ADV-ASIA-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ASIA-80V
+  virtual 65.54.192.229 tcp www
+  serverfarm ADV-ASIA-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-DADK-443V
+  virtual 65.54.192.217 tcp https
+  serverfarm ADV-DADK-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-DADK-80V
+  virtual 65.54.192.217 tcp www
+  serverfarm ADV-DADK-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-DEDE-443V
+  virtual 65.54.192.188 tcp https
+  serverfarm ADV-DEDE-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-DEDE-80V
+  virtual 65.54.192.188 tcp www
+  serverfarm ADV-DEDE-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-DESSO-443V
+  virtual 65.54.192.203 tcp https
+  serverfarm ADV-DESSO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-DESSO-80V
+  virtual 65.54.192.203 tcp www
+  serverfarm ADV-DESSO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ENGB-443V
+  virtual 65.54.192.225 tcp https
+  serverfarm ADV-ENGB-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ENGB-80V
+  virtual 65.54.192.225 tcp www
+  serverfarm ADV-ENGB-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ENSG-443V
+  virtual 65.54.192.222 tcp https
+  serverfarm ADV-ENSG-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ENSG-80V
+  virtual 65.54.192.222 tcp www
+  serverfarm ADV-ENSG-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ESES-443V
+  virtual 65.54.192.223 tcp https
+  serverfarm ADV-ESES-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ESES-80V
+  virtual 65.54.192.223 tcp www
+  serverfarm ADV-ESES-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-EURO-443V
+  virtual 65.54.192.226 tcp https
+  serverfarm ADV-EURO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-EURO-80V
+  virtual 65.54.192.226 tcp www
+  serverfarm ADV-EURO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-FRBE-443V
+  virtual 65.54.192.216 tcp https
+  serverfarm ADV-FRBE-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-FRBE-80V
+  virtual 65.54.192.216 tcp www
+  serverfarm ADV-FRBE-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-FRFR-443V
+  virtual 65.54.192.218 tcp https
+  serverfarm ADV-FRFR-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-FRFR-80V
+  virtual 65.54.192.218 tcp www
+  serverfarm ADV-FRFR-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ITIT-443V
+  virtual 65.54.192.219 tcp https
+  serverfarm ADV-ITIT-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-ITIT-80V
+  virtual 65.54.192.219 tcp www
+  serverfarm ADV-ITIT-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-NBNO-443V
+  virtual 65.54.192.221 tcp https
+  serverfarm ADV-NBNO-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-NBNO-80V
+  virtual 65.54.192.221 tcp www
+  serverfarm ADV-NBNO-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-NLBE-443V
+  virtual 65.54.192.215 tcp https
+  serverfarm ADV-NLBE-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-NLBE-80V
+  virtual 65.54.192.215 tcp www
+  serverfarm ADV-NLBE-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-NLNL-443V
+  virtual 65.54.192.220 tcp https
+  serverfarm ADV-NLNL-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-NLNL-80V
+  virtual 65.54.192.220 tcp www
+  serverfarm ADV-NLNL-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-PGY-443V
+  virtual 65.54.192.230 tcp https
+  serverfarm ADV-PGY-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-PGY-80V
+  virtual 65.54.192.230 tcp www
+  serverfarm ADV-PGY-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-SVSE-443V
+  virtual 65.54.192.224 tcp https
+  serverfarm ADV-SVSE-443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV-SVSE-80V
+  virtual 65.54.192.224 tcp www
+  serverfarm ADV-SVSE-80R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADVANTAGE_443V
+  virtual 65.54.192.247 tcp https
+  serverfarm ADVANTAGE_443
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADVANTAGE_80V
+  virtual 65.54.192.247 tcp www
+  serverfarm ADVANTAGE_80
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV_PRES_443V
+  virtual 65.54.192.253 tcp https
+  serverfarm ADV_PRES_443S
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ADV_PUB_443V
+  virtual 65.54.192.252 tcp https
+  serverfarm ADV_PUB_443S
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver B_ENTMNT_443V
+  virtual 207.68.181.248 tcp https
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver B_ENTMNT_80V
+  virtual 207.68.181.248 tcp www
+  serverfarm B_ENTMNT_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver DOLLARS_443V
+  virtual 207.68.166.115 tcp https
+  serverfarm DOLLARS_449
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver DOLLARS_80V
+  virtual 207.68.166.115 tcp www
+  serverfarm DOLLARS_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ENT-FTP-V
+  virtual 207.68.181.244 tcp ftp service ftp
+  serverfarm ENT-FTP
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ENT_BETA_80V
+  virtual 65.54.140.59 tcp www
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ENT_SUP_443V
+  virtual 207.68.181.249 tcp https
+  serverfarm ENT_SUP_443
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ENT_SUP_80V
+  virtual 207.68.181.249 tcp www
+  serverfarm ENT_SUP_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MER1_443
+  virtual 207.68.166.113 tcp https
+  serverfarm ESHWB1_443
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MER1_80
+  virtual 207.68.166.113 tcp www
+  serverfarm ESHWB1_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MERCA1_443
+  virtual 207.68.166.114 tcp https
+  serverfarm ESHWB1_444
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MERCA1_80
+  virtual 207.68.166.114 tcp www
+  serverfarm ESHWB1_81
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MERCA_443
+  virtual 207.68.166.122 tcp https
+  serverfarm ESHWB2_444
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MERCA_80
+  virtual 207.68.166.122 tcp www
+  serverfarm ESHWB2_81
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MER_443
+  virtual 207.68.166.126 tcp https
+  serverfarm ESHWB2_443
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_MER_80
+  virtual 207.68.166.126 tcp www
+  serverfarm ESHWB2_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_PAR1_443
+  virtual 207.68.166.112 tcp https
+  serverfarm ESHWB1_446
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_PAR1_80
+  virtual 207.68.166.112 tcp www
+  serverfarm ESHWB1_8083
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_PAR_443
+  virtual 207.68.166.120 tcp https
+  serverfarm ESHWB2_446
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver ESHP_PAR_80
+  virtual 207.68.166.120 tcp www
+  serverfarm ESHWB2_8083
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver GROUPS_ACS1
+  virtual 65.54.134.190 tcp www
+  serverfarm GROUPS_ACS
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver GROUPS_FE-SP5V
+  virtual 65.54.134.189 tcp www
+  serverfarm GROUPS_FE-SP5
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver G_UAT_443V
+  virtual 65.54.134.188 tcp https
+  serverfarm G_UAT_443S
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver G_UAT_80V
+  virtual 65.54.134.188 tcp www
+  serverfarm G_UAT_80S
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ILM-MSGR_80V
+  virtual 65.54.213.94 tcp www
+  serverfarm ILM-MSGR-R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver ILM-WEB_443V
+  virtual 65.54.213.94 tcp https
+  serverfarm ILM-MSGR-R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver MEMBERS_80V
+  virtual 65.54.202.254 tcp www
+  serverfarm MEMBERS_80
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver MI.MUSIC.MSN_22
+  virtual 207.68.181.245 tcp 22
+  serverfarm ENT_SSH_22
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver MSID_80V
+  virtual 65.54.192.249 tcp www
+  serverfarm MSID_80
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver MSNSALES2_80V
+  virtual 65.54.192.252 tcp www
+  serverfarm MSNSALES2_80
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver MSNSALES_80V
+  virtual 65.54.192.253 tcp www
+  serverfarm MSNSALES_80
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver PRIVACY_80V
+  virtual 65.54.135.94 tcp www
+  serverfarm PRIVACY_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver RATEADMIN_80V
+  virtual 65.54.147.189 tcp www
+  serverfarm RATEADMIN_80R
+  sticky 30
+  idle 60
+  persistent rebalance
+  slb-policy RATEADMIN
+  inservice
+ !
+  vserver RATEADMIN_81V
+  virtual 65.54.147.189 tcp 81
+  serverfarm RATEADMIN_81R
+  sticky 1
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver RATEWEB_80V
+  virtual 65.54.147.190 tcp www
+  serverfarm RATEWEB_80R
+  sticky 30
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver RATWEB_443V
+  virtual 65.54.147.187 tcp https
+  serverfarm RATEWEB_443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver RRWEB_443V
+  virtual 65.54.147.190 tcp https
+  serverfarm RRWEB_443R
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver S-MEMBERS_80V
+  virtual 65.54.202.253 tcp www
+  serverfarm S-MEMBERS_80
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver S-MEMBERS_81V
+  virtual 65.54.202.253 tcp 81
+  serverfarm S-MEMBERS_81
+  idle 120
+  persistent rebalance
+  inservice
+ !
+  vserver SHOPCAPART_450
+  virtual 207.68.166.124 tcp https
+  serverfarm SHOPCAPART_450
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHOPCAPART_8085
+  virtual 207.68.166.109 tcp www
+  serverfarm SHOPCAPART_8085
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHOPCA_PART_447
+  virtual 207.68.166.109 tcp 447
+  serverfarm SHOPCAPART_447
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHOPFRPART_8084
+  virtual 207.68.166.124 tcp www
+  serverfarm SHOPFRPART_8084
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHOP_FRCA_81
+  virtual 207.68.166.108 tcp www
+  serverfarm SHOPFRCA_81
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHOP_FRCA_81_4
+  virtual 65.54.194.62 tcp www
+  serverfarm SHOPFRCA_81_4
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPCA_80V
+  virtual 207.68.166.117 tcp www
+  serverfarm SHPCA_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPIMGCA_80V
+  virtual 207.68.166.116 tcp www
+  serverfarm SHPIMGCA_81
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPIMGFR_8081
+  virtual 207.68.166.110 tcp www
+  serverfarm SHPIMGFR_8081
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPIMG_80V
+  virtual 207.68.166.118 tcp www
+  serverfarm SHPIMG_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPWB2_80V
+  virtual 207.68.166.123 tcp www
+  serverfarm SHPWB2_80
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPXML2_8081V
+  virtual 207.68.166.119 tcp www
+  serverfarm SHPXML2_8081
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHPYP2_86V
+  virtual 207.68.166.125 tcp www
+  serverfarm SHPYP2_86
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHP_MRCH_451
+  virtual 207.68.166.111 tcp https
+  serverfarm SHOPFRCA_451
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  vserver SHP_MRCH_8081
+  virtual 207.68.166.111 tcp www
+  serverfarm SHOPFRCA_8081
+  idle 60
+  persistent rebalance
+  inservice
+ !
+  xml-config
+  vlan 51
+  credentials vipnetws password xxxxx
+  inservice
+ !
+ !
+ redundancy
+  mode rpr-plus
+  main-cpu
+  auto-sync running-config
+  auto-sync standard
+ !
+ !
+ vlan 2
+  name TUK_UNUSED_PORTS
+ !
+ vlan 3
+  name bad
+ !
+ vlan 50
+  name CSM_FT
+ !
+ vlan 51
+  name CSM_XML
+ !
+ vlan 100
+  name P:SHOP:F:R:65.54.147.160/27
+ !
+ vlan 101
+  name P:SHOP:F:U:65.54.147.160/27
+ !
+ vlan 110
+  name P:ADS:F:R:65.54.194.64/26
+ !
+ vlan 117
+  name P:ADS:F:U:65.54.194.64/26
+ !
+ vlan 120
+  name P:MSGR:F:R:65.54.213.64/27
+ !
+ vlan 121
+  name P:MSGR:F:U:65.54.213.64/27
+ !
+ vlan 150
+  name P:ENT:F:R:65.54.140.0/26
+ !
+ vlan 151
+  name P:ENT:F:U:65.54.140.0/26
+ !
+ vlan 160
+  name P:ENT:F:R:207.68.181.128/25
+ !
+ vlan 161
+  name P:ENT:F:U:207.68.181.128/25
+ !
+ vlan 200
+  name P:MSN:F:R:65.54.211.64/27
+ !
+ vlan 201
+  name P:MSN:F:U:65.54.211.64/27
+ !
+ vlan 220
+  name P:GRP:F:R:65.54.208.64/26
+ !
+ vlan 221
+  name P:GRP:F:U:65.54.208.64/26
+ !
+ vlan 222
+  name P:GRP:F:R:65.54.134.160/27
+ !
+ vlan 223
+  name P:GRP:F:U:65.54.134.160/27
+ !
+ vlan 250
+  name P:VOI:F:R:65.54.192.0/25
+ !
+ vlan 251
+  name P:VOI:F:U:65.54.192.0/25
+ !
+ vlan 270
+  name P:OFF:F:R:207.68.166.128/25
+ !
+ vlan 280
+  name P:ADVAN:F:R:65.54.192.1/24_ADV
+ !
+ vlan 281
+  name P:ADVAN:F:U:65.54.192.1/24_ADV
+ !
+ vlan 291
+  name P:OFF:F:U:207.68.166.128/25
+ !
+ vlan 300
+  name P:SHOP:F:R:207.68.166.0/25
+ !
+ vlan 303
+  name P:SHOP:F:U:207.68.166.0/25
+ !
+ vlan 430
+  name P:MEXP:F:R:65.54.149.160/28:MX_W
+ !
+ vlan 460
+  name P:ADS:F:R:65.54.195.128/26
+ !
+ vlan 463
+  name P:ADS:F:U:65.54.195.128/26:LD
+ !
+ vlan 465
+  name P:ADS:F:U:65.54.195.128/26
+ !
+ vlan 650
+  name P:MDIR:F:R:65.54.202.224/27
+ !
+ vlan 651
+  name P:MDIR:F:U:65.54.202.224/27
+ !
+ vlan 700
+  name P:MPGSC:F:R:65.54.159.16/28:WEB_
+ !
+ vlan 730
+  name P:MSN:F:R:65.54.205.128/26
+ !
+ vlan 800
+  name P:NETWK:F:R:207.68.179.0/25:MGMT
+ !
+ vlan 821
+  name P:NETWK:F:R:207.68.170.128/29
+ !
+ vlan 822
+  name P:NETWK:F:R:207.68.170.136/29
+ !
+ vlan 940
+  name P:PRIV:F:R:65.54.135.80/28
+ !
+ vlan 941
+  name P:PRIV:F:U:65.54.135.80/28
+ !
+ policy-map RSVote_5_80S
+ !
+ !
+ !
+ interface Loopback0
+  description MGMT:207.68.179.25/32:tuk-6nf-5a
+  ip address 207.68.179.25 255.255.255.255
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+ !
+ interface Port-channel1
+  logging event link-status
+  switchport
+  switchport trunk encapsulation dot1q
+ !
+ interface GigabitEthernet1/1
+  description CORE:TUK-6NF-5B:1/1
+  logging event link-status
+  logging event bundle-status
+  logging event trunk-status
+  load-interval 30
+  switchport
+  switchport trunk encapsulation dot1q
+  channel-group 1 mode desirable
+ !
+ interface GigabitEthernet1/2
+  description CORE:TUK-6NF-5B:1/2
+  logging event link-status
+  logging event bundle-status
+  logging event trunk-status
+  load-interval 30
+  switchport
+  switchport trunk encapsulation dot1q
+  channel-group 1 mode desirable
+ !
+ interface GigabitEthernet3/1
+  description "TK2-LDT-ADS-08_G0"
+  logging event link-status
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/2
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/3
+  description "TK2-LDT-ADS-10_G0"
+  logging event link-status
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/4
+  description "Ads_NetSclr"
+  switchport
+  switchport access vlan 117
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/5
+  speed nonegotiate
+  flowcontrol receive on
+  flowcontrol send off
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+ !
+ interface GigabitEthernet3/6
+  speed nonegotiate
+  flowcontrol receive on
+  flowcontrol send off
+  switchport
+  switchport access vlan 160
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+ !
+ interface GigabitEthernet3/7
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/8
+  switchport
+  switchport access vlan 465
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/9
+  description tuk-5pf-mpgsc-1a:Gig 0
+  logging event link-status
+  load-interval 30
+  switchport
+  switchport access vlan 700
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/10
+  description tuk-5pf-mexp-1a:Gig 0
+  logging event link-status
+  load-interval 30
+  switchport
+  switchport access vlan 430
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/11
+  description PeakflowX-jboern
+  logging event link-status
+  flowcontrol receive on
+  flowcontrol send off
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/12
+  logging event link-status
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/13
+  description "TK2-LDT-GSV-02_G0"
+  logging event link-status
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/14
+  description "TK2-LDT-GSV-02_G1"
+  logging event link-status
+  switchport
+  switchport access vlan 463
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/15
+  description TK2UPSNSA01-Netscaler
+  logging event link-status
+  load-interval 30
+  flowcontrol receive on
+  flowcontrol send on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet3/16
+  description infra:core:tuk-76c-1a:g7/1
+  ip address 207.46.39.98 255.255.255.252
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  ip ospf message-digest-key xxxxx
+  logging event link-status
+  load-interval 30
+  udld port aggressive
+  flowcontrol receive on
+  flowcontrol send off
+ !
+ interface GigabitEthernet4/1
+  description CORE:TUK2F-GSR-A:G9/0
+  logging event link-status
+  speed nonegotiate
+  switchport
+  switchport access vlan 821
+ !
+ interface GigabitEthernet4/2
+  description CORE:TUK2F-GSR-B:G8/2
+  logging event link-status
+  speed nonegotiate
+  switchport
+  switchport access vlan 822
+ !
+ interface GigabitEthernet4/3
+  logging event link-status
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/4
+  logging event link-status
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/5
+  description "TK2-LDT-OFF-02_G0"
+  logging event link-status
+  switchport
+  switchport access vlan 270
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/6
+  logging event link-status
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/7
+  description "TK2TRARPT01"
+  logging event link-status
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/8
+  description empty port
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/9
+  description "TK2-LDT-OFF-01_G0"
+  logging event link-status
+  switchport
+  switchport access vlan 270
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/10
+  description "TK2-LDT-OFF-01_G1"
+  logging event link-status
+  switchport
+  switchport access vlan 291
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/11
+  description MSN_Netsclr
+  switchport
+  switchport access vlan 200
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/12
+  description netscaler
+  switchport
+  switchport access vlan 201
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/13
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/14
+  description infra:core:tuk-76c-1b:g7/1
+  ip address 207.46.39.106 255.255.255.252
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  ip ospf message-digest-key xxxxx
+  logging event link-status
+  load-interval 30
+  udld port aggressive
+  flowcontrol receive on
+  flowcontrol send off
+ !
+ interface GigabitEthernet4/15
+  shutdown
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface GigabitEthernet4/16
+  description empty port
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  switchport nonegotiate
+  no cdp enable
+ !
+ interface FastEthernet5/1
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 121
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/2
+  description TK2CPOWEBS01
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 730
+  switchport mode access
+ !
+ interface FastEthernet5/3
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 121
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/4
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/5
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/6
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/7
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/8
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/9
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/10
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/11
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/12
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/13
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 221
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/14
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet5/15
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 191
+  switchport mode access
+ !
+ interface FastEthernet5/16
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/17
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/18
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/19
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/20
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet5/21
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/22
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/23
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/24
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 800
+  switchport mode access
+ !
+ interface FastEthernet5/25
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/26
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 465
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/27
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 800
+  switchport mode access
+ !
+ interface FastEthernet5/28
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 465
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/29
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/30
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/31
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet5/32
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/33
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet5/34
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet5/35
+  description TK2VSACNA01
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 251
+  switchport mode access
+ !
+ interface FastEthernet5/36
+  description "rsvd for PPM17172"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 291
+  switchport mode access
+ !
+ interface FastEthernet5/37
+  description "rsvd for PPM17172"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 221
+  switchport mode access
+ !
+ interface FastEthernet5/38
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/39
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/40
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/41
+  description "rsvd for PPM17172"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 250
+  switchport mode access
+  no cdp enable
+ !
+ interface FastEthernet5/42
+  description "rsvd for PPM17172"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 251
+  switchport mode access
+  no cdp enable
+ !
+ interface FastEthernet5/43
+  description "rsvd for PPM17172"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 251
+  switchport mode access
+ !
+ interface FastEthernet5/44
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/45
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/46
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet5/47
+  description TK2VSPRVA01
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 251
+  switchport mode access
+ !
+ interface FastEthernet5/48
+  description TK2VSUTILA01
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 251
+  switchport mode access
+ !
+ interface FastEthernet7/1
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/2
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 281
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/3
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/4
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 201
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/5
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/6
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/7
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/8
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/9
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/10
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/11
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 651
+  switchport mode access
+ !
+ interface FastEthernet7/12
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/13
+  description TK2MSNMY25
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 201
+  switchport mode access
+ !
+ interface FastEthernet7/14
+  description TK2MSNMY27
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 201
+  switchport mode access
+ !
+ interface FastEthernet7/15
+  description TK2MSNMY29
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 201
+  switchport mode access
+ !
+ interface FastEthernet7/16
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet7/17
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet7/18
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 201
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/19
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/20
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 201
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet7/21
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 251
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet7/22
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet7/23
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/24
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet7/25
+  description "TK2RTTPOP03"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/26
+  description "TK2RTTPOP21"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/27
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 650
+  switchport mode access
+ !
+ interface FastEthernet7/28
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 201
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet7/29
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/30
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/31
+  description TK2RTTADV01
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 941
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet7/32
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 941
+  switchport mode access
+ !
+ interface FastEthernet7/33
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/34
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 117
+  switchport mode access
+ !
+ interface FastEthernet7/35
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 117
+  switchport mode access
+ !
+ interface FastEthernet7/36
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 117
+  switchport mode access
+ !
+ interface FastEthernet7/37
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 281
+  switchport mode access
+ !
+ interface FastEthernet7/38
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 117
+  switchport mode access
+ !
+ interface FastEthernet7/39
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 117
+  switchport mode access
+ !
+ interface FastEthernet7/40
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet7/41
+  description "BAD PORT"
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 200
+  switchport mode access
+ !
+ interface FastEthernet7/42
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 200
+  switchport mode access
+ !
+ interface FastEthernet7/43
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet7/44
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 200
+  switchport mode access
+ !
+ interface FastEthernet7/45
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet7/46
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet7/47
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet7/48
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+ !
+ interface FastEthernet8/1
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 117
+  switchport mode access
+ !
+ interface FastEthernet8/2
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/3
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/4
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/5
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 220
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/6
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/7
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/8
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/9
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/10
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/11
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/12
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 2
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/13
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/14
+  description /27_MSN_GROUPS
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 222
+  switchport mode access
+ !
+ interface FastEthernet8/15
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/16
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/17
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/18
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/19
+  description /27_MSN_GROUPS
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 222
+  switchport mode access
+ !
+ interface FastEthernet8/20
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/21
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/22
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet8/23
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 151
+  switchport mode access
+ !
+ interface FastEthernet8/24
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 151
+  switchport mode access
+ !
+ interface FastEthernet8/25
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/26
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/27
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/28
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/29
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/30
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/31
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/32
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/33
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 101
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet8/34
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/35
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/36
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/37
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/38
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/39
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/40
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/41
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/42
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/43
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/44
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/45
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/46
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/47
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet8/48
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet9/1
+  description "TK2ESHWBD31"
+  shutdown
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 2
+  switchport mode access
+ !
+ interface FastEthernet9/2
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 201
+  switchport mode access
+ !
+ interface FastEthernet9/3
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 223
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet9/4
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 465
+  switchport mode access
+ !
+ interface FastEthernet9/5
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 465
+  switchport mode access
+ !
+ interface FastEthernet9/6
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 220
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet9/7
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/8
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+ !
+ interface FastEthernet9/9
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/10
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/11
+  description TK2MDWBA05
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 651
+  switchport mode access
+ !
+ interface FastEthernet9/12
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+ !
+ interface FastEthernet9/13
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet9/14
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/15
+  description TK2MDWBA07
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 651
+  switchport mode access
+ !
+ interface FastEthernet9/16
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 220
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet9/17
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+ !
+ interface FastEthernet9/18
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+ !
+ interface FastEthernet9/19
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/20
+  description TK2MDWBA09
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 651
+  switchport mode access
+ !
+ interface FastEthernet9/21
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/22
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/23
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/24
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 651
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet9/25
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+  spanning-tree bpduguard enable
+ !
+ interface FastEthernet9/26
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 460
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/27
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/28
+  description TK2SHOPWEB01
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/29
+  description TK2SHOPWEB03
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/30
+  description TK2SHOPWEB09
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/31
+  description "TK2ESWBS01"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/32
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/33
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/34
+  description "TK2ESWBS07"
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/35
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/36
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/37
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/38
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/39
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 303
+  switchport mode access
+ !
+ interface FastEthernet9/40
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/41
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/42
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 200
+  switchport mode access
+ !
+ interface FastEthernet9/43
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 223
+  switchport mode access
+ !
+ interface FastEthernet9/44
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/45
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/46
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/47
+  speed 100
+  duplex full
+  switchport
+  switchport access vlan 161
+  switchport mode access
+  spanning-tree portfast
+ !
+ interface FastEthernet9/48
+  speed 100
+  duplex full
+  flowcontrol receive on
+  switchport
+  switchport access vlan 110
+  switchport mode access
+  no cdp enable
+  spanning-tree portfast
+ !
+ interface Vlan1
+  no ip address
+  shutdown
+ !
+ interface Vlan51
+  description mgmt:10.20.64.72/29:CSM_XML
+  ip address 10.20.64.75 255.255.255.248
+  ip access-group csm-xml-mgmt-out out
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 10.20.64.73
+  standby 1 priority 150
+  standby 1 preempt
+ !
+ interface Vlan100
+  description PROP:SHOP:65.54.147.160/27
+  ip address 65.54.147.163 255.255.255.224
+  ip access-group shoprr-out out
+  ip helper-address 10.20.192.26
+  no ip redirects
+  no ip unreachables
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.147.161
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.147.162
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan110
+  description PROP:ADS:65.54.194.64/26_Ads
+  ip address 65.54.194.67 255.255.255.192
+  ip access-group vlan110-temp-out out
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 10 ip 65.54.194.65
+  standby 10 priority 150
+  standby 10 preempt
+  standby 10 track GigabitEthernet3/16 11
+  standby 10 track GigabitEthernet4/14 11
+  standby 11 ip 65.54.194.66
+  standby 11 priority 140
+  standby 11 preempt
+  standby 11 track GigabitEthernet3/16 11
+  standby 11 track GigabitEthernet4/14 11
+ !
+ interface Vlan120
+  description PROP:MSGR:tuk-6nf-5a/b:Vlan120:65.54.213.64/27_ILM
+  ip address 65.54.213.67 255.255.255.224
+  no ip redirects
+  no ip unreachables
+  no ip proxy-arp
+  no ip mroute-cache
+  standby 1 ip 65.54.213.65
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.213.66
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan150
+  description PROP:ENT:65.54.140.0/26_Entertainment
+  ip address 65.54.140.3 255.255.255.192
+  ip access-group entertainment_ppe-out-vlan-150 out
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.140.1
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.140.2
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan160
+  description PROP:ENT:207.68.181.128/25_Ent
+  ip address 207.68.181.131 255.255.255.128
+  ip access-group vlan160-ent-out out
+  ip helper-address 10.20.192.26
+  no ip redirects
+  no ip unreachables
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 207.68.181.129
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 207.68.181.130
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan200
+  description PROP:MSN:65.54.211.64/26_MSN_Netscalar
+  ip address 65.54.211.67 255.255.255.192
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.211.65
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.211.66
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan220
+  description PROP:GRP:65.54.208.64/26_Communities
+  ip address 65.54.208.67 255.255.255.192
+  no ip redirects
+  no ip unreachables
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.208.65
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.208.66
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan222
+  description PROP:GRP:65.54.134.160/27_GROUPS
+  ip address 65.54.134.163 255.255.255.224
+  ip access-group msn-groups-sp5-out out
+  no ip redirects
+  no ip unreachables
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.134.161
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.134.162
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan270
+  description PROP:OFF:207.68.166.128/25_Office.Net
+  ip address 207.68.166.131 255.255.255.128
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 207.68.166.129
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 207.68.166.130
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan280
+  description PROP:ADVAN:65.54.192.0/24_ADVANTAGE
+  ip address 65.54.192.3 255.255.255.0
+  ip access-group advantage-vlan280-out out
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.192.1
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.192.2
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan300
+  description PROP:SHOP:207.68.166.0/25_eShop
+  ip address 207.68.166.3 255.255.255.128
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 207.68.166.1
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 207.68.166.2
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan430
+  description PROP:MEXP:F:R:65.54.149.160/28:MX_WEB_FW_LAN
+  ip address 65.54.149.163 255.255.255.240
+  ip access-group MEXP-WEB-OUT out
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.149.161
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.149.162
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan460
+  description PROP:ADS:65.54.195.128/26:
+  ip address 65.54.195.131 255.255.255.192
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.195.129
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.195.130
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan650
+  description PROP:MDIR:65.54.202.224/27_Mem_Dir
+  ip address 65.54.202.227 255.255.255.224
+  ip helper-address 10.20.192.26
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  ip ospf cost 100
+  load-interval 30
+  standby 1 ip 65.54.202.225
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.202.226
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan700
+  description NOBILL:MPGSC:F:R:65.54.159.16/28:WEB_FW_DMZ_LAN
+  ip address 65.54.159.19 255.255.255.240
+  ip access-group MPGSC-WEB-OUT out
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.159.17
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.159.18
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan730
+  description PROP:MSN:65.54.205.128/26_MSN8
+  ip address 65.54.205.131 255.255.255.192
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.205.129
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.205.130
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ interface Vlan821
+  description INFRA:CORE:tUK2F-gsr-a:G10/2
+  ip address 207.68.170.130 255.255.255.248
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  ip ospf cost 20000
+  load-interval 30
+  shutdown
+ !
+ interface Vlan822
+  description INFRA:CORE:tUK2F-gsr-b:G10/2
+  ip address 207.68.170.140 255.255.255.248
+  no ip redirects
+  no ip proxy-arp
+  no ip mroute-cache
+  ip ospf cost 20000
+  load-interval 30
+  shutdown
+ !
+ interface Vlan940
+  description PROP:PRIV:65.54.135.80/28_Privacy
+  ip address 65.54.135.83 255.255.255.240
+  ip access-group vlan-940-privacy-out out
+  no ip redirects
+  no ip unreachables
+  no ip proxy-arp
+  no ip mroute-cache
+  load-interval 30
+  standby 1 ip 65.54.135.81
+  standby 1 priority 150
+  standby 1 preempt
+  standby 1 track GigabitEthernet3/16 11
+  standby 1 track GigabitEthernet4/14 11
+  standby 2 ip 65.54.135.82
+  standby 2 priority 140
+  standby 2 preempt
+  standby 2 track GigabitEthernet3/16 11
+  standby 2 track GigabitEthernet4/14 11
+ !
+ router ospf 8075
+  router-id 207.68.179.25
+  log-adjacency-changes
+  area 300 authentication xxxxx
+  redistribute static metric 1 subnets route-map STATIC-TO-OSPF
+  passive-interface default
+  no passive-interface GigabitEthernet3/16
+  no passive-interface GigabitEthernet4/14
+  network 10.20.64.72 0.0.0.7 area 300
+  network 65.54.134.160 0.0.0.31 area 300
+  network 65.54.135.80 0.0.0.15 area 300
+  network 65.54.140.0 0.0.0.63 area 300
+  network 65.54.147.160 0.0.0.31 area 300
+  network 65.54.149.160 0.0.0.15 area 300
+  network 65.54.159.16 0.0.0.15 area 300
+  network 65.54.192.0 0.0.0.255 area 300
+  network 65.54.194.64 0.0.0.63 area 300
+  network 65.54.195.128 0.0.0.63 area 300
+  network 65.54.202.224 0.0.0.31 area 300
+  network 65.54.205.128 0.0.0.63 area 300
+  network 65.54.208.64 0.0.0.63 area 300
+  network 65.54.211.64 0.0.0.63 area 300
+  network 65.54.213.64 0.0.0.31 area 300
+  network 207.46.39.96 0.0.0.3 area 300
+  network 207.46.39.104 0.0.0.3 area 300
+  network 207.68.166.0 0.0.0.127 area 300
+  network 207.68.166.128 0.0.0.127 area 300
+  network 207.68.179.25 0.0.0.0 area 300
+  network 207.68.181.128 0.0.0.127 area 300
+ !
+ ip classless
+ ip route 65.54.158.0 255.255.255.224 65.54.159.21
+ ip route 65.54.159.128 255.255.255.128 65.54.149.165
+ ip route 65.54.192.0 255.255.255.128 207.68.170.198
+ ip route 65.54.192.0 255.255.255.128 207.68.170.197
+ no ip http server
+ !
+ !
+ ip prefix-list STATIC-REDIST-TO-OSPF seq 500 permit 65.54.159.128/25
+ ip prefix-list STATIC-REDIST-TO-OSPF seq 600 permit 65.54.158.0/27
+ ip prefix-list STATIC-REDIST-TO-OSPF seq 1000 deny 0.0.0.0/0
+ !
+ ip access-list standard VOICE_ASSIGNED_IPS
+  permit 65.54.192.0 0.0.0.127
+ !
+ ip access-list extended MPGSC-WEB-OUT
+  remark NOTE: ALL ACLS REFERRING to 65.54.158.0/27 subnet should be made
+  remark on tuk-5pf-mpgsc-1a PIX. Don't forget to write standby on 1a. 
+  remark Please contact DAVWILL if you have any questions.
+  remark Antispoof
+  deny ip 65.54.158.0 0.0.0.31 65.54.158.0 0.0.0.31
+  deny ip 65.54.159.16 0.0.0.15 65.54.159.16 0.0.0.15
+  remark Permit mgmt traffic to PIX's
+  permit ip 10.20.5.0 0.0.0.255 65.54.159.16 0.0.0.15
+  permit ip 10.20.6.0 0.0.0.255 65.54.159.16 0.0.0.15
+  permit ip 10.20.142.0 0.0.0.255 65.54.159.16 0.0.0.15
+  remark permit all traffic to the SCG host network 65.54.158.0/27
+  permit tcp any 65.54.158.0 0.0.0.31
+  permit udp any 65.54.158.0 0.0.0.31
+  permit icmp any 65.54.158.0 0.0.0.31
+  permit udp 207.46.32.84 0.0.0.1 eq ntp host 65.54.159.21
+  permit udp 207.46.32.84 0.0.0.1 eq ntp host 65.54.159.22
+ ip access-list extended advantage-vlan280-out
+  permit icmp 10.20.0.0 0.0.15.255 any
+  deny ip 65.54.192.0 0.0.0.255 65.54.192.0 0.0.0.255
+  permit tcp 10.20.0.0 0.0.15.255 65.54.192.0 0.0.0.255
+  permit udp 10.20.0.0 0.0.15.255 65.54.192.0 0.0.0.255
+  permit icmp 10.20.0.0 0.0.15.255 65.54.192.0 0.0.0.255
+  permit tcp 10.20.192.0 0.0.63.255 65.54.192.0 0.0.0.255
+  permit udp 10.20.192.0 0.0.63.255 65.54.192.0 0.0.0.255
+  permit icmp 10.20.192.0 0.0.63.255 65.54.192.0 0.0.0.255
+  permit tcp any 65.54.192.0 0.0.0.255 established
+  permit tcp any gt 1023 host 65.54.192.188 eq www
+  permit tcp any gt 1023 host 65.54.192.188 eq 443
+  permit tcp any gt 1023 host 65.54.192.203 eq www
+  permit tcp any gt 1023 host 65.54.192.203 eq 443
+  permit tcp any gt 1023 host 65.54.192.215 eq www
+  permit tcp any gt 1023 host 65.54.192.215 eq 443
+  permit tcp any gt 1023 65.54.192.216 0.0.0.7 eq www
+  permit tcp any gt 1023 65.54.192.216 0.0.0.7 eq 443
+  permit tcp any gt 1023 65.54.192.224 0.0.0.3 eq www
+  permit tcp any gt 1023 65.54.192.224 0.0.0.3 eq 443
+  permit tcp any gt 1023 host 65.54.192.235 eq www
+  permit tcp any gt 1023 host 65.54.192.235 eq 443
+  permit tcp any gt 1023 65.54.192.236 0.0.0.3 eq www
+  permit tcp any gt 1023 65.54.192.236 0.0.0.3 eq 443
+  permit tcp any gt 1023 65.54.192.240 0.0.0.3 eq www
+  permit tcp any gt 1023 65.54.192.240 0.0.0.3 eq 443
+  permit tcp any gt 1023 65.54.192.244 0.0.0.1 eq www
+  permit tcp any gt 1023 65.54.192.244 0.0.0.1 eq 443
+  permit tcp any gt 1023 host 65.54.192.247 eq www
+  permit tcp any gt 1023 host 65.54.192.247 eq 443
+  permit tcp any gt 1023 host 65.54.192.249 eq www
+  permit tcp any gt 1023 host 65.54.192.249 eq 443
+  permit tcp any gt 1023 65.54.192.252 0.0.0.1 eq www
+  permit tcp any gt 1023 65.54.192.252 0.0.0.1 eq 443
+  permit tcp any gt 1023 host 65.54.192.163 eq www
+  permit tcp any gt 1023 65.54.192.164 0.0.0.1 eq www
+  permit tcp any gt 1023 host 65.54.192.140 eq www
+  permit tcp host 207.68.176.88 gt 1023 65.54.192.0 0.0.0.255 eq www
+  permit tcp any gt 1023 host 65.54.192.229 eq www
+  permit tcp any gt 1023 host 65.54.192.230 eq www
+  permit tcp any gt 1023 host 65.54.192.229 eq 443
+  permit tcp any gt 1023 host 65.54.192.230 eq 443
+ ip access-list extended csm-xml-mgmt-out
+  permit tcp 10.20.5.0 0.0.0.255 host 10.20.64.77 eq www
+  permit tcp 10.20.6.0 0.0.0.255 host 10.20.64.77 eq www
+  permit tcp 10.20.5.0 0.0.0.255 host 10.20.64.78 eq www
+  permit tcp 10.20.6.0 0.0.0.255 host 10.20.64.78 eq www
+ ip access-list extended entertainment_ppe-out-vlan-150
+  deny ip 65.54.140.0 0.0.0.63 any
+  permit tcp 10.20.0.0 0.0.255.255 65.54.140.0 0.0.0.63
+  permit udp 10.20.0.0 0.0.255.255 65.54.140.0 0.0.0.63
+  permit icmp 10.20.0.0 0.0.255.255 65.54.140.0 0.0.0.63
+  permit tcp any gt 1023 65.54.140.60 0.0.0.1 eq www
+  permit tcp any gt 1023 65.54.140.60 0.0.0.1 eq 443
+  permit tcp any gt 1023 host 65.54.140.62 eq www
+  permit tcp any gt 1023 host 65.54.140.62 eq 443
+  permit tcp any any established
+ ip access-list extended msn-groups-sp5-out
+  deny ip 65.54.134.160 0.0.0.31 any
+  deny ip any 65.54.134.160 0.0.0.3
+  deny ip any host 65.54.134.164
+  remark GROUPS PROD Server responses back in
+  permit tcp any 65.54.134.160 0.0.0.31 established
+  permit tcp any host 65.54.134.190 eq www
+  remark Ticket 1015932
+  permit tcp any 65.54.134.160 0.0.0.31 eq www
+  permit tcp any 65.54.134.160 0.0.0.31 eq 443
+ ip access-list extended shoprr-out
+  deny ip 65.54.147.160 0.0.0.31 65.54.147.160 0.0.0.31
+  permit tcp 10.20.0.0 0.0.15.255 65.54.147.160 0.0.0.31
+  permit udp 10.20.0.0 0.0.15.255 65.54.147.160 0.0.0.31
+  permit icmp 10.20.0.0 0.0.15.255 65.54.147.160 0.0.0.31
+  permit tcp 10.20.192.0 0.0.63.255 65.54.147.160 0.0.0.31
+  permit udp 10.20.192.0 0.0.63.255 65.54.147.160 0.0.0.31
+  permit icmp 10.20.192.0 0.0.63.255 65.54.147.160 0.0.0.31
+  permit tcp any gt 1023 host 65.54.147.189 eq www
+  permit tcp 207.46.245.0 0.0.0.63 gt 1023 host 65.54.147.190 eq www
+  permit tcp 207.46.150.0 0.0.0.63 gt 1023 host 65.54.147.190 eq www
+  permit tcp 65.54.157.128 0.0.0.127 gt 1023 host 65.54.147.190 eq www
+  permit tcp any eq www 65.54.147.160 0.0.0.31 gt 1023
+  permit tcp any eq 81 65.54.147.160 0.0.0.31 gt 1023
+  permit tcp any eq 443 65.54.147.160 0.0.0.31 gt 1023
+  permit tcp 207.46.0.0 0.0.7.255 gt 1023 host 65.54.147.190 eq www
+  permit tcp host 65.54.202.253 gt 1023 65.54.147.160 0.0.0.31 eq www
+  permit tcp host 65.54.202.253 gt 1023 65.54.147.160 0.0.0.31 eq 81
+  permit udp host 65.54.202.253 gt 1023 65.54.147.160 0.0.0.31 eq 80
+  permit udp host 65.54.202.253 gt 1023 65.54.147.160 0.0.0.31 eq 81
+  permit tcp host 65.54.204.93 gt 1023 host 65.54.147.190 eq www
+  permit tcp 207.68.181.128 0.0.0.127 gt 1023 host 65.54.147.190 eq www
+  permit tcp 207.68.180.0 0.0.0.255 gt 1023 host 65.54.147.190 eq www
+  permit tcp host 65.54.204.75 gt 1023 host 65.54.147.190 eq www
+  permit tcp host 65.54.204.77 gt 1023 host 65.54.147.190 eq www
+  permit tcp 65.54.202.224 0.0.0.31 gt 1023 host 65.54.147.163 eq 81
+  permit udp 65.54.202.224 0.0.0.31 gt 1023 host 65.54.147.163 eq 81
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 65.54.147.160 0.0.0.31 eq www
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 65.54.147.160 0.0.0.31 eq 443
+  permit tcp 65.54.152.128 0.0.0.127 host 65.54.147.190 eq www
+  permit tcp 207.68.183.128 0.0.0.127 host 65.54.147.190 eq www
+  permit tcp 202.58.56.0 0.0.3.255 host 65.54.147.190 eq www
+  permit tcp 65.54.204.128 0.0.0.63 host 65.54.147.190 eq www
+  permit tcp 202.58.56.0 0.0.3.255 gt 1023 host 65.54.147.187 eq 443
+  permit tcp 202.58.56.0 0.0.3.255 gt 1023 host 65.54.147.190 eq 443
+  permit tcp 65.54.226.64 0.0.0.63 gt 1023 host 65.54.147.190 eq www
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 65.54.147.160 0.0.0.31 eq 81
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 65.54.147.160 0.0.0.31 eq www
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 65.54.147.160 0.0.0.31 eq 443
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 65.54.147.160 0.0.0.31 eq 81
+  permit tcp 65.54.157.0 0.0.0.127 gt 1023 host 65.54.147.189 eq 81
+  permit tcp 65.54.142.128 0.0.0.63 gt 1023 host 65.54.147.189 eq 81
+  permit tcp 207.46.214.0 0.0.1.255 gt 1023 host 65.54.147.189 eq 81
+ ip access-list extended shrpointfe-ppe-out
+  deny ip any any
+ ip access-list extended shrpointfe-prod-out
+  deny ip any any
+ ip access-list extended vlan-940-privacy-out
+  deny ip 65.54.135.80 0.0.0.15 65.54.135.80 0.0.0.15
+  permit tcp any host 65.54.135.94 eq www
+  permit tcp any host 65.54.135.94 eq 443
+  permit tcp any 65.54.135.80 0.0.0.15 gt 1023 established
+  permit tcp host 131.107.8.42 65.54.135.80 0.0.0.15 eq www
+  permit tcp host 131.107.8.41 65.54.135.80 0.0.0.15 eq www
+  permit tcp host 131.107.37.244 65.54.135.80 0.0.0.15 eq www
+  permit tcp host 131.107.37.243 65.54.135.80 0.0.0.15 eq www
+  permit tcp 131.107.3.64 0.0.0.31 65.54.135.80 0.0.0.15 eq www
+  permit tcp host 131.107.170.65 65.54.135.80 0.0.0.15 eq www
+  permit tcp host 131.107.8.42 65.54.135.80 0.0.0.15 eq 443
+  permit tcp host 131.107.8.41 65.54.135.80 0.0.0.15 eq 443
+  permit tcp host 131.107.37.244 65.54.135.80 0.0.0.15 eq 443
+  permit tcp host 131.107.37.243 65.54.135.80 0.0.0.15 eq 443
+  permit tcp 131.107.3.64 0.0.0.31 65.54.135.80 0.0.0.15 eq 443
+  permit tcp host 131.107.170.65 65.54.135.80 0.0.0.15 eq 443
+  permit tcp 65.54.223.160 0.0.0.31 65.54.135.80 0.0.0.15 eq www
+  permit tcp 65.54.223.160 0.0.0.31 65.54.135.80 0.0.0.15 eq 443
+  permit tcp 207.68.176.0 0.0.0.127 65.54.135.80 0.0.0.15 eq www
+  permit tcp 207.68.176.0 0.0.0.127 65.54.135.80 0.0.0.15 eq 443
+  permit tcp 207.68.185.192 0.0.0.63 65.54.135.80 0.0.0.15 eq www
+  permit tcp 207.68.185.192 0.0.0.63 65.54.135.80 0.0.0.15 eq 443
+  permit tcp 131.107.87.128 0.0.0.127 65.54.135.80 0.0.0.15 eq www
+  permit tcp 131.107.87.128 0.0.0.127 65.54.135.80 0.0.0.15 eq 443
+ ip access-list extended vlan110-temp-out
+  deny ip 65.54.194.64 0.0.0.63 65.54.194.64 0.0.0.63
+  permit tcp host 8.6.176.231 gt 1023 host 65.54.194.101 eq www
+  permit tcp host 8.6.176.231 gt 1023 host 65.54.194.101 eq 443
+  permit tcp host 8.6.176.232 gt 1023 host 65.54.194.101 eq www
+  permit tcp host 8.6.176.232 gt 1023 host 65.54.194.101 eq 443
+  permit tcp any gt 1023 host 65.54.194.83 eq 443
+  deny tcp any gt 1023 host 65.54.194.101 eq www
+  deny tcp any gt 1023 host 65.54.194.101 eq 443
+  permit ip any any
+ ip access-list extended vlan160-ent-out
+  deny ip 207.68.181.128 0.0.0.127 any
+  permit tcp 131.107.87.192 0.0.0.63 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp 131.107.87.192 0.0.0.63 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit ip 65.54.140.0 0.0.0.63 207.68.181.128 0.0.0.127
+  permit ip 207.68.177.0 0.0.0.63 207.68.181.128 0.0.0.127
+  permit ip 207.68.181.0 0.0.0.127 207.68.181.128 0.0.0.127
+  permit ip 207.68.180.0 0.0.0.255 207.68.181.128 0.0.0.127
+  permit tcp 207.68.176.0 0.0.0.127 207.68.181.128 0.0.0.127 eq www
+  permit tcp 207.68.176.0 0.0.0.127 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.179 eq www
+  permit tcp 203.167.75.0 0.0.0.255 gt 1023 host 207.68.181.179 eq www
+  permit tcp 203.177.87.0 0.0.0.255 gt 1023 host 207.68.181.179 eq www
+  permit tcp 210.1.79.0 0.0.0.255 gt 1023 host 207.68.181.179 eq www
+  permit tcp 202.138.157.0 0.0.0.255 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 208.181.253.33 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 63.79.215.26 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 131.197.101.61 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 131.197.101.6 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.179 eq www
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.179 eq www
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.179 eq www
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.179 eq www
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.179 eq www
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.180 eq www
+  permit tcp 203.167.75.0 0.0.0.255 gt 1023 host 207.68.181.180 eq www
+  permit tcp 203.177.87.0 0.0.0.255 gt 1023 host 207.68.181.180 eq www
+  permit tcp 210.1.79.0 0.0.0.255 gt 1023 host 207.68.181.180 eq www
+  permit tcp 202.138.157.0 0.0.0.255 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 208.181.253.33 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 63.79.215.26 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 131.197.101.61 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 131.197.101.6 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.180 eq www
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.180 eq www
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.180 eq www
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.180 eq www
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.180 eq www
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 203.167.75.0 0.0.0.255 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 203.177.87.0 0.0.0.255 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 210.1.79.0 0.0.0.255 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 202.138.157.0 0.0.0.255 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 208.181.253.33 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 63.79.215.26 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 131.197.101.61 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 131.197.101.6 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.179 eq 443
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.179 eq 443
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 203.167.75.0 0.0.0.255 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 203.177.87.0 0.0.0.255 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 210.1.79.0 0.0.0.255 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 202.138.157.0 0.0.0.255 gt 1023 host 207.68.181.180 eq 443
+  permit tcp host 208.181.253.33 gt 1023 host 207.68.181.180 eq 443
+  permit tcp host 63.79.215.26 gt 1023 host 207.68.181.180 eq 443
+  permit tcp host 131.197.101.61 gt 1023 host 207.68.181.180 eq 443
+  permit tcp host 131.197.101.6 gt 1023 host 207.68.181.180 eq 443
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.180 eq 443
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.180 eq 443
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.180 eq 443
+  permit tcp any 207.68.181.246 0.0.0.1 eq www
+  permit tcp any 207.68.181.246 0.0.0.1 eq 443
+  permit tcp any 207.68.181.248 0.0.0.7 eq www
+  permit tcp any 207.68.181.248 0.0.0.7 eq 443
+  permit tcp any 207.68.181.136 0.0.0.1 eq nntp
+  permit tcp any host 207.68.181.245 range ftp-data 22
+  permit tcp any host 207.68.181.245 gt 1023
+  permit tcp any eq www 207.68.181.128 0.0.0.127 gt 1023 established
+  permit tcp any eq 443 207.68.181.128 0.0.0.127 gt 1023 established
+  permit tcp any eq smtp 207.68.181.128 0.0.0.127 gt 1023 established
+  permit icmp host 209.240.207.67 host 207.68.181.246 echo
+  permit icmp host 209.240.207.67 host 207.68.181.246 echo-reply
+  permit tcp host 192.251.67.232 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp host 192.251.67.232 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 64.95.14.106 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp host 64.95.14.106 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 64.95.24.244 0.0.0.1 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp 64.95.24.244 0.0.0.1 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 65.203.170.36 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp host 65.203.170.36 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 64.85.69.0 0.0.0.255 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp 64.85.69.0 0.0.0.255 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 64.236.243.16 0.0.0.15 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp 64.236.243.16 0.0.0.15 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 80.67.67.0 0.0.0.255 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp 80.67.68.0 0.0.0.255 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp 80.67.72.0 0.0.0.255 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp 193.108.90.0 0.0.0.255 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp 193.108.92.0 0.0.1.255 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp 193.108.155.0 0.0.0.255 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp any eq nntp 207.68.181.136 0.0.0.1 gt 1023 established
+  permit tcp 207.68.176.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 range ftp 22
+  permit tcp 207.68.176.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 131.107.3.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 range ftp 22
+  permit tcp 131.107.3.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 207.46.228.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 range ftp 22
+  permit tcp 207.46.228.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 207.46.238.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 range ftp 22
+  permit tcp 207.46.238.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 131.107.87.165 gt 1023 207.68.181.138 0.0.0.1 range ftp 22
+  permit tcp host 131.107.87.165 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 207.68.176.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp 207.68.176.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 131.107.3.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp 131.107.3.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 131.107.76.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp 131.107.76.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 207.46.228.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp 207.46.228.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 207.46.238.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp 207.46.238.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 192.251.67.232 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp host 192.251.67.232 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 207.68.176.0 0.0.0.255 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp 207.68.176.0 0.0.0.255 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 131.107.3.0 0.0.0.255 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp 131.107.3.0 0.0.0.255 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 131.107.76.0 0.0.0.255 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp 131.107.76.0 0.0.0.255 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 207.46.228.0 0.0.0.255 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp 207.46.228.0 0.0.0.255 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 207.46.240.0 0.0.0.255 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp 207.46.240.0 0.0.0.255 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp host 192.251.67.232 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp host 192.251.67.232 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp host 131.107.87.165 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 204.95.100.198 0.0.0.1 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp 204.95.100.200 0.0.0.3 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp 204.95.100.200 0.0.0.7 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp host 204.95.100.212 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp host 131.107.163.34 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp host 131.107.163.57 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp host 131.107.163.61 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp 204.95.100.198 0.0.0.1 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp 204.95.100.200 0.0.0.3 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp 204.95.100.200 0.0.0.7 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 204.95.100.212 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 131.107.163.34 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 131.107.163.57 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 131.107.163.61 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp any gt 1023 host 207.68.181.249 eq www
+  permit tcp any gt 1023 host 207.68.181.249 eq 443
+  permit tcp 80.67.67.0 0.0.0.255 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 80.67.68.0 0.0.0.255 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 80.67.72.0 0.0.0.255 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 193.108.90.0 0.0.0.255 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 193.108.92.0 0.0.1.255 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 193.108.155.0 0.0.0.255 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 131.107.71.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 range ftp 22
+  permit tcp 131.107.71.0 0.0.0.255 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp 131.107.71.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp 131.107.71.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 131.107.163.20 gt 1023 207.68.180.0 0.0.0.128 eq www
+  permit tcp host 131.107.163.20 gt 1023 207.68.180.0 0.0.0.128 eq 443
+  permit tcp host 131.107.87.9 gt 1023 207.68.181.0 0.0.0.128 eq www
+  permit tcp host 131.107.87.9 gt 1023 207.68.181.0 0.0.0.128 eq 443
+  permit tcp host 193.82.57.58 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 193.82.57.58 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 146.101.246.22 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 146.101.246.22 gt 1023 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 67.138.101.55 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 206.15.69.42 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 206.15.69.44 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 65.54.141.20 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp host 65.54.141.20 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 65.54.141.22 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp host 65.54.141.22 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.238 eq ftp
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.240 eq ftp
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp host 209.123.50.65 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 207.99.16.12 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 63.210.173.0 0.0.0.255 host 207.68.181.238 range ftp-data ftp
+  permit tcp 80.67.69.0 0.0.0.255 host 207.68.181.238 range ftp-data ftp
+  permit tcp 80.67.73.0 0.0.0.255 host 207.68.181.238 range ftp-data ftp
+  permit tcp 63.210.173.0 0.0.0.255 host 207.68.181.240 range ftp-data ftp
+  permit tcp 80.67.69.0 0.0.0.255 host 207.68.181.240 range ftp-data ftp
+  permit tcp 80.67.73.0 0.0.0.255 host 207.68.181.240 range ftp-data ftp
+  permit tcp host 80.67.64.20 gt 1023 host 207.68.181.238 range ftp-data ftp
+  permit tcp host 80.67.64.20 gt 1023 host 207.68.181.240 range ftp-data ftp
+  permit tcp host 65.244.245.5 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 64.95.24.244 0.0.0.1 host 207.68.181.238 eq ftp
+  permit tcp 64.95.24.244 0.0.0.1 host 207.68.181.238 gt 1023
+  permit tcp 64.95.24.244 0.0.0.1 host 207.68.181.240 eq ftp
+  permit tcp 64.95.24.244 0.0.0.1 host 207.68.181.240 gt 1023
+  permit tcp 80.67.73.0 0.0.0.255 host 207.68.181.238 gt 1023
+  permit tcp 80.67.73.0 0.0.0.255 host 207.68.181.240 gt 1023
+  permit tcp 80.67.73.0 0.0.0.255 host 207.68.181.244 range ftp-data ftp
+  permit tcp 80.67.73.0 0.0.0.255 host 207.68.181.244 gt 1023
+  permit tcp 63.210.173.0 0.0.0.255 host 207.68.181.238 gt 1023
+  permit tcp 63.210.173.0 0.0.0.255 host 207.68.181.240 gt 1023
+  permit tcp 63.210.173.0 0.0.0.255 host 207.68.181.244 range ftp-data ftp
+  permit tcp 63.210.173.0 0.0.0.255 host 207.68.181.244 gt 1023
+  permit tcp 80.67.69.0 0.0.0.255 host 207.68.181.238 gt 1023
+  permit tcp 80.67.69.0 0.0.0.255 host 207.68.181.240 eq 1023
+  permit tcp 80.67.69.0 0.0.0.255 host 207.68.181.244 range ftp-data ftp
+  permit tcp 80.67.69.0 0.0.0.255 host 207.68.181.244 eq 1023
+  permit tcp host 63.70.198.154 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 host 207.68.181.238 range ftp-data 
+ftp
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 host 207.68.181.240 range ftp-data 
+ftp
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 host 207.68.181.244 range ftp-data 
+ftp
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.238 range ftp-data ftp
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.240 range ftp-data ftp
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.244 range ftp-data ftp
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.238 range ftp-data 
+ftp
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.240 range ftp-data 
+ftp
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.244 range ftp-data 
+ftp
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.238 range ftp-data ftp
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.240 range ftp-data ftp
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.244 range ftp-data ftp
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.238 range ftp-data 
+ftp
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.240 range ftp-data 
+ftp
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.244 range ftp-data 
+ftp
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.238 range ftp-data ftp
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.240 range ftp-data ftp
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.244 range ftp-data ftp
+  permit tcp 204.95.100.192 0.0.0.15 gt 1023 host 207.68.181.238 range ftp-data 
+ftp
+  permit tcp 204.95.100.192 0.0.0.15 gt 1023 host 207.68.181.240 range ftp-data 
+ftp
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.238 range ftp-data ftp
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.240 range ftp-data ftp
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.244 range ftp-data ftp
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.238 range ftp-data ftp
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.240 range ftp-data ftp
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.244 range ftp-data ftp
+  permit tcp 204.95.100.192 0.0.0.15 gt 1023 host 207.68.181.244 range ftp-data 
+ftp
+  permit tcp host 67.103.122.242 207.68.181.138 0.0.0.1 eq 22
+  permit tcp any gt 1023 host 207.68.181.179 eq 443
+  permit tcp any gt 1023 host 207.68.181.179 eq www
+  permit tcp any gt 1023 host 207.68.181.180 eq 443
+  permit tcp any gt 1023 host 207.68.181.180 eq www
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp host 207.68.182.138 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 65.54.132.174 0.0.0.1 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp host 65.54.132.178 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 65.54.140.246 0.0.0.1 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.238 range ftp-data 
+ftp
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.240 range ftp-data 
+ftp
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.244 range ftp-data 
+ftp
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 65.54.196.128 0.0.0.31 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 65.54.192.34 0.0.0.1 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp 204.95.100.192 0.0.0.15 gt 1023 host 207.68.181.238 gt 1023
+  permit tcp 204.95.100.192 0.0.0.15 gt 1023 host 207.68.181.240 gt 1023
+  permit tcp 204.95.100.192 0.0.0.15 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp host 65.54.141.20 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp host 65.54.141.22 gt 1023 host 207.68.181.244 gt 1023
+  permit tcp host 217.17.214.33 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 217.17.214.38 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 217.17.214.40 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 65.151.109.220 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 69.28.133.112 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp host 69.28.133.112 207.68.181.140 0.0.0.1 range ftp-data ftp
+  permit tcp host 69.28.133.112 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp host 69.28.133.112 207.68.181.236 0.0.0.1 range ftp-data ftp
+  permit tcp 68.142.98.0 0.0.0.127 207.68.181.140 0.0.0.1 gt 1023 established
+  permit tcp 68.142.98.0 0.0.0.127 207.68.181.140 0.0.0.1 range ftp-data ftp
+  permit tcp 68.142.98.0 0.0.0.127 207.68.181.236 0.0.0.1 gt 1023 established
+  permit tcp 68.142.98.0 0.0.0.127 207.68.181.236 0.0.0.1 range ftp-data ftp
+  permit tcp 80.67.82.0 0.0.0.255 host 207.68.181.240 gt 1023 established
+  permit tcp 80.67.82.0 0.0.0.255 gt 1023 host 207.68.181.240 eq ftp-data 
+established
+  permit tcp 80.67.82.0 0.0.0.255 host 207.68.181.240 eq ftp
+  permit tcp 80.67.82.0 0.0.0.255 host 207.68.181.244 gt 1023 established
+  permit tcp 80.67.82.0 0.0.0.255 gt 1023 host 207.68.181.244 eq ftp-data 
+established
+  permit tcp 80.67.82.0 0.0.0.255 host 207.68.181.244 eq ftp
+  permit tcp 80.67.82.0 0.0.0.255 host 207.68.181.238 gt 1023 established
+  permit tcp 80.67.82.0 0.0.0.255 gt 1023 host 207.68.181.238 eq ftp-data 
+established
+  permit tcp 80.67.82.0 0.0.0.255 host 207.68.181.238 eq ftp
+  permit tcp 213.203.229.0 0.0.0.127 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 66.251.60.176 0.0.0.15 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 66.251.60.176 0.0.0.15 eq 22 207.68.181.138 0.0.0.1 gt 1023 
+established
+  permit tcp 69.28.128.0 0.0.0.255 gt 1023 host 207.68.181.238 range ftp-data 
+ftp
+  permit tcp 69.28.128.0 0.0.0.255 gt 1023 host 207.68.181.238 gt 1023 
+established
+  permit tcp 69.28.128.0 0.0.0.255 gt 1023 host 207.68.181.240 range ftp-data 
+ftp
+  permit tcp 69.28.128.0 0.0.0.255 gt 1023 host 207.68.181.240 gt 1023 
+established
+  permit tcp 69.28.128.0 0.0.0.255 gt 1023 host 207.68.181.244 range ftp-data 
+ftp
+  permit tcp 69.28.128.0 0.0.0.255 gt 1023 host 207.68.181.244 gt 1023 
+established
+  permit tcp 170.20.96.10 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 170.20.96.12 0.0.0.3 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 67.102.64.130 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 67.102.64.132 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 67.102.64.134 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 216.254.100.201 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 217.139.39.160 0.0.0.31 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 217.52.51.64 0.0.0.31 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 64.236.243.54 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 64.236.243.16 0.0.0.7 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 64.236.243.24 0.0.0.3 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 64.236.243.28 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 64.236.243.31 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 66.88.100.147 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 65.54.141.20 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp host 65.54.141.20 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 65.54.141.22 gt 1023 207.68.181.128 0.0.0.127 eq www
+  permit tcp host 65.54.141.22 gt 1023 207.68.181.128 0.0.0.127 eq 443
+  permit tcp host 213.39.238.60 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 64.95.14.106 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 64.95.24.244 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 83.244.137.162 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 170.171.252.210 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 203.184.139.137 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 213.123.227.77 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 10.20.0.0 0.0.15.255 host 207.68.181.129
+  permit tcp 10.20.0.0 0.0.15.255 207.68.181.130 0.0.0.1
+  permit tcp 10.20.0.0 0.0.15.255 host 207.68.181.132
+  permit udp 10.20.0.0 0.0.15.255 host 207.68.181.129
+  permit udp 10.20.0.0 0.0.15.255 207.68.181.130 0.0.0.1
+  permit udp 10.20.0.0 0.0.15.255 host 207.68.181.132
+  permit icmp 10.20.0.0 0.0.15.255 host 207.68.181.129
+  permit icmp 10.20.0.0 0.0.15.255 207.68.181.130 0.0.0.1
+  permit icmp 10.20.0.0 0.0.15.255 host 207.68.181.132
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 any eq www
+  permit tcp 65.54.196.128 0.0.0.127 gt 1023 any eq 443
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 any eq www
+  permit tcp 207.68.176.0 0.0.0.127 gt 1023 any eq 443
+  permit tcp host 202.87.36.178 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 202.189.225.24 0.0.0.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp 72.246.4.0 0.0.3.255 host 207.68.181.244 range ftp-data ftp
+  permit tcp 72.246.4.0 0.0.3.255 host 207.68.181.244 gt 1023
+  permit tcp 72.246.4.0 0.0.3.255 host 207.68.181.238 range ftp-data ftp
+  permit tcp 72.246.4.0 0.0.3.255 host 207.68.181.238 gt 1023
+  permit tcp 72.246.4.0 0.0.3.255 host 207.68.181.240 range ftp-data ftp
+  permit tcp 72.246.4.0 0.0.3.255 host 207.68.181.240 gt 1023
+  permit tcp 216.74.141.0 0.0.0.15 host 207.68.181.244 range ftp-data ftp
+  permit tcp 216.74.141.0 0.0.0.15 host 207.68.181.244 gt 1023
+  permit tcp 216.74.141.0 0.0.0.15 host 207.68.181.238 range ftp-data ftp
+  permit tcp 216.74.141.0 0.0.0.15 host 207.68.181.238 gt 1023
+  permit tcp 216.74.141.0 0.0.0.15 host 207.68.181.240 range ftp-data ftp
+  permit tcp 216.74.141.0 0.0.0.15 host 207.68.181.240 gt 1023
+  permit tcp host 87.74.5.245 207.68.181.138 0.0.0.1 range ftp-data 22
+  permit tcp host 87.74.5.245 207.68.181.138 0.0.0.1 gt 1023
+  permit tcp any eq ftp host 207.68.181.238 established
+  permit tcp any gt 1023 host 207.68.181.238 established
+  permit tcp any eq ftp host 207.68.181.240 established
+  permit tcp any gt 1023 host 207.68.181.240 established
+  permit tcp host 80.38.50.1 gt 1023 207.68.181.138 0.0.0.1 eq 22
+  permit tcp host 80.38.50.1 host 207.68.181.245 eq 22
+ logging facility local1
+ logging source-interface Loopback0
+ logging 10.20.5.11
+ logging 10.20.6.51
+ access-list 8 permit 10.20.0.0 0.0.255.255
+ access-list 10 permit 10.20.0.0 0.0.255.255
+ access-list 50 permit 65.54.147.160 0.0.0.31
+ access-list 101 remark VOICE application inet facing ACL
+ access-list 101 remark 
+ access-list 101 remark ***application Lines
+ access-list 101 permit tcp any any gt 1023 established
+ access-list 101 permit udp any any gt 1023
+ access-list 101 permit tcp any host 65.54.192.125 eq www
+ access-list 101 permit tcp any host 65.54.192.125 eq 443
+ access-list 101 permit tcp any host 65.54.192.126 eq 443
+ access-list 101 permit udp any 65.54.192.122 0.0.0.1 eq 7001
+ access-list 101 permit udp 207.68.160.0 0.0.31.255 65.54.192.0 0.0.0.127 eq 
+domain
+ access-list 101 permit tcp 207.68.160.0 0.0.31.255 65.54.192.0 0.0.0.127 eq 
+domain
+ access-list 101 permit udp any 65.54.192.122 0.0.0.1 eq discard
+ access-list 101 remark 
+ access-list 101 remark *** next lines allows sitescope to ping boxes and hsrp
+ access-list 101 permit icmp any any
+ access-list 101 permit icmp 207.68.176.0 0.0.0.127 any
+ access-list 101 permit icmp host 207.68.179.65 any echo
+ access-list 101 permit udp any host 224.0.0.2 eq 1985
+ access-list 101 remark 
+ access-list 101 remark ***next lines for Monitoring Management and ntp
+ access-list 101 permit tcp 207.68.179.0 0.0.0.127 any eq telnet
+ access-list 101 permit udp 207.68.179.0 0.0.0.127 any eq snmp
+ access-list 101 permit tcp 207.68.181.0 0.0.0.127 any eq telnet
+ access-list 101 permit udp 207.68.181.0 0.0.0.127 any eq snmp
+ access-list 101 permit udp host 207.68.179.1 any eq ntp
+ access-list 101 permit ip host 207.68.179.69 any
+ access-list 101 remark 
+ access-list 101 permit tcp any host 65.54.192.27 eq www
+ access-list 101 permit tcp 207.68.176.0 0.0.0.127 65.54.192.4 0.0.0.3 eq telnet
+ access-list 101 remark 
+ access-list 101 remark s**next lines for LD IS/OOS tool
+ access-list 101 permit tcp host 10.20.4.80 any eq telnet
+ access-list 101 permit ip 10.20.142.0 0.0.0.255 65.54.192.0 0.0.0.127
+ access-list 101 permit ip 10.20.5.0 0.0.0.255 65.54.192.0 0.0.0.127
+ access-list 101 remark ***next lines for OSSG Monitoring over the FE
+ access-list 101 permit tcp 207.68.176.0 0.0.0.127 65.54.192.0 0.0.0.127 eq www
+ access-list 101 permit tcp 207.68.176.0 0.0.0.127 65.54.192.0 0.0.0.127 eq 443
+ access-list 101 permit tcp 207.68.176.0 0.0.0.127 65.54.192.0 0.0.0.127 eq 5060
+ access-list 101 permit tcp 207.68.176.0 0.0.0.127 65.54.192.0 0.0.0.127 eq 5061
+ access-list 101 permit tcp 207.68.176.0 0.0.0.127 65.54.192.0 0.0.0.127 range 
+25000 25005
+ access-list 101 remark VOICE application inet facing ACL
+ access-list 101 remark 
+ access-list 101 remark ***application Lines
+ access-list 101 remark 
+ access-list 101 remark *** next lines allows sitescope to ping boxes and hsrp
+ access-list 101 remark 
+ access-list 101 remark ***next lines for Monitoring Management and ntp
+ access-list 101 remark 
+ access-list 101 remark 
+ access-list 101 remark s**next lines for LD IS/OOS tool
+ access-list 101 remark ***next lines for OSSG Monitoring over the FE
+ access-list 102 remark 
+ access-list 102 permit tcp any any gt 1023 established
+ access-list 102 permit udp any host 224.0.0.2 eq 1985
+ access-list 102 permit icmp host 207.68.179.65 any echo
+ access-list 102 remark sitescope monitoring
+ access-list 102 permit icmp 207.68.176.0 0.0.0.127 any
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Dialpad Peer***
+ access-list 102 permit udp host 66.35.216.206 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit udp host 66.35.216.210 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit esp host 66.35.216.206 207.68.170.164 0.0.0.3
+ access-list 102 permit esp host 66.35.216.210 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Deltathree Peer***
+ access-list 102 permit udp host 213.137.65.131 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit esp host 213.137.65.131 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Telus Peer***
+ access-list 102 permit udp host 161.184.255.237 207.68.170.164 0.0.0.3 eq 
+isakmp
+ access-list 102 permit udp host 161.184.255.238 207.68.170.164 0.0.0.3 eq 
+isakmp
+ access-list 102 permit esp host 161.184.255.237 207.68.170.164 0.0.0.3
+ access-list 102 permit esp host 161.184.255.238 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Callserve Peer***
+ access-list 102 permit udp host 62.189.6.6 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit esp host 62.189.6.6 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Net2Phone Peer***
+ access-list 102 permit udp host 66.33.137.241 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit esp host 66.33.137.241 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net SAT-TEST Peer***
+ access-list 102 permit udp host 207.68.186.150 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit esp host 207.68.186.150 207.68.170.164 0.0.0.3
+ access-list 102 permit gre host 207.68.186.150 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 permit gre host 207.68.169.147 207.68.170.164 0.0.0.3
+ access-list 102 permit udp host 207.68.169.147 host 207.68.170.166 eq isakmp
+ access-list 102 permit esp host 207.68.169.147 207.68.170.164 0.0.0.3
+ access-list 102 remark Telus
+ access-list 102 permit gre host 161.184.255.237 host 207.68.170.165
+ access-list 102 permit gre host 161.184.255.238 host 207.68.170.166
+ access-list 102 remark ***Tuk2 Voice.Net Deltathree Peer #2 ****
+ access-list 102 permit udp host 216.223.47.90 207.68.170.164 0.0.0.3 eq isakmp
+ access-list 102 permit esp host 216.223.47.90 207.68.170.164 0.0.0.3
+ access-list 102 permit esp host 195.219.4.22 207.68.170.164 0.0.0.3
+ access-list 102 remark 
+ access-list 102 remark sitescope monitoring
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Dialpad Peer***
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Deltathree Peer***
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Telus Peer***
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Callserve Peer***
+ access-list 102 remark 
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net Net2Phone Peer***
+ access-list 102 remark 
+ access-list 102 remark ***Tuk2 Voice.Net SAT-TEST Peer***
+ access-list 102 remark 
+ access-list 102 remark Telus
+ access-list 102 remark ***Tuk2 Voice.Net Deltathree Peer #2 ****
+ access-list 103 permit ip host 207.68.166.158 host 207.68.170.131
+ route-map STATIC-TO-OSPF permit 10
+  description new prefix list for F5/PIX and other ospf redistribution
+  match ip address prefix-list STATIC-REDIST-TO-OSPF
+ !
+ route-map VOICE_NET permit 10
+  match ip address VOICE_ASSIGNED_IPS
+ !
+ snmp-server engineID local 000000090200000021000000
+ snmp-server community xxxxx
+ snmp-server location "Tuk2_Rack_C.05 (AboveNet)"
+ snmp-server contact socnet@microsoft.com
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server enable trap xxxxx
+ snmp-server host xxxxx
+ snmp-server host xxxxx
+ !
+ tftp-server sup-bootflash:c6sup22-pk2sv-mz.121-13.E8
+ tacacs-server host 10.20.194.17
+ tacacs-server host 10.20.208.89
+ no tacacs-server directed-request
+ tacacs-server key xxxxx
+ banner motd C
+ NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE
+ 
+ Unauthorized access and/or use prohibited. All access and/or use subject to 
+monitoring.
+ 
+ NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE 
+ alias exec sum show ip bgp summary
+ alias exec ospf show ip ospf
+ alias exec ospfn show ip ospf neighbor
+ alias exec cpu show processes cpu
+ alias exec mem show processes memory
+ alias exec brief show ip interface brief
+ !
+ line con 0
+  exec-timeout 60 0
+  password xxxxx
+  logging synchronous
+ line vty 0 4
+  access-class 10 in
+  exec-timeout 60 0
+  password xxxxx
+  logging synchronous
+  transport preferred none
+  transport input telnet ssh
+  transport output telnet
+  escape-character 3
+ line vty 5 15
+  access-class 10 in
+  exec-timeout 60 0
+  password xxxxx
+  logging synchronous
+  transport preferred none
+  transport input telnet ssh
+  transport output telnet
+  escape-character 3
+ !
+ ntp clock-period 17179611
+ ntp source Loopback0
+ ntp update-calendar
+ ntp server 207.68.160.9
+ ntp server 207.68.160.10
+ !
+ monitor session 1 source interface Fa7/2
+ monitor session 1 destination interface Fa8/14
+ !
+ end

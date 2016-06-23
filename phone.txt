@@ -1,0 +1,19 @@
+Analyst      Extension     Console#     GROUP
+.................................................
+Randy Piotrowski (Volt)
+A-RAPIOT       75106          06          soc
+Mike Burnett (Excell Data Corporation)
+A-MICHB        72855          12          soc
+Troy Weis (Volt)
+A-TROYW        75688          13          soc
+Trent Dailey (Excell Data Corporation)
+A-TRENTD       72776          14          soc
+Steven Bloch (Siemens Business Services Inc)
+A-SBLOCH       75655          16          soc
+Siggi Bjarnason (Volt)
+A-SIGGIB       76055          25          socnet
+
+
+.................................................
+
+NB: verify your phone extension above with phone next to you

@@ -1,0 +1,275 @@
+<HTML>
+<HEAD>
+<TITLE>DMI Lookup</TITLE>
+<BODY topmargin=0 leftmargin=0 rightmargin=0>
+<!-- Start: ToolBar V2.5-->
+<SCRIPT language="JavaScript" src="/header/scripts/toolbar.js"></SCRIPT>
+<SCRIPT language="JavaScript" src="/header/scripts/global.js"></SCRIPT>
+<SCRIPT language="JavaScript" src="/header/scripts/local.js"></SCRIPT>
+<SCRIPT language="JavaScript">
+drawToolbar();
+
+//use this to highlight the current context - unique menu name, background color, font color, mouse-over color
+//setAppMenuColor("Help", "#003399", "yellow", "#0099FF");
+</SCRIPT>
+<!-- End: ToolBar V2.5--><TABLE style="font-family:Arial;"><TR VALIGN="Top">
+<TD>
+               <TABLE BGCOLOR="WhiteSmoke" CELLPADDING="0" CELLSPACING="0" WIDTH="400" style="font-family:Arial;font-size:7pt;color:gray">
+<TR><TH BGCOLOR=00335B nowrap style="font-size:12pt;color:white"><B>&nbsp;&nbsp;DMI Lookup &nbsp;&nbsp;</B></th>
+<th><FORM METHOD="GET" ACTION="dmiLookup.pl">
+</TD></TR>
+<input type=text name=dmiIpaddress size=20 value=""></th>
+<th><INPUT TYPE="SUBMIT" VALUE="Lookup Device"></th>
+</FORM></TH><th nowrap><font color=black>wildcards permitted, (ex 1.2.3.*)</font></th></TR>
+</TABLE></TD><tr>
+<tr><TD>
+<H3> Network Acceptance: <font color=red>Failed</font></h3><TABLE BGCOLOR=WHITESMOKE style="font-family:Arial;font-size:10pt">
+			<TR BGCOLOR=0081C7 style="color:white">
+			  <TH COLSPAN=9 align=left><B><font color=yellow>bay-6nb-hot-3</font> IP Address: <font color=yellow>64.4.63.130</font></b></TH></TR>
+<TR BGCOLOR=0081C7 style="color:white">
+					<TH>Agent</TH>
+					<TH>DMI/DCI</th>
+					<TH>Test Result</TH>
+					<TH>Score</TH>
+					<TH>Test Time</TH>				
+					<TH>Test Again</TH>
+					<TH>Logs</TH>
+					<TH>Required for<BR>Submitting A<BR>Network Acceptance</TH>
+					</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Console"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Console","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Console</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>bay-36t-2:2077</TD>
+		<TD>0</TD>
+		<TD title="test application = ConsoleDMI">2005-09-06 01:06:00</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=Gainsboro ALIGN=CENTER>
+ 		<TD title="Select for further info on agent DNS"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=DNS","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>DNS</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success<br> 3 interfaces</TD>
+		<TD>0</TD>
+		<TD title="test application = msnov\dmi_dns.pl">2005-09-06 08:12:42</TD>
+	  <TD Title="Test DNS using nslookup.  Tests all intefaces"><a href="/cgi-bin/dmiLookup.pl?updateDMI=DNS&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=orange><b>No</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent iAdmin"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=iAdmin","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>iAdmin</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = SP_dmi_iadmin">2005-09-06 08:00:27</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=Gainsboro ALIGN=CENTER>
+ 		<TD title="Select for further info on agent InChargeBAY"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=InChargeBAY","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>InChargeBAY</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=orange width="200" align=left>Failure: Device not in InCharge management</TD>
+		<TD>4</TD>
+		<TD title="test application = InChargeDMI 2.0">2005-09-03 02:12:32</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=orange><b>No</b></font></TD>
+</TR>
+<TR BGCOLOR=Gainsboro ALIGN=CENTER>
+ 		<TD title="Select for further info on agent InChargeTUK"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=InChargeTUK","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>InChargeTUK</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = InChargeDMI 2.0">2005-09-06 08:00:12</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=orange><b>No</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Ping"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Ping","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Ping</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = msnov\dmiSweep.pl">2005-09-06 06:31:48</TD>
+	  <TD title="Test Ping and Snmp together"><a href="/cgi-bin/dmiLookup.pl?updateDMI=ping_snmp&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Snmp"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Snmp","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Snmp</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success snmp version 1</TD>
+		<TD>0</TD>
+		<TD title="test application = msnov\dmiSweep.pl">2005-09-06 06:31:48</TD>
+	  <TD title="Test Ping and Snmp together"><a href="/cgi-bin/dmiLookup.pl?updateDMI=ping_snmp&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Syslog"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Syslog","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Syslog</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>132: Aug 25 17:43:58 UTC: %SYS-5-CONFIG_I: Configured from console by truecontrol on vty0 (10.20.5.102)</TD>
+		<TD>0</TD>
+		<TD title="test application = SP_dmi_syslog">2005-08-25 09:43:59</TD>
+	  <TD Title="Test whether a syslog message has made it to netdb."><a href="/cgi-bin/dmiLookup.pl?updateDMI=Syslog&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent SysName"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=SysName","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>SysName</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = SysNameDMI.exe">2005-09-06 00:02:13</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Telnet-SSH"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Telnet-SSH","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Telnet-SSH</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Telnet tacacs_telnet</TD>
+		<TD>0</TD>
+		<TD title="test application = TK2STGSQLH01\dmi_telnet.pl">2005-09-01 01:09:41</TD>
+	  <TD title="test Telnet-SSH.  This might take a few minutes"><a href="/cgi-bin/dmiLookup.pl?updateDMI=Telnet-SSH&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD><a href="showlogs.pl?dmiDevice=64.4.63.130&agent=Telnet-SSH">Logs</a></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent TrueControl"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=TrueControl","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>TrueControl</a></TD>
+
+		<TD>DMI</TD>
+		<TD BGCOLOR=TOMATO width="200" align=left>not able to get snapshot</TD>
+		<TD>2</TD>
+		<TD title="test application = tc_manage_devices.pl">2005-09-03 23:07:55</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent InterfaceDesc"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=InterfaceDesc","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>InterfaceDesc</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = SP_updateInterfaceDescDMI">2005-09-06 05:00:08</TD>
+	  <TD></TD>
+<TD><a href="http://ineteng/net/interfaceNameDMI.aspx?devicename=bay-6nb-hot-3">More Detail</a></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Policy-Access"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Policy-Access","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Policy-Access</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = TK2STGSQLH01\tc_manage_policies2.pl">2005-04-01 11:58:47</TD>
+	  <TD title="Test to see if all Policies pass or fail
+Note that this does not (today) run the actual policy in TrueControl.  This only sees if the Policy passes and updates DMI"><a href="/cgi-bin/dmiLookup.pl?updateDMI=Policy&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Policy-Baseline"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Policy-Baseline","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Policy-Baseline</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = TK2STGSQLH01\tc_manage_policies.pl">2005-08-25 18:12:13</TD>
+	  <TD title="Test to see if all Policies pass or fail
+Note that this does not (today) run the actual policy in TrueControl.  This only sees if the Policy passes and updates DMI"><a href="/cgi-bin/dmiLookup.pl?updateDMI=Policy&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Policy-Monitoring"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Policy-Monitoring","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Policy-Monitoring</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = TK2STGSQLH01\tc_manage_policies.pl">2005-03-08 13:09:05</TD>
+	  <TD title="Test to see if all Policies pass or fail
+Note that this does not (today) run the actual policy in TrueControl.  This only sees if the Policy passes and updates DMI"><a href="/cgi-bin/dmiLookup.pl?updateDMI=Policy&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Policy-Routing"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Policy-Routing","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Policy-Routing</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=TOMATO width="200" align=left><br><b>Policy-Routing-OSPF Access</b> rule <a href="https://truecontrol/config_policy.event.view.do?eventID=3556209&deviceID=8475">IOS</a></TD>
+		<TD>1</TD>
+		<TD title="test application = TK2STGTCWB01\post_PAM.pl">2005-08-31 10:32:53</TD>
+	  <TD title="Test to see if all Policies pass or fail
+Note that this does not (today) run the actual policy in TrueControl.  This only sees if the Policy passes and updates DMI"><a href="/cgi-bin/dmiLookup.pl?updateDMI=Policy&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent Policy-Security"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=Policy-Security","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>Policy-Security</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = TK2STGSQLH01\tc_manage_policies.pl">2005-03-08 13:11:01</TD>
+	  <TD title="Test to see if all Policies pass or fail
+Note that this does not (today) run the actual policy in TrueControl.  This only sees if the Policy passes and updates DMI"><a href="/cgi-bin/dmiLookup.pl?updateDMI=Policy&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent SysOSVer"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=SysOSVer","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>SysOSVer</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left></TD>
+		<TD>0</TD>
+		<TD title="test application = spSysOSVerDMIUpdate">2005-09-06 07:00:08</TD>
+	  <TD></TD>
+<TD></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+<TR BGCOLOR=White ALIGN=CENTER>
+ 		<TD title="Select for further info on agent VLAN"><a href='#' 
+                    onClick='window.open("ShowExplanation.pl?Agent=VLAN","Microsoft","height=500,width=500,resizable=1,menubar=0,titlebar=0,scrollbars=1")'>VLAN</a></TD>
+
+		<TD>DCI</TD>
+		<TD BGCOLOR=LIME width="200" align=left>Success</TD>
+		<TD>0</TD>
+		<TD title="test application = SP_dmi_VLAN">2005-09-06 00:00:14</TD>
+	  <TD title="test VLAN.  This might take a few minutes"><a href="/cgi-bin/dmiLookup.pl?updateDMI=VLAN&dmiIpaddress=64.4.63.130">test</a></TD>
+<TD><a href="http://ineteng/net/vlanDMI_detail.aspx?ip=64.4.63.130">More Detail</a></TD>
+<TD><font color=blue><b>Yes</b></font></TD>
+</TR>
+</TABLE><BR>
+</TD></TR></TABLE>
+</BODY>
+</HTML>

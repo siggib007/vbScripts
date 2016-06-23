@@ -1,0 +1,288 @@
+Device,Status
+bay-f6b-hot-1a, PASS
+bay-f6b-hot-1b, PASS
+bay-f6b-msgr-2a, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-2b, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-3a, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-3b, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-4a, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-4b, FAILED, Active=N/A Standby=N/A
+bay-f6b-msgr-5b, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1a, FAILED, Active=disable Standby=disable
+bay-f6f-abch-1b, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1c, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1d, FAILED, Active=N/A Standby=N/A
+bay-f6f-abch-1e, PASS
+bay-f6f-abch-1f, PASS
+bay-f6f-hot-101a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-101b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-102a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-102b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-103a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-103b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-104a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-104b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-105a, FAILED, Active=disable Standby=disable
+bay-f6f-hot-105b, FAILED, Active=disable Standby=disable
+bay-f6f-hot-106a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-106b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-107a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-107b, FAILED, Active=disable Standby=disable
+bay-f6f-hot-108a, PASS
+bay-f6f-hot-108b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-109a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-109b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-110a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-110b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-111a, FAILED, Active=disable Standby=disable
+bay-f6f-hot-111b, FAILED, Active=disable Standby=disable
+bay-f6f-hot-112a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-112b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-113a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-113b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-114a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-114b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-115a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-115b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-1a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-1b, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-1c, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-1d, FAILED, Active=disable Standby=disable
+bay-f6f-hot-1e, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-1f, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-1g, PASS
+bay-f6f-hot-1h, PASS
+bay-f6f-hot-2a, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-2b, FAILED, Active=disable Standby=disable
+bay-f6f-hot-2c, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-2d, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-2e, PASS
+bay-f6f-hot-2f, PASS
+bay-f6f-hot-2g, PASS
+bay-f6f-hot-2h, PASS
+bay-f6f-hot-3a, PASS
+bay-f6f-hot-3b, PASS
+bay-f6f-hot-3c, FAILED, Active=N/A Standby=N/A
+bay-f6f-hot-3d, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-1a, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-1b, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-2a, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-2b, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-3a, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-3b, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-4a, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-4b, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-5a, FAILED, Active=N/A Standby=N/A
+bay-f6f-msgr-5b, FAILED, Active=N/A Standby=N/A
+bay-f6f-ppe-msgr-1a, PASS
+bay-f6f-ppe-msgr-1b, PASS
+bay-f6f-ppt-1a, FAILED, Active=N/A Standby=N/A
+bay-f6f-ppt-1b, FAILED, Active=N/A Standby=N/A
+bay-f6f-ppt-2a, FAILED, Active=N/A Standby=N/A
+bay-f6f-ppt-2b, FAILED, Active=N/A Standby=N/A
+bay-f6f-srch-1a, PASS
+bay-f6f-srch-1b, PASS
+bay-f6f-sts-1a, PASS
+bay-f6f-sts-1b, PASS
+blu-f6b-1a, FAILED, Active=N/A Standby=N/A
+blu-f6b-1b, FAILED, Active=disable Standby=disable
+blu-f6b-msgr-2a, PASS
+blu-f6b-msgr-2b, PASS
+blu-f6f-a1-1a, PASS
+blu-f6f-a1-1b, FAILED, Active=N/A Standby=N/A
+blu-f6f-cps-1a, FAILED, Active=N/A Standby=N/A
+blu-f6f-cps-1b, FAILED, Active=disable Standby=disable
+blu-f6f-hot-101a, FAILED, Active=N/A Standby=N/A
+blu-f6f-hot-101b, FAILED, Active=N/A Standby=N/A
+blu-f6f-msgr-2a, PASS
+blu-f6f-msgr-2b, PASS
+blu-f6f-srch-1a, PASS
+blu-f6f-srch-1b, PASS
+blu-f6f-srch-2a, PASS
+blu-f6f-srch-2b, PASS
+blu-f6x-1a, PASS
+blu-f6x-1b, PASS
+by2-f6b-msgr-1a, FAILED, Active=N/A Standby=N/A
+by2-f6b-msgr-1b, FAILED, Active=N/A Standby=N/A
+by2-f6b-msgr-1c, FAILED, Active=disable Standby=disable
+by2-f6b-msgr-1d, FAILED, Active=disable Standby=disable
+by2-f6b-msgr-2a, FAILED, Active=N/A Standby=N/A
+by2-f6b-msgr-2b, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-1a, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-1b, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-1c, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-1d, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-1e, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-1f, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-2a, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-2b, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-2c, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-2d, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-2e, FAILED, Active=N/A Standby=N/A
+by2-f6f-abch-2f, FAILED, Active=N/A Standby=N/A
+by2-f6f-hot-116a, FAILED, Active=N/A Standby=N/A
+by2-f6f-hot-116b, FAILED, Active=N/A Standby=N/A
+by2-f6f-hot-117a, FAILED, Active=disable Standby=disable
+by2-f6f-hot-117b, FAILED, Active=N/A Standby=N/A
+by2-f6f-hot-118a, PASS
+by2-f6f-hot-118b, PASS
+by2-f6f-hot-119a, PASS
+by2-f6f-hot-119b, PASS
+by2-f6f-hot-120a, PASS
+by2-f6f-hot-120b, PASS
+by2-f6f-hot-121a, PASS
+by2-f6f-hot-121b, PASS
+by2-f6f-hot-122a, PASS
+by2-f6f-hot-122b, PASS
+by2-f6f-hot-123a, PASS
+by2-f6f-hot-123b, PASS
+by2-f6f-hot-124a, PASS
+by2-f6f-hot-124b, PASS
+by2-f6f-hot-125a, PASS
+by2-f6f-hot-125b, PASS
+by2-f6f-hot-126a, PASS
+by2-f6f-hot-126b, PASS
+by2-f6f-hot-127a, PASS
+by2-f6f-hot-127b, PASS
+by2-f6f-hot-128a, PASS
+by2-f6f-hot-128b, PASS
+by2-f6f-hot-129a, PASS
+by2-f6f-hot-129b, PASS
+by2-f6f-hot-130a, PASS
+by2-f6f-hot-130b, PASS
+by2-f6f-hot-131a, PASS
+by2-f6f-hot-131b, PASS
+by2-f6f-hot-132a, PASS
+by2-f6f-hot-132b, PASS
+by2-f6f-hot-133a, PASS
+by2-f6f-hot-133b, PASS
+by2-f6f-hot-134a, PASS
+by2-f6f-hot-134b, PASS
+by2-f6f-hot-135a, PASS
+by2-f6f-hot-135b, PASS
+by2-f6f-hot-136a, PASS
+by2-f6f-hot-136b, PASS
+by2-f6f-msgr-1a, PASS
+by2-f6f-msgr-1b, PASS
+by2-f6f-msgr-2a, FAILED, Active=N/A Standby=N/A
+by2-f6f-msgr-2b, FAILED, Active=N/A Standby=N/A
+by2-f6f-ppe-ppt-1a, PASS
+by2-f6f-ppe-ppt-1b, PASS
+by2-f6f-sps-1a, PASS
+by2-f6f-sps-1b, PASS
+by2-f6f-sps-1c, PASS
+by2-f6f-sps-1d, PASS
+by2-f6f-sps-1e, PASS
+by2-f6f-sps-1f, PASS
+by2-f6f-sps-1g, PASS
+by2-f6f-sps-1h, PASS
+by2-f6f-str-1a, PASS
+by2-f6f-str-1b, PASS
+by2-f6f-str-2e, PASS
+by2-f6f-str-2f, PASS
+by2-f6m-spare-1, FAILED, Active=N/A Standby=N/A
+by2-f6m-spare-2, FAILED, Active=N/A Standby=N/A
+by2-f6x-1a, PASS
+by2-f6x-1b, PASS
+by2-f6x-2a, PASS
+by2-f6x-2b, PASS
+cpk-f6f-a1-1a, FAILED, Active=N/A Standby=N/A
+cpk-f6f-a1-1b, FAILED, Active=disable Standby=disable
+cpk-f6f-sts-1a, PASS
+cpk-f6f-sts-1b, FAILED, Active=N/A Standby=N/A
+dub-f6f-1a, PASS
+dub-f6f-1b, PASS
+dub-f6f-app-1a, PASS
+dub-f6f-app-1b, PASS
+dub-f6f-msgr-1a, PASS
+dub-f6f-msgr-1b, PASS
+dub-f6f-xit-1a, PASS
+dub-f6f-xit-1b, FAILED, Active=N/A Standby=N/A
+dub-f6f-xit-2a, FAILED, Active=N/A Standby=N/A
+dub-f6f-xit-2b, FAILED, Active=N/A Standby=N/A
+godfatha01, PASS
+godfatha02, PASS
+kaw-f6f-msgr-1a, PASS
+kaw-f6f-msgr-1b, PASS
+kaw-f6f-msn-1a, FAILED, Active=N/A Standby=N/A
+kaw-f6f-msn-1b, FAILED, Active=disable Standby=disable
+kaw-f6f-msn-int-1, FAILED, Active=N/A Standby=N/A
+kaw-f6f-spare-1, FAILED, Active=N/A Standby=N/A
+kaw-f6f-xit-1a, FAILED, Active=N/A Standby=N/A
+kaw-f6f-xit-1b, FAILED, Active=N/A Standby=N/A
+lon-f6f-msn-1a, FAILED, Active=disable Standby=disable
+lon-f6f-msn-1b, FAILED, Active=N/A Standby=N/A
+lon-f6f-msn-2a, PASS
+lon-f6f-msn-2b, PASS
+lon-f6f-ppe-1a, FAILED, Active=N/A Standby=N/A
+lon-f6f-ppe-1b, FAILED, Active=N/A Standby=N/A
+sat-f3f-int-mia-1b, PASS
+sat-f6f-int-ppt-1, FAILED, Active=N/A Standby=N/A
+sin-f6f-xit-1a, FAILED, Active=N/A Standby=N/A
+sin-f6f-xit-1b, FAILED, Active=N/A Standby=N/A
+sv4-f6x-int-hmops-1a, PASS
+sv4-f6x-int-hmops-1b, PASS
+tuk-f6-mia-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6-mia-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6-mia-2a, FAILED, Active=N/A Standby=N/A
+tuk-f6-mia-2b, FAILED, Active=N/A Standby=N/A
+tuk-f6d-mpgsc-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6d-mpgsc-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6d-ossg-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6d-ossg-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-a1-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-a1-1b, FAILED, Active=disable Standby=disable
+tuk-f6f-a1-2a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-a1-2b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-bcn-1a, PASS
+tuk-f6f-bcn-1b, PASS
+tuk-f6f-cts-1a, PASS
+tuk-f6f-cts-1b, PASS
+tuk-f6f-int-ppt-1a, FAILED, Active=disable Standby=disable
+tuk-f6f-int-ppt-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-int-v2s-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-int-v2s-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-mexp-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-mexp-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-mpgsc-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-mpgsc-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppe-ppt-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppe-ppt-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppe-sps-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppe-sps-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppt-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppt-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppt-2a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-ppt-2b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-sps-1a, PASS
+tuk-f6f-sps-1b, PASS
+tuk-f6f-sps-2a, PASS
+tuk-f6f-sps-2b, PASS
+tuk-f6f-sps-3a, PASS
+tuk-f6f-sps-3b, PASS
+tuk-f6f-str-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-2a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-2b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-3a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-3b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-4a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-str-4b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-v2s-1a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-v2s-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-1a, FAILED, Active=disable Standby=disable
+tuk-f6f-xit-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-2a, FAILED, Active=disable Standby=disable
+tuk-f6f-xit-2b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-3a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-3b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-4a, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-4b, FAILED, Active=N/A Standby=N/A
+tuk-f6f-xit-5a, FAILED, Active=disable Standby=disable
+tuk-f6f-xit-5b, FAILED, Active=N/A Standby=N/A
+tuk-f6m-spare-1, FAILED, Active=N/A Standby=N/A
+tuk-f6m-spare-2, FAILED, Active=N/A Standby=N/A
+tuk-f6x-cps-1a, PASS
+tuk-f6x-cps-1b, FAILED, Active=N/A Standby=N/A
+tuk-f6x-int-msgr-1a, FAILED, Active=disable Standby=disable
+tuk-f6x-int-msgr-1b, FAILED, Active=N/A Standby=N/A

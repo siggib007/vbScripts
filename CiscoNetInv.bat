@@ -1,0 +1,1 @@
+cscript XMLPull.vbs "CiscoNetInv.xml" "Network - InventoryList" "siggib" "Cisco Network Devices Inventory Sweep" "0"

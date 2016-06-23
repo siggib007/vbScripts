@@ -1,0 +1,1949 @@
+!
+! Last configuration change at 23:56:18 UTC Sun May 8 2005 by truecontrol
+! NVRAM config last updated at 23:56:31 UTC Sun May 8 2005 by truecontrol
+!
+version 12.2
+service nagle
+no service pad
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime localtime show-timezone
+service password-encryption
+service counters max age 10
+!
+hostname bay-6nb-5b
+!
+boot system flash sup-bootflash:s72033-pk9sv-mz.122-17d.SXB7.bin
+logging snmp-authfail
+logging buffered 65535 informational
+no logging console
+logging monitor errors
+aaa new-model
+aaa authentication login default group tacacs+ enable
+aaa authentication enable default group tacacs+ enable
+aaa authorization exec default group tacacs+ if-authenticated 
+aaa authorization commands 1 default group tacacs+ if-authenticated 
+aaa authorization commands 15 default group tacacs+ if-authenticated 
+aaa accounting exec default start-stop group tacacs+
+aaa accounting commands 1 default start-stop group tacacs+
+aaa accounting commands 15 default start-stop group tacacs+
+aaa accounting network default start-stop group tacacs+
+aaa accounting connection default start-stop group tacacs+
+aaa accounting system default start-stop group tacacs+
+!
+clock summer-time UTC recurring
+vtp mode transparent
+udld enable
+
+ip subnet-zero
+no ip source-route
+!
+!
+ip tftp source-interface Loopback0
+ip domain-list ntwk.msn.net
+no ip domain-lookup
+ip domain-name ntwk.msn.net
+ip name-server 65.54.237.158
+ip name-server 10.20.208.24
+ip name-server 10.20.192.41
+ip name-server 10.20.208.41
+!
+mpls ldp logging neighbor-changes
+no mls flow ip
+no mls flow ipv6
+mls cef error action freeze
+!
+spanning-tree mode pvst
+no spanning-tree optimize bpdu transmission
+diagnostic cns publish cisco.cns.device.diag_results
+diagnostic cns subscribe cisco.cns.device.diag_commands
+!
+redundancy
+ mode sso
+ main-cpu
+  auto-sync running-config
+  auto-sync standard
+!
+vlan internal allocation policy ascending
+vlan access-log ratelimit 2000
+!
+vlan 2
+ name Unused_Ports
+!
+vlan 3
+ name Bad_Ports
+!
+vlan 4
+ name Reserved_Ports
+!
+vlan 100
+ name P:WMKT:B:R:10.1.217.0/24
+!
+vlan 110
+ name P:MIA:B:R:10.1.216.128/25:IA_MDA
+!
+vlan 120
+ name P:SSO:B:R:10.1.94.64/26_SSO_Infr
+!
+vlan 130
+ name P:MIA:B:R:10.1.219.0/24:IA_BE
+!
+!
+interface Loopback0
+ description MGMT:65.54.191.125/32:bay-6nb-5a
+ ip address 65.54.191.125 255.255.255.255
+ no ip redirects
+ no ip proxy-arp
+ no ip mroute-cache
+ logging event link-status
+!
+interface Loopback5
+ ip address 192.168.1.1 255.255.255.0
+ logging event link-status
+ shutdown
+!
+interface Port-channel1
+ description INFRA:CORE:BAY-6nb-5A:6/1-8:Portchannel1
+ no ip address
+ flowcontrol receive on
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Port-channel4
+ description INFRA:CORE:BAY-76C-1D:7/1-4:portchannel4
+ ip address 64.4.58.89 255.255.255.252
+ ip ospf cost 600
+ logging event link-status
+ speed 1000
+ flowcontrol receive on
+!
+interface Port-channel5
+ description INFRA:CORE:BAY-76C-1C:8/1-4:portchannel5
+ ip address 64.4.58.93 255.255.255.252
+ ip ospf cost 600
+ logging event link-status
+ speed 1000
+ flowcontrol receive on
+!
+interface GigabitEthernet5/1
+ no ip address
+ shutdown
+!
+interface GigabitEthernet5/2
+ no ip address
+ shutdown
+!
+interface GigabitEthernet6/1
+ description INFRA:IX:BAY-6nb-5A:6/1:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/2
+ description INFRA:IX:BAY-6nb-5A:6/2:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/3
+ description INFRA:IX:BAY-6nb-5A:6/3:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/4
+ description INFRA:IX:BAY-6nb-5A:6/4:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/5
+ description INFRA:IX:BAY-6nb-5A:6/5:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/6
+ description INFRA:IX:BAY-6nb-5A:6/6:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/7
+ description INFRA:IX:BAY-6nb-5A:6/7:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/8
+ description INFRA:IX:BAY-6nb-5A:6/8:PortChannel1
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface GigabitEthernet6/9
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/10
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/11
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/12
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/13
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/14
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/15
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/16
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/17
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/18
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/19
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/20
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/21
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/22
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/23
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/24
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/25
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/26
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/27
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/28
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/29
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/30
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/31
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/32
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/33
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/34
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/35
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/36
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/37
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/38
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/39
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/40
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/41
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/42
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/43
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/44
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!         
+interface GigabitEthernet6/45
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/46
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/47
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet6/48
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/1
+ description INFRA:IX:BAY-76C-1D:1/45:PortChannel4
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 4 mode desirable
+!
+interface GigabitEthernet7/2
+ description INFRA:IX:BAY-76C-1D:1/46:PortChannel4
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 4 mode desirable
+!
+interface GigabitEthernet7/3
+ description INFRA:IX:BAY-76C-1D:2/14:PortChannel4
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 4 mode desirable
+!
+interface GigabitEthernet7/4
+ description INFRA:IX:BAY-76C-1D:2/28:PortChannel4
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 4 mode desirable
+!
+interface GigabitEthernet7/5
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/6
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!         
+interface GigabitEthernet7/7
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/8
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/9
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/10
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/11
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/12
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/13
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/14
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/15
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/16
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/17
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/18
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/19
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/20
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/21
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/22
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/23
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/24
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/25
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/26
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/27
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/28
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/29
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/30
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/31
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/32
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/33
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/34
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/35
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/36
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/37
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/38
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/39
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/40
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/41
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/42
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/43
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/44
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/45
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/46
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/47
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/48
+ description IA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 130
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/1
+ description INFRA:IX:BAY-76C-1c:1/45:PortChannel5
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 5 mode desirable
+!
+interface GigabitEthernet8/2
+ description INFRA:IX:BAY-76C-1c:1/46:PortChannel5
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 5 mode desirable
+!
+interface GigabitEthernet8/3
+ description INFRA:IX:BAY-76C-1c:2/14:PortChannel5
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 5 mode desirable
+!
+interface GigabitEthernet8/4
+ description INFRA:IX:BAY-76C-1c:2/28:PortChannel5
+ no ip address
+ logging event link-status
+ speed 1000
+ udld port aggressive
+ flowcontrol receive on
+ flowcontrol send off
+ channel-group 5 mode desirable
+!
+interface GigabitEthernet8/5
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/6
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!         
+interface GigabitEthernet8/7
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/8
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/9
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/10
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/11
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/12
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/13
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/14
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/15
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/16
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/17
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/18
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/19
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/20
+ description danorm-10333-SHOPPING-032305-SVR
+ no ip address
+ speed 1000
+ duplex full
+ switchport
+ switchport access vlan 100
+ switchport mode access
+!
+interface GigabitEthernet8/21
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/22
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/23
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/24
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/25
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/26
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/27
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/28
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/29
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/30
+ no ip address
+ speed 100
+ duplex full
+ flowcontrol receive on
+ flowcontrol send off
+ switchport
+ switchport access vlan 100
+ switchport mode access
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/31
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/32
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/33
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/34
+ description IA_MDA_BE
+ no ip address
+ speed 100
+ duplex full
+ switchport
+ switchport access vlan 110
+ no cdp enable
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/35
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/36
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/37
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/38
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/39
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/40
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/41
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/42
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/43
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/44
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/45
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/46
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/47
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface GigabitEthernet8/48
+ description danorm-10141-SSO-040405-SVR
+ no ip address
+ shutdown
+ switchport
+ switchport access vlan 120
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan100
+ description PROP:WMKT:10.1.217.0/24
+ ip address 10.1.217.4 255.255.255.0
+ ip helper-address 10.20.192.26
+ ip helper-address 10.20.208.76
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ no ip mroute-cache
+ load-interval 30
+ standby 1 ip 10.1.217.1
+ standby 1 priority 140
+ standby 1 preempt
+ standby 1 track Port-channel4 11
+ standby 1 track Port-channel5 11
+ standby 2 ip 10.1.217.2
+ standby 2 priority 150
+ standby 2 preempt
+ standby 2 track Port-channel4 11
+ standby 2 track Port-channel5 11
+!
+interface Vlan110
+ description PROP:MIA:B:R:10.1.216.128/25:IA_MDA_BE
+ ip address 10.1.216.132 255.255.255.128
+ no ip redirects
+ no ip proxy-arp
+ no ip mroute-cache
+ load-interval 30
+ standby 1 ip 10.1.216.129
+ standby 1 priority 140
+ standby 1 preempt
+ standby 1 track Port-channel4 11
+ standby 1 track Port-channel5 11
+ standby 2 ip 10.1.216.130
+ standby 2 priority 150
+ standby 2 preempt
+ standby 2 track Port-channel4 11
+ standby 2 track Port-channel5 11
+!
+interface Vlan120
+ description NOBILL:SSO:10.1.94.64/26
+ ip address 10.1.94.68 255.255.255.192
+ ip helper-address 10.20.208.76
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ no ip mroute-cache
+ load-interval 30
+ standby 1 ip 10.1.94.65
+ standby 1 priority 140
+ standby 1 preempt
+ standby 1 track Port-channel4 11
+ standby 1 track Port-channel5 11
+ standby 2 ip 10.1.94.66
+ standby 2 priority 150
+ standby 2 preempt
+ standby 2 track Port-channel4 11
+ standby 2 track Port-channel5 11
+!
+interface Vlan130
+ description PROP:MIA:B:R:10.1.219.0/24:IA_BE
+ ip address 10.1.219.4 255.255.255.0
+ no ip redirects
+ no ip proxy-arp
+ no ip mroute-cache
+ load-interval 30
+ standby 1 ip 10.1.219.1
+ standby 1 priority 140
+ standby 1 preempt
+ standby 1 track Port-channel4 11
+ standby 1 track Port-channel5 11
+ standby 2 ip 10.1.219.2
+ standby 2 priority 150
+ standby 2 preempt
+ standby 2 track Port-channel4 11
+ standby 2 track Port-channel5 11
+!
+router ospf 8075
+ router-id 65.54.191.125
+ log-adjacency-changes
+ passive-interface default
+ no passive-interface Port-channel4
+ no passive-interface Port-channel5
+ network 10.1.94.64 0.0.0.63 area 900
+ network 10.1.216.128 0.0.0.127 area 900
+ network 10.1.217.0 0.0.0.255 area 900
+ network 10.1.219.0 0.0.0.255 area 900
+ network 64.4.58.88 0.0.0.3 area 900
+ network 64.4.58.92 0.0.0.3 area 900
+ network 64.54.191.125 0.0.0.0 area 900
+ network 65.54.191.125 0.0.0.0 area 900
+!
+ip classless
+no ip http server
+ip tacacs source-interface Loopback0
+!
+!
+logging trap debugging
+logging facility local1
+logging source-interface Loopback0
+logging 10.20.142.11
+logging 10.20.6.51
+logging 10.20.5.11
+access-list 2 permit 10.20.0.0 0.0.255.255
+access-list 8 permit 10.20.0.0 0.0.255.255
+access-list 10 permit 10.20.0.0 0.0.255.255
+!
+snmp-server community w89waterfish7 RO 8
+snmp-server trap-source Loopback0
+snmp-server location Bay IDC
+snmp-server contact SN:SAL08373VBQ;ASSET:895140
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps chassis
+snmp-server enable traps module
+snmp-server enable traps tty
+snmp-server enable traps casa
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps slb real virtual csrp
+snmp-server enable traps csg agent quota database
+snmp-server enable traps hsrp
+snmp-server enable traps config
+snmp-server enable traps entity
+snmp-server enable traps fru-ctrl
+snmp-server enable traps c6kxbar swbus
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx
+snmp-server enable traps vlan-mac-limit
+snmp-server enable traps flash insertion removal
+snmp-server enable traps rf
+snmp-server enable traps MAC-Notification move threshold
+snmp-server enable traps syslog
+snmp-server enable traps bgp
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps ipmulticast
+snmp-server enable traps msdp
+snmp-server enable traps rsvp
+snmp-server enable traps frame-relay
+snmp-server enable traps rtr
+snmp-server enable traps isakmp policy add
+snmp-server enable traps isakmp policy delete
+snmp-server enable traps isakmp tunnel start
+snmp-server enable traps isakmp tunnel stop
+snmp-server enable traps ipsec cryptomap add
+snmp-server enable traps ipsec cryptomap delete
+snmp-server enable traps ipsec cryptomap attach
+snmp-server enable traps ipsec cryptomap detach
+snmp-server enable traps ipsec tunnel start
+snmp-server enable traps ipsec tunnel stop
+snmp-server enable traps ipsec too-many-sas
+snmp-server enable traps isdn call-information
+snmp-server enable traps isdn layer2
+snmp-server enable traps isdn chan-not-avail
+snmp-server enable traps isdn ietf
+snmp-server enable traps srp
+snmp-server enable traps sonet
+snmp-server enable traps mpls vpn
+snmp-server enable traps mpls traffic-eng
+snmp-server enable traps mpls ldp
+snmp-server enable traps dlsw
+snmp-server host 10.20.5.11 w89waterfish7 
+snmp-server host 10.20.6.52 w89waterfish7 
+snmp-server tftp-server-list 8
+!
+tacacs-server host 10.20.208.89
+tacacs-server host 10.20.194.17
+tacacs-server host 10.20.5.19
+tacacs-server directed-request
+tacacs-server key 5d7f533b97fc5fa64f4983603b627e7f
+banner motd ^CC
+ NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE
+ 
+ Unauthorized access and/or use prohibited. All access and/or use subject to monitoring.
+ 
+ NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE
+^C
+!
+line con 0
+ location bay-36t-2 2103
+ exec-timeout 60 0
+ password 7 14450A5A03052E7820
+ logging synchronous
+line vty 0 4
+ access-class 10 in
+ exec-timeout 60 0
+ password 7 14450A5A03052E7820
+ logging synchronous
+ transport preferred none
+ transport input telnet ssh
+ transport output telnet
+ escape-character 3
+line vty 5 15
+ exec-timeout 60 0
+ password 7 01411E55540A025C25
+ logging synchronous
+ transport preferred none
+ transport input telnet ssh
+ transport output telnet
+ escape-character 3
+!
+ntp clock-period 17179902
+ntp source Loopback0
+ntp update-calendar
+ntp server 65.54.160.1
+ntp server 65.54.160.2
+ntp server 64.4.63.135
+ntp server 64.4.63.132
+end
+

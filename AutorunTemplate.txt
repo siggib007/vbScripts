@@ -1,0 +1,4 @@
+interface %p1%
+udld port aggressive
+exit
+ 

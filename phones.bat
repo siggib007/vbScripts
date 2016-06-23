@@ -1,0 +1,1 @@
+cscript "\\tkihsfs01\public\siggib\VBScript\phone.vbs" "c:\documents and settings\all users\desktop\phones.txt"

@@ -1,0 +1,116 @@
+Public Function XMLPull(sDatasourceName, sSavedReportUserAlias, sSavedReportName, sMaxNumRows, sTableName, sArguments) As Integer
+
+'..................................................................................................................................
+'...    sDatasourceName          - name of the datasource to be queried                                                    ...
+'...    sSavedReportUserAlias    - user alias of the person owning the saved report                                        ...
+'...    sSavedReportName         - name of the saved report to be loaded                                                   ...
+'...    sMaxNumRows              - maximum number of rows to return (0 for all)                                            ...
+'...    sTableName               - Name of table to store results in.
+'...    sArguments               - [optional] comma-separated list of search parameter values                              ...
+'..................................................................................................................................
+
+Dim strURL, oPoster, sOutputFileName, fso, fFile, sFileDestination, strErrLabel
+Dim RS As New ADODB.Recordset, Flds As ADODB.Field, strSQL As String
+
+    DoCmd.Hourglass True
+    
+    '--- Constants
+    '--- Make sure you are posting the data to the correct URL
+    strURL = "http://XMLInterface1/XMLPullRS.asp"
+    sFileDestination = "C:\~XMLPull.xml"   'Note: this file is only used as a workspace... it will be deleted
+
+    '-- Log this action
+    strSQL = "INSERT INTO XMLLog ( [dtTimeStamp], [Action], [Comment] ) VALUES (Now(), '" & sTableName & "', Null)"
+    'DoCmd.RunSQL strSQL
+    RS.Open strSQL, CurrentProject.Connection, adOpenStatic, adLockReadOnly
+    
+    '--- Send the data
+    Set oPoster = CreateObject("Microsoft.XMLHTTP")
+    oPoster.Open "POST", strURL, 0
+    oPoster.SetRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+    oPoster.Send "sAction=ScriptedPull&p1=" & URLEncode(sDatasourceName) & "&p2=" & URLEncode(sSavedReportUserAlias) & "&p3=" & URLEncode(sSavedReportName) & "&p4=" & CInt(sMaxNumRows) & "&p5=" & URLEncode(sArguments)
+
+'--- Check the return status
+    Select Case Left(oPoster.Status, 3)
+     Case "200"
+          strErrLabel = "Processing was successful!"
+
+     Case "202"
+          strErrLabel = "Diary Posting was partially successful. Check the status web page for details."
+
+     Case "602"
+          strErrLabel = "Diary Posting was unsuccessful. Check the status web page for details."
+
+     Case "604"
+          strErrLabel = "Diary Posting was unsuccessful. Database error."
+
+     Case "606"
+          strErrLabel = "Diary Posting denied. User has insufficient authorization to post events to SocConsole."
+
+     Case Else
+          strErrLabel = "Diary Posting returned an unexpected HTTP status code.  " & oPoster.Status
+          
+End Select
+
+XMLPull = oPoster.Status
+
+If oPoster.responseXML.XML <> "" Then          'oPoster.responseXML is an XMLDocument object containing the query results
+
+    
+    '############Change XML to a Access consumable format
+        Dim regEx, sXML
+        sXML = oPoster.responseXML.XML
+        Set regEx = CreateObject("VBScript.RegExp")
+        regEx.Pattern = " ([^=""<>]+)=""([^""]*)"""
+        regEx.Global = True
+        regEx.IgnoreCase = True
+        sXML = regEx.Replace(sXML, "<$1>$2</$1>")
+        sXML = Replace(Replace(Replace(sXML, "<?xml<version>1.0</version>?>", "<?xml version=""1.0""?>"), "<DATAROW", "<DATAROW>"), ">/>", "></DATAROW>")
+
+    '############End XML consumable Change#######################
+        
+
+    '###########Write XML to file on client side for temporary processing###########
+
+     '--- Write the XML to the output file
+     '--- The XML could be parsed here instead
+     Set fso = CreateObject("Scripting.FileSystemObject")
+     Set fFile = fso.CreateTextFile(sFileDestination, True, True)
+     'write in re-written xml to actual file
+     fFile.Write (sXML)
+     fFile.Close
+     
+     On Error Resume Next
+     DoCmd.RunSQL "Drop Table DATAROW;"   'Drop table DATAROW if it exists
+     On Error GoTo 0
+     
+     'Import the XML File into the Access Table DATAROW
+     Application.ImportXML DataSource:=sFileDestination, ImportOptions:=acStructureAndData
+
+     'Delete temporary XML File after export is done
+     fso.DeleteFile (sFileDestination)
+     
+     Set fFile = Nothing
+     Set fso = Nothing
+
+     On Error Resume Next
+     DoCmd.RunSQL "Drop Table [" & sTableName & "];"   'Drop the desired permanent table if it exists
+     DoCmd.Rename sTableName, acTable, "DATAROW"       'Rename table DATAROW to the desired permanent table name
+     On Error GoTo 0
+     
+     If oPoster.Status <> 200 Then
+        DoCmd.OpenForm "DiaryError", acNormal
+        Form_DiaryError.lblError.Caption = strErrLabel
+        Form_DiaryError.txtError.Value = oPoster.responseText
+     End If
+Else
+    DoCmd.OpenForm "DiaryError", acNormal
+    Form_DiaryError.lblError.Caption = strErrLabel
+    Form_DiaryError.txtError.Value = oPoster.responseText
+End If
+
+'------------ Load Response XML doc async---------------------
+DoCmd.Hourglass False
+
+
+End Function

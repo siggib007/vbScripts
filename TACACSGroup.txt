@@ -1,0 +1,1172 @@
+------------------------------------------------------------
+USER GROUP NAME: Default Group
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = ignore 
+default attribute = deny====
+	shell
+	4
+	exec:no-no
+	Ý
+------------------------------------------------------------
+USER GROUP NAME: Neteng
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = permit 
+default service = deny 
+default 
+cmd = permit 
+default attribute = deny 
+cmd = write 
+	unmatched = permit
+		deny erase
+		permit .*
+cmd = no 
+	unmatched = permit
+		deny "enable secret"
+		deny "enable secret .*"
+		deny "router bgp .*"
+		permit "router ospf .*"
+		permit .*
+cmd = ip 
+	unmatched = permit
+		permit .*
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = neteng
+		allow-commands = .*
+		====
+	shell
+	2
+	exec:no-no
+	Inventory=no-noP&
+------------------------------------------------------------
+USER GROUP NAME: Truecontrol
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = copy 
+	unmatched = permit
+		permit nvram
+		permit "startup-config .*"
+		permit "running-config .*"
+		permit "tftp .*"
+		permit "config tftp .*"
+		permit "tftp:* .*"
+		permit "tftp sup-bootflash:*"
+		permit tftp*
+		permit "tftp* .*"
+cmd = write 
+	unmatched = deny
+		permit memory
+cmd = enable 
+	unmatched = permit
+		permit "secret .*"
+cmd = disable 
+	unmatched = deny
+cmd = show 
+	unmatched = permit
+cmd = configure 
+	unmatched = deny
+		permit terminal
+cmd = remote 
+	unmatched = deny
+		permit "command switch show .*"
+		permit "command switch dir .*"
+		permit "command switch test .*"
+		permit "login switch .*"
+		permit "command module .*"
+cmd = terminal 
+	unmatched = deny
+		permit "length .*"
+cmd = tacacs-server 
+	unmatched = deny
+		permit "host .*"
+		permit "key .*"
+cmd = tacacs 
+	unmatched = deny
+		permit "server .*"
+cmd = no 
+	unmatched = deny
+		permit "ip access-list standard 5
+		permit ip access-list standard 8"
+		permit "ip access-list standard 10"
+		permit "ip access-list standard 98"
+		permit "ip access-list standard 99"
+		permit "access-list 5"
+		permit "access-list 8"
+		permit "access-list 10"
+		permit "access-list 98"
+		permit "logging .*"
+		permit "snmp-server .*"
+		permit "ip name-server .*"
+		permit "ip domain-name .*"
+		permit "ip domain-lookup .*"
+		permit "tacacs-server .*"
+		permit "crypto isakmp enable"
+		permit "ip finger"
+		permit "ip http server"
+		permit exec
+		permit "access-class 10 in"
+		permit "ip domain-list .*"
+		permit "logging console"
+		permit "boot system*"
+		permit "service *"
+		permit "ip prefix-list .*"
+		permit "ip as-path .*"
+		permit "ip community .*"
+		permit "ntp server .*"
+		permit "neighbor .*"
+cmd = access-list 
+	unmatched = deny
+		permit "98 .*"
+		permit "5 .*"
+		permit "10 .*"
+		permit "8 .*"
+		permit "111 .*"
+cmd = ip 
+	unmatched = deny
+		permit "domain-name .*"
+		permit "name-server .*"
+		permit "domain-list ntwk.msn.net"
+		permit "domain-lookup .*"
+		permit "prefix-list .*"
+		permit "as-path .*"
+		permit "community .*"
+		permit "ftp source-interface .*"
+		permit "tftp source-interface .*"
+cmd = logging 
+	unmatched = permit
+cmd = snmp-server 
+	unmatched = permit
+cmd = service 
+	unmatched = deny
+		permit "timestamps .*"
+		permit password-encryption
+cmd = line 
+	unmatched = deny
+		permit "vty .*"
+		permit "console .*"
+		permit "aux 0"
+cmd = password 
+	unmatched = permit
+cmd = set 
+	unmatched = deny
+		permit "snmp .*"
+		permit "tacacs .*"
+		permit "logging level .*"
+		permit "logging telnet disable"
+		permit "logging console disable"
+		permit "snmp trap enable all"
+		permit "ip permit 10.20.0.0 255.255.0.0"
+		permit "ip permit enable snmp"
+		permit "ip permit enable telnet"
+		permit "length 0"
+		permit "logging server .*"
+		permit "ip permit enable ssh"
+		permit "ip dns server *"
+		permit "ip dns domain ntwk.msn.net"
+		permit "ip dns domain .*"
+		permit "ip dns server .*"
+		permit "ip dns enable"
+		permit "ip dns disable"
+		permit password*
+		permit enable*
+		permit vlan*
+		permit banner*
+		permit "ip permit*"
+		permit config-register*
+cmd = clear 
+	unmatched = deny
+		permit "snmp trap all"
+		permit "tacacs .*"
+		permit "logging server .*"
+		permit "ip dns server all"
+		permit "ip permit*"
+cmd = access-class 
+	unmatched = deny
+		permit "10 in .*"
+		permit "111 in .*"
+cmd = transport 
+	unmatched = deny
+		permit "input telnet ssh"
+		permit "input telnet"
+		permit "preferred none"
+		permit "output telnet"
+		permit "input all"
+cmd = exec-timeout 
+	unmatched = deny
+		permit "60 0"
+cmd = session-timeout 
+	unmatched = deny
+		permit 60
+cmd = login 
+	unmatched = permit
+cmd = stopbits 
+	unmatched = deny
+		permit 1
+cmd = flush-at-activation 
+	unmatched = permit
+cmd = absolute-timeout 
+	unmatched = deny
+		permit 60
+cmd = escape-character 
+	unmatched = deny
+		permit 3
+cmd = flowcontrol 
+	unmatched = deny
+		permit hardware
+cmd = dir 
+	unmatched = permit
+cmd = del 
+	unmatched = permit
+		permit slot0:*
+		permit slot1:*
+		permit disk0:*
+		permit flash:*
+		permit sup-bootflash:*
+cmd = squeeze 
+	unmatched = permit
+cmd = delete 
+	unmatched = permit
+		permit slot0:*
+		permit slot1:*
+		permit disk0:*
+		permit flash:*
+		permit sup-bootflash:*
+cmd = boot 
+	unmatched = deny
+		permit "system sup-bootflash:*"
+cmd = ntp 
+	unmatched = permit
+		permit "server .*"
+cmd = router 
+	unmatched = permit
+		permit "router .*"
+cmd = neighbor 
+	unmatched = permit
+		permit "neighbor .*"
+cmd = power 
+	unmatched = permit
+		permit "redundancy-mode .*"
+cmd = logout 
+	unmatched = permit
+		permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = tools
+		allow-commands = "\"show configuration\""
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: VIPNET
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit "ip slb .*"
+		permit "module csm .*"
+cmd = configure 
+	unmatched = deny
+		permit terminal
+cmd = module 
+	unmatched = deny
+		permit csm
+cmd = serverfarm 
+	unmatched = permit
+cmd = terminal 
+	unmatched = deny
+		permit "length 0"
+cmd = write 
+	unmatched = deny
+		permit memory
+cmd = ip 
+	unmatched = deny
+		permit "slb .*"
+cmd = real 
+	unmatched = permit
+cmd = inservice 
+	unmatched = permit
+cmd = no 
+	unmatched = deny
+		permit inservice
+cmd = exit 
+	unmatched = permit
+cmd = connect 
+	unmatched = deny
+		permit "\"inservice\""
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: TELNET
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit tacacs
+		permit "privilege
+		 permit interfaces .*
+		permit version"
+		permit users
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = neteng
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: No Rights
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: Search
+Associated Hardware Group: Search¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = telnet 
+	unmatched = deny
+		permit .*
+cmd = clear 
+	unmatched = deny
+		permit "\"line .*\""
+		permit "line *"
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: BrixDevices
+Associated Hardware Group: NDG:BrixDevices¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = permit 
+default attribute = deny permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	Ù
+------------------------------------------------------------
+USER GROUP NAME: Messenger
+Associated Hardware Group: Messenger¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = clear 
+	unmatched = deny
+		permit "\"line .*\""
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: NOC
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = Show 
+	unmatched = permit
+		deny "\"running-config .*\""
+cmd = terminal 
+	unmatched = deny
+		permit "\"monitor\"
+		permit \"length .*\""
+cmd = traceroute 
+	unmatched = permit
+cmd = ping 
+	unmatched = permit
+cmd = systat 
+	unmatched = permit
+cmd = clear 
+	unmatched = deny
+		permit "\"counters .*\""
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: ACL Check
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit "ip .*"
+		permit run
+		permit "\"ip bgp summary\""
+cmd = Terminal 
+	unmatched = deny
+		permit length
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: Console
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = permit
+		permit "\"tacacs\"
+		 permit \"privilege\""
+		permit "\"interfaces .*\""
+		permit "\"version\""
+		permit "\"users\""
+		permit "\"ip *\""
+cmd = terminal 
+	unmatched = deny
+		permit "\"length .*\""
+cmd = set 
+	unmatched = deny
+		permit "\"length .*\""
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = neteng
+		====
+	shell
+	2
+	exec:no-no
+	ta='
+	Q
+------------------------------------------------------------
+USER GROUP NAME:   Juniper-test
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: whatport
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit "\"arp\"
+		permit \"ip slb arp\""
+		permit "\"mac-address-table dynamic\""
+		permit "\"cam dynamic\""
+cmd = terminal 
+	unmatched = deny
+		permit "\"length\""
+cmd = set 
+	unmatched = deny
+		permit "\"length\""
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	dá
+------------------------------------------------------------
+USER GROUP NAME: neteng_auto
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = terminal 
+	unmatched = deny
+		permit length*
+		permit monitor
+cmd = show 
+	unmatched = deny
+		permit .*
+		deny tech
+		deny inventory
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = tools
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: memberexp
+Associated Hardware Group: NDG:pci-memberexp¬*¬*
+Enable: 1
+Option:DENY
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = ignore 
+default attribute = deny====
+	shell
+	4
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: SLB
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit "ip slb .*"
+		permit "module .*"
+cmd = terminal 
+	unmatched = deny
+		permit length
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 1
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: showstar
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit .*
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: vipnet_ws_bigip
+Associated Hardware Group: NDG:POC-F5¬*¬*	NDG:PCI-F5¬*¬*	NDG:pci-memberexp¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = ignore 
+default attribute = deny====
+	shell
+	1
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: AutoNet
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = permit
+cmd = copy 
+	unmatched = deny
+		permit "\"running-config startup-config\""
+cmd = reload 
+	unmatched = permit
+cmd = write 
+	unmatched = deny
+		permit erase
+cmd = squeeze 
+	unmatched = permit
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: SLB2
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = permit
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: shipbgp
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = deny
+		permit "ip bgp"
+cmd = terminal 
+	unmatched = deny
+		permit "length .*"
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: Tools
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = permit 
+default attribute = deny 
+cmd = write 
+	unmatched = deny
+		deny erase
+		permit .*
+cmd = no 
+	unmatched = deny
+		deny "enable secret"
+		deny "enable secret .*"
+		deny "router bgp .*"
+		deny "router ospf 8075"
+		permit "router ospf .*"
+		permit .*
+cmd = ip 
+	unmatched = permit
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = neteng
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: MSN Security
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = permit 
+default attribute = deny 
+cmd = terminal 
+	unmatched = deny
+		permit "\"length .*\""
+		permit monitor
+cmd = show 
+	unmatched = permit
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		====
+	shell
+	2
+	exec:no-no
+	'Ù
+------------------------------------------------------------
+USER GROUP NAME: GNS Network PM (Read only)
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = terminal 
+	unmatched = deny
+		permit "\"length .*\""
+		permit "monitor "
+cmd = show 
+	unmatched = deny
+		permit .* ====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: 
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny permit service = exec 
+	 unmatched = deny
+		====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: MSNSOC-RW
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = terminal 
+	unmatched = deny
+		permit "\"length .*\""
+		permit "monitor .*"
+cmd = show 
+	unmatched = permit
+		deny "\"tech\""
+		deny "\"inventory\""
+		permit .*
+cmd = remote 
+	unmatched = deny
+		permit "\"command switch show .*\""
+cmd = configure 
+	unmatched = deny
+		permit terminal
+cmd = ip 
+	unmatched = deny
+		permit "\"slb serverfarm\""
+		permit "\"helper-address .*\""
+		permit "\"helper-address*\""
+cmd = real 
+	unmatched = permit
+		permit .*
+cmd = inservice 
+	unmatched = permit
+cmd = no 
+	unmatched = deny
+		permit inservice
+		permit "\"ip helper-address .*\""
+		permit "\"ip helper-address*\""
+cmd = uptime 
+	unmatched = deny
+		permit .*
+cmd = module 
+	unmatched = deny
+		permit "csm .*"
+		permit .*
+cmd = exit 
+	unmatched = permit
+cmd = write 
+	unmatched = deny
+		permit memory
+cmd = b 
+	unmatched = deny
+		permit "\"config sync all\""
+		permit "\"failover show\""
+		permit "\"interface .*\""
+		permit "\"pool .*\""
+cmd = bigpipe 
+	unmatched = deny
+		permit "\"memory show .*\""
+		permit "\"virtual show .*\""
+cmd = bigstart 
+	unmatched = deny
+		permit "\"status tmm snmpd sod tamd\""
+cmd = clear 
+	unmatched = deny
+		permit "\"count\""
+		permit "\"ip bgp *\""
+cmd = copy 
+	unmatched = permit
+cmd = end 
+	unmatched = deny
+cmd = interface 
+	unmatched = deny
+		permit .*
+cmd = ls 
+	unmatched = deny
+		permit "\"-1 /shared/core\""
+cmd = neighbor 
+	unmatched = permit
+cmd = nslookup 
+	unmatched = deny
+		permit .*
+cmd = ping 
+	unmatched = deny
+		permit .*
+cmd = router 
+	unmatched = deny
+		permit "bgp .*"
+cmd = serverfarm 
+	unmatched = deny
+		permit .*
+cmd = system_check 
+	unmatched = deny
+		permit "\"-d | grep power\""
+cmd = tmstat 
+	unmatched = deny
+cmd = tracert 
+	unmatched = deny
+		permit .*
+cmd = conf 
+	unmatched = deny
+		permit "\"t*\""
+cmd = config 
+	unmatched = deny
+		permit "\"t*\""
+		permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		priv-lvl = 15
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = tier1-rw
+		====
+	shell
+	2
+	exec:no-no
+	s-ex°
+------------------------------------------------------------
+USER GROUP NAME: Hotmail DEV Lab
+Associated Hardware Group: NDG:Hotmail DEV Lab¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = show 
+	unmatched = permit
+cmd = exit 
+	unmatched = deny
+cmd = logout 
+	unmatched = deny ====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: Juniper-access-only
+Associated Hardware Group: NDG:Juniper Business Guest¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = ignore 
+default attribute = deny permit service = ppp protocol = ip 
+	 unmatched = deny
+		 permit service = exec 
+	 unmatched = deny
+		 permit service = junos-exec 
+	 unmatched = deny
+		local-user-name = neteng
+		allow-commands = .*
+		====
+	shell
+	4
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: OOBAccess
+Associated Hardware Group: NDG:OOBAccess¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = telnet 
+	unmatched = permit
+cmd = connect 
+	unmatched = permit
+cmd = show 
+	unmatched = deny
+		permit "line .*"
+cmd = clear 
+	unmatched = deny
+		permit "line .*"
+cmd = disconnect 
+	unmatched = permit
+cmd = exit 
+	unmatched = deny
+cmd = quit 
+	unmatched = deny
+cmd = logout 
+	unmatched = deny ====
+	shell
+	2
+	exec:no-no
+cmd = dis±
+------------------------------------------------------------
+USER GROUP NAME: Hotmail
+Associated Hardware Group: NDG:HotmailOps¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = terminal 
+	unmatched = deny
+		permit "length .*"
+		permit "monitor .*"
+cmd = show 
+	unmatched = deny
+		deny tech
+		deny inventory
+		permit .*
+cmd = remote 
+	unmatched = deny
+		permit "\"command switch show .*\"" ====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: Shopping
+Associated Hardware Group: NDG:Search¬*¬*	shopping¬*¬*
+Enable: 1
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny 
+cmd = terminal 
+	unmatched = deny
+		permit "length .*"
+		permit "monitor .*"
+cmd = show 
+	unmatched = deny
+		deny tech
+		deny inventory
+		permit .*
+cmd = remote 
+	unmatched = deny
+		permit "\"command switch show .*\"" ====
+	shell
+	2
+	exec:no-no
+	
+------------------------------------------------------------
+USER GROUP NAME: Group 100
+Associated Hardware Group: 
+Enable: 0
+Option:PERMIT
+Commands: 
+default = deny 
+default service = deny 
+default 
+cmd = deny 
+default attribute = deny permit service = ppp protocol = ip 
+	 unmatched = deny
+		
+------------------------------------------------------------

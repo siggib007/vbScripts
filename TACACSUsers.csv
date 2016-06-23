@@ -1,0 +1,159 @@
+username, group, real name, property, UTS, approver, HWGroup
+monikama, Neteng, Monika Machado, MSN Neteng - North, , , 
+larrylg, Neteng, Larry Guilliams, MSN Neteng - North, , , 
+truecontrol, Truecontrol, True Control, , , , 
+joesz, Neteng, Joe Szymusiak, MSN Neteng - North, , , 
+wlawton, Neteng, Will Lawton, MSN SOC/NOC Tier 1.5, , , 
+vipnet, VIPNET, VIPNET, , , , 
+telnet, TELNET, Telnet, , , , 
+bharatr, Neteng, Bharat Ranjan, , , , 
+htts, showstar, HTTS Cisco support, , , , 
+kennethh, memberexp, Kenneth Heiret, Member Exp, , , NDG:pci-memberexp¬*¬*
+walt, Neteng, Walt Wollny, MSN Neteng - North, , , 
+paulvl, Neteng, Paul Van Lierop, MSN Neteng - North, , , 
+gcamps, Neteng, Geoffrey Camps, MSN Neteng - North, , , 
+rayau, Neteng, Ray Austria, MSN Neteng - North, , , 
+davwill, Neteng, David Willard, MSN Neteng - North, , , 
+marekj, Neteng, Marek Jedrzejewicz, MSN Neteng - North, , , 
+geronec, Neteng, Gerone Chandler, MSN Neteng - North, , , 
+siviv, Neteng, Sivi Varghese, MSN Neteng - North, , , 
+donnoel, Neteng, Don Noel, MSN Neteng - North, , , 
+davidril, Neteng, David Riley, MSN Neteng - North, , , 
+danorm, Neteng, Darren Norman, MSN Neteng - North, , , 
+timge, Neteng, Tim Gearhart, MSN Neteng - North, , , 
+dlang, Neteng, Daniel Lang, MSN Neteng - North, , , 
+mpierce, Neteng, Michael Pierce, MSN Neteng - North, , , 
+timn, Neteng, Tim Nelson, MSNIA, , , 
+skern, Tools, Steve Kern, OSSG Network Tools Group, , , 
+dougwil, Neteng, Doug Wilson, MSN Neteng - South, , , 
+bpop, GNS Network PM (Read only), Bill Poplawski, GNS PM, , , 
+davidnor, Neteng, David Norsby, MSN Neteng - South, , , 
+bswen, Neteng, Brian Swenson, MSN Neteng - South, , , 
+seancar, Neteng, Sean Carlin, International, , , 
+bcasper, MSN Security, Bryan Casper, MSN Security, , , 
+jpj, Neteng, Jeff Jensen, WebTV Neteng, , , 
+jeffreyo, Neteng, Jeffrey Osborne, WebTV Neteng, , , 
+edwing, Neteng, Ed Galapon, Neteng, , , 
+rogersei, Neteng, Roger Seielstad, MSN Messenger group, , , 
+andycor, Messenger, Andy Corran, MSN Messenger group, , , Messenger¬*¬*
+billdu, Neteng, Bill Duchesneau, MSN SOC/NOC Tier 1.5, , , 
+tomhag, Neteng, Tom Hagmann, MSN SOC/NOC Tier 1.5, , , 
+rickbr, Neteng, Rick Brown, MSN SOC/NOC Tier 1.5, , , 
+jboern, Neteng, James Boerner, MSN SOC/NOC Tier 1.5, , , 
+samt, Neteng, Sam Turpin, MSN SOC/NOC Tier 1.5, , , 
+acl_check, ACL Check, Border router ACL check script, Also used in the script on netops, , , 
+najama, Neteng, Najam Ahmad, MSN Networking director, , , 
+console, Console, Console, for console script, , , 
+aaronsey, Neteng, Aaron Seydlitz, MSN SOC/NOC Tier 1.5, , , 
+slb, SLB, Server Load Balance, account use to view load balancing, , , 
+showstar, showstar, , Ticket 1355646, , , 
+search, Search, Search, Search script ticket #1211641, , , Search¬*¬*
+edetn, Neteng, Edet Nkposong, GNS NetEng - International, , , 
+b-jatamv, Neteng, Jagannadha Tamvada, Cisco Networking, , , 
+markth, Search, Mark Thorsteinson, Search LAB engineer, , , Search¬*¬*
+wmacphee, Search, William MacPhee, Search, , , Search¬*¬*
+slb2, SLB2, SLB2, Ticket 1439645 - Larry Guililams, , , 
+ineteng, shipbgp, Ticket #1454821, , , , 
+parantal, Neteng, Parantap Lahiri, Networking Architect, , , 
+jomccoy, Neteng, Jon McCoy, GNS Incident Management, , , 
+siggib, Neteng, Siggi Bjarnason, NETWORK ENGINEER, , , 
+naokikit, Neteng, Naoki Kitajima, SR Network Engineer, , , 
+v-cwybo, Neteng, Cole Wybo, Saturn Networking (GNS Red Team), , , 
+mglas, Neteng, Mark Glasser, GNS Engineering Blue Team, , , 
+aricb, Neteng, Aric Babson, Network Engineer, , , 
+clintb, Neteng, Clint Bernatis, GNS Engineering, , , 
+shahint, Neteng, Shahin Torpis, GNSBlue, , , 
+showcmd, showstar, Show Cmd, Ticket #1652972, , , 
+mkasten, Neteng, Mark Kasten, GNS Core, , , 
+v-aidsw, Neteng, Aid Swailem, SatNet, , , 
+bobs, Search, Bob Schroder, Search Dev, , , Search¬*¬*
+deepa, Search, Deepak Agarwal, Search Dev, , , Search¬*¬*
+cnorkus, Search, Chip Norkus, Search, , , Search¬*¬*
+linnco, GNS Network PM (Read only), Linn Compton, GNS PM, , , 
+jyounge, GNS Network PM (Read only), Jonathan Younge, GNS PM, , , 
+svisel, GNS Network PM (Read only), Steven Visel, GNS PM, , , 
+dtai, GNS Network PM (Read only), Doug Tai, GNS PM, , , 
+damongr, Neteng, Damon Gray, GNS Engineering, , , 
+harrydup, No Rights, Harry DuPape, Tacacs SE Tic 2162428, , , 
+carlac, Neteng, Carla Cetina, GNSRed, , , 
+blainech, Neteng, Blaine Christian, GNS Core Eng, , , 
+b-corerh, Neteng, Corey Rhoades, b-corerh, , , 
+v-joncal, Neteng, Jonathan Calalang, Saturn Networking, , , 
+johnar, Neteng, John Arnold, MSN Networking, , , 
+a-jowood, MSNSOC-RW, Joseph Wood, SOC, , , 
+brdavies, Neteng, Brian Davies, Core Network Engineering, , , 
+ionay, Neteng, Iona Yuan, GNS, , , 
+nwalker, OOBAccess, Nairn Walker, Microsoft Game Studio, , , NDG:OOBAccess¬*¬*
+johndeli, Neteng, John Delinocci, NETWORK SECURITY ENGINEER, , , 
+jonatham, Neteng, Jonathan Morris, GNSIM, , , 
+solomons, Neteng, Vijay Souri, GNSIM, , , 
+a-chuckr, MSNSOC-RW, Chuck Richter, SOC, , , 
+a-gehint, MSNSOC-RW, Geoff Hinton, SOC, , , 
+a-halob, MSNSOC-RW, Hal O'Brien, SOC, , , 
+a-jscott, MSNSOC-RW, Justin Scott, SOC, , , 
+a-nickga, MSNSOC-RW, Nick Gaze, SOC, , , 
+jansul, Neteng, Janet Sullivan, GNSIM, , , 
+a-kirste, MSNSOC-RW, Kirste Eilers, SOC, , , 
+a-samirp, MSNSOC-RW, Sam Pyakurel, SOC, , , 
+a-johill, MSNSOC-RW, Joseph Hill, SOC, , , 
+a-bengue, MSNSOC-RW, Ben Guerechit, SOC, , , 
+bhodges, Hotmail DEV Lab, Brian Hodges, Hotmail Dev Lab, , , NDG:Hotmail DEV Lab¬*¬*
+danitay, Hotmail DEV Lab, Dan Taylor, Hotmail DEV Lab, , , NDG:Hotmail DEV Lab¬*¬*
+tomvu, Shopping, Tommy Vu, msn marketplaces operations, , , NDG:Search¬*¬*	shopping¬*¬*
+mikechow, Neteng, Mike Chow, GNS Engineering, , , 
+rkopel, Neteng, Rich Kopel, US-Networking, , , 
+a-kchull, Neteng, Kenneth Chullickel, GNSNA, , , 
+bsaffin, Hotmail DEV Lab, Bruce Saffin, OSSG, , , NDG:Hotmail DEV Lab¬*¬*
+wchapp, Tools, Bill Chappell, OSSG, , , 
+a-dclark, MSNSOC-RW, David Clark, SOC, , , 
+mikeng, Messenger, Mike Nguyen, Messanger, , , Messenger¬*¬*
+gcamps_auto, neteng_auto, Geoffrey Camps, Neteng, , , 
+blainech_auto, neteng_auto, Blaine Christian, neteng_auto, , , 
+brdavies_auto, neteng_auto, Brian Davies, neteng_auto, , , 
+mkasten_auto, neteng_auto, Mark Kasten, neteng_auto, , , 
+msitler, memberexp, Michael Sitler, Member Exp, , , NDG:pci-memberexp¬*¬*
+mcosta, memberexp, Mike Costa, Member Exp, , , NDG:pci-memberexp¬*¬*
+a-rodneg, memberexp, Rodney A Gilliard, Member Exp, , , NDG:pci-memberexp¬*¬*
+tadwil, memberexp, Tad Wilkins, Member Exp, , , NDG:pci-memberexp¬*¬*
+tomja, memberexp, Tom Janes, Member Exp, , , NDG:pci-memberexp¬*¬*
+zachm, memberexp, Zachariah Morgan, Member Exp, , , NDG:pci-memberexp¬*¬*
+vipnet_ws_bigip, vipnet_ws_bigip, Vipnet tool for F5, Ticket #2015698, , , NDG:POC-F5¬*¬*	NDG:PCI-F5¬*¬*	NDG:pci-memberexp¬*¬*
+chrisham, Hotmail DEV Lab, Chris Hampton, HotmailOps, , , NDG:Hotmail DEV Lab¬*¬*
+kgarewal, memberexp, Krishna Garewal, Memberexp, , , NDG:pci-memberexp¬*¬*
+menglim, Neteng, Meng Koon Lim, GNS, , , 
+wayney, memberexp, Wayne Yim, memberexp, , , NDG:pci-memberexp¬*¬*
+bfey, OOBAccess, Brett Fey, DSX Operations, , , NDG:OOBAccess¬*¬*
+a-sagree, MSNSOC-RW, Sam Green, SOC, , , 
+a-emmang, MSNSOC-RW, emmanuel gambliel, SOC, , , 
+johnlam, memberexp, John Lambert, MX Member exp, , , NDG:pci-memberexp¬*¬*
+tyao, OOBAccess, Hongbing (Teresa) Yao, OOBACess, , , NDG:OOBAccess¬*¬*
+dbenisch, Search, Derk Benisch, Search, , , Search¬*¬*
+benoates, memberexp, Ben Oates, Member EXP, , , NDG:pci-memberexp¬*¬*
+minervad, memberexp, Minerva Del Razo Alcaraz, Member exp, , , NDG:pci-memberexp¬*¬*
+v-jjohn, Neteng, john johnson, GNS, , , 
+v-tladd, Neteng, Thomas Ladd, GNS, , , 
+a-dhopfe, MSNSOC-RW, Don Hopfe, SOC, , , 
+v-edwarh, Neteng, Edward Herzog, GNS, , , 
+v-wilmar, Neteng, William Martin, GNS, , , 
+siggib_auto, neteng_auto, Siggi Bjarnason, Tools Script 2075630, , , 
+v-bhprak, Juniper-access-only, Bhanu Prakash, support for juniper, , , NDG:Juniper Business Guest¬*¬*
+v-sbssto, Neteng, Stephen Opel, GNS, , , 
+a-treenf, MSNSOC-RW, Treena Franklin, SOC, , , 
+v-sbsrde, Neteng, Robert Dees, GNS, , , 
+v-jmahal, Neteng, Jaswinder Mahal, GNS Blue team, , , 
+v-jorine, Neteng, Joseph RInehart, GNS, , , 
+a-mlevy, MSNSOC-RW, Mark Levy, SOC Member, , , 
+pareshmu, Neteng, Paresh Mundade, GNS, , , 
+b-dadouc, BrixDevices, David Doucette, Brix devices 2136224, , , NDG:BrixDevices¬*¬*
+a-aljoaq, MSNSOC-RW, Alysa Joaquin, SOC, 2046020, , 
+v-rpaol, Neteng, Richard Paolello, GNS Networking, , , 
+AutoNet, AutoNet, AutoNet Tools Automation, Tic# 2138771, , , 
+a-andrew, MSNSOC-RW, Andrea Whitley, SOC Analyst Tic# 2145877, , , 
+b-markod, BrixDevices, Mark O'Donnald, TACACS account request for b-markod, , , NDG:BrixDevices¬*¬*
+b-mism, BrixDevices, Mike Smith, TACACS account request for b-mism, , , NDG:BrixDevices¬*¬*
+asibha, Neteng, Asib Hakimi, TACACS account request for: asibhak  Ticket# 2156844, 2173614, , 
+sguill, Neteng, Stephen Guilliot, Neteng, 2156545, , 
+robw, memberexp, Robert Walker, TACACS account request for robw  Ticket 2166125, , , NDG:pci-memberexp¬*¬*
+johnwr, memberexp, John Wright, TACACS account request for johnwr  Ticket 2166133, , , NDG:pci-memberexp¬*¬*
+jasonev, memberexp, Jason Evans, SCGSEOPS, 2172102, , NDG:pci-memberexp¬*¬*
+a-jeremo, MSNSOC-RW, Jeremy O'Brine, SOC, 2186732, , 

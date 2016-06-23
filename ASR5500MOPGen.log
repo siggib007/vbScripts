@@ -1,0 +1,2255 @@
+2/9/2015 1:54:57 PM	Main directory C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\
+2/9/2015 1:54:57 PM	Reading CIQ's from C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\
+2/9/2015 1:54:57 PM	Using template file C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500Conf.txt
+2/9/2015 1:54:57 PM	Saving Configurations to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/9/2015 1:54:57 PM	Saving CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500Vars.csv
+2/9/2015 1:54:57 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF004_CIQ.xlsx
+2/9/2015 1:54:59 PM	Starting with Common elements
+2/9/2015 1:54:59 PM	Now working on ARG21 specifics
+2/9/2015 1:54:59 PM	Now working on ARG22 specifics
+2/9/2015 1:54:59 PM	Now working on PCF specifics
+2/9/2015 1:54:59 PM	Now adding a line to the CSV
+2/9/2015 1:54:59 PM	Now generating configuration for ARG21
+2/9/2015 1:54:59 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG21.txt
+2/9/2015 1:54:59 PM	Now generating configuration for ARG22
+2/9/2015 1:54:59 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG22.txt
+2/9/2015 1:54:59 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:54:59 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF005_CIQ.xlsx
+2/9/2015 1:55:02 PM	Starting with Common elements
+2/9/2015 1:55:02 PM	Now working on ARG21 specifics
+2/9/2015 1:55:02 PM	Now working on ARG22 specifics
+2/9/2015 1:55:02 PM	Now working on PCF specifics
+2/9/2015 1:55:02 PM	Now adding a line to the CSV
+2/9/2015 1:55:02 PM	Now generating configuration for ARG21
+2/9/2015 1:55:02 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG21.txt
+2/9/2015 1:55:02 PM	Now generating configuration for ARG22
+2/9/2015 1:55:02 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG22.txt
+2/9/2015 1:55:02 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:02 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF003_CIQ.xlsx
+2/9/2015 1:55:05 PM	Starting with Common elements
+2/9/2015 1:55:05 PM	Now working on ARG21 specifics
+2/9/2015 1:55:05 PM	Now working on ARG22 specifics
+2/9/2015 1:55:05 PM	Now working on PCF specifics
+2/9/2015 1:55:05 PM	Now adding a line to the CSV
+2/9/2015 1:55:05 PM	Now generating configuration for ARG21
+2/9/2015 1:55:05 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG21.txt
+2/9/2015 1:55:05 PM	Now generating configuration for ARG22
+2/9/2015 1:55:05 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG22.txt
+2/9/2015 1:55:05 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:05 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF004_CIQ.xlsx
+2/9/2015 1:55:08 PM	Starting with Common elements
+2/9/2015 1:55:08 PM	Now working on ARG21 specifics
+2/9/2015 1:55:08 PM	Now working on ARG22 specifics
+2/9/2015 1:55:08 PM	Now working on PCF specifics
+2/9/2015 1:55:08 PM	Now adding a line to the CSV
+2/9/2015 1:55:08 PM	Now generating configuration for ARG21
+2/9/2015 1:55:08 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG21.txt
+2/9/2015 1:55:08 PM	Now generating configuration for ARG22
+2/9/2015 1:55:08 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG22.txt
+2/9/2015 1:55:08 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:08 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF004_CIQ.xlsx
+2/9/2015 1:55:10 PM	Starting with Common elements
+2/9/2015 1:55:10 PM	Now working on ARG21 specifics
+2/9/2015 1:55:10 PM	Now working on ARG22 specifics
+2/9/2015 1:55:10 PM	Now working on PCF specifics
+2/9/2015 1:55:10 PM	Now adding a line to the CSV
+2/9/2015 1:55:10 PM	Now generating configuration for ARG21
+2/9/2015 1:55:10 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG21.txt
+2/9/2015 1:55:10 PM	Now generating configuration for ARG22
+2/9/2015 1:55:10 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG22.txt
+2/9/2015 1:55:10 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:10 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF005_CIQ.xlsx
+2/9/2015 1:55:14 PM	Starting with Common elements
+2/9/2015 1:55:14 PM	Now working on ARG21 specifics
+2/9/2015 1:55:14 PM	Now working on ARG22 specifics
+2/9/2015 1:55:14 PM	Now working on PCF specifics
+2/9/2015 1:55:14 PM	Now adding a line to the CSV
+2/9/2015 1:55:14 PM	Now generating configuration for ARG21
+2/9/2015 1:55:14 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG21.txt
+2/9/2015 1:55:14 PM	Now generating configuration for ARG22
+2/9/2015 1:55:14 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG22.txt
+2/9/2015 1:55:14 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:14 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DCPCF002_CIQ.xlsx
+2/9/2015 1:55:17 PM	Starting with Common elements
+2/9/2015 1:55:18 PM	Now working on ARG21 specifics
+2/9/2015 1:55:18 PM	Now working on ARG22 specifics
+2/9/2015 1:55:18 PM	Now working on PCF specifics
+2/9/2015 1:55:18 PM	Now adding a line to the CSV
+2/9/2015 1:55:18 PM	Now generating configuration for ARG21
+2/9/2015 1:55:18 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG21.txt
+2/9/2015 1:55:18 PM	Now generating configuration for ARG22
+2/9/2015 1:55:18 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG22.txt
+2/9/2015 1:55:18 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:18 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DEPCF003_CIQ.xlsx
+2/9/2015 1:55:21 PM	Starting with Common elements
+2/9/2015 1:55:21 PM	Now working on ARG21 specifics
+2/9/2015 1:55:21 PM	Now working on ARG22 specifics
+2/9/2015 1:55:22 PM	Now working on PCF specifics
+2/9/2015 1:55:22 PM	Now adding a line to the CSV
+2/9/2015 1:55:22 PM	Now generating configuration for ARG21
+2/9/2015 1:55:22 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG21.txt
+2/9/2015 1:55:22 PM	Now generating configuration for ARG22
+2/9/2015 1:55:22 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG22.txt
+2/9/2015 1:55:22 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:22 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\HNPCF003_CIQ.xlsx
+2/9/2015 1:55:25 PM	Starting with Common elements
+2/9/2015 1:55:25 PM	Now working on ARG21 specifics
+2/9/2015 1:55:25 PM	Now working on ARG22 specifics
+2/9/2015 1:55:25 PM	Now working on PCF specifics
+2/9/2015 1:55:25 PM	Now adding a line to the CSV
+2/9/2015 1:55:25 PM	Now generating configuration for ARG21
+2/9/2015 1:55:25 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG21.txt
+2/9/2015 1:55:25 PM	Now generating configuration for ARG22
+2/9/2015 1:55:25 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG22.txt
+2/9/2015 1:55:25 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:25 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF006_CIQ.xlsx
+2/9/2015 1:55:29 PM	Starting with Common elements
+2/9/2015 1:55:29 PM	Now working on ARG21 specifics
+2/9/2015 1:55:29 PM	Now working on ARG22 specifics
+2/9/2015 1:55:29 PM	Now working on PCF specifics
+2/9/2015 1:55:29 PM	Now adding a line to the CSV
+2/9/2015 1:55:29 PM	Now generating configuration for ARG21
+2/9/2015 1:55:29 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG21.txt
+2/9/2015 1:55:29 PM	Now generating configuration for ARG22
+2/9/2015 1:55:29 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG22.txt
+2/9/2015 1:55:29 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:29 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF007_CIQ.xlsx
+2/9/2015 1:55:32 PM	Starting with Common elements
+2/9/2015 1:55:32 PM	Now working on ARG21 specifics
+2/9/2015 1:55:32 PM	Now working on ARG22 specifics
+2/9/2015 1:55:32 PM	Now working on PCF specifics
+2/9/2015 1:55:32 PM	Now adding a line to the CSV
+2/9/2015 1:55:32 PM	Now generating configuration for ARG21
+2/9/2015 1:55:32 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG21.txt
+2/9/2015 1:55:32 PM	Now generating configuration for ARG22
+2/9/2015 1:55:32 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG22.txt
+2/9/2015 1:55:32 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:32 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF008_CIQ.xlsx
+2/9/2015 1:55:36 PM	Starting with Common elements
+2/9/2015 1:55:36 PM	Now working on ARG21 specifics
+2/9/2015 1:55:36 PM	Now working on ARG22 specifics
+2/9/2015 1:55:36 PM	Now working on PCF specifics
+2/9/2015 1:55:36 PM	Now adding a line to the CSV
+2/9/2015 1:55:36 PM	Now generating configuration for ARG21
+2/9/2015 1:55:36 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG21.txt
+2/9/2015 1:55:36 PM	Now generating configuration for ARG22
+2/9/2015 1:55:36 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG22.txt
+2/9/2015 1:55:36 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:36 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF009_CIQ.xlsx
+2/9/2015 1:55:39 PM	Starting with Common elements
+2/9/2015 1:55:39 PM	Now working on ARG21 specifics
+2/9/2015 1:55:39 PM	Now working on ARG22 specifics
+2/9/2015 1:55:39 PM	Now working on PCF specifics
+2/9/2015 1:55:39 PM	Now adding a line to the CSV
+2/9/2015 1:55:39 PM	Now generating configuration for ARG21
+2/9/2015 1:55:39 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG21.txt
+2/9/2015 1:55:39 PM	Now generating configuration for ARG22
+2/9/2015 1:55:39 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG22.txt
+2/9/2015 1:55:39 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:39 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NEPCF002_CIQ.xlsx
+2/9/2015 1:55:43 PM	Starting with Common elements
+2/9/2015 1:55:43 PM	Now working on ARG21 specifics
+2/9/2015 1:55:43 PM	Now working on ARG22 specifics
+2/9/2015 1:55:43 PM	Now working on PCF specifics
+2/9/2015 1:55:43 PM	Now adding a line to the CSV
+2/9/2015 1:55:43 PM	Now generating configuration for ARG21
+2/9/2015 1:55:43 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG21.txt
+2/9/2015 1:55:43 PM	Now generating configuration for ARG22
+2/9/2015 1:55:43 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG22.txt
+2/9/2015 1:55:43 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:43 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NVPCF003_CIQ.xlsx
+2/9/2015 1:55:46 PM	Starting with Common elements
+2/9/2015 1:55:46 PM	Now working on ARG21 specifics
+2/9/2015 1:55:46 PM	Now working on ARG22 specifics
+2/9/2015 1:55:46 PM	Now working on PCF specifics
+2/9/2015 1:55:46 PM	Now adding a line to the CSV
+2/9/2015 1:55:46 PM	Now generating configuration for ARG21
+2/9/2015 1:55:46 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG21.txt
+2/9/2015 1:55:46 PM	Now generating configuration for ARG22
+2/9/2015 1:55:46 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG22.txt
+2/9/2015 1:55:46 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:46 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF007_CIQ.xlsx
+2/9/2015 1:55:50 PM	Starting with Common elements
+2/9/2015 1:55:50 PM	Now working on ARG21 specifics
+2/9/2015 1:55:50 PM	Now working on ARG22 specifics
+2/9/2015 1:55:50 PM	Now working on PCF specifics
+2/9/2015 1:55:50 PM	Now adding a line to the CSV
+2/9/2015 1:55:50 PM	Now generating configuration for ARG21
+2/9/2015 1:55:50 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG21.txt
+2/9/2015 1:55:50 PM	Now generating configuration for ARG22
+2/9/2015 1:55:50 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG22.txt
+2/9/2015 1:55:50 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:50 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF008_CIQ.xlsx
+2/9/2015 1:55:53 PM	Starting with Common elements
+2/9/2015 1:55:53 PM	Now working on ARG21 specifics
+2/9/2015 1:55:53 PM	Now working on ARG22 specifics
+2/9/2015 1:55:53 PM	Now working on PCF specifics
+2/9/2015 1:55:53 PM	Now adding a line to the CSV
+2/9/2015 1:55:53 PM	Now generating configuration for ARG21
+2/9/2015 1:55:53 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG21.txt
+2/9/2015 1:55:53 PM	Now generating configuration for ARG22
+2/9/2015 1:55:53 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG22.txt
+2/9/2015 1:55:53 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:53 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF009_CIQ.xlsx
+2/9/2015 1:55:56 PM	Starting with Common elements
+2/9/2015 1:55:56 PM	Now working on ARG21 specifics
+2/9/2015 1:55:56 PM	Now working on ARG22 specifics
+2/9/2015 1:55:56 PM	Now working on PCF specifics
+2/9/2015 1:55:56 PM	Now adding a line to the CSV
+2/9/2015 1:55:56 PM	Now generating configuration for ARG21
+2/9/2015 1:55:56 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG21.txt
+2/9/2015 1:55:56 PM	Now generating configuration for ARG22
+2/9/2015 1:55:56 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG22.txt
+2/9/2015 1:55:56 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:56 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF003_CIQ.xlsx
+2/9/2015 1:55:59 PM	Starting with Common elements
+2/9/2015 1:55:59 PM	Now working on ARG21 specifics
+2/9/2015 1:55:59 PM	Now working on ARG22 specifics
+2/9/2015 1:55:59 PM	Now working on PCF specifics
+2/9/2015 1:55:59 PM	Now adding a line to the CSV
+2/9/2015 1:55:59 PM	Now generating configuration for ARG21
+2/9/2015 1:55:59 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG21.txt
+2/9/2015 1:55:59 PM	Now generating configuration for ARG22
+2/9/2015 1:55:59 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG22.txt
+2/9/2015 1:55:59 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:55:59 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF004_CIQ.xlsx
+2/9/2015 1:56:02 PM	Starting with Common elements
+2/9/2015 1:56:02 PM	Now working on ARG21 specifics
+2/9/2015 1:56:02 PM	Now working on ARG22 specifics
+2/9/2015 1:56:02 PM	Now working on PCF specifics
+2/9/2015 1:56:02 PM	Now adding a line to the CSV
+2/9/2015 1:56:02 PM	Now generating configuration for ARG21
+2/9/2015 1:56:02 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG21.txt
+2/9/2015 1:56:02 PM	Now generating configuration for ARG22
+2/9/2015 1:56:02 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG22.txt
+2/9/2015 1:56:02 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:56:02 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\PHPCF004_CIQ.xlsx
+2/9/2015 1:56:05 PM	Starting with Common elements
+2/9/2015 1:56:06 PM	Now working on ARG21 specifics
+2/9/2015 1:56:06 PM	Now working on ARG22 specifics
+2/9/2015 1:56:06 PM	Now working on PCF specifics
+2/9/2015 1:56:06 PM	Now adding a line to the CSV
+2/9/2015 1:56:06 PM	Now generating configuration for ARG21
+2/9/2015 1:56:06 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG21.txt
+2/9/2015 1:56:06 PM	Now generating configuration for ARG22
+2/9/2015 1:56:06 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG22.txt
+2/9/2015 1:56:06 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:56:06 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF006_CIQ.xlsx
+2/9/2015 1:56:09 PM	Starting with Common elements
+2/9/2015 1:56:09 PM	Now working on ARG21 specifics
+2/9/2015 1:56:09 PM	Now working on ARG22 specifics
+2/9/2015 1:56:09 PM	Now working on PCF specifics
+2/9/2015 1:56:09 PM	Now adding a line to the CSV
+2/9/2015 1:56:09 PM	Now generating configuration for ARG21
+2/9/2015 1:56:09 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG21.txt
+2/9/2015 1:56:09 PM	Now generating configuration for ARG22
+2/9/2015 1:56:09 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG22.txt
+2/9/2015 1:56:09 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:56:09 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF007_CIQ.xlsx
+2/9/2015 1:56:12 PM	Starting with Common elements
+2/9/2015 1:56:12 PM	Now working on ARG21 specifics
+2/9/2015 1:56:12 PM	Now working on ARG22 specifics
+2/9/2015 1:56:12 PM	Now working on PCF specifics
+2/9/2015 1:56:12 PM	Now adding a line to the CSV
+2/9/2015 1:56:12 PM	Now generating configuration for ARG21
+2/9/2015 1:56:12 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG21.txt
+2/9/2015 1:56:12 PM	Now generating configuration for ARG22
+2/9/2015 1:56:12 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG22.txt
+2/9/2015 1:56:12 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:56:12 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF002_CIQ.xlsx
+2/9/2015 1:56:15 PM	Starting with Common elements
+2/9/2015 1:56:15 PM	Now working on ARG21 specifics
+2/9/2015 1:56:15 PM	Now working on ARG22 specifics
+2/9/2015 1:56:15 PM	Now working on PCF specifics
+2/9/2015 1:56:15 PM	Now adding a line to the CSV
+2/9/2015 1:56:15 PM	Now generating configuration for ARG21
+2/9/2015 1:56:15 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG21.txt
+2/9/2015 1:56:15 PM	Now generating configuration for ARG22
+2/9/2015 1:56:15 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG22.txt
+2/9/2015 1:56:15 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:56:15 PM	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF003_CIQ.xlsx
+2/9/2015 1:56:18 PM	Starting with Common elements
+2/9/2015 1:56:18 PM	Now working on ARG21 specifics
+2/9/2015 1:56:18 PM	Now working on ARG22 specifics
+2/9/2015 1:56:18 PM	Now working on PCF specifics
+2/9/2015 1:56:18 PM	Now adding a line to the CSV
+2/9/2015 1:56:18 PM	Now generating configuration for ARG21
+2/9/2015 1:56:18 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG21.txt
+2/9/2015 1:56:18 PM	Now generating configuration for ARG22
+2/9/2015 1:56:18 PM	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG22.txt
+2/9/2015 1:56:18 PM	Closing this CIQ and moving on to the next one
+2/9/2015 1:56:18 PM	Done. CSV saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500Vars.csv
+2/9/2015 1:56:18 PM	Configuration files saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 20:39:27	Main directory C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\
+2/26/2015 20:39:27	Reading CIQ's from C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\
+2/26/2015 20:39:27	Using template file C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500ConfDollar.txt
+2/26/2015 20:39:27	Saving Configurations to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 20:39:27	Saving the allvar CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 20:39:27	Saving the ACLVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S1ASR55KACL.csv
+2/26/2015 20:39:27	Saving the BVIVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S2ASR55KBVI.csv
+2/26/2015 20:39:27	Saving the BEDVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S3ASR55KBED.csv
+2/26/2015 20:39:27	Saving the BEXVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S4ASR55KBEX.csv
+2/26/2015 20:39:27	Saving the IntVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S5ASR55KInt.csv
+2/26/2015 20:39:27	Saving the VPNVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S6ASR55KVPN.csv
+2/26/2015 20:39:27	Saving the BGPVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S7ASR55KBGP.csv
+2/26/2015 20:39:27	Validating input
+2/26/2015 20:39:27	Starting Excel
+2/26/2015 20:39:27	Initializing Dictionaries
+2/26/2015 20:39:27	Creating CSV files
+2/26/2015 20:39:27	AllVar CSV Created
+2/26/2015 20:39:27	ACLVar CSV Created
+2/26/2015 20:39:27	BVIVar Created
+2/26/2015 20:39:27	BEDVar CSV Created
+2/26/2015 20:39:27	BEXVar CSV Created
+2/26/2015 20:39:27	IntVar CSV Created
+2/26/2015 20:39:27	VPNVar CSV Created
+2/26/2015 20:39:27	BGPVar CSV Created
+2/26/2015 20:39:27	writing headers to CSV files
+2/26/2015 20:39:27	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF004_CIQ.xlsx
+2/26/2015 20:39:29	Starting with Common elements
+2/26/2015 20:39:29	Now working on ARG21 specifics
+2/26/2015 20:39:29	Now working on ARG22 specifics
+2/26/2015 20:39:29	Now working on PCF specifics
+2/26/2015 20:39:29	Now adding a line to the AllVar CSV
+2/26/2015 20:39:29	Now generating configuration for ARG21
+2/26/2015 20:39:29	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG21.txt
+2/26/2015 20:39:29	Now adding a line to the various section CSV files
+2/26/2015 20:39:29	Now generating configuration for ARG22
+2/26/2015 20:39:29	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG22.txt
+2/26/2015 20:39:29	Now adding a line to the various section CSV files
+2/26/2015 20:39:29	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:29	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF005_CIQ.xlsx
+2/26/2015 20:39:32	Starting with Common elements
+2/26/2015 20:39:32	Now working on ARG21 specifics
+2/26/2015 20:39:32	Now working on ARG22 specifics
+2/26/2015 20:39:32	Now working on PCF specifics
+2/26/2015 20:39:32	Now adding a line to the AllVar CSV
+2/26/2015 20:39:32	Now generating configuration for ARG21
+2/26/2015 20:39:32	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG21.txt
+2/26/2015 20:39:32	Now adding a line to the various section CSV files
+2/26/2015 20:39:32	Now generating configuration for ARG22
+2/26/2015 20:39:32	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG22.txt
+2/26/2015 20:39:32	Now adding a line to the various section CSV files
+2/26/2015 20:39:32	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:32	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF003_CIQ.xlsx
+2/26/2015 20:39:34	Starting with Common elements
+2/26/2015 20:39:34	Now working on ARG21 specifics
+2/26/2015 20:39:34	Now working on ARG22 specifics
+2/26/2015 20:39:34	Now working on PCF specifics
+2/26/2015 20:39:34	Now adding a line to the AllVar CSV
+2/26/2015 20:39:34	Now generating configuration for ARG21
+2/26/2015 20:39:34	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG21.txt
+2/26/2015 20:39:34	Now adding a line to the various section CSV files
+2/26/2015 20:39:34	Now generating configuration for ARG22
+2/26/2015 20:39:34	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG22.txt
+2/26/2015 20:39:34	Now adding a line to the various section CSV files
+2/26/2015 20:39:34	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:34	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF003_CIQ_v6.xlsx
+2/26/2015 20:39:36	Starting with Common elements
+2/26/2015 20:39:36	Now working on ARG21 specifics
+2/26/2015 20:39:36	Now working on ARG22 specifics
+2/26/2015 20:39:36	Now working on PCF specifics
+2/26/2015 20:39:36	Now adding a line to the AllVar CSV
+2/26/2015 20:39:36	Now generating configuration for ARG21
+2/26/2015 20:39:36	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG21.txt
+2/26/2015 20:39:36	Now adding a line to the various section CSV files
+2/26/2015 20:39:36	Now generating configuration for ARG22
+2/26/2015 20:39:36	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG22.txt
+2/26/2015 20:39:36	Now adding a line to the various section CSV files
+2/26/2015 20:39:36	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:36	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF004_CIQ.xlsx
+2/26/2015 20:39:39	Starting with Common elements
+2/26/2015 20:39:39	Now working on ARG21 specifics
+2/26/2015 20:39:39	Now working on ARG22 specifics
+2/26/2015 20:39:39	Now working on PCF specifics
+2/26/2015 20:39:39	Now adding a line to the AllVar CSV
+2/26/2015 20:39:39	Now generating configuration for ARG21
+2/26/2015 20:39:39	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG21.txt
+2/26/2015 20:39:39	Now adding a line to the various section CSV files
+2/26/2015 20:39:39	Now generating configuration for ARG22
+2/26/2015 20:39:39	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG22.txt
+2/26/2015 20:39:39	Now adding a line to the various section CSV files
+2/26/2015 20:39:39	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:39	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF004_CIQ_v6.xlsx
+2/26/2015 20:39:42	Starting with Common elements
+2/26/2015 20:39:42	Now working on ARG21 specifics
+2/26/2015 20:39:42	Now working on ARG22 specifics
+2/26/2015 20:39:42	Now working on PCF specifics
+2/26/2015 20:39:42	Now adding a line to the AllVar CSV
+2/26/2015 20:39:42	Now generating configuration for ARG21
+2/26/2015 20:39:42	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG21.txt
+2/26/2015 20:39:42	Now adding a line to the various section CSV files
+2/26/2015 20:39:42	Now generating configuration for ARG22
+2/26/2015 20:39:42	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG22.txt
+2/26/2015 20:39:42	Now adding a line to the various section CSV files
+2/26/2015 20:39:42	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:42	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF004_CIQ.xlsx
+2/26/2015 20:39:44	Starting with Common elements
+2/26/2015 20:39:44	Now working on ARG21 specifics
+2/26/2015 20:39:44	Now working on ARG22 specifics
+2/26/2015 20:39:44	Now working on PCF specifics
+2/26/2015 20:39:44	Now adding a line to the AllVar CSV
+2/26/2015 20:39:44	Now generating configuration for ARG21
+2/26/2015 20:39:44	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG21.txt
+2/26/2015 20:39:44	Now adding a line to the various section CSV files
+2/26/2015 20:39:44	Now generating configuration for ARG22
+2/26/2015 20:39:44	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG22.txt
+2/26/2015 20:39:44	Now adding a line to the various section CSV files
+2/26/2015 20:39:44	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:44	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF004_CIQ_v6.xlsx
+2/26/2015 20:39:46	Starting with Common elements
+2/26/2015 20:39:46	Now working on ARG21 specifics
+2/26/2015 20:39:46	Now working on ARG22 specifics
+2/26/2015 20:39:46	Now working on PCF specifics
+2/26/2015 20:39:46	Now adding a line to the AllVar CSV
+2/26/2015 20:39:46	Now generating configuration for ARG21
+2/26/2015 20:39:46	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG21.txt
+2/26/2015 20:39:46	Now adding a line to the various section CSV files
+2/26/2015 20:39:46	Now generating configuration for ARG22
+2/26/2015 20:39:46	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG22.txt
+2/26/2015 20:39:46	Now adding a line to the various section CSV files
+2/26/2015 20:39:46	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:46	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF005_CIQ.xlsx
+2/26/2015 20:39:49	Starting with Common elements
+2/26/2015 20:39:49	Now working on ARG21 specifics
+2/26/2015 20:39:49	Now working on ARG22 specifics
+2/26/2015 20:39:49	Now working on PCF specifics
+2/26/2015 20:39:49	Now adding a line to the AllVar CSV
+2/26/2015 20:39:49	Now generating configuration for ARG21
+2/26/2015 20:39:49	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG21.txt
+2/26/2015 20:39:49	Now adding a line to the various section CSV files
+2/26/2015 20:39:49	Now generating configuration for ARG22
+2/26/2015 20:39:49	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG22.txt
+2/26/2015 20:39:49	Now adding a line to the various section CSV files
+2/26/2015 20:39:49	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:49	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF005_CIQ_v6.xlsx
+2/26/2015 20:39:51	Starting with Common elements
+2/26/2015 20:39:52	Now working on ARG21 specifics
+2/26/2015 20:39:52	Now working on ARG22 specifics
+2/26/2015 20:39:52	Now working on PCF specifics
+2/26/2015 20:39:52	Now adding a line to the AllVar CSV
+2/26/2015 20:39:52	Now generating configuration for ARG21
+2/26/2015 20:39:52	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG21.txt
+2/26/2015 20:39:52	Now adding a line to the various section CSV files
+2/26/2015 20:39:52	Now generating configuration for ARG22
+2/26/2015 20:39:52	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG22.txt
+2/26/2015 20:39:52	Now adding a line to the various section CSV files
+2/26/2015 20:39:52	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:52	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DCPCF002_CIQ.xlsx
+2/26/2015 20:39:54	Starting with Common elements
+2/26/2015 20:39:54	Now working on ARG21 specifics
+2/26/2015 20:39:55	Now working on ARG22 specifics
+2/26/2015 20:39:55	Now working on PCF specifics
+2/26/2015 20:39:55	Now adding a line to the AllVar CSV
+2/26/2015 20:39:55	Now generating configuration for ARG21
+2/26/2015 20:39:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG21.txt
+2/26/2015 20:39:55	Now adding a line to the various section CSV files
+2/26/2015 20:39:55	Now generating configuration for ARG22
+2/26/2015 20:39:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG22.txt
+2/26/2015 20:39:55	Now adding a line to the various section CSV files
+2/26/2015 20:39:55	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:55	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DCPCF002_CIQ_V2.xlsx
+2/26/2015 20:39:57	Starting with Common elements
+2/26/2015 20:39:58	Now working on ARG21 specifics
+2/26/2015 20:39:58	Now working on ARG22 specifics
+2/26/2015 20:39:58	Now working on PCF specifics
+2/26/2015 20:39:58	Now adding a line to the AllVar CSV
+2/26/2015 20:39:58	Now generating configuration for ARG21
+2/26/2015 20:39:58	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG21.txt
+2/26/2015 20:39:58	Now adding a line to the various section CSV files
+2/26/2015 20:39:58	Now generating configuration for ARG22
+2/26/2015 20:39:58	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG22.txt
+2/26/2015 20:39:58	Now adding a line to the various section CSV files
+2/26/2015 20:39:58	Closing this CIQ and moving on to the next one
+2/26/2015 20:39:58	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DEPCF003_CIQ.xlsx
+2/26/2015 20:40:00	Starting with Common elements
+2/26/2015 20:40:00	Now working on ARG21 specifics
+2/26/2015 20:40:00	Now working on ARG22 specifics
+2/26/2015 20:40:00	Now working on PCF specifics
+2/26/2015 20:40:00	Now adding a line to the AllVar CSV
+2/26/2015 20:40:00	Now generating configuration for ARG21
+2/26/2015 20:40:00	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG21.txt
+2/26/2015 20:40:00	Now adding a line to the various section CSV files
+2/26/2015 20:40:00	Now generating configuration for ARG22
+2/26/2015 20:40:00	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG22.txt
+2/26/2015 20:40:00	Now adding a line to the various section CSV files
+2/26/2015 20:40:00	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:00	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DEPCF003_CIQ_V2.xlsx
+2/26/2015 20:40:03	Starting with Common elements
+2/26/2015 20:40:03	Now working on ARG21 specifics
+2/26/2015 20:40:03	Now working on ARG22 specifics
+2/26/2015 20:40:03	Now working on PCF specifics
+2/26/2015 20:40:03	Now adding a line to the AllVar CSV
+2/26/2015 20:40:03	Now generating configuration for ARG21
+2/26/2015 20:40:03	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG21.txt
+2/26/2015 20:40:03	Now adding a line to the various section CSV files
+2/26/2015 20:40:03	Now generating configuration for ARG22
+2/26/2015 20:40:03	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG22.txt
+2/26/2015 20:40:03	Now adding a line to the various section CSV files
+2/26/2015 20:40:03	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:03	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\HNPCF003_CIQ.xlsx
+2/26/2015 20:40:06	Starting with Common elements
+2/26/2015 20:40:06	Now working on ARG21 specifics
+2/26/2015 20:40:06	Now working on ARG22 specifics
+2/26/2015 20:40:06	Now working on PCF specifics
+2/26/2015 20:40:06	Now adding a line to the AllVar CSV
+2/26/2015 20:40:06	Now generating configuration for ARG21
+2/26/2015 20:40:06	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG21.txt
+2/26/2015 20:40:06	Now adding a line to the various section CSV files
+2/26/2015 20:40:06	Now generating configuration for ARG22
+2/26/2015 20:40:06	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG22.txt
+2/26/2015 20:40:06	Now adding a line to the various section CSV files
+2/26/2015 20:40:06	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:06	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF006_CIQ.xlsx
+2/26/2015 20:40:09	Starting with Common elements
+2/26/2015 20:40:09	Now working on ARG21 specifics
+2/26/2015 20:40:09	Now working on ARG22 specifics
+2/26/2015 20:40:09	Now working on PCF specifics
+2/26/2015 20:40:09	Now adding a line to the AllVar CSV
+2/26/2015 20:40:09	Now generating configuration for ARG21
+2/26/2015 20:40:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG21.txt
+2/26/2015 20:40:09	Now adding a line to the various section CSV files
+2/26/2015 20:40:09	Now generating configuration for ARG22
+2/26/2015 20:40:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG22.txt
+2/26/2015 20:40:09	Now adding a line to the various section CSV files
+2/26/2015 20:40:09	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:09	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF007_CIQ.xlsx
+2/26/2015 20:40:12	Starting with Common elements
+2/26/2015 20:40:12	Now working on ARG21 specifics
+2/26/2015 20:40:12	Now working on ARG22 specifics
+2/26/2015 20:40:12	Now working on PCF specifics
+2/26/2015 20:40:12	Now adding a line to the AllVar CSV
+2/26/2015 20:40:12	Now generating configuration for ARG21
+2/26/2015 20:40:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG21.txt
+2/26/2015 20:40:12	Now adding a line to the various section CSV files
+2/26/2015 20:40:12	Now generating configuration for ARG22
+2/26/2015 20:40:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG22.txt
+2/26/2015 20:40:12	Now adding a line to the various section CSV files
+2/26/2015 20:40:12	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:12	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF008_CIQ.xlsx
+2/26/2015 20:40:14	Starting with Common elements
+2/26/2015 20:40:14	Now working on ARG21 specifics
+2/26/2015 20:40:14	Now working on ARG22 specifics
+2/26/2015 20:40:14	Now working on PCF specifics
+2/26/2015 20:40:14	Now adding a line to the AllVar CSV
+2/26/2015 20:40:14	Now generating configuration for ARG21
+2/26/2015 20:40:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG21.txt
+2/26/2015 20:40:14	Now adding a line to the various section CSV files
+2/26/2015 20:40:14	Now generating configuration for ARG22
+2/26/2015 20:40:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG22.txt
+2/26/2015 20:40:14	Now adding a line to the various section CSV files
+2/26/2015 20:40:14	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:14	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF008_CIQ_v2.xlsx
+2/26/2015 20:40:16	Starting with Common elements
+2/26/2015 20:40:16	Now working on ARG21 specifics
+2/26/2015 20:40:16	Now working on ARG22 specifics
+2/26/2015 20:40:16	Now working on PCF specifics
+2/26/2015 20:40:16	Now adding a line to the AllVar CSV
+2/26/2015 20:40:16	Now generating configuration for ARG21
+2/26/2015 20:40:16	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG21.txt
+2/26/2015 20:40:16	Now adding a line to the various section CSV files
+2/26/2015 20:40:16	Now generating configuration for ARG22
+2/26/2015 20:40:16	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG22.txt
+2/26/2015 20:40:16	Now adding a line to the various section CSV files
+2/26/2015 20:40:16	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:16	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF009_CIQ.xlsx
+2/26/2015 20:40:19	Starting with Common elements
+2/26/2015 20:40:19	Now working on ARG21 specifics
+2/26/2015 20:40:19	Now working on ARG22 specifics
+2/26/2015 20:40:19	Now working on PCF specifics
+2/26/2015 20:40:19	Now adding a line to the AllVar CSV
+2/26/2015 20:40:19	Now generating configuration for ARG21
+2/26/2015 20:40:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG21.txt
+2/26/2015 20:40:19	Now adding a line to the various section CSV files
+2/26/2015 20:40:19	Now generating configuration for ARG22
+2/26/2015 20:40:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG22.txt
+2/26/2015 20:40:19	Now adding a line to the various section CSV files
+2/26/2015 20:40:19	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:19	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF009_CIQ_v2.xlsx
+2/26/2015 20:40:21	Starting with Common elements
+2/26/2015 20:40:21	Now working on ARG21 specifics
+2/26/2015 20:40:21	Now working on ARG22 specifics
+2/26/2015 20:40:21	Now working on PCF specifics
+2/26/2015 20:40:21	Now adding a line to the AllVar CSV
+2/26/2015 20:40:21	Now generating configuration for ARG21
+2/26/2015 20:40:21	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG21.txt
+2/26/2015 20:40:21	Now adding a line to the various section CSV files
+2/26/2015 20:40:21	Now generating configuration for ARG22
+2/26/2015 20:40:21	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG22.txt
+2/26/2015 20:40:21	Now adding a line to the various section CSV files
+2/26/2015 20:40:21	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:21	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NEPCF002_CIQ.xlsx
+2/26/2015 20:40:24	Starting with Common elements
+2/26/2015 20:40:24	Now working on ARG21 specifics
+2/26/2015 20:40:24	Now working on ARG22 specifics
+2/26/2015 20:40:24	Now working on PCF specifics
+2/26/2015 20:40:24	Now adding a line to the AllVar CSV
+2/26/2015 20:40:24	Now generating configuration for ARG21
+2/26/2015 20:40:24	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG21.txt
+2/26/2015 20:40:24	Now adding a line to the various section CSV files
+2/26/2015 20:40:24	Now generating configuration for ARG22
+2/26/2015 20:40:24	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG22.txt
+2/26/2015 20:40:24	Now adding a line to the various section CSV files
+2/26/2015 20:40:24	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:24	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NEPCF002_CIQ_V2.xlsx
+2/26/2015 20:40:27	Starting with Common elements
+2/26/2015 20:40:27	Now working on ARG21 specifics
+2/26/2015 20:40:27	Now working on ARG22 specifics
+2/26/2015 20:40:27	Now working on PCF specifics
+2/26/2015 20:40:27	Now adding a line to the AllVar CSV
+2/26/2015 20:40:27	Now generating configuration for ARG21
+2/26/2015 20:40:27	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG21.txt
+2/26/2015 20:40:27	Now adding a line to the various section CSV files
+2/26/2015 20:40:27	Now generating configuration for ARG22
+2/26/2015 20:40:27	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG22.txt
+2/26/2015 20:40:27	Now adding a line to the various section CSV files
+2/26/2015 20:40:27	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:27	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NVPCF003_CIQ.xlsx
+2/26/2015 20:40:29	Starting with Common elements
+2/26/2015 20:40:29	Now working on ARG21 specifics
+2/26/2015 20:40:29	Now working on ARG22 specifics
+2/26/2015 20:40:29	Now working on PCF specifics
+2/26/2015 20:40:29	Now adding a line to the AllVar CSV
+2/26/2015 20:40:29	Now generating configuration for ARG21
+2/26/2015 20:40:29	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG21.txt
+2/26/2015 20:40:29	Now adding a line to the various section CSV files
+2/26/2015 20:40:29	Now generating configuration for ARG22
+2/26/2015 20:40:29	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG22.txt
+2/26/2015 20:40:29	Now adding a line to the various section CSV files
+2/26/2015 20:40:29	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:29	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NVPCF003_CIQ_v2.xlsx
+2/26/2015 20:40:31	Starting with Common elements
+2/26/2015 20:40:31	Now working on ARG21 specifics
+2/26/2015 20:40:31	Now working on ARG22 specifics
+2/26/2015 20:40:31	Now working on PCF specifics
+2/26/2015 20:40:31	Now adding a line to the AllVar CSV
+2/26/2015 20:40:31	Now generating configuration for ARG21
+2/26/2015 20:40:31	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG21.txt
+2/26/2015 20:40:31	Now adding a line to the various section CSV files
+2/26/2015 20:40:31	Now generating configuration for ARG22
+2/26/2015 20:40:31	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG22.txt
+2/26/2015 20:40:31	Now adding a line to the various section CSV files
+2/26/2015 20:40:31	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:31	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF007_CIQ.xlsx
+2/26/2015 20:40:34	Starting with Common elements
+2/26/2015 20:40:34	Now working on ARG21 specifics
+2/26/2015 20:40:34	Now working on ARG22 specifics
+2/26/2015 20:40:34	Now working on PCF specifics
+2/26/2015 20:40:34	Now adding a line to the AllVar CSV
+2/26/2015 20:40:34	Now generating configuration for ARG21
+2/26/2015 20:40:34	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG21.txt
+2/26/2015 20:40:34	Now adding a line to the various section CSV files
+2/26/2015 20:40:34	Now generating configuration for ARG22
+2/26/2015 20:40:34	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG22.txt
+2/26/2015 20:40:34	Now adding a line to the various section CSV files
+2/26/2015 20:40:34	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:34	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF007_CIQ_V2.xlsx
+2/26/2015 20:40:37	Starting with Common elements
+2/26/2015 20:40:37	Now working on ARG21 specifics
+2/26/2015 20:40:37	Now working on ARG22 specifics
+2/26/2015 20:40:37	Now working on PCF specifics
+2/26/2015 20:40:37	Now adding a line to the AllVar CSV
+2/26/2015 20:40:37	Now generating configuration for ARG21
+2/26/2015 20:40:37	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG21.txt
+2/26/2015 20:40:37	Now adding a line to the various section CSV files
+2/26/2015 20:40:37	Now generating configuration for ARG22
+2/26/2015 20:40:37	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG22.txt
+2/26/2015 20:40:37	Now adding a line to the various section CSV files
+2/26/2015 20:40:37	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:37	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF008_CIQ.xlsx
+2/26/2015 20:40:40	Starting with Common elements
+2/26/2015 20:40:40	Now working on ARG21 specifics
+2/26/2015 20:40:40	Now working on ARG22 specifics
+2/26/2015 20:40:40	Now working on PCF specifics
+2/26/2015 20:40:40	Now adding a line to the AllVar CSV
+2/26/2015 20:40:40	Now generating configuration for ARG21
+2/26/2015 20:40:40	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG21.txt
+2/26/2015 20:40:40	Now adding a line to the various section CSV files
+2/26/2015 20:40:40	Now generating configuration for ARG22
+2/26/2015 20:40:40	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG22.txt
+2/26/2015 20:40:40	Now adding a line to the various section CSV files
+2/26/2015 20:40:40	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:40	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF008_CIQ_V2.xlsx
+2/26/2015 20:40:43	Starting with Common elements
+2/26/2015 20:40:43	Now working on ARG21 specifics
+2/26/2015 20:40:43	Now working on ARG22 specifics
+2/26/2015 20:40:43	Now working on PCF specifics
+2/26/2015 20:40:43	Now adding a line to the AllVar CSV
+2/26/2015 20:40:43	Now generating configuration for ARG21
+2/26/2015 20:40:43	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG21.txt
+2/26/2015 20:40:43	Now adding a line to the various section CSV files
+2/26/2015 20:40:43	Now generating configuration for ARG22
+2/26/2015 20:40:43	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG22.txt
+2/26/2015 20:40:43	Now adding a line to the various section CSV files
+2/26/2015 20:40:43	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:43	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF009_CIQ.xlsx
+2/26/2015 20:40:46	Starting with Common elements
+2/26/2015 20:40:47	Now working on ARG21 specifics
+2/26/2015 20:40:47	Now working on ARG22 specifics
+2/26/2015 20:40:47	Now working on PCF specifics
+2/26/2015 20:40:47	Now adding a line to the AllVar CSV
+2/26/2015 20:40:47	Now generating configuration for ARG21
+2/26/2015 20:40:47	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG21.txt
+2/26/2015 20:40:47	Now adding a line to the various section CSV files
+2/26/2015 20:40:47	Now generating configuration for ARG22
+2/26/2015 20:40:47	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG22.txt
+2/26/2015 20:40:47	Now adding a line to the various section CSV files
+2/26/2015 20:40:47	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:47	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF009_CIQ_V2.xlsx
+2/26/2015 20:40:50	Starting with Common elements
+2/26/2015 20:40:50	Now working on ARG21 specifics
+2/26/2015 20:40:50	Now working on ARG22 specifics
+2/26/2015 20:40:50	Now working on PCF specifics
+2/26/2015 20:40:50	Now adding a line to the AllVar CSV
+2/26/2015 20:40:50	Now generating configuration for ARG21
+2/26/2015 20:40:50	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG21.txt
+2/26/2015 20:40:50	Now adding a line to the various section CSV files
+2/26/2015 20:40:50	Now generating configuration for ARG22
+2/26/2015 20:40:50	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG22.txt
+2/26/2015 20:40:50	Now adding a line to the various section CSV files
+2/26/2015 20:40:50	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:50	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF003_CIQ.xlsx
+2/26/2015 20:40:53	Starting with Common elements
+2/26/2015 20:40:53	Now working on ARG21 specifics
+2/26/2015 20:40:53	Now working on ARG22 specifics
+2/26/2015 20:40:53	Now working on PCF specifics
+2/26/2015 20:40:53	Now adding a line to the AllVar CSV
+2/26/2015 20:40:53	Now generating configuration for ARG21
+2/26/2015 20:40:53	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG21.txt
+2/26/2015 20:40:53	Now adding a line to the various section CSV files
+2/26/2015 20:40:53	Now generating configuration for ARG22
+2/26/2015 20:40:53	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG22.txt
+2/26/2015 20:40:53	Now adding a line to the various section CSV files
+2/26/2015 20:40:53	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:53	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF003_CIQ_v6.xlsx
+2/26/2015 20:40:57	Starting with Common elements
+2/26/2015 20:40:57	Now working on ARG21 specifics
+2/26/2015 20:40:57	Now working on ARG22 specifics
+2/26/2015 20:40:57	Now working on PCF specifics
+2/26/2015 20:40:57	Now adding a line to the AllVar CSV
+2/26/2015 20:40:57	Now generating configuration for ARG21
+2/26/2015 20:40:57	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG21.txt
+2/26/2015 20:40:57	Now adding a line to the various section CSV files
+2/26/2015 20:40:57	Now generating configuration for ARG22
+2/26/2015 20:40:57	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG22.txt
+2/26/2015 20:40:57	Now adding a line to the various section CSV files
+2/26/2015 20:40:57	Closing this CIQ and moving on to the next one
+2/26/2015 20:40:57	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF004_CIQ.xlsx
+2/26/2015 20:41:00	Starting with Common elements
+2/26/2015 20:41:00	Now working on ARG21 specifics
+2/26/2015 20:41:00	Now working on ARG22 specifics
+2/26/2015 20:41:00	Now working on PCF specifics
+2/26/2015 20:41:00	Now adding a line to the AllVar CSV
+2/26/2015 20:41:00	Now generating configuration for ARG21
+2/26/2015 20:41:00	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG21.txt
+2/26/2015 20:41:00	Now adding a line to the various section CSV files
+2/26/2015 20:41:00	Now generating configuration for ARG22
+2/26/2015 20:41:00	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG22.txt
+2/26/2015 20:41:00	Now adding a line to the various section CSV files
+2/26/2015 20:41:00	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:00	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\PHPCF004_CIQ.xlsx
+2/26/2015 20:41:04	Starting with Common elements
+2/26/2015 20:41:04	Now working on ARG21 specifics
+2/26/2015 20:41:04	Now working on ARG22 specifics
+2/26/2015 20:41:04	Now working on PCF specifics
+2/26/2015 20:41:04	Now adding a line to the AllVar CSV
+2/26/2015 20:41:04	Now generating configuration for ARG21
+2/26/2015 20:41:04	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG21.txt
+2/26/2015 20:41:04	Now adding a line to the various section CSV files
+2/26/2015 20:41:04	Now generating configuration for ARG22
+2/26/2015 20:41:04	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG22.txt
+2/26/2015 20:41:04	Now adding a line to the various section CSV files
+2/26/2015 20:41:04	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:04	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\PHPCF004_CIQ_v3.xlsx
+2/26/2015 20:41:06	Starting with Common elements
+2/26/2015 20:41:06	Now working on ARG21 specifics
+2/26/2015 20:41:06	Now working on ARG22 specifics
+2/26/2015 20:41:06	Now working on PCF specifics
+2/26/2015 20:41:06	Now adding a line to the AllVar CSV
+2/26/2015 20:41:06	Now generating configuration for ARG21
+2/26/2015 20:41:06	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG21.txt
+2/26/2015 20:41:06	Now adding a line to the various section CSV files
+2/26/2015 20:41:06	Now generating configuration for ARG22
+2/26/2015 20:41:06	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG22.txt
+2/26/2015 20:41:06	Now adding a line to the various section CSV files
+2/26/2015 20:41:06	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:06	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF006_CIQ.xlsx
+2/26/2015 20:41:09	Starting with Common elements
+2/26/2015 20:41:09	Now working on ARG21 specifics
+2/26/2015 20:41:09	Now working on ARG22 specifics
+2/26/2015 20:41:09	Now working on PCF specifics
+2/26/2015 20:41:09	Now adding a line to the AllVar CSV
+2/26/2015 20:41:09	Now generating configuration for ARG21
+2/26/2015 20:41:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG21.txt
+2/26/2015 20:41:09	Now adding a line to the various section CSV files
+2/26/2015 20:41:09	Now generating configuration for ARG22
+2/26/2015 20:41:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG22.txt
+2/26/2015 20:41:09	Now adding a line to the various section CSV files
+2/26/2015 20:41:09	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:09	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF002_CIQ.xlsx
+2/26/2015 20:41:13	Starting with Common elements
+2/26/2015 20:41:13	Now working on ARG21 specifics
+2/26/2015 20:41:13	Now working on ARG22 specifics
+2/26/2015 20:41:13	Now working on PCF specifics
+2/26/2015 20:41:13	Now adding a line to the AllVar CSV
+2/26/2015 20:41:13	Now generating configuration for ARG21
+2/26/2015 20:41:13	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG21.txt
+2/26/2015 20:41:13	Now adding a line to the various section CSV files
+2/26/2015 20:41:13	Now generating configuration for ARG22
+2/26/2015 20:41:13	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG22.txt
+2/26/2015 20:41:13	Now adding a line to the various section CSV files
+2/26/2015 20:41:13	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:13	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF003_CIQ.xlsx
+2/26/2015 20:41:16	Starting with Common elements
+2/26/2015 20:41:17	Now working on ARG21 specifics
+2/26/2015 20:41:17	Now working on ARG22 specifics
+2/26/2015 20:41:17	Now working on PCF specifics
+2/26/2015 20:41:17	Now adding a line to the AllVar CSV
+2/26/2015 20:41:17	Now generating configuration for ARG21
+2/26/2015 20:41:17	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG21.txt
+2/26/2015 20:41:17	Now adding a line to the various section CSV files
+2/26/2015 20:41:17	Now generating configuration for ARG22
+2/26/2015 20:41:17	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG22.txt
+2/26/2015 20:41:17	Now adding a line to the various section CSV files
+2/26/2015 20:41:17	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:17	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF003_CIQ_v2.xlsx
+2/26/2015 20:41:19	Starting with Common elements
+2/26/2015 20:41:19	Now working on ARG21 specifics
+2/26/2015 20:41:19	Now working on ARG22 specifics
+2/26/2015 20:41:19	Now working on PCF specifics
+2/26/2015 20:41:19	Now adding a line to the AllVar CSV
+2/26/2015 20:41:19	Now generating configuration for ARG21
+2/26/2015 20:41:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG21.txt
+2/26/2015 20:41:19	Now adding a line to the various section CSV files
+2/26/2015 20:41:19	Now generating configuration for ARG22
+2/26/2015 20:41:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG22.txt
+2/26/2015 20:41:19	Now adding a line to the various section CSV files
+2/26/2015 20:41:19	Closing this CIQ and moving on to the next one
+2/26/2015 20:41:19	Done. CSV saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 20:41:19	Configuration files saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:07:04	Main directory C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\
+2/26/2015 21:07:04	Reading CIQ's from C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\
+2/26/2015 21:07:04	Using template file C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500ConfDollar.txt
+2/26/2015 21:07:04	Saving Configurations to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:07:04	Saving the allvar CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:07:04	Saving the ACLVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S1ASR55KACL.csv
+2/26/2015 21:07:04	Saving the BVIVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S2ASR55KBVI.csv
+2/26/2015 21:07:04	Saving the BEDVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S3ASR55KBED.csv
+2/26/2015 21:07:04	Saving the BEXVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S4ASR55KBEX.csv
+2/26/2015 21:07:04	Saving the IntVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S5ASR55KInt.csv
+2/26/2015 21:07:04	Saving the VPNVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S6ASR55KVPN.csv
+2/26/2015 21:07:04	Saving the BGPVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S7ASR55KBGP.csv
+2/26/2015 21:07:04	Validating input
+2/26/2015 21:07:04	Starting Excel
+2/26/2015 21:07:05	Initializing Dictionaries
+2/26/2015 21:07:05	Creating CSV files
+2/26/2015 21:07:05	AllVar CSV Created
+2/26/2015 21:07:05	ACLVar CSV Created
+2/26/2015 21:07:05	BVIVar Created
+2/26/2015 21:07:05	BEDVar CSV Created
+2/26/2015 21:07:05	BEXVar CSV Created
+2/26/2015 21:07:05	IntVar CSV Created
+2/26/2015 21:07:05	VPNVar CSV Created
+2/26/2015 21:07:05	BGPVar CSV Created
+2/26/2015 21:07:05	writing headers to CSV files
+2/26/2015 21:07:05	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF004_CIQ.xlsx
+2/26/2015 21:07:07	Starting with Common elements
+2/26/2015 21:07:07	Now working on ARG21 specifics
+2/26/2015 21:07:07	Now working on ARG22 specifics
+2/26/2015 21:07:07	Now working on PCF specifics
+2/26/2015 21:07:07	Now adding a line to the AllVar CSV
+2/26/2015 21:07:07	Now generating configuration for ARG21
+2/26/2015 21:07:07	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG21.txt
+2/26/2015 21:07:07	Now adding a line to the various section CSV files
+2/26/2015 21:07:07	Now generating configuration for ARG22
+2/26/2015 21:07:07	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG22.txt
+2/26/2015 21:07:07	Now adding a line to the various section CSV files
+2/26/2015 21:07:07	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:07	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF005_CIQ.xlsx
+2/26/2015 21:07:09	Starting with Common elements
+2/26/2015 21:07:09	Now working on ARG21 specifics
+2/26/2015 21:07:09	Now working on ARG22 specifics
+2/26/2015 21:07:09	Now working on PCF specifics
+2/26/2015 21:07:09	Now adding a line to the AllVar CSV
+2/26/2015 21:07:09	Now generating configuration for ARG21
+2/26/2015 21:07:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG21.txt
+2/26/2015 21:07:09	Now adding a line to the various section CSV files
+2/26/2015 21:07:09	Now generating configuration for ARG22
+2/26/2015 21:07:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG22.txt
+2/26/2015 21:07:09	Now adding a line to the various section CSV files
+2/26/2015 21:07:09	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:09	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF003_CIQ.xlsx
+2/26/2015 21:07:12	Starting with Common elements
+2/26/2015 21:07:12	Now working on ARG21 specifics
+2/26/2015 21:07:12	Now working on ARG22 specifics
+2/26/2015 21:07:12	Now working on PCF specifics
+2/26/2015 21:07:12	Now adding a line to the AllVar CSV
+2/26/2015 21:07:12	Now generating configuration for ARG21
+2/26/2015 21:07:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG21.txt
+2/26/2015 21:07:12	Now adding a line to the various section CSV files
+2/26/2015 21:07:12	Now generating configuration for ARG22
+2/26/2015 21:07:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG22.txt
+2/26/2015 21:07:12	Now adding a line to the various section CSV files
+2/26/2015 21:07:12	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:12	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF004_CIQ.xlsx
+2/26/2015 21:07:14	Starting with Common elements
+2/26/2015 21:07:14	Now working on ARG21 specifics
+2/26/2015 21:07:14	Now working on ARG22 specifics
+2/26/2015 21:07:14	Now working on PCF specifics
+2/26/2015 21:07:14	Now adding a line to the AllVar CSV
+2/26/2015 21:07:14	Now generating configuration for ARG21
+2/26/2015 21:07:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG21.txt
+2/26/2015 21:07:14	Now adding a line to the various section CSV files
+2/26/2015 21:07:14	Now generating configuration for ARG22
+2/26/2015 21:07:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG22.txt
+2/26/2015 21:07:14	Now adding a line to the various section CSV files
+2/26/2015 21:07:14	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:14	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF004_CIQ.xlsx
+2/26/2015 21:07:16	Starting with Common elements
+2/26/2015 21:07:16	Now working on ARG21 specifics
+2/26/2015 21:07:16	Now working on ARG22 specifics
+2/26/2015 21:07:16	Now working on PCF specifics
+2/26/2015 21:07:16	Now adding a line to the AllVar CSV
+2/26/2015 21:07:16	Now generating configuration for ARG21
+2/26/2015 21:07:16	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG21.txt
+2/26/2015 21:07:16	Now adding a line to the various section CSV files
+2/26/2015 21:07:16	Now generating configuration for ARG22
+2/26/2015 21:07:16	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG22.txt
+2/26/2015 21:07:16	Now adding a line to the various section CSV files
+2/26/2015 21:07:16	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:16	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF005_CIQ.xlsx
+2/26/2015 21:07:19	Starting with Common elements
+2/26/2015 21:07:19	Now working on ARG21 specifics
+2/26/2015 21:07:19	Now working on ARG22 specifics
+2/26/2015 21:07:19	Now working on PCF specifics
+2/26/2015 21:07:19	Now adding a line to the AllVar CSV
+2/26/2015 21:07:19	Now generating configuration for ARG21
+2/26/2015 21:07:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG21.txt
+2/26/2015 21:07:19	Now adding a line to the various section CSV files
+2/26/2015 21:07:19	Now generating configuration for ARG22
+2/26/2015 21:07:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG22.txt
+2/26/2015 21:07:19	Now adding a line to the various section CSV files
+2/26/2015 21:07:19	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:19	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DCPCF002_CIQ.xlsx
+2/26/2015 21:07:22	Starting with Common elements
+2/26/2015 21:07:22	Now working on ARG21 specifics
+2/26/2015 21:07:22	Now working on ARG22 specifics
+2/26/2015 21:07:22	Now working on PCF specifics
+2/26/2015 21:07:22	Now adding a line to the AllVar CSV
+2/26/2015 21:07:22	Now generating configuration for ARG21
+2/26/2015 21:07:22	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG21.txt
+2/26/2015 21:07:22	Now adding a line to the various section CSV files
+2/26/2015 21:07:22	Now generating configuration for ARG22
+2/26/2015 21:07:22	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG22.txt
+2/26/2015 21:07:22	Now adding a line to the various section CSV files
+2/26/2015 21:07:22	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:22	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DEPCF003_CIQ.xlsx
+2/26/2015 21:07:25	Starting with Common elements
+2/26/2015 21:07:25	Now working on ARG21 specifics
+2/26/2015 21:07:25	Now working on ARG22 specifics
+2/26/2015 21:07:25	Now working on PCF specifics
+2/26/2015 21:07:25	Now adding a line to the AllVar CSV
+2/26/2015 21:07:25	Now generating configuration for ARG21
+2/26/2015 21:07:25	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG21.txt
+2/26/2015 21:07:25	Now adding a line to the various section CSV files
+2/26/2015 21:07:25	Now generating configuration for ARG22
+2/26/2015 21:07:25	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG22.txt
+2/26/2015 21:07:25	Now adding a line to the various section CSV files
+2/26/2015 21:07:25	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:25	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\HNPCF003_CIQ.xlsx
+2/26/2015 21:07:28	Starting with Common elements
+2/26/2015 21:07:28	Now working on ARG21 specifics
+2/26/2015 21:07:28	Now working on ARG22 specifics
+2/26/2015 21:07:28	Now working on PCF specifics
+2/26/2015 21:07:28	Now adding a line to the AllVar CSV
+2/26/2015 21:07:28	Now generating configuration for ARG21
+2/26/2015 21:07:28	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG21.txt
+2/26/2015 21:07:28	Now adding a line to the various section CSV files
+2/26/2015 21:07:28	Now generating configuration for ARG22
+2/26/2015 21:07:28	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG22.txt
+2/26/2015 21:07:28	Now adding a line to the various section CSV files
+2/26/2015 21:07:28	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:28	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF006_CIQ.xlsx
+2/26/2015 21:07:31	Starting with Common elements
+2/26/2015 21:07:31	Now working on ARG21 specifics
+2/26/2015 21:07:31	Now working on ARG22 specifics
+2/26/2015 21:07:31	Now working on PCF specifics
+2/26/2015 21:07:31	Now adding a line to the AllVar CSV
+2/26/2015 21:07:31	Now generating configuration for ARG21
+2/26/2015 21:07:31	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG21.txt
+2/26/2015 21:07:31	Now adding a line to the various section CSV files
+2/26/2015 21:07:31	Now generating configuration for ARG22
+2/26/2015 21:07:31	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG22.txt
+2/26/2015 21:07:31	Now adding a line to the various section CSV files
+2/26/2015 21:07:31	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:31	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF007_CIQ.xlsx
+2/26/2015 21:07:34	Starting with Common elements
+2/26/2015 21:07:34	Now working on ARG21 specifics
+2/26/2015 21:07:34	Now working on ARG22 specifics
+2/26/2015 21:07:34	Now working on PCF specifics
+2/26/2015 21:07:34	Now adding a line to the AllVar CSV
+2/26/2015 21:07:34	Now generating configuration for ARG21
+2/26/2015 21:07:34	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG21.txt
+2/26/2015 21:07:34	Now adding a line to the various section CSV files
+2/26/2015 21:07:34	Now generating configuration for ARG22
+2/26/2015 21:07:34	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG22.txt
+2/26/2015 21:07:34	Now adding a line to the various section CSV files
+2/26/2015 21:07:34	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:34	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF008_CIQ.xlsx
+2/26/2015 21:07:36	Starting with Common elements
+2/26/2015 21:07:36	Now working on ARG21 specifics
+2/26/2015 21:07:36	Now working on ARG22 specifics
+2/26/2015 21:07:36	Now working on PCF specifics
+2/26/2015 21:07:36	Now adding a line to the AllVar CSV
+2/26/2015 21:07:36	Now generating configuration for ARG21
+2/26/2015 21:07:36	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG21.txt
+2/26/2015 21:07:36	Now adding a line to the various section CSV files
+2/26/2015 21:07:36	Now generating configuration for ARG22
+2/26/2015 21:07:36	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG22.txt
+2/26/2015 21:07:36	Now adding a line to the various section CSV files
+2/26/2015 21:07:36	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:36	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF009_CIQ.xlsx
+2/26/2015 21:07:38	Starting with Common elements
+2/26/2015 21:07:38	Now working on ARG21 specifics
+2/26/2015 21:07:38	Now working on ARG22 specifics
+2/26/2015 21:07:38	Now working on PCF specifics
+2/26/2015 21:07:38	Now adding a line to the AllVar CSV
+2/26/2015 21:07:38	Now generating configuration for ARG21
+2/26/2015 21:07:38	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG21.txt
+2/26/2015 21:07:38	Now adding a line to the various section CSV files
+2/26/2015 21:07:38	Now generating configuration for ARG22
+2/26/2015 21:07:38	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG22.txt
+2/26/2015 21:07:38	Now adding a line to the various section CSV files
+2/26/2015 21:07:38	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:38	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NEPCF002_CIQ.xlsx
+2/26/2015 21:07:41	Starting with Common elements
+2/26/2015 21:07:41	Now working on ARG21 specifics
+2/26/2015 21:07:41	Now working on ARG22 specifics
+2/26/2015 21:07:41	Now working on PCF specifics
+2/26/2015 21:07:41	Now adding a line to the AllVar CSV
+2/26/2015 21:07:41	Now generating configuration for ARG21
+2/26/2015 21:07:41	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG21.txt
+2/26/2015 21:07:41	Now adding a line to the various section CSV files
+2/26/2015 21:07:41	Now generating configuration for ARG22
+2/26/2015 21:07:41	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG22.txt
+2/26/2015 21:07:41	Now adding a line to the various section CSV files
+2/26/2015 21:07:41	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:41	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NVPCF003_CIQ.xlsx
+2/26/2015 21:07:43	Starting with Common elements
+2/26/2015 21:07:43	Now working on ARG21 specifics
+2/26/2015 21:07:43	Now working on ARG22 specifics
+2/26/2015 21:07:43	Now working on PCF specifics
+2/26/2015 21:07:43	Now adding a line to the AllVar CSV
+2/26/2015 21:07:43	Now generating configuration for ARG21
+2/26/2015 21:07:43	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG21.txt
+2/26/2015 21:07:43	Now adding a line to the various section CSV files
+2/26/2015 21:07:43	Now generating configuration for ARG22
+2/26/2015 21:07:43	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG22.txt
+2/26/2015 21:07:43	Now adding a line to the various section CSV files
+2/26/2015 21:07:43	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:43	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF007_CIQ.xlsx
+2/26/2015 21:07:46	Starting with Common elements
+2/26/2015 21:07:46	Now working on ARG21 specifics
+2/26/2015 21:07:46	Now working on ARG22 specifics
+2/26/2015 21:07:46	Now working on PCF specifics
+2/26/2015 21:07:46	Now adding a line to the AllVar CSV
+2/26/2015 21:07:46	Now generating configuration for ARG21
+2/26/2015 21:07:46	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG21.txt
+2/26/2015 21:07:46	Now adding a line to the various section CSV files
+2/26/2015 21:07:46	Now generating configuration for ARG22
+2/26/2015 21:07:46	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG22.txt
+2/26/2015 21:07:46	Now adding a line to the various section CSV files
+2/26/2015 21:07:46	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:46	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF008_CIQ.xlsx
+2/26/2015 21:07:48	Starting with Common elements
+2/26/2015 21:07:48	Now working on ARG21 specifics
+2/26/2015 21:07:49	Now working on ARG22 specifics
+2/26/2015 21:07:49	Now working on PCF specifics
+2/26/2015 21:07:49	Now adding a line to the AllVar CSV
+2/26/2015 21:07:49	Now generating configuration for ARG21
+2/26/2015 21:07:49	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG21.txt
+2/26/2015 21:07:49	Now adding a line to the various section CSV files
+2/26/2015 21:07:49	Now generating configuration for ARG22
+2/26/2015 21:07:49	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG22.txt
+2/26/2015 21:07:49	Now adding a line to the various section CSV files
+2/26/2015 21:07:49	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:49	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF009_CIQ.xlsx
+2/26/2015 21:07:51	Starting with Common elements
+2/26/2015 21:07:51	Now working on ARG21 specifics
+2/26/2015 21:07:51	Now working on ARG22 specifics
+2/26/2015 21:07:52	Now working on PCF specifics
+2/26/2015 21:07:52	Now adding a line to the AllVar CSV
+2/26/2015 21:07:52	Now generating configuration for ARG21
+2/26/2015 21:07:52	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG21.txt
+2/26/2015 21:07:52	Now adding a line to the various section CSV files
+2/26/2015 21:07:52	Now generating configuration for ARG22
+2/26/2015 21:07:52	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG22.txt
+2/26/2015 21:07:52	Now adding a line to the various section CSV files
+2/26/2015 21:07:52	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:52	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF003_CIQ.xlsx
+2/26/2015 21:07:54	Starting with Common elements
+2/26/2015 21:07:55	Now working on ARG21 specifics
+2/26/2015 21:07:55	Now working on ARG22 specifics
+2/26/2015 21:07:55	Now working on PCF specifics
+2/26/2015 21:07:55	Now adding a line to the AllVar CSV
+2/26/2015 21:07:55	Now generating configuration for ARG21
+2/26/2015 21:07:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG21.txt
+2/26/2015 21:07:55	Now adding a line to the various section CSV files
+2/26/2015 21:07:55	Now generating configuration for ARG22
+2/26/2015 21:07:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG22.txt
+2/26/2015 21:07:55	Now adding a line to the various section CSV files
+2/26/2015 21:07:55	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:55	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF004_CIQ.xlsx
+2/26/2015 21:07:57	Starting with Common elements
+2/26/2015 21:07:57	Now working on ARG21 specifics
+2/26/2015 21:07:57	Now working on ARG22 specifics
+2/26/2015 21:07:57	Now working on PCF specifics
+2/26/2015 21:07:57	Now adding a line to the AllVar CSV
+2/26/2015 21:07:57	Now generating configuration for ARG21
+2/26/2015 21:07:57	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG21.txt
+2/26/2015 21:07:57	Now adding a line to the various section CSV files
+2/26/2015 21:07:57	Now generating configuration for ARG22
+2/26/2015 21:07:57	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG22.txt
+2/26/2015 21:07:57	Now adding a line to the various section CSV files
+2/26/2015 21:07:57	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:58	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\PHPCF004_CIQ.xlsx
+2/26/2015 21:07:59	Starting with Common elements
+2/26/2015 21:07:59	Now working on ARG21 specifics
+2/26/2015 21:07:59	Now working on ARG22 specifics
+2/26/2015 21:07:59	Now working on PCF specifics
+2/26/2015 21:07:59	Now adding a line to the AllVar CSV
+2/26/2015 21:07:59	Now generating configuration for ARG21
+2/26/2015 21:07:59	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG21.txt
+2/26/2015 21:07:59	Now adding a line to the various section CSV files
+2/26/2015 21:07:59	Now generating configuration for ARG22
+2/26/2015 21:07:59	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG22.txt
+2/26/2015 21:07:59	Now adding a line to the various section CSV files
+2/26/2015 21:07:59	Closing this CIQ and moving on to the next one
+2/26/2015 21:07:59	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF006_CIQ.xlsx
+2/26/2015 21:08:02	Starting with Common elements
+2/26/2015 21:08:02	Now working on ARG21 specifics
+2/26/2015 21:08:02	Now working on ARG22 specifics
+2/26/2015 21:08:02	Now working on PCF specifics
+2/26/2015 21:08:02	Now adding a line to the AllVar CSV
+2/26/2015 21:08:02	Now generating configuration for ARG21
+2/26/2015 21:08:02	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG21.txt
+2/26/2015 21:08:02	Now adding a line to the various section CSV files
+2/26/2015 21:08:02	Now generating configuration for ARG22
+2/26/2015 21:08:02	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG22.txt
+2/26/2015 21:08:02	Now adding a line to the various section CSV files
+2/26/2015 21:08:02	Closing this CIQ and moving on to the next one
+2/26/2015 21:08:02	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF007_CIQ.xlsx
+2/26/2015 21:08:05	Starting with Common elements
+2/26/2015 21:08:05	Now working on ARG21 specifics
+2/26/2015 21:08:05	Now working on ARG22 specifics
+2/26/2015 21:08:05	Now working on PCF specifics
+2/26/2015 21:08:05	Now adding a line to the AllVar CSV
+2/26/2015 21:08:05	Now generating configuration for ARG21
+2/26/2015 21:08:05	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG21.txt
+2/26/2015 21:08:05	Now adding a line to the various section CSV files
+2/26/2015 21:08:05	Now generating configuration for ARG22
+2/26/2015 21:08:05	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG22.txt
+2/26/2015 21:08:05	Now adding a line to the various section CSV files
+2/26/2015 21:08:05	Closing this CIQ and moving on to the next one
+2/26/2015 21:08:05	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF002_CIQ.xlsx
+2/26/2015 21:08:07	Starting with Common elements
+2/26/2015 21:08:07	Now working on ARG21 specifics
+2/26/2015 21:08:07	Now working on ARG22 specifics
+2/26/2015 21:08:07	Now working on PCF specifics
+2/26/2015 21:08:07	Now adding a line to the AllVar CSV
+2/26/2015 21:08:07	Now generating configuration for ARG21
+2/26/2015 21:08:07	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG21.txt
+2/26/2015 21:08:07	Now adding a line to the various section CSV files
+2/26/2015 21:08:07	Now generating configuration for ARG22
+2/26/2015 21:08:07	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG22.txt
+2/26/2015 21:08:07	Now adding a line to the various section CSV files
+2/26/2015 21:08:07	Closing this CIQ and moving on to the next one
+2/26/2015 21:08:07	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF003_CIQ.xlsx
+2/26/2015 21:08:09	Starting with Common elements
+2/26/2015 21:08:09	Now working on ARG21 specifics
+2/26/2015 21:08:09	Now working on ARG22 specifics
+2/26/2015 21:08:09	Now working on PCF specifics
+2/26/2015 21:08:09	Now adding a line to the AllVar CSV
+2/26/2015 21:08:09	Now generating configuration for ARG21
+2/26/2015 21:08:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG21.txt
+2/26/2015 21:08:09	Now adding a line to the various section CSV files
+2/26/2015 21:08:09	Now generating configuration for ARG22
+2/26/2015 21:08:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG22.txt
+2/26/2015 21:08:09	Now adding a line to the various section CSV files
+2/26/2015 21:08:09	Closing this CIQ and moving on to the next one
+2/26/2015 21:08:09	Done. CSV saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:08:09	Configuration files saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:22:55	Main directory C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\
+2/26/2015 21:22:55	Reading CIQ's from C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\
+2/26/2015 21:22:55	Using template file C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500ConfDollar.txt
+2/26/2015 21:22:55	Saving Configurations to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:22:55	Saving the allvar CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:22:55	Saving the ACLVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S1ASR55KACL.csv
+2/26/2015 21:22:55	Saving the BVIVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S2ASR55KBVI.csv
+2/26/2015 21:22:55	Saving the BEDVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S3ASR55KBED.csv
+2/26/2015 21:22:55	Saving the BEXVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S4ASR55KBEX.csv
+2/26/2015 21:22:55	Saving the IntVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S5ASR55KInt.csv
+2/26/2015 21:22:55	Saving the VPNVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S6ASR55KVPN.csv
+2/26/2015 21:22:55	Saving the BGPVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S7ASR55KBGP.csv
+2/26/2015 21:22:55	Validating input
+2/26/2015 21:22:55	Starting Excel
+2/26/2015 21:22:56	Initializing Dictionaries
+2/26/2015 21:22:56	Creating CSV files
+2/26/2015 21:23:14	Main directory C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\
+2/26/2015 21:23:14	Reading CIQ's from C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\
+2/26/2015 21:23:14	Using template file C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500ConfDollar.txt
+2/26/2015 21:23:14	Saving Configurations to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:23:14	Saving the allvar CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:23:14	Saving the ACLVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S1ASR55KACL.csv
+2/26/2015 21:23:14	Saving the BVIVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S2ASR55KBVI.csv
+2/26/2015 21:23:14	Saving the BEDVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S3ASR55KBED.csv
+2/26/2015 21:23:14	Saving the BEXVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S4ASR55KBEX.csv
+2/26/2015 21:23:14	Saving the IntVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S5ASR55KInt.csv
+2/26/2015 21:23:14	Saving the VPNVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S6ASR55KVPN.csv
+2/26/2015 21:23:14	Saving the BGPVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S7ASR55KBGP.csv
+2/26/2015 21:23:14	Validating input
+2/26/2015 21:23:14	Starting Excel
+2/26/2015 21:23:14	Initializing Dictionaries
+2/26/2015 21:23:14	Creating CSV files
+2/26/2015 21:23:14	AllVar CSV Created
+2/26/2015 21:23:14	ACLVar CSV Created
+2/26/2015 21:23:14	BVIVar Created
+2/26/2015 21:23:14	BEDVar CSV Created
+2/26/2015 21:23:14	BEXVar CSV Created
+2/26/2015 21:23:14	IntVar CSV Created
+2/26/2015 21:23:14	VPNVar CSV Created
+2/26/2015 21:23:14	BGPVar CSV Created
+2/26/2015 21:23:14	writing headers to CSV files
+2/26/2015 21:23:14	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF004_CIQ.xlsx
+2/26/2015 21:23:16	Starting with Common elements
+2/26/2015 21:23:17	Now working on ARG21 specifics
+2/26/2015 21:23:17	Now working on ARG22 specifics
+2/26/2015 21:23:17	Now working on PCF specifics
+2/26/2015 21:23:17	Now adding a line to the AllVar CSV
+2/26/2015 21:23:17	Now generating configuration for ARG21
+2/26/2015 21:23:17	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG21.txt
+2/26/2015 21:23:17	Now adding a line to the various section CSV files
+2/26/2015 21:23:17	Now generating configuration for ARG22
+2/26/2015 21:23:17	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG22.txt
+2/26/2015 21:23:17	Now adding a line to the various section CSV files
+2/26/2015 21:23:17	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:17	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF005_CIQ.xlsx
+2/26/2015 21:23:19	Starting with Common elements
+2/26/2015 21:23:19	Now working on ARG21 specifics
+2/26/2015 21:23:19	Now working on ARG22 specifics
+2/26/2015 21:23:19	Now working on PCF specifics
+2/26/2015 21:23:19	Now adding a line to the AllVar CSV
+2/26/2015 21:23:19	Now generating configuration for ARG21
+2/26/2015 21:23:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG21.txt
+2/26/2015 21:23:19	Now adding a line to the various section CSV files
+2/26/2015 21:23:19	Now generating configuration for ARG22
+2/26/2015 21:23:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG22.txt
+2/26/2015 21:23:19	Now adding a line to the various section CSV files
+2/26/2015 21:23:19	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:19	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF003_CIQ.xlsx
+2/26/2015 21:23:21	Starting with Common elements
+2/26/2015 21:23:21	Now working on ARG21 specifics
+2/26/2015 21:23:21	Now working on ARG22 specifics
+2/26/2015 21:23:21	Now working on PCF specifics
+2/26/2015 21:23:21	Now adding a line to the AllVar CSV
+2/26/2015 21:23:21	Now generating configuration for ARG21
+2/26/2015 21:23:21	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG21.txt
+2/26/2015 21:23:21	Now adding a line to the various section CSV files
+2/26/2015 21:23:21	Now generating configuration for ARG22
+2/26/2015 21:23:21	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG22.txt
+2/26/2015 21:23:21	Now adding a line to the various section CSV files
+2/26/2015 21:23:21	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:21	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF004_CIQ.xlsx
+2/26/2015 21:23:24	Starting with Common elements
+2/26/2015 21:23:24	Now working on ARG21 specifics
+2/26/2015 21:23:24	Now working on ARG22 specifics
+2/26/2015 21:23:24	Now working on PCF specifics
+2/26/2015 21:23:24	Now adding a line to the AllVar CSV
+2/26/2015 21:23:24	Now generating configuration for ARG21
+2/26/2015 21:23:24	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG21.txt
+2/26/2015 21:23:24	Now adding a line to the various section CSV files
+2/26/2015 21:23:24	Now generating configuration for ARG22
+2/26/2015 21:23:24	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG22.txt
+2/26/2015 21:23:24	Now adding a line to the various section CSV files
+2/26/2015 21:23:24	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:24	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF004_CIQ.xlsx
+2/26/2015 21:23:26	Starting with Common elements
+2/26/2015 21:23:26	Now working on ARG21 specifics
+2/26/2015 21:23:26	Now working on ARG22 specifics
+2/26/2015 21:23:26	Now working on PCF specifics
+2/26/2015 21:23:26	Now adding a line to the AllVar CSV
+2/26/2015 21:23:26	Now generating configuration for ARG21
+2/26/2015 21:23:26	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG21.txt
+2/26/2015 21:23:26	Now adding a line to the various section CSV files
+2/26/2015 21:23:26	Now generating configuration for ARG22
+2/26/2015 21:23:26	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG22.txt
+2/26/2015 21:23:26	Now adding a line to the various section CSV files
+2/26/2015 21:23:26	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:26	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF005_CIQ.xlsx
+2/26/2015 21:23:30	Starting with Common elements
+2/26/2015 21:23:30	Now working on ARG21 specifics
+2/26/2015 21:23:30	Now working on ARG22 specifics
+2/26/2015 21:23:30	Now working on PCF specifics
+2/26/2015 21:23:30	Now adding a line to the AllVar CSV
+2/26/2015 21:23:30	Now generating configuration for ARG21
+2/26/2015 21:23:30	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG21.txt
+2/26/2015 21:23:30	Now adding a line to the various section CSV files
+2/26/2015 21:23:30	Now generating configuration for ARG22
+2/26/2015 21:23:30	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG22.txt
+2/26/2015 21:23:30	Now adding a line to the various section CSV files
+2/26/2015 21:23:30	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:30	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DCPCF002_CIQ.xlsx
+2/26/2015 21:23:33	Starting with Common elements
+2/26/2015 21:23:33	Now working on ARG21 specifics
+2/26/2015 21:23:33	Now working on ARG22 specifics
+2/26/2015 21:23:33	Now working on PCF specifics
+2/26/2015 21:23:33	Now adding a line to the AllVar CSV
+2/26/2015 21:23:33	Now generating configuration for ARG21
+2/26/2015 21:23:33	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG21.txt
+2/26/2015 21:23:33	Now adding a line to the various section CSV files
+2/26/2015 21:23:33	Now generating configuration for ARG22
+2/26/2015 21:23:33	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG22.txt
+2/26/2015 21:23:33	Now adding a line to the various section CSV files
+2/26/2015 21:23:33	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:33	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DEPCF003_CIQ.xlsx
+2/26/2015 21:23:36	Starting with Common elements
+2/26/2015 21:23:36	Now working on ARG21 specifics
+2/26/2015 21:23:36	Now working on ARG22 specifics
+2/26/2015 21:23:36	Now working on PCF specifics
+2/26/2015 21:23:36	Now adding a line to the AllVar CSV
+2/26/2015 21:23:36	Now generating configuration for ARG21
+2/26/2015 21:23:36	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG21.txt
+2/26/2015 21:23:36	Now adding a line to the various section CSV files
+2/26/2015 21:23:36	Now generating configuration for ARG22
+2/26/2015 21:23:36	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG22.txt
+2/26/2015 21:23:36	Now adding a line to the various section CSV files
+2/26/2015 21:23:36	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:36	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\HNPCF003_CIQ.xlsx
+2/26/2015 21:23:39	Starting with Common elements
+2/26/2015 21:23:39	Now working on ARG21 specifics
+2/26/2015 21:23:39	Now working on ARG22 specifics
+2/26/2015 21:23:39	Now working on PCF specifics
+2/26/2015 21:23:39	Now adding a line to the AllVar CSV
+2/26/2015 21:23:39	Now generating configuration for ARG21
+2/26/2015 21:23:39	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG21.txt
+2/26/2015 21:23:39	Now adding a line to the various section CSV files
+2/26/2015 21:23:39	Now generating configuration for ARG22
+2/26/2015 21:23:39	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG22.txt
+2/26/2015 21:23:39	Now adding a line to the various section CSV files
+2/26/2015 21:23:39	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:39	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF006_CIQ.xlsx
+2/26/2015 21:23:42	Starting with Common elements
+2/26/2015 21:23:42	Now working on ARG21 specifics
+2/26/2015 21:23:42	Now working on ARG22 specifics
+2/26/2015 21:23:42	Now working on PCF specifics
+2/26/2015 21:23:42	Now adding a line to the AllVar CSV
+2/26/2015 21:23:42	Now generating configuration for ARG21
+2/26/2015 21:23:42	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG21.txt
+2/26/2015 21:23:42	Now adding a line to the various section CSV files
+2/26/2015 21:23:42	Now generating configuration for ARG22
+2/26/2015 21:23:42	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG22.txt
+2/26/2015 21:23:42	Now adding a line to the various section CSV files
+2/26/2015 21:23:42	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:42	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF007_CIQ.xlsx
+2/26/2015 21:23:45	Starting with Common elements
+2/26/2015 21:23:45	Now working on ARG21 specifics
+2/26/2015 21:23:45	Now working on ARG22 specifics
+2/26/2015 21:23:45	Now working on PCF specifics
+2/26/2015 21:23:45	Now adding a line to the AllVar CSV
+2/26/2015 21:23:45	Now generating configuration for ARG21
+2/26/2015 21:23:45	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG21.txt
+2/26/2015 21:23:45	Now adding a line to the various section CSV files
+2/26/2015 21:23:45	Now generating configuration for ARG22
+2/26/2015 21:23:45	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG22.txt
+2/26/2015 21:23:45	Now adding a line to the various section CSV files
+2/26/2015 21:23:45	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:45	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF008_CIQ.xlsx
+2/26/2015 21:23:47	Starting with Common elements
+2/26/2015 21:23:48	Now working on ARG21 specifics
+2/26/2015 21:23:48	Now working on ARG22 specifics
+2/26/2015 21:23:48	Now working on PCF specifics
+2/26/2015 21:23:48	Now adding a line to the AllVar CSV
+2/26/2015 21:23:48	Now generating configuration for ARG21
+2/26/2015 21:23:48	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG21.txt
+2/26/2015 21:23:48	Now adding a line to the various section CSV files
+2/26/2015 21:23:48	Now generating configuration for ARG22
+2/26/2015 21:23:48	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG22.txt
+2/26/2015 21:23:48	Now adding a line to the various section CSV files
+2/26/2015 21:23:48	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:48	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF009_CIQ.xlsx
+2/26/2015 21:23:50	Starting with Common elements
+2/26/2015 21:23:50	Now working on ARG21 specifics
+2/26/2015 21:23:50	Now working on ARG22 specifics
+2/26/2015 21:23:50	Now working on PCF specifics
+2/26/2015 21:23:50	Now adding a line to the AllVar CSV
+2/26/2015 21:23:50	Now generating configuration for ARG21
+2/26/2015 21:23:50	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG21.txt
+2/26/2015 21:23:50	Now adding a line to the various section CSV files
+2/26/2015 21:23:50	Now generating configuration for ARG22
+2/26/2015 21:23:50	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG22.txt
+2/26/2015 21:23:50	Now adding a line to the various section CSV files
+2/26/2015 21:23:50	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:50	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NEPCF002_CIQ.xlsx
+2/26/2015 21:23:53	Starting with Common elements
+2/26/2015 21:23:53	Now working on ARG21 specifics
+2/26/2015 21:23:53	Now working on ARG22 specifics
+2/26/2015 21:23:53	Now working on PCF specifics
+2/26/2015 21:23:53	Now adding a line to the AllVar CSV
+2/26/2015 21:23:53	Now generating configuration for ARG21
+2/26/2015 21:23:53	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG21.txt
+2/26/2015 21:23:53	Now adding a line to the various section CSV files
+2/26/2015 21:23:53	Now generating configuration for ARG22
+2/26/2015 21:23:53	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG22.txt
+2/26/2015 21:23:53	Now adding a line to the various section CSV files
+2/26/2015 21:23:53	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:53	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NVPCF003_CIQ.xlsx
+2/26/2015 21:23:55	Starting with Common elements
+2/26/2015 21:23:55	Now working on ARG21 specifics
+2/26/2015 21:23:55	Now working on ARG22 specifics
+2/26/2015 21:23:55	Now working on PCF specifics
+2/26/2015 21:23:55	Now adding a line to the AllVar CSV
+2/26/2015 21:23:55	Now generating configuration for ARG21
+2/26/2015 21:23:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG21.txt
+2/26/2015 21:23:55	Now adding a line to the various section CSV files
+2/26/2015 21:23:55	Now generating configuration for ARG22
+2/26/2015 21:23:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG22.txt
+2/26/2015 21:23:55	Now adding a line to the various section CSV files
+2/26/2015 21:23:55	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:55	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF007_CIQ.xlsx
+2/26/2015 21:23:58	Starting with Common elements
+2/26/2015 21:23:58	Now working on ARG21 specifics
+2/26/2015 21:23:58	Now working on ARG22 specifics
+2/26/2015 21:23:58	Now working on PCF specifics
+2/26/2015 21:23:58	Now adding a line to the AllVar CSV
+2/26/2015 21:23:58	Now generating configuration for ARG21
+2/26/2015 21:23:58	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG21.txt
+2/26/2015 21:23:58	Now adding a line to the various section CSV files
+2/26/2015 21:23:58	Now generating configuration for ARG22
+2/26/2015 21:23:58	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG22.txt
+2/26/2015 21:23:58	Now adding a line to the various section CSV files
+2/26/2015 21:23:58	Closing this CIQ and moving on to the next one
+2/26/2015 21:23:58	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF008_CIQ.xlsx
+2/26/2015 21:24:01	Starting with Common elements
+2/26/2015 21:24:01	Now working on ARG21 specifics
+2/26/2015 21:24:01	Now working on ARG22 specifics
+2/26/2015 21:24:01	Now working on PCF specifics
+2/26/2015 21:24:01	Now adding a line to the AllVar CSV
+2/26/2015 21:24:01	Now generating configuration for ARG21
+2/26/2015 21:24:01	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG21.txt
+2/26/2015 21:24:01	Now adding a line to the various section CSV files
+2/26/2015 21:24:01	Now generating configuration for ARG22
+2/26/2015 21:24:01	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG22.txt
+2/26/2015 21:24:01	Now adding a line to the various section CSV files
+2/26/2015 21:24:01	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:01	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF009_CIQ.xlsx
+2/26/2015 21:24:05	Starting with Common elements
+2/26/2015 21:24:05	Now working on ARG21 specifics
+2/26/2015 21:24:05	Now working on ARG22 specifics
+2/26/2015 21:24:05	Now working on PCF specifics
+2/26/2015 21:24:05	Now adding a line to the AllVar CSV
+2/26/2015 21:24:05	Now generating configuration for ARG21
+2/26/2015 21:24:05	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG21.txt
+2/26/2015 21:24:05	Now adding a line to the various section CSV files
+2/26/2015 21:24:05	Now generating configuration for ARG22
+2/26/2015 21:24:05	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG22.txt
+2/26/2015 21:24:05	Now adding a line to the various section CSV files
+2/26/2015 21:24:05	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:05	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF003_CIQ.xlsx
+2/26/2015 21:24:09	Starting with Common elements
+2/26/2015 21:24:09	Now working on ARG21 specifics
+2/26/2015 21:24:09	Now working on ARG22 specifics
+2/26/2015 21:24:09	Now working on PCF specifics
+2/26/2015 21:24:09	Now adding a line to the AllVar CSV
+2/26/2015 21:24:09	Now generating configuration for ARG21
+2/26/2015 21:24:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG21.txt
+2/26/2015 21:24:09	Now adding a line to the various section CSV files
+2/26/2015 21:24:09	Now generating configuration for ARG22
+2/26/2015 21:24:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG22.txt
+2/26/2015 21:24:09	Now adding a line to the various section CSV files
+2/26/2015 21:24:09	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:09	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF004_CIQ.xlsx
+2/26/2015 21:24:12	Starting with Common elements
+2/26/2015 21:24:12	Now working on ARG21 specifics
+2/26/2015 21:24:12	Now working on ARG22 specifics
+2/26/2015 21:24:12	Now working on PCF specifics
+2/26/2015 21:24:12	Now adding a line to the AllVar CSV
+2/26/2015 21:24:12	Now generating configuration for ARG21
+2/26/2015 21:24:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG21.txt
+2/26/2015 21:24:12	Now adding a line to the various section CSV files
+2/26/2015 21:24:12	Now generating configuration for ARG22
+2/26/2015 21:24:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG22.txt
+2/26/2015 21:24:12	Now adding a line to the various section CSV files
+2/26/2015 21:24:12	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:12	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\PHPCF004_CIQ.xlsx
+2/26/2015 21:24:14	Starting with Common elements
+2/26/2015 21:24:14	Now working on ARG21 specifics
+2/26/2015 21:24:14	Now working on ARG22 specifics
+2/26/2015 21:24:14	Now working on PCF specifics
+2/26/2015 21:24:14	Now adding a line to the AllVar CSV
+2/26/2015 21:24:14	Now generating configuration for ARG21
+2/26/2015 21:24:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG21.txt
+2/26/2015 21:24:14	Now adding a line to the various section CSV files
+2/26/2015 21:24:14	Now generating configuration for ARG22
+2/26/2015 21:24:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG22.txt
+2/26/2015 21:24:14	Now adding a line to the various section CSV files
+2/26/2015 21:24:14	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:14	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF006_CIQ.xlsx
+2/26/2015 21:24:17	Starting with Common elements
+2/26/2015 21:24:17	Now working on ARG21 specifics
+2/26/2015 21:24:17	Now working on ARG22 specifics
+2/26/2015 21:24:17	Now working on PCF specifics
+2/26/2015 21:24:17	Now adding a line to the AllVar CSV
+2/26/2015 21:24:17	Now generating configuration for ARG21
+2/26/2015 21:24:17	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG21.txt
+2/26/2015 21:24:17	Now adding a line to the various section CSV files
+2/26/2015 21:24:17	Now generating configuration for ARG22
+2/26/2015 21:24:17	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG22.txt
+2/26/2015 21:24:17	Now adding a line to the various section CSV files
+2/26/2015 21:24:17	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:17	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF007_CIQ.xlsx
+2/26/2015 21:24:20	Starting with Common elements
+2/26/2015 21:24:20	Now working on ARG21 specifics
+2/26/2015 21:24:20	Now working on ARG22 specifics
+2/26/2015 21:24:20	Now working on PCF specifics
+2/26/2015 21:24:20	Now adding a line to the AllVar CSV
+2/26/2015 21:24:20	Now generating configuration for ARG21
+2/26/2015 21:24:20	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG21.txt
+2/26/2015 21:24:20	Now adding a line to the various section CSV files
+2/26/2015 21:24:20	Now generating configuration for ARG22
+2/26/2015 21:24:20	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG22.txt
+2/26/2015 21:24:20	Now adding a line to the various section CSV files
+2/26/2015 21:24:20	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:20	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF002_CIQ.xlsx
+2/26/2015 21:24:22	Starting with Common elements
+2/26/2015 21:24:22	Now working on ARG21 specifics
+2/26/2015 21:24:22	Now working on ARG22 specifics
+2/26/2015 21:24:22	Now working on PCF specifics
+2/26/2015 21:24:22	Now adding a line to the AllVar CSV
+2/26/2015 21:24:22	Now generating configuration for ARG21
+2/26/2015 21:24:22	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG21.txt
+2/26/2015 21:24:22	Now adding a line to the various section CSV files
+2/26/2015 21:24:22	Now generating configuration for ARG22
+2/26/2015 21:24:22	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG22.txt
+2/26/2015 21:24:22	Now adding a line to the various section CSV files
+2/26/2015 21:24:22	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:22	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF003_CIQ.xlsx
+2/26/2015 21:24:24	Starting with Common elements
+2/26/2015 21:24:24	Now working on ARG21 specifics
+2/26/2015 21:24:24	Now working on ARG22 specifics
+2/26/2015 21:24:24	Now working on PCF specifics
+2/26/2015 21:24:24	Now adding a line to the AllVar CSV
+2/26/2015 21:24:24	Now generating configuration for ARG21
+2/26/2015 21:24:24	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG21.txt
+2/26/2015 21:24:24	Now adding a line to the various section CSV files
+2/26/2015 21:24:24	Now generating configuration for ARG22
+2/26/2015 21:24:24	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG22.txt
+2/26/2015 21:24:24	Now adding a line to the various section CSV files
+2/26/2015 21:24:24	Closing this CIQ and moving on to the next one
+2/26/2015 21:24:24	Done. CSV saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:24:24	Configuration files saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:35:03	Main directory C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\
+2/26/2015 21:35:03	Reading CIQ's from C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\
+2/26/2015 21:35:03	Using template file C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\ASR5500ConfDollar.txt
+2/26/2015 21:35:03	Saving Configurations to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+2/26/2015 21:35:03	Saving the allvar CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:35:03	Saving the ACLVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S1ASR55KACL.csv
+2/26/2015 21:35:03	Saving the BVIVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S2ASR55KBVI.csv
+2/26/2015 21:35:03	Saving the BEDVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S3ASR55KBED.csv
+2/26/2015 21:35:03	Saving the BEXVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S4ASR55KBEX.csv
+2/26/2015 21:35:03	Saving the IntVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S5ASR55KInt.csv
+2/26/2015 21:35:03	Saving the VPNVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S6ASR55KVPN.csv
+2/26/2015 21:35:03	Saving the BGPVarCSVName CSV file to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\S7ASR55KBGP.csv
+2/26/2015 21:35:03	Validating input
+2/26/2015 21:35:03	Starting Excel
+2/26/2015 21:35:04	Initializing Dictionaries
+2/26/2015 21:35:04	Creating CSV files
+2/26/2015 21:35:04	AllVar CSV Created
+2/26/2015 21:35:04	ACLVar CSV Created
+2/26/2015 21:35:04	BVIVar Created
+2/26/2015 21:35:04	BEDVar CSV Created
+2/26/2015 21:35:04	BEXVar CSV Created
+2/26/2015 21:35:04	IntVar CSV Created
+2/26/2015 21:35:04	VPNVar CSV Created
+2/26/2015 21:35:04	BGPVar CSV Created
+2/26/2015 21:35:04	writing headers to CSV files
+2/26/2015 21:35:04	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF004_CIQ.xlsx
+2/26/2015 21:35:06	Starting with Common elements
+2/26/2015 21:35:06	Now working on ARG21 specifics
+2/26/2015 21:35:06	Now working on ARG22 specifics
+2/26/2015 21:35:06	Now working on PCF specifics
+2/26/2015 21:35:06	Now adding a line to the AllVar CSV
+2/26/2015 21:35:06	Now generating configuration for ARG21
+2/26/2015 21:35:06	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG21.txt
+2/26/2015 21:35:06	Now adding a line to the various section CSV files
+2/26/2015 21:35:06	Now generating configuration for ARG22
+2/26/2015 21:35:06	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF004ARG22.txt
+2/26/2015 21:35:06	Now adding a line to the various section CSV files
+2/26/2015 21:35:06	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:06	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CHPCF005_CIQ.xlsx
+2/26/2015 21:35:09	Starting with Common elements
+2/26/2015 21:35:09	Now working on ARG21 specifics
+2/26/2015 21:35:09	Now working on ARG22 specifics
+2/26/2015 21:35:09	Now working on PCF specifics
+2/26/2015 21:35:09	Now adding a line to the AllVar CSV
+2/26/2015 21:35:09	Now generating configuration for ARG21
+2/26/2015 21:35:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG21.txt
+2/26/2015 21:35:09	Now adding a line to the various section CSV files
+2/26/2015 21:35:09	Now generating configuration for ARG22
+2/26/2015 21:35:09	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CHPCF005ARG22.txt
+2/26/2015 21:35:09	Now adding a line to the various section CSV files
+2/26/2015 21:35:09	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:09	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF003_CIQ.xlsx
+2/26/2015 21:35:11	Starting with Common elements
+2/26/2015 21:35:11	Now working on ARG21 specifics
+2/26/2015 21:35:11	Now working on ARG22 specifics
+2/26/2015 21:35:11	Now working on PCF specifics
+2/26/2015 21:35:11	Now adding a line to the AllVar CSV
+2/26/2015 21:35:11	Now generating configuration for ARG21
+2/26/2015 21:35:11	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG21.txt
+2/26/2015 21:35:11	Now adding a line to the various section CSV files
+2/26/2015 21:35:11	Now generating configuration for ARG22
+2/26/2015 21:35:11	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF003ARG22.txt
+2/26/2015 21:35:11	Now adding a line to the various section CSV files
+2/26/2015 21:35:11	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:11	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\CRPCF004_CIQ.xlsx
+2/26/2015 21:35:14	Starting with Common elements
+2/26/2015 21:35:14	Now working on ARG21 specifics
+2/26/2015 21:35:14	Now working on ARG22 specifics
+2/26/2015 21:35:14	Now working on PCF specifics
+2/26/2015 21:35:14	Now adding a line to the AllVar CSV
+2/26/2015 21:35:14	Now generating configuration for ARG21
+2/26/2015 21:35:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG21.txt
+2/26/2015 21:35:14	Now adding a line to the various section CSV files
+2/26/2015 21:35:14	Now generating configuration for ARG22
+2/26/2015 21:35:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\CRPCF004ARG22.txt
+2/26/2015 21:35:14	Now adding a line to the various section CSV files
+2/26/2015 21:35:14	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:14	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF004_CIQ.xlsx
+2/26/2015 21:35:16	Starting with Common elements
+2/26/2015 21:35:16	Now working on ARG21 specifics
+2/26/2015 21:35:16	Now working on ARG22 specifics
+2/26/2015 21:35:16	Now working on PCF specifics
+2/26/2015 21:35:16	Now adding a line to the AllVar CSV
+2/26/2015 21:35:16	Now generating configuration for ARG21
+2/26/2015 21:35:16	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG21.txt
+2/26/2015 21:35:16	Now adding a line to the various section CSV files
+2/26/2015 21:35:16	Now generating configuration for ARG22
+2/26/2015 21:35:16	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF004ARG22.txt
+2/26/2015 21:35:16	Now adding a line to the various section CSV files
+2/26/2015 21:35:16	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:16	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DAPCF005_CIQ.xlsx
+2/26/2015 21:35:19	Starting with Common elements
+2/26/2015 21:35:19	Now working on ARG21 specifics
+2/26/2015 21:35:19	Now working on ARG22 specifics
+2/26/2015 21:35:19	Now working on PCF specifics
+2/26/2015 21:35:19	Now adding a line to the AllVar CSV
+2/26/2015 21:35:19	Now generating configuration for ARG21
+2/26/2015 21:35:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG21.txt
+2/26/2015 21:35:19	Now adding a line to the various section CSV files
+2/26/2015 21:35:19	Now generating configuration for ARG22
+2/26/2015 21:35:19	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DAPCF005ARG22.txt
+2/26/2015 21:35:19	Now adding a line to the various section CSV files
+2/26/2015 21:35:19	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:19	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DCPCF002_CIQ.xlsx
+2/26/2015 21:35:22	Starting with Common elements
+2/26/2015 21:35:22	Now working on ARG21 specifics
+2/26/2015 21:35:22	Now working on ARG22 specifics
+2/26/2015 21:35:22	Now working on PCF specifics
+2/26/2015 21:35:22	Now adding a line to the AllVar CSV
+2/26/2015 21:35:22	Now generating configuration for ARG21
+2/26/2015 21:35:22	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG21.txt
+2/26/2015 21:35:22	Now adding a line to the various section CSV files
+2/26/2015 21:35:22	Now generating configuration for ARG22
+2/26/2015 21:35:22	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DCPCF002ARG22.txt
+2/26/2015 21:35:22	Now adding a line to the various section CSV files
+2/26/2015 21:35:22	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:22	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\DEPCF003_CIQ.xlsx
+2/26/2015 21:35:25	Starting with Common elements
+2/26/2015 21:35:25	Now working on ARG21 specifics
+2/26/2015 21:35:25	Now working on ARG22 specifics
+2/26/2015 21:35:25	Now working on PCF specifics
+2/26/2015 21:35:25	Now adding a line to the AllVar CSV
+2/26/2015 21:35:25	Now generating configuration for ARG21
+2/26/2015 21:35:25	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG21.txt
+2/26/2015 21:35:25	Now adding a line to the various section CSV files
+2/26/2015 21:35:25	Now generating configuration for ARG22
+2/26/2015 21:35:25	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\DEPCF003ARG22.txt
+2/26/2015 21:35:25	Now adding a line to the various section CSV files
+2/26/2015 21:35:25	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:25	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\HNPCF003_CIQ.xlsx
+2/26/2015 21:35:29	Starting with Common elements
+2/26/2015 21:35:29	Now working on ARG21 specifics
+2/26/2015 21:35:29	Now working on ARG22 specifics
+2/26/2015 21:35:29	Now working on PCF specifics
+2/26/2015 21:35:29	Now adding a line to the AllVar CSV
+2/26/2015 21:35:29	Now generating configuration for ARG21
+2/26/2015 21:35:29	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG21.txt
+2/26/2015 21:35:29	Now adding a line to the various section CSV files
+2/26/2015 21:35:29	Now generating configuration for ARG22
+2/26/2015 21:35:29	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\HNPCF003ARG22.txt
+2/26/2015 21:35:29	Now adding a line to the various section CSV files
+2/26/2015 21:35:29	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:29	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF006_CIQ.xlsx
+2/26/2015 21:35:32	Starting with Common elements
+2/26/2015 21:35:32	Now working on ARG21 specifics
+2/26/2015 21:35:32	Now working on ARG22 specifics
+2/26/2015 21:35:32	Now working on PCF specifics
+2/26/2015 21:35:32	Now adding a line to the AllVar CSV
+2/26/2015 21:35:32	Now generating configuration for ARG21
+2/26/2015 21:35:32	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG21.txt
+2/26/2015 21:35:32	Now adding a line to the various section CSV files
+2/26/2015 21:35:32	Now generating configuration for ARG22
+2/26/2015 21:35:32	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF006ARG22.txt
+2/26/2015 21:35:32	Now adding a line to the various section CSV files
+2/26/2015 21:35:32	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:32	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF007_CIQ.xlsx
+2/26/2015 21:35:35	Starting with Common elements
+2/26/2015 21:35:35	Now working on ARG21 specifics
+2/26/2015 21:35:35	Now working on ARG22 specifics
+2/26/2015 21:35:35	Now working on PCF specifics
+2/26/2015 21:35:35	Now adding a line to the AllVar CSV
+2/26/2015 21:35:35	Now generating configuration for ARG21
+2/26/2015 21:35:35	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG21.txt
+2/26/2015 21:35:35	Now adding a line to the various section CSV files
+2/26/2015 21:35:35	Now generating configuration for ARG22
+2/26/2015 21:35:35	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF007ARG22.txt
+2/26/2015 21:35:35	Now adding a line to the various section CSV files
+2/26/2015 21:35:35	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:35	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF008_CIQ.xlsx
+2/26/2015 21:35:37	Starting with Common elements
+2/26/2015 21:35:37	Now working on ARG21 specifics
+2/26/2015 21:35:37	Now working on ARG22 specifics
+2/26/2015 21:35:37	Now working on PCF specifics
+2/26/2015 21:35:37	Now adding a line to the AllVar CSV
+2/26/2015 21:35:37	Now generating configuration for ARG21
+2/26/2015 21:35:37	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG21.txt
+2/26/2015 21:35:37	Now adding a line to the various section CSV files
+2/26/2015 21:35:37	Now generating configuration for ARG22
+2/26/2015 21:35:37	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF008ARG22.txt
+2/26/2015 21:35:37	Now adding a line to the various section CSV files
+2/26/2015 21:35:37	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:37	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\LAPCF009_CIQ.xlsx
+2/26/2015 21:35:39	Starting with Common elements
+2/26/2015 21:35:39	Now working on ARG21 specifics
+2/26/2015 21:35:39	Now working on ARG22 specifics
+2/26/2015 21:35:39	Now working on PCF specifics
+2/26/2015 21:35:39	Now adding a line to the AllVar CSV
+2/26/2015 21:35:39	Now generating configuration for ARG21
+2/26/2015 21:35:39	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG21.txt
+2/26/2015 21:35:39	Now adding a line to the various section CSV files
+2/26/2015 21:35:39	Now generating configuration for ARG22
+2/26/2015 21:35:39	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\LAPCF009ARG22.txt
+2/26/2015 21:35:39	Now adding a line to the various section CSV files
+2/26/2015 21:35:39	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:39	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NEPCF002_CIQ.xlsx
+2/26/2015 21:35:43	Starting with Common elements
+2/26/2015 21:35:43	Now working on ARG21 specifics
+2/26/2015 21:35:43	Now working on ARG22 specifics
+2/26/2015 21:35:43	Now working on PCF specifics
+2/26/2015 21:35:43	Now adding a line to the AllVar CSV
+2/26/2015 21:35:43	Now generating configuration for ARG21
+2/26/2015 21:35:43	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG21.txt
+2/26/2015 21:35:43	Now adding a line to the various section CSV files
+2/26/2015 21:35:43	Now generating configuration for ARG22
+2/26/2015 21:35:43	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NEPCF002ARG22.txt
+2/26/2015 21:35:43	Now adding a line to the various section CSV files
+2/26/2015 21:35:43	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:43	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NVPCF003_CIQ.xlsx
+2/26/2015 21:35:45	Starting with Common elements
+2/26/2015 21:35:45	Now working on ARG21 specifics
+2/26/2015 21:35:45	Now working on ARG22 specifics
+2/26/2015 21:35:45	Now working on PCF specifics
+2/26/2015 21:35:45	Now adding a line to the AllVar CSV
+2/26/2015 21:35:45	Now generating configuration for ARG21
+2/26/2015 21:35:45	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG21.txt
+2/26/2015 21:35:45	Now adding a line to the various section CSV files
+2/26/2015 21:35:45	Now generating configuration for ARG22
+2/26/2015 21:35:45	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NVPCF003ARG22.txt
+2/26/2015 21:35:45	Now adding a line to the various section CSV files
+2/26/2015 21:35:45	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:45	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF007_CIQ.xlsx
+2/26/2015 21:35:48	Starting with Common elements
+2/26/2015 21:35:48	Now working on ARG21 specifics
+2/26/2015 21:35:48	Now working on ARG22 specifics
+2/26/2015 21:35:48	Now working on PCF specifics
+2/26/2015 21:35:48	Now adding a line to the AllVar CSV
+2/26/2015 21:35:48	Now generating configuration for ARG21
+2/26/2015 21:35:48	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG21.txt
+2/26/2015 21:35:48	Now adding a line to the various section CSV files
+2/26/2015 21:35:48	Now generating configuration for ARG22
+2/26/2015 21:35:48	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF007ARG22.txt
+2/26/2015 21:35:48	Now adding a line to the various section CSV files
+2/26/2015 21:35:48	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:48	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF008_CIQ.xlsx
+2/26/2015 21:35:52	Starting with Common elements
+2/26/2015 21:35:52	Now working on ARG21 specifics
+2/26/2015 21:35:52	Now working on ARG22 specifics
+2/26/2015 21:35:52	Now working on PCF specifics
+2/26/2015 21:35:52	Now adding a line to the AllVar CSV
+2/26/2015 21:35:52	Now generating configuration for ARG21
+2/26/2015 21:35:52	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG21.txt
+2/26/2015 21:35:52	Now adding a line to the various section CSV files
+2/26/2015 21:35:52	Now generating configuration for ARG22
+2/26/2015 21:35:52	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF008ARG22.txt
+2/26/2015 21:35:52	Now adding a line to the various section CSV files
+2/26/2015 21:35:52	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:52	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\NYPCF009_CIQ.xlsx
+2/26/2015 21:35:55	Starting with Common elements
+2/26/2015 21:35:55	Now working on ARG21 specifics
+2/26/2015 21:35:55	Now working on ARG22 specifics
+2/26/2015 21:35:55	Now working on PCF specifics
+2/26/2015 21:35:55	Now adding a line to the AllVar CSV
+2/26/2015 21:35:55	Now generating configuration for ARG21
+2/26/2015 21:35:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG21.txt
+2/26/2015 21:35:55	Now adding a line to the various section CSV files
+2/26/2015 21:35:55	Now generating configuration for ARG22
+2/26/2015 21:35:55	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\NYPCF009ARG22.txt
+2/26/2015 21:35:55	Now adding a line to the various section CSV files
+2/26/2015 21:35:55	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:55	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF003_CIQ.xlsx
+2/26/2015 21:35:58	Starting with Common elements
+2/26/2015 21:35:58	Now working on ARG21 specifics
+2/26/2015 21:35:58	Now working on ARG22 specifics
+2/26/2015 21:35:58	Now working on PCF specifics
+2/26/2015 21:35:58	Now adding a line to the AllVar CSV
+2/26/2015 21:35:58	Now generating configuration for ARG21
+2/26/2015 21:35:58	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG21.txt
+2/26/2015 21:35:58	Now adding a line to the various section CSV files
+2/26/2015 21:35:58	Now generating configuration for ARG22
+2/26/2015 21:35:58	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF003ARG22.txt
+2/26/2015 21:35:58	Now adding a line to the various section CSV files
+2/26/2015 21:35:58	Closing this CIQ and moving on to the next one
+2/26/2015 21:35:58	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\ORPCF004_CIQ.xlsx
+2/26/2015 21:36:01	Starting with Common elements
+2/26/2015 21:36:01	Now working on ARG21 specifics
+2/26/2015 21:36:01	Now working on ARG22 specifics
+2/26/2015 21:36:01	Now working on PCF specifics
+2/26/2015 21:36:01	Now adding a line to the AllVar CSV
+2/26/2015 21:36:01	Now generating configuration for ARG21
+2/26/2015 21:36:01	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG21.txt
+2/26/2015 21:36:01	Now adding a line to the various section CSV files
+2/26/2015 21:36:01	Now generating configuration for ARG22
+2/26/2015 21:36:01	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\ORPCF004ARG22.txt
+2/26/2015 21:36:01	Now adding a line to the various section CSV files
+2/26/2015 21:36:01	Closing this CIQ and moving on to the next one
+2/26/2015 21:36:01	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\PHPCF004_CIQ.xlsx
+2/26/2015 21:36:03	Starting with Common elements
+2/26/2015 21:36:03	Now working on ARG21 specifics
+2/26/2015 21:36:03	Now working on ARG22 specifics
+2/26/2015 21:36:03	Now working on PCF specifics
+2/26/2015 21:36:03	Now adding a line to the AllVar CSV
+2/26/2015 21:36:03	Now generating configuration for ARG21
+2/26/2015 21:36:03	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG21.txt
+2/26/2015 21:36:03	Now adding a line to the various section CSV files
+2/26/2015 21:36:03	Now generating configuration for ARG22
+2/26/2015 21:36:03	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\PHPCF004ARG22.txt
+2/26/2015 21:36:03	Now adding a line to the various section CSV files
+2/26/2015 21:36:03	Closing this CIQ and moving on to the next one
+2/26/2015 21:36:04	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF006_CIQ.xlsx
+2/26/2015 21:36:07	Starting with Common elements
+2/26/2015 21:36:07	Now working on ARG21 specifics
+2/26/2015 21:36:07	Now working on ARG22 specifics
+2/26/2015 21:36:07	Now working on PCF specifics
+2/26/2015 21:36:07	Now adding a line to the AllVar CSV
+2/26/2015 21:36:07	Now generating configuration for ARG21
+2/26/2015 21:36:07	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG21.txt
+2/26/2015 21:36:07	Now adding a line to the various section CSV files
+2/26/2015 21:36:07	Now generating configuration for ARG22
+2/26/2015 21:36:07	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF006ARG22.txt
+2/26/2015 21:36:07	Now adding a line to the various section CSV files
+2/26/2015 21:36:07	Closing this CIQ and moving on to the next one
+2/26/2015 21:36:07	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\SEPCF007_CIQ.xlsx
+2/26/2015 21:36:10	Starting with Common elements
+2/26/2015 21:36:10	Now working on ARG21 specifics
+2/26/2015 21:36:10	Now working on ARG22 specifics
+2/26/2015 21:36:10	Now working on PCF specifics
+2/26/2015 21:36:10	Now adding a line to the AllVar CSV
+2/26/2015 21:36:10	Now generating configuration for ARG21
+2/26/2015 21:36:10	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG21.txt
+2/26/2015 21:36:10	Now adding a line to the various section CSV files
+2/26/2015 21:36:10	Now generating configuration for ARG22
+2/26/2015 21:36:10	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\SEPCF007ARG22.txt
+2/26/2015 21:36:10	Now adding a line to the various section CSV files
+2/26/2015 21:36:10	Closing this CIQ and moving on to the next one
+2/26/2015 21:36:10	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF002_CIQ.xlsx
+2/26/2015 21:36:12	Starting with Common elements
+2/26/2015 21:36:12	Now working on ARG21 specifics
+2/26/2015 21:36:12	Now working on ARG22 specifics
+2/26/2015 21:36:12	Now working on PCF specifics
+2/26/2015 21:36:12	Now adding a line to the AllVar CSV
+2/26/2015 21:36:12	Now generating configuration for ARG21
+2/26/2015 21:36:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG21.txt
+2/26/2015 21:36:12	Now adding a line to the various section CSV files
+2/26/2015 21:36:12	Now generating configuration for ARG22
+2/26/2015 21:36:12	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF002ARG22.txt
+2/26/2015 21:36:12	Now adding a line to the various section CSV files
+2/26/2015 21:36:12	Closing this CIQ and moving on to the next one
+2/26/2015 21:36:12	Opening up CIQ C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CIQ\VGPCF003_CIQ.xlsx
+2/26/2015 21:36:14	Starting with Common elements
+2/26/2015 21:36:14	Now working on ARG21 specifics
+2/26/2015 21:36:14	Now working on ARG22 specifics
+2/26/2015 21:36:14	Now working on PCF specifics
+2/26/2015 21:36:14	Now adding a line to the AllVar CSV
+2/26/2015 21:36:14	Now generating configuration for ARG21
+2/26/2015 21:36:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG21.txt
+2/26/2015 21:36:14	Now adding a line to the various section CSV files
+2/26/2015 21:36:14	Now generating configuration for ARG22
+2/26/2015 21:36:14	Saving configuration to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\VGPCF003ARG22.txt
+2/26/2015 21:36:14	Now adding a line to the various section CSV files
+2/26/2015 21:36:14	Closing this CIQ and moving on to the next one
+2/26/2015 21:36:14	Done. CSV saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\CSVs\ASR5500Allvars.csv
+2/26/2015 21:36:14	Configuration files saved to C:\Users\sbjarna\Documents\Projects\ASR5500\Phase5\configurations\
+3/6/2015 13:53:51	Main directory C:\2015PCF\
+3/6/2015 13:53:51	Reading CIQ's from C:\2015PCF\CIQ\
+3/6/2015 13:53:51	Using template file C:\2015PCF\ASR5500ConfDollar.txt
+3/6/2015 13:53:51	Saving Configurations to C:\2015PCF\configurations\
+3/6/2015 13:53:51	Saving the allvar CSV file to C:\2015PCF\CSVs\ASR5500Allvars.csv
+3/6/2015 13:53:51	Saving the ACLVarCSVName CSV file to C:\2015PCF\CSVs\S1ASR55KACL.csv
+3/6/2015 13:53:51	Saving the BVIVarCSVName CSV file to C:\2015PCF\CSVs\S2ASR55KBVI.csv
+3/6/2015 13:53:51	Saving the BEDVarCSVName CSV file to C:\2015PCF\CSVs\S3ASR55KBED.csv
+3/6/2015 13:53:51	Saving the BEXVarCSVName CSV file to C:\2015PCF\CSVs\S4ASR55KBEX.csv
+3/6/2015 13:53:51	Saving the IntVarCSVName CSV file to C:\2015PCF\CSVs\S5ASR55KInt.csv
+3/6/2015 13:53:51	Saving the VPNVarCSVName CSV file to C:\2015PCF\CSVs\S6ASR55KVPN.csv
+3/6/2015 13:53:51	Saving the BGPVarCSVName CSV file to C:\2015PCF\CSVs\S7ASR55KBGP.csv
+3/6/2015 13:53:51	Validating input
+3/6/2015 13:53:51	C:\2015PCF\configurations\ did not exists so I created it
+3/6/2015 13:53:51	C:\2015PCF\CSVs\ did not exists so I created it
+3/6/2015 13:53:51	Starting Excel
+3/6/2015 13:54:06	Initializing Dictionaries
+3/6/2015 13:54:06	Creating CSV files
+3/6/2015 13:54:06	AllVar CSV Created
+3/6/2015 13:54:06	ACLVar CSV Created
+3/6/2015 13:54:06	BVIVar Created
+3/6/2015 13:54:06	BEDVar CSV Created
+3/6/2015 13:54:06	BEXVar CSV Created
+3/6/2015 13:54:06	IntVar CSV Created
+3/6/2015 13:54:06	VPNVar CSV Created
+3/6/2015 13:54:06	BGPVar CSV Created
+3/6/2015 13:54:06	writing headers to CSV files
+3/6/2015 13:54:06	Opening up CIQ C:\2015PCF\CIQ\CHPCF004_CIQ.xlsx
+3/6/2015 13:54:11	Starting with Common elements
+3/6/2015 13:54:11	Now working on ARG21 specifics
+3/6/2015 13:54:11	Now working on ARG22 specifics
+3/6/2015 13:54:11	Now working on PCF specifics
+3/6/2015 13:54:11	Now adding a line to the AllVar CSV
+3/6/2015 13:54:11	Now generating configuration for ARG21
+3/6/2015 13:54:11	Saving configuration to C:\2015PCF\configurations\CHPCF004ARG21.txt
+3/6/2015 13:54:11	Now adding a line to the various section CSV files
+3/6/2015 13:54:11	Now generating configuration for ARG22
+3/6/2015 13:54:11	Saving configuration to C:\2015PCF\configurations\CHPCF004ARG22.txt
+3/6/2015 13:54:11	Now adding a line to the various section CSV files
+3/6/2015 13:54:11	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:12	Opening up CIQ C:\2015PCF\CIQ\CHPCF005_CIQ.xlsx
+3/6/2015 13:54:15	Starting with Common elements
+3/6/2015 13:54:16	Now working on ARG21 specifics
+3/6/2015 13:54:16	Now working on ARG22 specifics
+3/6/2015 13:54:16	Now working on PCF specifics
+3/6/2015 13:54:16	Now adding a line to the AllVar CSV
+3/6/2015 13:54:16	Now generating configuration for ARG21
+3/6/2015 13:54:16	Saving configuration to C:\2015PCF\configurations\CHPCF005ARG21.txt
+3/6/2015 13:54:16	Now adding a line to the various section CSV files
+3/6/2015 13:54:16	Now generating configuration for ARG22
+3/6/2015 13:54:16	Saving configuration to C:\2015PCF\configurations\CHPCF005ARG22.txt
+3/6/2015 13:54:16	Now adding a line to the various section CSV files
+3/6/2015 13:54:16	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:16	Opening up CIQ C:\2015PCF\CIQ\CRPCF003_CIQ.xlsx
+3/6/2015 13:54:20	Starting with Common elements
+3/6/2015 13:54:20	Now working on ARG21 specifics
+3/6/2015 13:54:20	Now working on ARG22 specifics
+3/6/2015 13:54:20	Now working on PCF specifics
+3/6/2015 13:54:20	Now adding a line to the AllVar CSV
+3/6/2015 13:54:20	Now generating configuration for ARG21
+3/6/2015 13:54:20	Saving configuration to C:\2015PCF\configurations\CRPCF003ARG21.txt
+3/6/2015 13:54:20	Now adding a line to the various section CSV files
+3/6/2015 13:54:20	Now generating configuration for ARG22
+3/6/2015 13:54:20	Saving configuration to C:\2015PCF\configurations\CRPCF003ARG22.txt
+3/6/2015 13:54:20	Now adding a line to the various section CSV files
+3/6/2015 13:54:20	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:20	Opening up CIQ C:\2015PCF\CIQ\CRPCF004_CIQ.xlsx
+3/6/2015 13:54:24	Starting with Common elements
+3/6/2015 13:54:24	Now working on ARG21 specifics
+3/6/2015 13:54:24	Now working on ARG22 specifics
+3/6/2015 13:54:24	Now working on PCF specifics
+3/6/2015 13:54:24	Now adding a line to the AllVar CSV
+3/6/2015 13:54:24	Now generating configuration for ARG21
+3/6/2015 13:54:24	Saving configuration to C:\2015PCF\configurations\CRPCF004ARG21.txt
+3/6/2015 13:54:24	Now adding a line to the various section CSV files
+3/6/2015 13:54:24	Now generating configuration for ARG22
+3/6/2015 13:54:24	Saving configuration to C:\2015PCF\configurations\CRPCF004ARG22.txt
+3/6/2015 13:54:24	Now adding a line to the various section CSV files
+3/6/2015 13:54:24	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:24	Opening up CIQ C:\2015PCF\CIQ\DAPCF004_CIQ.xlsx
+3/6/2015 13:54:27	Starting with Common elements
+3/6/2015 13:54:27	Now working on ARG21 specifics
+3/6/2015 13:54:27	Now working on ARG22 specifics
+3/6/2015 13:54:27	Now working on PCF specifics
+3/6/2015 13:54:27	Now adding a line to the AllVar CSV
+3/6/2015 13:54:27	Now generating configuration for ARG21
+3/6/2015 13:54:27	Saving configuration to C:\2015PCF\configurations\DAPCF004ARG21.txt
+3/6/2015 13:54:27	Now adding a line to the various section CSV files
+3/6/2015 13:54:27	Now generating configuration for ARG22
+3/6/2015 13:54:27	Saving configuration to C:\2015PCF\configurations\DAPCF004ARG22.txt
+3/6/2015 13:54:27	Now adding a line to the various section CSV files
+3/6/2015 13:54:27	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:27	Opening up CIQ C:\2015PCF\CIQ\DAPCF005_CIQ.xlsx
+3/6/2015 13:54:31	Starting with Common elements
+3/6/2015 13:54:31	Now working on ARG21 specifics
+3/6/2015 13:54:31	Now working on ARG22 specifics
+3/6/2015 13:54:31	Now working on PCF specifics
+3/6/2015 13:54:31	Now adding a line to the AllVar CSV
+3/6/2015 13:54:31	Now generating configuration for ARG21
+3/6/2015 13:54:32	Saving configuration to C:\2015PCF\configurations\DAPCF005ARG21.txt
+3/6/2015 13:54:32	Now adding a line to the various section CSV files
+3/6/2015 13:54:32	Now generating configuration for ARG22
+3/6/2015 13:54:32	Saving configuration to C:\2015PCF\configurations\DAPCF005ARG22.txt
+3/6/2015 13:54:32	Now adding a line to the various section CSV files
+3/6/2015 13:54:32	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:32	Opening up CIQ C:\2015PCF\CIQ\DCPCF002_CIQ.xlsx
+3/6/2015 13:54:36	Starting with Common elements
+3/6/2015 13:54:36	Now working on ARG21 specifics
+3/6/2015 13:54:36	Now working on ARG22 specifics
+3/6/2015 13:54:36	Now working on PCF specifics
+3/6/2015 13:54:36	Now adding a line to the AllVar CSV
+3/6/2015 13:54:36	Now generating configuration for ARG21
+3/6/2015 13:54:36	Saving configuration to C:\2015PCF\configurations\DCPCF002ARG21.txt
+3/6/2015 13:54:36	Now adding a line to the various section CSV files
+3/6/2015 13:54:36	Now generating configuration for ARG22
+3/6/2015 13:54:36	Saving configuration to C:\2015PCF\configurations\DCPCF002ARG22.txt
+3/6/2015 13:54:36	Now adding a line to the various section CSV files
+3/6/2015 13:54:36	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:36	Opening up CIQ C:\2015PCF\CIQ\DEPCF003_CIQ.xlsx
+3/6/2015 13:54:41	Starting with Common elements
+3/6/2015 13:54:41	Now working on ARG21 specifics
+3/6/2015 13:54:41	Now working on ARG22 specifics
+3/6/2015 13:54:41	Now working on PCF specifics
+3/6/2015 13:54:41	Now adding a line to the AllVar CSV
+3/6/2015 13:54:41	Now generating configuration for ARG21
+3/6/2015 13:54:41	Saving configuration to C:\2015PCF\configurations\DEPCF003ARG21.txt
+3/6/2015 13:54:41	Now adding a line to the various section CSV files
+3/6/2015 13:54:41	Now generating configuration for ARG22
+3/6/2015 13:54:41	Saving configuration to C:\2015PCF\configurations\DEPCF003ARG22.txt
+3/6/2015 13:54:41	Now adding a line to the various section CSV files
+3/6/2015 13:54:41	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:41	Opening up CIQ C:\2015PCF\CIQ\HNPCF003_CIQ.xlsx
+3/6/2015 13:54:46	Starting with Common elements
+3/6/2015 13:54:46	Now working on ARG21 specifics
+3/6/2015 13:54:46	Now working on ARG22 specifics
+3/6/2015 13:54:46	Now working on PCF specifics
+3/6/2015 13:54:46	Now adding a line to the AllVar CSV
+3/6/2015 13:54:46	Now generating configuration for ARG21
+3/6/2015 13:54:46	Saving configuration to C:\2015PCF\configurations\HNPCF003ARG21.txt
+3/6/2015 13:54:46	Now adding a line to the various section CSV files
+3/6/2015 13:54:46	Now generating configuration for ARG22
+3/6/2015 13:54:46	Saving configuration to C:\2015PCF\configurations\HNPCF003ARG22.txt
+3/6/2015 13:54:46	Now adding a line to the various section CSV files
+3/6/2015 13:54:46	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:46	Opening up CIQ C:\2015PCF\CIQ\LAPCF006_CIQ.xlsx
+3/6/2015 13:54:50	Starting with Common elements
+3/6/2015 13:54:50	Now working on ARG21 specifics
+3/6/2015 13:54:50	Now working on ARG22 specifics
+3/6/2015 13:54:50	Now working on PCF specifics
+3/6/2015 13:54:50	Now adding a line to the AllVar CSV
+3/6/2015 13:54:50	Now generating configuration for ARG21
+3/6/2015 13:54:50	Saving configuration to C:\2015PCF\configurations\LAPCF006ARG21.txt
+3/6/2015 13:54:50	Now adding a line to the various section CSV files
+3/6/2015 13:54:50	Now generating configuration for ARG22
+3/6/2015 13:54:50	Saving configuration to C:\2015PCF\configurations\LAPCF006ARG22.txt
+3/6/2015 13:54:50	Now adding a line to the various section CSV files
+3/6/2015 13:54:50	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:50	Opening up CIQ C:\2015PCF\CIQ\LAPCF007_CIQ.xlsx
+3/6/2015 13:54:55	Starting with Common elements
+3/6/2015 13:54:55	Now working on ARG21 specifics
+3/6/2015 13:54:55	Now working on ARG22 specifics
+3/6/2015 13:54:55	Now working on PCF specifics
+3/6/2015 13:54:55	Now adding a line to the AllVar CSV
+3/6/2015 13:54:55	Now generating configuration for ARG21
+3/6/2015 13:54:55	Saving configuration to C:\2015PCF\configurations\LAPCF007ARG21.txt
+3/6/2015 13:54:55	Now adding a line to the various section CSV files
+3/6/2015 13:54:55	Now generating configuration for ARG22
+3/6/2015 13:54:55	Saving configuration to C:\2015PCF\configurations\LAPCF007ARG22.txt
+3/6/2015 13:54:55	Now adding a line to the various section CSV files
+3/6/2015 13:54:55	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:55	Opening up CIQ C:\2015PCF\CIQ\LAPCF008_CIQ.xlsx
+3/6/2015 13:54:58	Starting with Common elements
+3/6/2015 13:54:58	Now working on ARG21 specifics
+3/6/2015 13:54:58	Now working on ARG22 specifics
+3/6/2015 13:54:58	Now working on PCF specifics
+3/6/2015 13:54:58	Now adding a line to the AllVar CSV
+3/6/2015 13:54:58	Now generating configuration for ARG21
+3/6/2015 13:54:58	Saving configuration to C:\2015PCF\configurations\LAPCF008ARG21.txt
+3/6/2015 13:54:58	Now adding a line to the various section CSV files
+3/6/2015 13:54:58	Now generating configuration for ARG22
+3/6/2015 13:54:58	Saving configuration to C:\2015PCF\configurations\LAPCF008ARG22.txt
+3/6/2015 13:54:58	Now adding a line to the various section CSV files
+3/6/2015 13:54:58	Closing this CIQ and moving on to the next one
+3/6/2015 13:54:58	Opening up CIQ C:\2015PCF\CIQ\LAPCF009_CIQ.xlsx
+3/6/2015 13:55:01	Starting with Common elements
+3/6/2015 13:55:01	Now working on ARG21 specifics
+3/6/2015 13:55:01	Now working on ARG22 specifics
+3/6/2015 13:55:01	Now working on PCF specifics
+3/6/2015 13:55:01	Now adding a line to the AllVar CSV
+3/6/2015 13:55:01	Now generating configuration for ARG21
+3/6/2015 13:55:01	Saving configuration to C:\2015PCF\configurations\LAPCF009ARG21.txt
+3/6/2015 13:55:01	Now adding a line to the various section CSV files
+3/6/2015 13:55:01	Now generating configuration for ARG22
+3/6/2015 13:55:01	Saving configuration to C:\2015PCF\configurations\LAPCF009ARG22.txt
+3/6/2015 13:55:01	Now adding a line to the various section CSV files
+3/6/2015 13:55:01	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:01	Opening up CIQ C:\2015PCF\CIQ\NEPCF002_CIQ.xlsx
+3/6/2015 13:55:05	Starting with Common elements
+3/6/2015 13:55:05	Now working on ARG21 specifics
+3/6/2015 13:55:05	Now working on ARG22 specifics
+3/6/2015 13:55:05	Now working on PCF specifics
+3/6/2015 13:55:05	Now adding a line to the AllVar CSV
+3/6/2015 13:55:05	Now generating configuration for ARG21
+3/6/2015 13:55:05	Saving configuration to C:\2015PCF\configurations\NEPCF002ARG21.txt
+3/6/2015 13:55:05	Now adding a line to the various section CSV files
+3/6/2015 13:55:05	Now generating configuration for ARG22
+3/6/2015 13:55:05	Saving configuration to C:\2015PCF\configurations\NEPCF002ARG22.txt
+3/6/2015 13:55:05	Now adding a line to the various section CSV files
+3/6/2015 13:55:05	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:05	Opening up CIQ C:\2015PCF\CIQ\NVPCF003_CIQ.xlsx
+3/6/2015 13:55:08	Starting with Common elements
+3/6/2015 13:55:08	Now working on ARG21 specifics
+3/6/2015 13:55:08	Now working on ARG22 specifics
+3/6/2015 13:55:08	Now working on PCF specifics
+3/6/2015 13:55:08	Now adding a line to the AllVar CSV
+3/6/2015 13:55:08	Now generating configuration for ARG21
+3/6/2015 13:55:08	Saving configuration to C:\2015PCF\configurations\NVPCF003ARG21.txt
+3/6/2015 13:55:08	Now adding a line to the various section CSV files
+3/6/2015 13:55:08	Now generating configuration for ARG22
+3/6/2015 13:55:08	Saving configuration to C:\2015PCF\configurations\NVPCF003ARG22.txt
+3/6/2015 13:55:08	Now adding a line to the various section CSV files
+3/6/2015 13:55:08	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:08	Opening up CIQ C:\2015PCF\CIQ\NYPCF007_CIQ.xlsx
+3/6/2015 13:55:12	Starting with Common elements
+3/6/2015 13:55:12	Now working on ARG21 specifics
+3/6/2015 13:55:12	Now working on ARG22 specifics
+3/6/2015 13:55:12	Now working on PCF specifics
+3/6/2015 13:55:12	Now adding a line to the AllVar CSV
+3/6/2015 13:55:12	Now generating configuration for ARG21
+3/6/2015 13:55:12	Saving configuration to C:\2015PCF\configurations\NYPCF007ARG21.txt
+3/6/2015 13:55:12	Now adding a line to the various section CSV files
+3/6/2015 13:55:12	Now generating configuration for ARG22
+3/6/2015 13:55:12	Saving configuration to C:\2015PCF\configurations\NYPCF007ARG22.txt
+3/6/2015 13:55:12	Now adding a line to the various section CSV files
+3/6/2015 13:55:12	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:12	Opening up CIQ C:\2015PCF\CIQ\NYPCF008_CIQ.xlsx
+3/6/2015 13:55:17	Starting with Common elements
+3/6/2015 13:55:17	Now working on ARG21 specifics
+3/6/2015 13:55:17	Now working on ARG22 specifics
+3/6/2015 13:55:17	Now working on PCF specifics
+3/6/2015 13:55:17	Now adding a line to the AllVar CSV
+3/6/2015 13:55:17	Now generating configuration for ARG21
+3/6/2015 13:55:17	Saving configuration to C:\2015PCF\configurations\NYPCF008ARG21.txt
+3/6/2015 13:55:17	Now adding a line to the various section CSV files
+3/6/2015 13:55:17	Now generating configuration for ARG22
+3/6/2015 13:55:17	Saving configuration to C:\2015PCF\configurations\NYPCF008ARG22.txt
+3/6/2015 13:55:17	Now adding a line to the various section CSV files
+3/6/2015 13:55:17	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:17	Opening up CIQ C:\2015PCF\CIQ\NYPCF009_CIQ.xlsx
+3/6/2015 13:55:21	Starting with Common elements
+3/6/2015 13:55:22	Now working on ARG21 specifics
+3/6/2015 13:55:22	Now working on ARG22 specifics
+3/6/2015 13:55:22	Now working on PCF specifics
+3/6/2015 13:55:22	Now adding a line to the AllVar CSV
+3/6/2015 13:55:22	Now generating configuration for ARG21
+3/6/2015 13:55:22	Saving configuration to C:\2015PCF\configurations\NYPCF009ARG21.txt
+3/6/2015 13:55:22	Now adding a line to the various section CSV files
+3/6/2015 13:55:22	Now generating configuration for ARG22
+3/6/2015 13:55:22	Saving configuration to C:\2015PCF\configurations\NYPCF009ARG22.txt
+3/6/2015 13:55:22	Now adding a line to the various section CSV files
+3/6/2015 13:55:22	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:22	Opening up CIQ C:\2015PCF\CIQ\ORPCF003_CIQ.xlsx
+3/6/2015 13:55:26	Starting with Common elements
+3/6/2015 13:55:26	Now working on ARG21 specifics
+3/6/2015 13:55:26	Now working on ARG22 specifics
+3/6/2015 13:55:26	Now working on PCF specifics
+3/6/2015 13:55:26	Now adding a line to the AllVar CSV
+3/6/2015 13:55:26	Now generating configuration for ARG21
+3/6/2015 13:55:26	Saving configuration to C:\2015PCF\configurations\ORPCF003ARG21.txt
+3/6/2015 13:55:26	Now adding a line to the various section CSV files
+3/6/2015 13:55:26	Now generating configuration for ARG22
+3/6/2015 13:55:26	Saving configuration to C:\2015PCF\configurations\ORPCF003ARG22.txt
+3/6/2015 13:55:26	Now adding a line to the various section CSV files
+3/6/2015 13:55:26	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:26	Opening up CIQ C:\2015PCF\CIQ\ORPCF004_CIQ.xlsx
+3/6/2015 13:55:31	Starting with Common elements
+3/6/2015 13:55:31	Now working on ARG21 specifics
+3/6/2015 13:55:31	Now working on ARG22 specifics
+3/6/2015 13:55:31	Now working on PCF specifics
+3/6/2015 13:55:31	Now adding a line to the AllVar CSV
+3/6/2015 13:55:31	Now generating configuration for ARG21
+3/6/2015 13:55:31	Saving configuration to C:\2015PCF\configurations\ORPCF004ARG21.txt
+3/6/2015 13:55:31	Now adding a line to the various section CSV files
+3/6/2015 13:55:31	Now generating configuration for ARG22
+3/6/2015 13:55:31	Saving configuration to C:\2015PCF\configurations\ORPCF004ARG22.txt
+3/6/2015 13:55:31	Now adding a line to the various section CSV files
+3/6/2015 13:55:31	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:31	Opening up CIQ C:\2015PCF\CIQ\PHPCF004_CIQ.xlsx
+3/6/2015 13:55:33	Starting with Common elements
+3/6/2015 13:55:33	Now working on ARG21 specifics
+3/6/2015 13:55:33	Now working on ARG22 specifics
+3/6/2015 13:55:34	Now working on PCF specifics
+3/6/2015 13:55:34	Now adding a line to the AllVar CSV
+3/6/2015 13:55:34	Now generating configuration for ARG21
+3/6/2015 13:55:34	Saving configuration to C:\2015PCF\configurations\PHPCF004ARG21.txt
+3/6/2015 13:55:34	Now adding a line to the various section CSV files
+3/6/2015 13:55:34	Now generating configuration for ARG22
+3/6/2015 13:55:34	Saving configuration to C:\2015PCF\configurations\PHPCF004ARG22.txt
+3/6/2015 13:55:34	Now adding a line to the various section CSV files
+3/6/2015 13:55:34	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:34	Opening up CIQ C:\2015PCF\CIQ\SEPCF006_CIQ.xlsx
+3/6/2015 13:55:38	Starting with Common elements
+3/6/2015 13:55:38	Now working on ARG21 specifics
+3/6/2015 13:55:38	Now working on ARG22 specifics
+3/6/2015 13:55:38	Now working on PCF specifics
+3/6/2015 13:55:38	Now adding a line to the AllVar CSV
+3/6/2015 13:55:38	Now generating configuration for ARG21
+3/6/2015 13:55:38	Saving configuration to C:\2015PCF\configurations\SEPCF006ARG21.txt
+3/6/2015 13:55:38	Now adding a line to the various section CSV files
+3/6/2015 13:55:38	Now generating configuration for ARG22
+3/6/2015 13:55:38	Saving configuration to C:\2015PCF\configurations\SEPCF006ARG22.txt
+3/6/2015 13:55:38	Now adding a line to the various section CSV files
+3/6/2015 13:55:38	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:38	Opening up CIQ C:\2015PCF\CIQ\SEPCF007_CIQ.xlsx
+3/6/2015 13:55:42	Starting with Common elements
+3/6/2015 13:55:43	Now working on ARG21 specifics
+3/6/2015 13:55:43	Now working on ARG22 specifics
+3/6/2015 13:55:43	Now working on PCF specifics
+3/6/2015 13:55:43	Now adding a line to the AllVar CSV
+3/6/2015 13:55:43	Now generating configuration for ARG21
+3/6/2015 13:55:43	Saving configuration to C:\2015PCF\configurations\SEPCF007ARG21.txt
+3/6/2015 13:55:43	Now adding a line to the various section CSV files
+3/6/2015 13:55:43	Now generating configuration for ARG22
+3/6/2015 13:55:43	Saving configuration to C:\2015PCF\configurations\SEPCF007ARG22.txt
+3/6/2015 13:55:43	Now adding a line to the various section CSV files
+3/6/2015 13:55:43	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:43	Opening up CIQ C:\2015PCF\CIQ\VGPCF002_CIQ.xlsx
+3/6/2015 13:55:45	Starting with Common elements
+3/6/2015 13:55:45	Now working on ARG21 specifics
+3/6/2015 13:55:45	Now working on ARG22 specifics
+3/6/2015 13:55:46	Now working on PCF specifics
+3/6/2015 13:55:46	Now adding a line to the AllVar CSV
+3/6/2015 13:55:46	Now generating configuration for ARG21
+3/6/2015 13:55:46	Saving configuration to C:\2015PCF\configurations\VGPCF002ARG21.txt
+3/6/2015 13:55:46	Now adding a line to the various section CSV files
+3/6/2015 13:55:46	Now generating configuration for ARG22
+3/6/2015 13:55:46	Saving configuration to C:\2015PCF\configurations\VGPCF002ARG22.txt
+3/6/2015 13:55:46	Now adding a line to the various section CSV files
+3/6/2015 13:55:46	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:46	Opening up CIQ C:\2015PCF\CIQ\VGPCF003_CIQ.xlsx
+3/6/2015 13:55:49	Starting with Common elements
+3/6/2015 13:55:49	Now working on ARG21 specifics
+3/6/2015 13:55:49	Now working on ARG22 specifics
+3/6/2015 13:55:49	Now working on PCF specifics
+3/6/2015 13:55:49	Now adding a line to the AllVar CSV
+3/6/2015 13:55:49	Now generating configuration for ARG21
+3/6/2015 13:55:49	Saving configuration to C:\2015PCF\configurations\VGPCF003ARG21.txt
+3/6/2015 13:55:49	Now adding a line to the various section CSV files
+3/6/2015 13:55:49	Now generating configuration for ARG22
+3/6/2015 13:55:49	Saving configuration to C:\2015PCF\configurations\VGPCF003ARG22.txt
+3/6/2015 13:55:49	Now adding a line to the various section CSV files
+3/6/2015 13:55:49	Closing this CIQ and moving on to the next one
+3/6/2015 13:55:49	Done. CSV saved to C:\2015PCF\CSVs\ASR5500Allvars.csv
+3/6/2015 13:55:49	Configuration files saved to C:\2015PCF\configurations\

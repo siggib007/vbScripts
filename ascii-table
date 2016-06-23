@@ -1,0 +1,3 @@
+for x=1 to 256
+	wscript.echo x & vbtab & chr(x)
+next

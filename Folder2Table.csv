@@ -1,0 +1,12 @@
+FolderName,TableName,BaseFileName
+AdminAudit,AdminAudit,Administration Audit
+Backup and Restore,BackupLog,Backup and Restore
+DBReplicate,Replication,Database Replication
+DbSync,,
+Failed Attempts,FailedAttempts,Failed Attempts
+Passed Authentications,PassedAuth,Passed Authentications
+RADIUS Accounting,RADIUSAccounting,RADIUS Accounting
+ServiceMonitoring,csmonlog,CSMonLog
+TACACS+ Accounting,TACACSAccounting,TACACS+ Accounting
+TACACS+ Administration,TacacsAdmin, Tacacs+ Administration 
+VoIP Accounting,,

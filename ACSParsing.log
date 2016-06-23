@@ -1,0 +1,1340 @@
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:31:54 AM Processing \\tk2ipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:54 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:31:55 AM Processing \\tk2ipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:55 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:31:55 AM Processing \\tk2ipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:55 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:31:55 AM Processing \\tk2ipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:55 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:31:55 AM Processing \\tk2ipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:55 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:31:56 AM Processing \\tk2ipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:56 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:31:56 AM Processing \\tk2ipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:56 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\tk2ipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:31:56 AM Processing \\tk2ipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:56 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:31:56 AM Processing \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:31:56 AM
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\tk2ipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:31:57 AM Processing \\tk2ppeacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:57 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:31:57 AM Processing \\tk2ppeacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:57 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:31:57 AM Processing \\tk2ppeacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:57 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:31:57 AM Processing \\tk2ppeacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:57 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:31:58 AM Processing \\tk2ppeacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:58 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:31:58 AM Processing \\tk2ppeacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:58 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:31:58 AM Processing \\tk2ppeacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:58 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\tk2ppeacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:31:58 AM Processing \\tk2ppeacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:58 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:31:58 AM Processing \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:31:58 AM
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\tk2ppeacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:31:59 AM Processing \\bayipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:59 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:31:59 AM Processing \\bayipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:59 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:31:59 AM Processing \\bayipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:31:59 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:32:00 AM Processing \\bayipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:00 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:32:00 AM Processing \\bayipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:00 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:32:00 AM Processing \\bayipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:00 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:32:00 AM Processing \\bayipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:00 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:32:01 AM Processing \\bayipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:01 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:32:01 AM Processing \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:32:01 AM
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\bayipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:32:08 AM Processing \\bayipsacea02\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:08 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:32:08 AM Processing \\bayipsacea02\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:08 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:32:08 AM Processing \\bayipsacea02\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:08 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:32:08 AM Processing \\bayipsacea02\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:08 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:32:09 AM Processing \\bayipsacea02\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:09 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:32:09 AM Processing \\bayipsacea02\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:09 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:32:09 AM Processing \\bayipsacea02\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:09 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\bayipsacea02\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:32:09 AM Processing \\bayipsacea02\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:09 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:32:09 AM Processing \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:32:09 AM
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\bayipsacea02\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:32:12 AM Processing \\Dbipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:12 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:32:12 AM Processing \\Dbipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:12 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:32:12 AM Processing \\Dbipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:12 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:32:12 AM Processing \\Dbipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:12 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:32:13 AM Processing \\Dbipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:13 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:32:13 AM Processing \\Dbipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:13 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:32:13 AM Processing \\Dbipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:13 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\Dbipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:32:13 AM Processing \\Dbipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:13 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:32:13 AM Processing \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:32:13 AM
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\Dbipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:32:29 AM Processing \\ukipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:29 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:32:29 AM Processing \\ukipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:29 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:32:29 AM Processing \\ukipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:29 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:32:30 AM Processing \\ukipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:30 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:32:30 AM Processing \\ukipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:30 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:32:30 AM Processing \\ukipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:30 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:32:30 AM Processing \\ukipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:30 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\ukipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:32:31 AM Processing \\ukipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:31 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:32:31 AM Processing \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:32:31 AM
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\ukipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:32:48 AM Processing \\sgipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:48 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:32:48 AM Processing \\sgipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:48 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:32:48 AM Processing \\sgipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:48 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:32:48 AM Processing \\sgipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:48 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:32:49 AM Processing \\sgipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:49 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:32:49 AM Processing \\sgipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:49 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:32:49 AM Processing \\sgipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:49 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\sgipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:32:49 AM Processing \\sgipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:32:49 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:32:50 AM Processing \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:32:50 AM
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\sgipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:33:15 AM Processing \\kawipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:15 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:33:15 AM Processing \\kawipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:15 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:33:15 AM Processing \\kawipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:15 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:33:16 AM Processing \\kawipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:16 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:33:16 AM Processing \\kawipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:16 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:33:16 AM Processing \\kawipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:16 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:33:16 AM Processing \\kawipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:16 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\kawipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:33:17 AM Processing \\kawipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:17 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:33:17 AM Processing \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:33:17 AM
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\kawipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:33:31 AM Processing \\saipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:31 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:33:31 AM Processing \\saipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:31 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:33:31 AM Processing \\saipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:31 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:33:31 AM Processing \\saipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:31 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:33:32 AM Processing \\saipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:32 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:33:32 AM Processing \\saipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:32 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:33:32 AM Processing \\saipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:32 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\saipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:33:32 AM Processing \\saipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:32 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:33:32 AM Processing \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:33:32 AM
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\saipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv
+select isnull(max(timestamp),0)  from [AdminAudit]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\AdminAudit\Administration Audit 2007-03-08.csv
+3/8/2007 10:33:33 AM Processing \\bluipsacea01\logs\AdminAudit\Administration Audit......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:33 AM
+select isnull(max(timestamp),0)  from [BackupLog]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\Backup and Restore\Backup and Restore 2007-03-08.csv
+3/8/2007 10:33:33 AM Processing \\bluipsacea01\logs\Backup and Restore\Backup and Restore......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:33 AM
+select isnull(max(timestamp),0)  from [Replicationlog]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\DBReplicate\Database Replication 2007-03-08.csv
+3/8/2007 10:33:33 AM Processing \\bluipsacea01\logs\DBReplicate\Database Replication......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:33 AM
+select isnull(max(timestamp),0)  from [FailedAttempts]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\Failed Attempts\Failed Attempts 2007-03-08.csv
+3/8/2007 10:33:33 AM Processing \\bluipsacea01\logs\Failed Attempts\Failed Attempts......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:33 AM
+select isnull(max(timestamp),0)  from [PassedAuth]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\Passed Authentications\Passed Authentications 2007-03-08.csv
+3/8/2007 10:33:34 AM Processing \\bluipsacea01\logs\Passed Authentications\Passed Authentications......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:34 AM
+select isnull(max(timestamp),0)  from [RADIUSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\RADIUS Accounting\RADIUS Accounting 2007-03-08.csv
+3/8/2007 10:33:34 AM Processing \\bluipsacea01\logs\RADIUS Accounting\RADIUS Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:34 AM
+select isnull(max(timestamp),0)  from [csmonlog]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\ServiceMonitoring\CSMonLog 2007-03-08.csv
+3/8/2007 10:33:34 AM Processing \\bluipsacea01\logs\ServiceMonitoring\CSMonLog......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:34 AM
+select isnull(max(timestamp),0)  from [TACACSAccounting]
+maxdate: 3/7/2007
+date is fine
+\\bluipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting 2007-03-08.csv
+3/8/2007 10:33:35 AM Processing \\bluipsacea01\logs\TACACS+ Accounting\TACACS+ Accounting......
+MaxDate is 3/8/2007 and yesterday is 3/7/2007 10:33:35 AM
+select isnull(max(timestamp),0)  from [TacacsAdmin]
+maxdate: 1/1/1900
+invalid date, it's now 2/15/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+3/8/2007 10:33:35 AM Processing \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration ......
+MaxDate is 2/16/2007 and yesterday is 3/7/2007 10:33:35 AM
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-16.csv
+current: 2/17/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-17.csv
+current: 2/18/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-18.csv
+current: 2/19/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-19.csv
+current: 2/20/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-20.csv
+current: 2/21/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-21.csv
+current: 2/22/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-22.csv
+current: 2/23/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-23.csv
+current: 2/24/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-24.csv
+current: 2/25/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-25.csv
+current: 2/26/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-26.csv
+current: 2/27/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-27.csv
+current: 2/28/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-02-28.csv
+current: 3/1/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-01.csv
+current: 3/2/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-02.csv
+current: 3/3/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-03.csv
+current: 3/4/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-04.csv
+current: 3/5/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-05.csv
+current: 3/6/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-06.csv
+current: 3/7/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+Check to see if \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv exists.
+Can't find \\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-07.csv
+current: 3/8/2007
+\\bluipsacea01\logs\TACACS+ Administration\ Tacacs+ Administration  2007-03-08.csv

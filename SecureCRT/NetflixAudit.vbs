@@ -1,20 +1,25 @@
+#$language = "VBScript"
+#$interface = "1.0"
+
 '|----------------------------------------------------------------------------------------------------------|
 '|  Author: Siggi Bjarnason                                                                                 |
 '|  Authored: 06/23/16                                                                                      |
 '|  Copyright: Siggi Bjarnason 2016                                                                         |
 '|----------------------------------------------------------------------------------------------------------|
 
-#$language = "VBScript"
-#$interface = "1.0"
 Option Explicit
+dim strInFile, strOutFile, strDelOut, strDelRaw
 
 ' User Spefified values, specify values here per your needs
-strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\AGC_cleanup_nexthop.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit.csv"
-strDelOut    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelOut.csv"
+strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\TestFile1.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit-Test1.csv"
+strDelOut    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelOut-Test1.csv"
+strDelRaw    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelRaw.txt"
 
-const DelNum = 38
-const ValidateDel = True
+const DelNum       = 38
+const ValidateDel  = True
+
+'Nothing below here is user configurable proceed at your own risk.
 
 Sub Main
 	const ForReading    = 1
@@ -24,14 +29,8 @@ Sub Main
 	const VerifyCmd = "show run ipv4 access-list OMW-ABF-IN | include "
 	const FirstCol = 4
 
-	dim strInFile, strOutFile, strDelOut
-
-
-
-	'Nothing below here is user configurable proceed at your own risk.
-
-	dim strParts, strLine, objFileIn, objFileOut, objDelOut, host, ConCmd, cmd, fso, nError, strErr, strResult, x
-	dim strResultParts, strNextHop, objDelDICT, strDelList(), strLineNum, strOut
+	dim strParts, strLine, objFileIn, objFileOut, objDelOut, objDROut, host, ConCmd, cmd, fso, nError, strErr, strResult, x,y
+	dim strResultParts, strNextHop, objDelDICT, strDelList(), strLineNum, strOut, strResLines
 
 	LoadDelList strDelList
 
@@ -42,8 +41,9 @@ Sub Main
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
-	set objDelOut = fso.OpenTextFile(strDelOut, ForWriting, True)
-	Set objFileIn = fso.OpenTextFile(strInFile, ForReading, false)
+	set objDelOut  = fso.OpenTextFile(strDelOut, ForWriting, True)
+	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
+	set objDROut   = fso.OpenTextFile(strDelRaw, ForWriting, True)
 	set objDelDICT = CreateObject("Scripting.Dictionary")
 
 	objFileOut.writeline "S=Status. (A):Adding a line there; (D):Deleting this line; (X):Adding a line after Deleting it" & vbcrlf
@@ -105,11 +105,18 @@ Sub Main
 					cmd = VerifyCmd & strDelList(x) & vbcrlf
 					crt.Screen.Send(cmd)
 					crt.Screen.WaitForString "[K",Timeout
-					strResult=trim(crt.Screen.Readstring ("RP/0/",vbcrlf,Timeout))
-					strResultParts = split(strResult," ")
-					if ubound(strResultParts) > 5 then
-						strOut = strOut & ", " & strResultParts(0)
-					end if
+					strResult=trim(crt.Screen.Readstring ("RP/0/",Timeout))
+					objDROut.writeline host & "," & x & "," & strResult
+					if instr(strResult,vbcrlf)>0 then
+						strResLines=split(strResult,vbcrlf)
+						for y = 0 to ubound(strResLines)
+							strResultParts = split(trim(strResLines(y))," ")
+							objDROut.writeline vbtab & "line " & y & "," & strResLines(y)
+							if ubound(strResultParts) > 5 then
+								strOut = strOut & ", " & strResultParts(0)
+							end if
+						next
+					end if 
 					crt.Screen.WaitForString "#", Timeout
 				next
 				objDelOut.writeline strOut

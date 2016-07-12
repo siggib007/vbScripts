@@ -8,13 +8,12 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile, strDelOut, strDelRaw
+dim strInFile, strOutFile, strDelOut
 
 ' User Spefified values, specify values here per your needs
 strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\TestFile1.csv"
 strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit-Test1.csv"
 strDelOut    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelOut-Test1.csv"
-strDelRaw    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelRaw.txt"
 
 const DelNum       = 38
 const ValidateDel  = True
@@ -29,7 +28,7 @@ Sub Main
 	const VerifyCmd = "show run ipv4 access-list OMW-ABF-IN | include "
 	const FirstCol = 4
 
-	dim strParts, strLine, objFileIn, objFileOut, objDelOut, objDROut, host, ConCmd, cmd, fso, nError, strErr, strResult, x,y
+	dim strParts, strLine, objFileIn, objFileOut, objDelOut, host, ConCmd, cmd, fso, nError, strErr, strResult, x,y
 	dim strResultParts, strNextHop, objDelDICT, strDelList(), strLineNum, strOut, strResLines
 
 	LoadDelList strDelList
@@ -43,7 +42,6 @@ Sub Main
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
 	set objDelOut  = fso.OpenTextFile(strDelOut, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
-	set objDROut   = fso.OpenTextFile(strDelRaw, ForWriting, True)
 	set objDelDICT = CreateObject("Scripting.Dictionary")
 
 	objFileOut.writeline "S=Status. (A):Adding a line there; (D):Deleting this line; (X):Adding a line after Deleting it" & vbcrlf
@@ -106,12 +104,10 @@ Sub Main
 					crt.Screen.Send(cmd)
 					crt.Screen.WaitForString "[K",Timeout
 					strResult=trim(crt.Screen.Readstring ("RP/0/",Timeout))
-					objDROut.writeline host & "," & x & "," & strResult
 					if instr(strResult,vbcrlf)>0 then
 						strResLines=split(strResult,vbcrlf)
 						for y = 0 to ubound(strResLines)
 							strResultParts = split(trim(strResLines(y))," ")
-							objDROut.writeline vbtab & "line " & y & "," & strResLines(y)
 							if ubound(strResultParts) > 5 then
 								strOut = strOut & ", " & strResultParts(0)
 							end if

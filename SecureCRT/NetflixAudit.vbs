@@ -1,31 +1,39 @@
+'|----------------------------------------------------------------------------------------------------------|
+'|  Author: Siggi Bjarnason                                                                                 |
+'|  Authored: 06/23/16                                                                                      |
+'|  Copyright: Siggi Bjarnason 2016                                                                         |
+'|----------------------------------------------------------------------------------------------------------|
+
 #$language = "VBScript"
 #$interface = "1.0"
 Option Explicit
-public TestMode
-TestMode = False
+
+' User Spefified values, specify values here per your needs
+strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\AGC_cleanup_nexthop.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit.csv"
+strDelOut    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelOut.csv"
+
+const DelNum = 38
+const ValidateDel = True
 
 Sub Main
 	const ForReading    = 1
 	const ForWriting    = 2
 	const ForAppending  = 8
-	Const Timeout = 5
+	Const Timeout = 2
+	const VerifyCmd = "show run ipv4 access-list OMW-ABF-IN | include "
+	const FirstCol = 4
 
-	dim strInFile, strOutFile
+	dim strInFile, strOutFile, strDelOut
 
-	'|----------------------------------------------------------------------------------------------------------|
-	'|  Author: Siggi Bjarnason                                                                                 |
-	'|  Authored: 06/23/16                                                                                      |
-	'|  Copyright: Siggi Bjarnason 2016                                                                         |
-	'|----------------------------------------------------------------------------------------------------------|
 
-	' User Spefified values, specify values here per your needs
-
-	strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\AGC_cleanup_and_add.csv"
-	strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit.txt"
 
 	'Nothing below here is user configurable proceed at your own risk.
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, cmd, fso, nError, strErr, strResult, x, strResultParts, strNextHop, objDel
+	dim strParts, strLine, objFileIn, objFileOut, objDelOut, host, ConCmd, cmd, fso, nError, strErr, strResult, x
+	dim strResultParts, strNextHop, objDelDICT, strDelList(), strLineNum, strOut
+
+	LoadDelList strDelList
 
 	crt.screen.synchronous = true
 	crt.screen.IgnoreEscape = True
@@ -34,15 +42,19 @@ Sub Main
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
+	set objDelOut = fso.OpenTextFile(strDelOut, ForWriting, True)
 	Set objFileIn = fso.OpenTextFile(strInFile, ForReading, false)
-	set objDel = CreateObject("Scripting.Dictionary")
+	set objDelDICT = CreateObject("Scripting.Dictionary")
+
+	objFileOut.writeline "S=Status. (A):Adding a line there; (D):Deleting this line; (X):Adding a line after Deleting it" & vbcrlf
+	objFileOut.writeline "Device,Line,S,Result,Next Hop"
 
 	strLine = objFileIn.readline
 	While not objFileIn.atendofstream
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(1)
-		objDel.RemoveAll
+		objDelDICT.RemoveAll
 
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
@@ -61,8 +73,8 @@ Sub Main
 			If nError <> 0 Then
 				result = "Error " & nError & ": " & strErr
 			end if
-			for x = 2 to ubound(strParts)-1
-				cmd = "show access-lists OMW-ABF-IN | include " & strParts(x) & vbcrlf
+			for x = FirstCol to ubound(strParts)-1
+				cmd = VerifyCmd & strParts(x) & vbcrlf
 				crt.Screen.Send(cmd)
 				crt.Screen.WaitForString "[K",Timeout
 				strResult=trim(crt.Screen.Readstring ("RP/0/",vbcrlf,Timeout))
@@ -72,21 +84,36 @@ Sub Main
 				else
 					strNextHop = ""
 				end if
-				if x<5 then
-					strResult = "(D)" & strResult
-					if not objDel.Exists (strParts(x)) then
-						objDel.add strParts(x),x
+				if x<FirstCol+3 then
+					strResult = "(D)," & strResult
+					if not objDelDICT.Exists (strParts(x)) then
+						objDelDICT.add strParts(x),x
 					end if
 				else
-					if objDel.Exists (strParts(x)) then
-						strResult = "(X)" & strResult
+					if objDelDICT.Exists (strParts(x)) then
+						strResult = "(X)," & strResult
 					else
-						strResult = "(A)" & strResult
+						strResult = "(A)," & strResult
 					end if
 				end if
 				objFileOut.writeline host & "," & strParts(x) & "," & strResult  & "," & strNextHop
 				crt.Screen.WaitForString "#", Timeout
 			next
+			if ValidateDel = True then
+				strOut = host
+				for x = 0 to DelNum-1
+					cmd = VerifyCmd & strDelList(x) & vbcrlf
+					crt.Screen.Send(cmd)
+					crt.Screen.WaitForString "[K",Timeout
+					strResult=trim(crt.Screen.Readstring ("RP/0/",vbcrlf,Timeout))
+					strResultParts = split(strResult," ")
+					if ubound(strResultParts) > 5 then
+						strOut = strOut & ", " & strResultParts(0)
+					end if
+					crt.Screen.WaitForString "#", Timeout
+				next
+				objDelOut.writeline strOut
+			end if 
 			crt.Session.Disconnect
 		else
 			nError = crt.GetLastError
@@ -97,8 +124,51 @@ Sub Main
 
 	Set objFileIn  = Nothing
 	Set objFileOut = Nothing
+	set objDelOut  = Nothing
 	Set fso = Nothing
 
 	msgbox "All Done, Cleanup complete"
+
 end sub
 
+sub LoadDelList (ByRef strDelList())
+redim strDelList(DelNum)
+	strDelList(0)  = "172.56.128.64 0.0.0.63"
+	strDelList(1)  = "172.56.129.64 0.0.0.63"
+	strDelList(2)  = "172.56.130.64 0.0.0.63"
+	strDelList(3)  = "172.56.131.64 0.0.0.63"
+	strDelList(4)  = "172.56.132.64 0.0.0.63"
+	strDelList(5)  = "172.56.133.64 0.0.0.63"
+	strDelList(6)  = "172.56.134.64 0.0.0.63"
+	strDelList(7)  = "172.56.136.64 0.0.0.63"
+	strDelList(8)  = "172.56.138.64 0.0.0.63"
+	strDelList(9)  = "172.56.139.64 0.0.0.63"
+	strDelList(10) = "172.56.141.64 0.0.0.63"
+	strDelList(11) = "172.56.142.64 0.0.0.63"
+	strDelList(12) = "172.56.143.0 0.0.0.31"
+	strDelList(13) = "172.56.143.64 0.0.0.63"
+	strDelList(14) = "172.56.144.64 0.0.0.63"
+	strDelList(15) = "172.56.145.64 0.0.0.63"
+	strDelList(16) = "172.56.146.64 0.0.0.63"
+	strDelList(17) = "208.54.32.0 0.0.0.31"
+	strDelList(18) = "208.54.34.0 0.0.0.31"
+	strDelList(19) = "208.54.35.0 0.0.0.63"
+	strDelList(20) = "208.54.36.0 0.0.0.63"
+	strDelList(21) = "208.54.37.0 0.0.0.31"
+	strDelList(22) = "208.54.38.0 0.0.0.31"
+	strDelList(23) = "208.54.39.0 0.0.0.31"
+	strDelList(24) = "208.54.40.0 0.0.0.31"
+	strDelList(25) = "208.54.44.0 0.0.0.63"
+	strDelList(26) = "208.54.45.0 0.0.0.31"
+	strDelList(27) = "208.54.64.0 0.0.0.31"
+	strDelList(28) = "208.54.66.0 0.0.0.63"
+	strDelList(29) = "208.54.67.0 0.0.0.31"
+	strDelList(30) = "208.54.70.0 0.0.0.31"
+	strDelList(31) = "208.54.74.128 0.0.0.63"
+	strDelList(32) = "208.54.80.0 0.0.0.31"
+	strDelList(33) = "208.54.83.0 0.0.0.31"
+	strDelList(34) = "208.54.85.0 0.0.0.31"
+	strDelList(35) = "208.54.87.0 0.0.0.31"
+	strDelList(36) = "208.54.5.0 0.0.0.31"
+	strDelList(37) = "172.56.140.64 0.0.0.63"
+end sub

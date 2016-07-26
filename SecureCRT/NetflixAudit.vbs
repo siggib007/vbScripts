@@ -11,12 +11,13 @@ Option Explicit
 dim strInFile, strOutFile, strDelOut
 
 ' User Spefified values, specify values here per your needs
-strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\TestFile1.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit-Test1.csv"
-strDelOut    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelOut-Test1.csv"
+strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\AGC_cleanup_nexthop.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\Audit.csv"
+strDelOut    = "C:\Users\sbjarna\Documents\IP Projects\Automation\Netflix\DelOut.csv"
 
 const DelNum       = 38
-const ValidateDel  = True
+const DelCount     = 4
+const ValidateDel  = false
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -40,9 +41,12 @@ Sub Main
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
-	set objDelOut  = fso.OpenTextFile(strDelOut, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 	set objDelDICT = CreateObject("Scripting.Dictionary")
+
+	if ValidateDel = True then
+		set objDelOut  = fso.OpenTextFile(strDelOut, ForWriting, True)
+	end if 
 
 	objFileOut.writeline "S=Status. (A):Adding a line there; (D):Deleting this line; (X):Adding a line after Deleting it" & vbcrlf
 	objFileOut.writeline "Device,Line,S,Result,Next Hop"
@@ -82,7 +86,7 @@ Sub Main
 				else
 					strNextHop = ""
 				end if
-				if x<FirstCol+3 then
+				if x<FirstCol+DelCount then
 					strResult = "(D)," & strResult
 					if not objDelDICT.Exists (strParts(x)) then
 						objDelDICT.add strParts(x),x
@@ -125,9 +129,14 @@ Sub Main
 		end if
 	wend
 
+	objFileOut.close
+	objFileIn.close	
 	Set objFileIn  = Nothing
 	Set objFileOut = Nothing
-	set objDelOut  = Nothing
+	if ValidateDel = True then
+		objDelOut.close
+		set objDelOut  = Nothing
+	end if 	
 	Set fso = Nothing
 
 	msgbox "All Done, Cleanup complete"

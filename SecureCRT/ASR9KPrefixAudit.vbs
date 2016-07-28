@@ -12,10 +12,10 @@ dim strInFile, strOutFile, strFolder, strPrefixName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
 strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList.csv"
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Prefix-Gi-Out-List.csv"
-strFolder     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\Out"
-strPrefixName = "Gi-Out"
-iStartCompare = 3
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Prefix-IPV6-GI-VOLTE-ROUTES-List.csv"
+strFolder     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\IPv6Out"
+strPrefixName = "IPV6-GI-VOLTE-ROUTES"
+iStartCompare = 1
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -106,7 +106,7 @@ Sub Main
 			end if
 			if ubound(strBaseLine) = ubound(strResultParts) then
 				strTest = "pass"
-				for x=3 to ubound(strBaseLine)
+				for x=iStartCompare to ubound(strBaseLine)
 					if strBaseLine(x) <> strResultParts(x) then
 						strTest= "failed on line " & x
 						exit for

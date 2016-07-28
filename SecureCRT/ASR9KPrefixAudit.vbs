@@ -11,12 +11,12 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, strPrefixName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList.csv"
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Prefix-IPV4-GI-Out-List.csv"
-strFolder     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\IPv4Out"
-strPrefixName = "Gi-Out"
-iStartCompare = 3  ' 0 based. 1,2 or 3 recomended. What line in the prefix set should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands. 
-Const Timeout = 5  ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on. 
+strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList.csv" ' Input file, comma seperated. format:IP, DeviceName
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Prefix-IPV4-GI-Out-List.csv" ' The name of the output file, CSV file listing results
+strFolder     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\IPv4Out" ' Folder to save individual prefix sets to
+strPrefixName = "Gi-Out" ' Name of prefix set to look at and compare
+iStartCompare = 3  ' 0 based. 1,2 or 3 recomended. What line in the prefix set should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
+Const Timeout = 5  ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
 

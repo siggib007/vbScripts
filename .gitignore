@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Other
+ASR9KPrefixAuditv4.vbs
+ASR9KPrefixAuditv6.vbs
+.gitignore
+.bzrignore
+.gitattributes
+

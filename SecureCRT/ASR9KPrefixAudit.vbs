@@ -11,12 +11,13 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, strPrefixName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList.csv" ' Input file, comma seperated. format:IP, DeviceName
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Prefix-IPV4-GI-Out-List.csv" ' The name of the output file, CSV file listing results
-strFolder     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\IPv4Out" ' Folder to save individual prefix sets to
-strPrefixName = "Gi-Out" ' Name of prefix set to look at and compare
-iStartCompare = 3  ' 0 based. 1,2 or 3 recomended. What line in the prefix set should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
-Const Timeout = 5  ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList-special.csv" ' Input file, comma seperated. format:IP, DeviceName
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Special-IPV4-GI-Out-List.csv" ' The name of the output file, CSV file listing results
+strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\IPv4SpecialOut" ' Folder to save individual prefix sets to
+strPrefixName    = "Gi-Out" ' Name of prefix set to look at and compare
+iStartCompare    = 1    ' 0 based. 1,2 or 3 recomended. What line in the prefix set should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
+const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
+const CompareAll = True ' Compare prefix sets even if they are different lengths. False is recomended.
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -25,8 +26,8 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, VerifyCmd
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont
+	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, VerifyCmd, iLineCount
 
 	VerifyCmd = "show run prefix-set " & strPrefixName
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
@@ -95,6 +96,7 @@ Sub Main
 			strResult=trim(crt.Screen.Readstring (vbcrlf&"RP/",Timeout))
 			crt.Session.Disconnect
 			strResultParts = split (strResult,vbcrlf)
+			strTest = ""
 			if ubound(strResultParts) > 2 then
 				strPrefix1 = trim(strResultParts(2))
 			end if
@@ -105,16 +107,33 @@ Sub Main
 				strBaseLine = strResultParts
 			end if
 			if ubound(strBaseLine) = ubound(strResultParts) then
-				strTest = "pass"
+				bCont = True
+				iLineCount = ubound(strBaseLine)
+			else
+				strTest = "Prefix set length does not match: " & ubound(strBaseLine) & " vs " & ubound(strResultParts) & ". "
+				if CompareAll = True then
+					bCont = True
+				else
+					bCont = False
+				end if
+				if ubound(strBaseLine) > ubound(strResultParts) then
+					iLineCount = ubound(strResultParts)
+				else
+					iLineCount = ubound(strBaseLine)
+				end if	
+			end if
+			if bCont = True then
 				strTemp = ""
-				for x=iStartCompare to ubound(strBaseLine)
+				for x=iStartCompare to iLineCount
 					if strBaseLine(x) <> strResultParts(x) then
 						strTemp = strTemp & x & " "
 					end if
 				next
-				if strTemp <> "" then strTest = "line(s) " & strTemp & "do not match "
-			else
-				strTest = "Prefix set length does not match: " & ubound(strBaseLine) & " vs " & ubound(strResultParts)
+				if strTemp = "" then 
+					strTest = "Pass"
+				else
+					strTest = strTest & "Line(s) " & strTemp & "do not match. "
+				end if 
 			end if
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
 			objDevName.writeline strResult

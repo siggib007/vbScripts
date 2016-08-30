@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile, strFolder
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\BGPTimerDevices.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\AuditOut.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\BGPTimertest.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\DevAuditOut.csv" ' The name of the output file, CSV file listing results
 strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\Configs" ' Folder to save individual prefix sets to
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 const CompareAll = True ' Compare prefix sets even if they are different lengths. False is recomended.

@@ -8,12 +8,11 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile, strFolder
+dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
 strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\BGPTimertest.csv" ' Input file, comma seperated. First value device name, first line header
 strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\AuditOut.csv" ' The name of the output file, CSV file listing results
-strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\Configs" ' Folder to save individual prefix sets to
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 const CompareAll = True ' Compare prefix sets even if they are different lengths. False is recomended.
 
@@ -25,7 +24,7 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strVersion, iLineCount
-	dim strResultParts, strOut, strOutPath, objDevName, x, bGlobalTimer, strLineParts, strNeighbor, strTemp, strTimer
+	dim strResultParts, strOut, strOutPath, x, bGlobalTimer, strLineParts, strNeighbor, strTemp, strTimer
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 
@@ -37,10 +36,6 @@ Sub Main
 		msgbox "Input file " & strInFile & " not found, exiting"
 		exit sub
 	end if
-	if not fso.FolderExists(strFolder) then
-		CreatePath (strFolder)
-		strOut = strOut & """" & strFolder & """ did not exists so I created it" & vbcrlf
-	end if
 
 	if not fso.FolderExists(strOutPath) then
 		CreatePath (strOutPath)
@@ -48,10 +43,6 @@ Sub Main
 	end if
 	if strOut <> "" then
 		msgbox strOut
-	end if
-
-	if right(strFolder,1)<>"\" then
-		strFolder = strFolder & "\"
 	end if
 
 	crt.screen.synchronous = true
@@ -151,9 +142,6 @@ Sub Main
 				next
 				objFileOut.writeline host & "," & strVersion & "," & bGlobalTimer & strNeighbor & "," & strTimer
 			end if
-			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
-			objDevName.writeline strResult
-			objDevName.close
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage

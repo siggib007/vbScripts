@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\TwoPeerNexusDevices.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\twoPeerNexusAuditOut.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\ThreePeerNexusDevices.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\ThreePeerNexusAuditOut.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -60,6 +60,7 @@ Sub Main
 	While not objFileIn.atendofstream
 		iLASNum = ""
 		iRASNum = "n/a"
+		strLast = ""
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(0)
@@ -105,7 +106,7 @@ Sub Main
 				iLineCount = ubound(strResultParts)
 				for x = 0 to iLineCount
 					strLineParts = split(trim(strResultParts(x))," ")
-					if strLineParts(0)="timers" then
+					if strLineParts(0)="timers" and strLineParts(1)="bgp" then
 						strGlobalTimer = strLineParts(2) & " " & strLineParts(3)
 						strTimer = strLineParts(2) & " " & strLineParts(3)
 					end if
@@ -136,50 +137,56 @@ Sub Main
 						iLASNum = strLineParts(2)
 					end if
 					if strLineParts(0)="neighbor" then
-						objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
-						strTimer = "default"
-						strNeighbor = ""
-						strTemplate = ""
-						strGlobalTimer = "None"
-						bBFD = false
+						if strLast = "Template" then
+							strNeighbor = "Template " & strTemplate
+						end if
+						If strNeighbor <> "" Then
+							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
+							strTimer = "default"
+							strNeighbor = ""
+							strTemplate = ""
+							strGlobalTimer = "None"
+							bBFD = false
+						end if
 						strNeighbor = strLineParts(1)
 						strLast = "neighbor"
 						if ubound(strLineParts) > 2 then iRASNum = strLineParts(3)
 					end if
 					if strLineParts(0)="template" then
-						objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
-						strTimer = "default"
-						strNeighbor = ""
-						strTemplate = ""
-						strGlobalTimer = "None"
-						bBFD = false
+						If strTemplate <> "" Then
+							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & ",Template " & strTemplate & "," & iRASNum & "," & strTimer & "," & bBFD
+							strTimer = "default"
+							strNeighbor = ""
+							strTemplate = ""
+							strGlobalTimer = "None"
+							bBFD = false
+						end if
 						strTemplate = strLineParts(2)
 						strLast = "Template"
 					end if
 					if strLineParts(0)="bfd" then bBFD = True
+					if strLineParts(0)="inherit" and strTimer = "default" then
+						strTimer = "Template: " & strLineParts(2)
+					end if
 					if strLineParts(0)="timers" then
-						strTimer = strLineParts(1) & " " & strLineParts(2)
 						if strLast = "Template" then
 							strNeighbor = "Template " & strTemplate
 						end if
 						If strNeighbor = "" Then
 							strGlobalTimer = strLineParts(2) & " " & strLineParts(3)
 						else
-							' objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
-							' strTimer = "default"
-							' strNeighbor = ""
-							' strTemplate = ""
-							' strGlobalTimer = "None"
-							' bBFD = false
+							strTimer = strLineParts(1) & " " & strLineParts(2)
 						End If
 					end if
 				next
-				objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
-				strTimer = "default"
-				strNeighbor = ""
-				strTemplate = ""
-				strGlobalTimer = "None"
-				bBFD = false				
+				If strNeighbor <> "" Then
+					objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
+					strTimer = "default"
+					strNeighbor = ""
+					strTemplate = ""
+					strGlobalTimer = "None"
+					bBFD = false
+				end if
 			end if
 		else
 			nError = crt.GetLastError

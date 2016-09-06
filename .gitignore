@@ -53,3 +53,4 @@ ASR9KPrefixAuditv6.vbs
 .bzrignore
 .gitattributes
 
+*.zip

@@ -3,16 +3,16 @@
 
 '|----------------------------------------------------------------------------------------------------------|
 '|  Author: Siggi Bjarnason                                                                                 |
-'|  Authored: 06/23/16                                                                                      |
+'|  Authored: 09/07/16                                                                                      |
 '|  Copyright: Siggi Bjarnason 2016                                                                         |
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile, AuditCmd
+dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ASYStorm\AkamaiInts.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ASYStorm\AkamaiStormControl.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\Version\MissingDevices.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\Version\MissingDevicesOut.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -22,13 +22,8 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, strInterface
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, iLineCount, strLastHost
-	dim iBLevel, iMLevel, iFound, strDescr, strVlanName, iVlanID, strVersion
-
-	If crt.Session.Connected Then
-		crt.Session.Disconnect
-	end if
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strOSType
+	dim strOut, strOutPath, strVersion, strHardware
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 
@@ -36,7 +31,6 @@ Sub Main
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
 	strOut = ""
-	strLastHost = ""
 	if not fso.FileExists(strInFile) Then
 		msgbox "Input file " & strInFile & " not found, exiting"
 		exit sub
@@ -50,7 +44,6 @@ Sub Main
 		msgbox strOut
 	end if
 
-
 	crt.screen.synchronous = true
 	crt.screen.IgnoreEscape = True
 
@@ -59,72 +52,60 @@ Sub Main
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
 	'Write a header for output file
-	objFileOut.writeline "primaryIPAddress,hostName,DeviceType,Port,Description,VLAN_Name,VlanID,BroadCastValue,MulticastValue"
+	objFileOut.writeline "hostName,OSType,Harware,OSVersion"
 
-	'Skip over the first header line 
+	'Skip over the first header line
 	strLine = objFileIn.readline
 	'Start Looping through the input file
 	While not objFileIn.atendofstream
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(0)
-		strInterface = strParts(1)
-		IPAddr = ""
-		strDescr = strParts(2)
-		strVlanName = strParts(3)
-		iVlanID = strParts(4)
-		AuditCmd = "show running-config interface " & strInterface
-		iBLevel = "none"
-		iMLevel = "none"
-
-		if strLastHost <> host then 
-			If crt.Session.Connected Then
-				crt.Session.Disconnect
-			end if
-
-			ConCmd = "/SSH2 /ACCEPTHOSTKEYS "  & host
-			on error resume next
-			crt.Session.Connect ConCmd
-			on error goto 0
-			If crt.Session.Connected Then
-				crt.Screen.WaitForString "#",Timeout
-				nError = Err.Number
-				strErr = Err.Description
-				If nError <> 0 Then
-					result = "Error " & nError & ": " & strErr
-				end if
-				crt.Screen.Send("term len 0" & vbcr)
-				crt.Screen.WaitForString "#",Timeout
-				crt.Screen.Send("show ver" & vbcr)
-				crt.Screen.WaitForString vbcrlf,Timeout
-				strVersion=replace(left(trim(crt.screen.Readstring(vbcr,Timeout)),36),",","")
-				crt.Screen.WaitForString "#",Timeout				
-			end if
-		end if
+		strOSType = ""
+		strVersion = ""
+		strHardware = ""
 
 		If crt.Session.Connected Then
-			crt.Screen.Send(AuditCmd & vbcr)
-			iFound = crt.Screen.WaitForStrings ("broadcast level ","multicast level ","#",Timeout)
-			if iFound = 1 or iFound = 2 then
-				strResult=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-				if iFound = 1 then iBLevel = strResult
-				if iFound = 2 then iMLevel = strResult
-				iFound = crt.Screen.WaitForStrings ("broadcast level ","multicast level ","#",Timeout)
-				if iFound = 1 or iFound = 2 then
-					strResult=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-					if iFound = 1 then iBLevel = strResult
-					if iFound = 2 then iMLevel = strResult
-					crt.Screen.WaitForString "#",Timeout
+			crt.Session.Disconnect
+		end if
+
+		ConCmd = "/SSH2 /ACCEPTHOSTKEYS "  & host
+		on error resume next
+		crt.Session.Connect ConCmd
+		on error goto 0
+
+		If crt.Session.Connected Then
+			crt.Screen.Synchronous = True
+			crt.Screen.WaitForString "#",Timeout
+			crt.Screen.Send("term len 0" & vbcr)
+			crt.Screen.WaitForString "#",Timeout
+			crt.Screen.Send("show ver" & vbcr)
+			crt.Screen.WaitForString vbcrlf,Timeout
+			strOSType=replace(left(trim(crt.screen.Readstring("(",Timeout)),36),",","")
+			if instr(strOSType,"Cisco IOS ") > 0 or instr(strOSType,"Cisco Internetwork Operating System ") > 0 Then
+				crt.Screen.WaitForString " Version ",Timeout
+				strVersion = replace(crt.screen.Readstring(" ",Timeout),",","")
+				if instr(strOSType,"IOS-XE") > 0 Then
+					crt.Screen.WaitForString "Next reboot license Level: ",Timeout
+					crt.Screen.WaitForString vbcrlf&vbcrlf,Timeout
+				else	
+					crt.Screen.WaitForString "export@cisco.com."&vbcrlf&vbcrlf,Timeout
 				end if
+				strHardware = trim(crt.screen.Readstring("(",Timeout))
 			end if
 
-			objFileOut.writeline IPAddr & "," & host & "," & strVersion & "," & strInterface & "," & strDescr & "," & strVlanName & "," & iVlanID & "," & iBLevel & "," & iMLevel
+			if instr(strOSType,"Cisco Nexus") > 0 Then
+				crt.Screen.WaitForString " system:    version ",Timeout
+				strVersion = crt.screen.Readstring(vbcrlf,Timeout)
+				crt.Screen.WaitForString "Hardware"&vbcrlf,Timeout
+				strHardware = trim(crt.screen.Readstring("(",Timeout))
+			end if
+			objFileOut.writeline host & "," & strOSType & "," & strHardware & "," & strVersion
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage
-			objFileOut.writeline IPAddr & "," & host & ",Not Connected,Error " & nError & ": " & strErr
+			objFileOut.writeline host & ",Not Connected,Error " & nError & ": " & strErr
 		end if
-		strLastHost = host
 	wend
 
 	objFileOut.close

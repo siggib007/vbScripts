@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\ThreePeerNexusDevices.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\ThreePeerNexusAuditOut.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\BadTimers.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\BadTimersAuditBFDversion.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -22,8 +22,9 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strVersion, iLineCount, strIPAddr, strLast
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strOSType, iLineCount, strIPAddr, strLast
 	dim strResultParts, strOut, strOutPath, x, strGlobalTimer, strLineParts, strNeighbor, strTimer, iLASNum, iRASNum, strTemplate, bBFD
+	dim strVersion, strHardware
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 
@@ -52,7 +53,7 @@ Sub Main
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
 	'Write a header for output file
-	objFileOut.writeline "primaryIPAddress,hostName,LocalAS,OSType,GlobalConfig,NeighborIP,RemoteAS,CurTimer,BFD"
+	objFileOut.writeline "primaryIPAddress,hostName,LocalAS,Hardware,OSVersion,GlobalConfig,NeighborIP,RemoteAS,CurTimer,BFD"
 
 	'Skip over the first header line
 	strLine = objFileIn.readline
@@ -86,13 +87,24 @@ Sub Main
 			crt.Screen.WaitForString "#",Timeout
 			crt.Screen.Send("show ver" & vbcr)
 			crt.Screen.WaitForString vbcrlf,Timeout
-			strVersion=replace(left(trim(crt.screen.Readstring(vbcr,Timeout)),36),",","")
-			crt.Screen.WaitForString "#",Timeout
+			strOSType=replace(left(trim(crt.screen.Readstring("(",Timeout)),36),",","")
 			strTimer = "default"
 			strNeighbor = ""
 			strGlobalTimer = "None"
 			bBFD = false
-			if instr(strVersion,"Cisco IOS")>0 Then
+			if instr(strOSType,"Cisco IOS ") > 0 or instr(strOSType,"Cisco Internetwork Operating System ") > 0 Then
+				crt.Screen.WaitForString " Version ",Timeout
+				strVersion = replace(crt.screen.Readstring(" ",Timeout),",","")
+				if instr(strOSType,"IOS-XE") > 0 Then
+					crt.Screen.WaitForString "Next reboot license Level: ",Timeout
+					crt.Screen.WaitForString vbcrlf&vbcrlf,Timeout
+					strVersion = "IOS-XE Version " & strVersion
+				else	
+					crt.Screen.WaitForString "export@cisco.com."&vbcrlf&vbcrlf,Timeout
+					strVersion = "IOS Version " & strVersion
+				end if
+				strHardware = trim(crt.screen.Readstring("(",Timeout))
+				crt.Screen.WaitForString "#",Timeout
 				crt.Screen.Send("show ip protocols summary | i bgp" & vbcr)
 				strResult=crt.Screen.WaitForStrings ("bgp ", "#", Timeout)
 				If strResult = 1 Then
@@ -106,9 +118,11 @@ Sub Main
 				iLineCount = ubound(strResultParts)
 				for x = 0 to iLineCount
 					strLineParts = split(trim(strResultParts(x))," ")
-					if strLineParts(0)="timers" and strLineParts(1)="bgp" then
-						strGlobalTimer = strLineParts(2) & " " & strLineParts(3)
-						strTimer = strLineParts(2) & " " & strLineParts(3)
+					if ubound(strLineParts)>0 then 
+						if strLineParts(0)="timers" and strLineParts(1)="bgp" then
+							strGlobalTimer = strLineParts(2) & " " & strLineParts(3)
+							strTimer = strLineParts(2) & " " & strLineParts(3)
+						end if
 					end if
 					if strLineParts(0)="neighbor" then
 						if strLineParts(2) = "timers" then strTimer = strLineParts(3) & " " & strLineParts(4)
@@ -117,14 +131,19 @@ Sub Main
 						elseif strNeighbor = strLineParts(1) and strLineParts(2) = "fall-over" then
 							bBFD = True
 						else
-							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
+							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strHardware & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
 							strNeighbor = strLineParts(1)
 						end if
 					end if
 				next
-				objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
+				objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strHardware & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
 			end if
-			if instr(strVersion,"Cisco Nexus")>0 Then
+			if instr(strOSType,"Cisco Nexus") > 0 Then
+				crt.Screen.WaitForString " system:    version ",Timeout
+				strVersion = crt.screen.Readstring(vbcrlf,Timeout)
+				crt.Screen.WaitForString "Hardware"&vbcrlf,Timeout
+				strHardware = trim(crt.screen.Readstring("(",Timeout))
+				crt.Screen.WaitForString "#",Timeout
 				crt.Screen.Send("show run | section ""router bgp""" & vbcr)
 				crt.Screen.WaitForString vbcrlf,Timeout
 				strResult=trim(crt.Screen.Readstring ("#",Timeout))
@@ -141,7 +160,7 @@ Sub Main
 							strNeighbor = "Template " & strTemplate
 						end if
 						If strNeighbor <> "" Then
-							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
+							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strHardware & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
 							strTimer = "default"
 							strNeighbor = ""
 							strTemplate = ""
@@ -154,7 +173,7 @@ Sub Main
 					end if
 					if strLineParts(0)="template" then
 						If strTemplate <> "" Then
-							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & ",Template " & strTemplate & "," & iRASNum & "," & strTimer & "," & bBFD
+							objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strHardware & "," & strVersion & "," & strGlobalTimer & ",Template " & strTemplate & "," & iRASNum & "," & strTimer & "," & bBFD
 							strTimer = "default"
 							strNeighbor = ""
 							strTemplate = ""
@@ -180,7 +199,7 @@ Sub Main
 					end if
 				next
 				If strNeighbor <> "" Then
-					objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
+					objFileOut.writeline strIPAddr & "," & host & "," & iLASNum & "," & strHardware & "," & strVersion & "," & strGlobalTimer & "," & strNeighbor & "," & iRASNum & "," & strTimer & "," & bBFD
 					strTimer = "default"
 					strNeighbor = ""
 					strTemplate = ""

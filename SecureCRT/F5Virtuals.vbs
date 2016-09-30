@@ -1,22 +1,42 @@
-' Connect to an SSH server using the SSH2 protocol. Specify the
-' username and password and hostname on the command line as well as
-' some SSH2 protocol specific options.
 option Explicit
+const iTimeout = 5
+' const host = "atrou051"
+const host = "serou041"
+' const host = "oclba101"
+
+const strOutPath = "C:\Users\sbjarna\Documents\IP Projects\ESME\F5 Forklift\"
+const strSuffix  = "Virtuals"
+const PagePrompt = "---(less"
+const EndPrompt  = "(END)"
+const SysPrompt  = "#"
 
 Sub Main
   const ForReading    = 1
   const ForWriting    = 2
   const ForAppending  = 8
+  crt.screen.synchronous = true
+  crt.screen.IgnoreEscape = True
 
-  Dim host, cmd, strVersion, user, result, screenrow, strVirtual, strAvail, strState, strReason, strOutFile, fso, objFileOut
-  host = "atrou051"
-  strOutFile = "C:\Users\sbjarna\Documents\IP Projects\ESME\F5 Forklift\atrou051Virtuals.csv" ' The name of the output file, CSV file listing results
-  
+  Dim cmd, result, strVirtual, strAvail, strState, strReason, strOutFile, fso, objFileOut, strOut, strConnCount, iLoc
+
   Set fso = CreateObject("Scripting.FileSystemObject")
+  if not fso.FolderExists(strOutPath) then
+    CreatePath (strOutPath)
+    strOut = strOut & vbcrlf & """" & strOutPath & """ did not exists so I created it" & vbcrlf
+  end if
+  if strOut <> "" then
+    msgbox strOut
+  end if
+
+  if right(strOutPath,1) <> "\" then
+    strOutPath = strOutPath & "\"
+  end if
+
+  strOutFile = strOutPath & host & strSuffix &".csv"
   set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
-  
+
   'Write a header for output file
-  objFileOut.writeline "Virtual,Availability,State,Reason"
+  objFileOut.writeline "Virtual,Availability,State,Connection Count,Reason"
 
   If crt.Session.Connected Then
     crt.Session.Disconnect
@@ -24,60 +44,59 @@ Sub Main
 
   cmd = "/SSH2 "  & host
   crt.Session.Connect cmd
-   '
+
   crt.Screen.Synchronous = True
   crt.Screen.WaitForString( "#" )
   crt.Screen.Send("show ltm virtual" & vbCR )
-  result = crt.Screen.WaitForStrings ("(y/n)","#",5)
+  result = crt.Screen.WaitForStrings ("(y/n)",vbcrlf&vbcrlf,iTimeout)
+  if result = 0 Then
+    msgbox "Timeout waiting for y/n "
+    exit sub
+  end if
   if result = 1 then crt.screen.Send("y")
   do While true
-    result=crt.Screen.WaitForStrings ("Ltm::Virtual Server: ","---(less","(END)","#",15)
-    ' msgbox "result:" & result
-    do while result = 2
-      crt.Screen.Send(" ")
-      result=crt.Screen.WaitForStrings("Ltm::Virtual Server: ","---(less","(END)","#",15)
-    loop
-    if result = 3 or result = 4 then exit do
-    if result = 0 then 
-      msgbox "Timeout waiting for virtual"
-      exit do
+    result = WaitWithPrompt("Ltm::Virtual Server: ",vbCR)
+    if result = "!@#EXIT$%^" then exit do
+    if result = "!@#Timeout$%^" then 
+      msgbox "Timeout while waiting for Virtual"
+      exit do 
     end if
-    strVirtual = trim(crt.screen.Readstring(vbCR,15))
+    strVirtual = result
 
-    result=crt.Screen.WaitForStrings ("Availability     : ","---(less","(END)","#",15)
-    do while result = 2
-      crt.Screen.Send(" ")
-      result=crt.Screen.WaitForStrings ("Availability     : ","---(less","(END)","#",15)
-    loop
-    if result = 0 then 
-      msgbox "Timeout waiting for Availability"
-      exit do   
-    end if 
-    if result = 3 or result = 4 then exit do    
-    strAvail = trim(crt.screen.Readstring(vbCR,5))
-    result=crt.Screen.WaitForStrings ("State            : ","---(less","(END)","#",15)
-    do while result = 2
-      crt.Screen.Send(" ")
-      result=crt.Screen.WaitForStrings ("State            : ","---(less","(END)","#",15)
-    loop
-    if result = 0 then 
-      msgbox "Timeout waiting for state"
-      exit do   
-    end if 
-    if result = 3 or result = 4 then exit do    
-    strState = trim(crt.screen.Readstring(vbCR,5))
-    result=crt.Screen.WaitForStrings ("Reason           : ","---(less","(END)","#",15)
-    do while result = 2
-      crt.Screen.Send(" ")
-      result=crt.Screen.WaitForStrings ("Reason           : ","---(less","(END)","#",15)
-    loop
-    if result = 0 then 
-      msgbox "Timeout waiting for reason"
-      exit do   
-    end if 
-    if result = 3 or result = 4 then exit do    
-    strReason = replace(trim(crt.screen.Readstring(vbCR,5)),",","")
-    objFileOut.writeline strVirtual & "," & strAvail & "," & strState & "," & strReason
+    result = WaitWithPrompt(" Availability ",vbCR)
+    if result = "!@#EXIT$%^" then exit do
+    if result = "!@#Timeout$%^" then 
+      msgbox "Timeout while waiting for Availability"
+      exit do 
+    end if
+    strAvail = result
+
+    result = WaitWithPrompt(" State ",vbCR)
+    if result = "!@#EXIT$%^" then exit do
+    if result = "!@#Timeout$%^" then 
+      msgbox "Timeout while waiting for State"
+      exit do 
+    end if
+    strState = result
+
+    result = WaitWithPrompt(" Reason ",vbCR)
+    if result = "!@#EXIT$%^" then exit do
+    if result = "!@#Timeout$%^" then 
+      msgbox "Timeout while waiting for Reason"
+      exit do 
+    end if
+    strReason = result
+  
+    result = WaitWithPrompt(" Total Connections ",vbCR)
+    if result = "!@#EXIT$%^" then exit do
+    if result = "!@#Timeout$%^" then 
+      msgbox "Timeout while waiting for Total Connections"
+      exit do 
+    end if
+    iLoc = instr(result," ")
+    strConnCount = trim(left(result,iLoc))
+
+    objFileOut.writeline strVirtual & "," & strAvail & "," & strState & "," & strConnCount & "," & strReason
   loop
   crt.Screen.Synchronous = False
   crt.session.disconnect
@@ -89,3 +108,64 @@ Sub Main
   msgbox "All Done, Cleanup complete"
 
 End Sub
+
+
+Function CreatePath (strFullPath)
+'-------------------------------------------------------------------------------------------------'
+' Function CreatePath (strFullPath)                                                               '
+'                                                                                                 '
+' This function takes a complete path as input and builds that path out as nessisary.             '
+'-------------------------------------------------------------------------------------------------'
+dim pathparts, buildpath, part, fso
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+  pathparts = split(strFullPath,"\")
+  buildpath = ""
+  for each part in pathparts
+    if buildpath<>"" then
+      if buildpath = "\" then
+        buildpath = buildpath & part
+      else
+        buildpath = buildpath & "\" & part
+      end if
+      if not fso.FolderExists(buildpath) then
+        fso.CreateFolder(buildpath)
+      end if
+    else
+      if part="" then
+        buildpath = "\"
+      else
+        buildpath = part
+      end if
+    end if
+  next
+end function
+
+Function WaitWithPrompt (strWaitFor,strReadUntil)
+'-------------------------------------------------------------------------------------------------'
+' Function WaitWithPrompt (strWaitFor,strReadUntil)                                               '
+'                                                                                                 '
+' This function takes a phrase to look for (strWaitFor)                                           '
+' and returns everthing that follows until strReadUntil                                           '
+'-------------------------------------------------------------------------------------------------'
+  dim strResult, iPrompt
+
+    iPrompt=crt.Screen.WaitForStrings (strWaitFor,PagePrompt,EndPrompt,SysPrompt,iTimeout)
+    do while iPrompt = 2
+      crt.Screen.Send(" ")
+      iPrompt=crt.Screen.WaitForStrings(strWaitFor,PagePrompt,EndPrompt,SysPrompt,iTimeout)
+    loop
+    select case iPrompt
+      case 3,4
+        WaitWithPrompt = "!@#EXIT$%^"
+      case 0
+        WaitWithPrompt = "!@#Timeout$%^"
+      case else
+        strResult = crt.screen.Readstring(strReadUntil,iTimeout)
+        strResult = replace(strResult,":","")
+        strResult = replace(strResult,",","")
+        strResult = trim(strResult)
+        WaitWithPrompt = strResult
+    end select
+End Function

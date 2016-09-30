@@ -4,7 +4,7 @@ const host = "atrou051"
 ' const host = "serou041"
 ' const host = "oclba101"
 
-const strCommand = "list ltm virtual"
+const strCommand = "list ltm virtual destination ip-protocol pool snat snatpool"
 const OutHeader = "Virtual,Destination,Port,IP Protocol,Pool,SNAT"
 
 const strOutPath = "C:\Users\sbjarna\Documents\IP Projects\ESME\F5 Forklift\"
@@ -49,14 +49,53 @@ Sub Main
   crt.Session.Connect cmd
 
   crt.Screen.Synchronous = True
-  crt.Screen.WaitForString( "#" )
+  crt.Screen.WaitForString "#",iTimeout
   crt.Screen.Send(strCommand & vbCR )
-  result = crt.Screen.WaitForStrings ("(y/n)",vbcrlf&vbcrlf,iTimeout)
-  if result = 0 Then
-    msgbox "Timeout waiting for y/n "
-    exit sub
-  end if
-  if result = 1 then crt.screen.Send("y")
+  crt.Screen.WaitForString vbcrlf,iTimeout
+  result = crt.Screen.WaitForStrings ("(y/n)","ltm virtual ",iTimeout)
+  select case result
+    case 0
+      msgbox "Timeout waiting for y/n "
+      exit sub
+    case 1
+      crt.screen.Send("y")
+    case 2
+      strVirtual = crt.screen.Readstring(" ",iTimeout)
+      strVirtual = replace(strVirtual,",","")
+      strVirtual = replace(strVirtual,":",",")
+      strVirtual = trim(strVirtual)
+      result = WaitWithPrompt(" destination ",vbCR)
+      if result = "!@#EXIT$%^" then exit sub
+      if result = "!@#Timeout$%^" then 
+        msgbox "Timeout while waiting for Availability"
+        exit sub
+      end if
+      strDest = result
+      result = WaitWithPrompt(" ip-protocol ",vbCR)
+      if result = "!@#EXIT$%^" then exit sub
+      if result = "!@#Timeout$%^" then 
+        msgbox "Timeout while waiting for State"
+        exit sub 
+      end if
+      strProt = result
+      result = WaitWithPrompt(" pool ",vbCR)
+      if result = "!@#EXIT$%^" then exit sub
+      if result = "!@#Timeout$%^" then 
+        msgbox "Timeout while waiting for Total Connections"
+        exit sub 
+      end if
+      strPool = result
+      result = WaitWithPrompt(" snat",vbCR)
+      if result = "!@#EXIT$%^" then exit sub
+      if result = "!@#Timeout$%^" then 
+        msgbox "Timeout while waiting for Reason"
+        exit sub 
+      end if
+      strSNAT = result      
+      objFileOut.writeline strVirtual & "," & strDest & "," & strProt & "," & strPool & "," & strSNAT
+    case else
+      msgbox "unexpected case"
+  end select      
   do While true
     result = WaitWithPrompt("ltm virtual "," ")
     if result = "!@#EXIT$%^" then exit do
@@ -89,7 +128,7 @@ Sub Main
       exit do 
     end if
     strPool = result
-    
+
     result = WaitWithPrompt(" snat",vbCR)
     if result = "!@#EXIT$%^" then exit do
     if result = "!@#Timeout$%^" then 

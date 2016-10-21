@@ -1,11 +1,11 @@
 option Explicit
 const iTimeout = 5
-const host = "atrou051"
-' const host = "serou041"
+' const host = "atrou051"
+const host = "serou041"
 ' const host = "oclba101"
 
-const strCommand = "list ltm virtual destination ip-protocol pool snat snatpool"
-const OutHeader = "Virtual,Destination,Port,IP Protocol,Pool,SNAT"
+const strCommand = "list ltm virtual destination ip-protocol pool snat snatpool profiles"
+const OutHeader = "Virtual,Destination,Port,IP Protocol,Pool,SNAT,Profile"
 
 const strOutPath = "C:\Users\sbjarna\Documents\IP Projects\ESME\F5 Forklift\"
 const strSuffix  = "VIPDest"
@@ -20,7 +20,7 @@ Sub Main
   crt.screen.synchronous = true
   crt.screen.IgnoreEscape = True
 
-  Dim cmd, result, strVirtual, strDest, strProt, strSNAT, strOutFile, fso, objFileOut, strOut, strPool, iLoc
+  Dim cmd, result, strVirtual, strDest, strProt, strSNAT, strOutFile, fso, objFileOut, strOut, strPool, iLoc, strProfile
 
   Set fso = CreateObject("Scripting.FileSystemObject")
   if not fso.FolderExists(strOutPath) then
@@ -85,14 +85,21 @@ Sub Main
         exit sub 
       end if
       strPool = result
+      result = WaitWithPrompt(" profiles {","{")
+      if result = "!@#EXIT$%^" then exit sub
+      if result = "!@#Timeout$%^" then 
+        msgbox "Timeout while waiting for profiles"
+        exit sub 
+      end if
+      strProfile = result
       result = WaitWithPrompt(" snat",vbCR)
       if result = "!@#EXIT$%^" then exit sub
       if result = "!@#Timeout$%^" then 
-        msgbox "Timeout while waiting for Reason"
+        msgbox "Timeout while waiting for snat"
         exit sub 
       end if
       strSNAT = result      
-      objFileOut.writeline strVirtual & "," & strDest & "," & strProt & "," & strPool & "," & strSNAT
+      objFileOut.writeline strVirtual & "," & strDest & "," & strProt & "," & strPool & "," & strSNAT & "," & strProfile
     case else
       msgbox "unexpected case"
   end select      
@@ -128,16 +135,24 @@ Sub Main
       exit do 
     end if
     strPool = result
+      
+    result = WaitWithPrompt(" profiles {","{")
+    if result = "!@#EXIT$%^" then exit sub
+    if result = "!@#Timeout$%^" then 
+      msgbox "Timeout while waiting for profiles"
+      exit sub 
+    end if
+    strProfile = result
 
-    result = WaitWithPrompt(" snat",vbCR)
+    result = WaitWithPrompt("snat",vbCR)
     if result = "!@#EXIT$%^" then exit do
     if result = "!@#Timeout$%^" then 
-      msgbox "Timeout while waiting for Reason"
+      msgbox "Timeout while waiting for snat"
       exit do 
     end if
     strSNAT = result
 
-    objFileOut.writeline strVirtual & "," & strDest & "," & strProt & "," & strPool & "," & strSNAT
+    objFileOut.writeline strVirtual & "," & strDest & "," & strProt & "," & strPool & "," & strSNAT & "," & strProfile
   loop
   crt.Screen.Synchronous = False
   crt.session.disconnect
@@ -205,6 +220,7 @@ Function WaitWithPrompt (strWaitFor,strReadUntil)
       case 1
         strResult = crt.screen.Readstring(strReadUntil,iTimeout)
         strResult = replace(strResult,",","")
+        strResult = replace(strResult,vbcrlf,"")
         strResult = replace(strResult,":",",")
         strResult = trim(strResult)
         WaitWithPrompt = strResult

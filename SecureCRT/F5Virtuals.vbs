@@ -1,7 +1,7 @@
 option Explicit
 const iTimeout = 5
-' const host = "atrou051"
-const host = "serou041"
+const host = "atrou051"
+' const host = "serou041"
 ' const host = "oclba101"
 
 const strOutPath = "C:\Users\sbjarna\Documents\IP Projects\ESME\F5 Forklift\"

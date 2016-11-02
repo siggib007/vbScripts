@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\search_result.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ACLs.csv"
+strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\Failures.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ACLs2.csv"
 
 const DelNum       = 38
 const DelCount     = 4

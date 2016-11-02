@@ -3,6 +3,7 @@ const iTimeout = 5
 const host = "atrou051"
 ' const host = "serou041"
 ' const host = "oclba101"
+' const host = "Lab"
 
 const strOutPath = "C:\Users\sbjarna\Documents\IP Projects\ESME\F5 Forklift\"
 const strSuffix  = "Virtuals"
@@ -42,10 +43,21 @@ Sub Main
     crt.Session.Disconnect
   end if
 
-  cmd = "/SSH2 "  & host
+  if host = "Lab" then 
+    cmd = "/s ""Lab LTM"""
+  else
+    cmd = "/SSH2 "  & host
+  end if
+
   crt.Session.Connect cmd
 
   crt.Screen.Synchronous = True
+  if host = "Lab" then 
+    crt.Screen.WaitForString( "#" )
+    crt.Screen.Send("tmsh" & vbCR )
+    crt.Screen.WaitForString( "#" )
+    crt.Screen.Send("modify cli admin-partitions query-partitions {Common}" & vbCR )
+  end if
   crt.Screen.WaitForString( "#" )
   crt.Screen.Send("show ltm virtual" & vbCR )
   result = crt.Screen.WaitForStrings ("(y/n)",vbcrlf&vbcrlf,iTimeout)

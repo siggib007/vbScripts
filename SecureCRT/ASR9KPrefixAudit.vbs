@@ -111,6 +111,11 @@ Sub Main
 				bCont = True
 				iLineCount = ubound(strBaseLine)
 			else
+				if CompareAll = True then
+					bCont = True
+				else
+					bCont = False
+				end if
 				if ubound(strBaseLine) = ubound(strResultParts)+1 and strBaseLine(3) = strResultParts(2) then
 					strTest = "First line Missing. "
 					bCont = True
@@ -119,11 +124,6 @@ Sub Main
 					strTest = "Prefix set length does not match: " & ubound(strBaseLine) & " vs " & ubound(strResultParts) & ". "
 					bOneMissing = False
 				end if 
-				if CompareAll = True then
-					bCont = True
-				else
-					bCont = False
-				end if
 				if ubound(strBaseLine) > ubound(strResultParts) then
 					iLineCount = ubound(strResultParts)
 				else
@@ -143,7 +143,7 @@ Sub Main
 						strTemp = strTemp & x & " "
 					end if
 				next
-				objFileOut.writeline "bCont=True; strTemp=" & strTemp & "; strTest=" & strTest
+				' objFileOut.writeline "bCont=True; strTemp=" & strTemp & "; strTest=" & strTest
 				if strTemp = "" then 
 					strTest = strTest & "Pass"
 				else

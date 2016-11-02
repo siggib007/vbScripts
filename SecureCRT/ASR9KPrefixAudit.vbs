@@ -117,11 +117,11 @@ Sub Main
 					bCont = False
 				end if
 				if ubound(strBaseLine) = ubound(strResultParts)+1 and strBaseLine(3) = strResultParts(2) then
-					strTest = "First line Missing. "
+					strTest = "First line Missing otherwise "
 					bCont = True
 					bOneMissing = True
 				else 
-					strTest = "Prefix set length does not match: " & ubound(strBaseLine) & " vs " & ubound(strResultParts) & ". "
+					strTest = "Prefix set length does not match. Baseline is " & ubound(strBaseLine) & " lines, this is " & ubound(strResultParts) & " lines. "
 					bOneMissing = False
 				end if 
 				if ubound(strBaseLine) > ubound(strResultParts) then
@@ -140,14 +140,14 @@ Sub Main
 						y=x 
 					end if 
 					if strBaseLine(x) <> strResultParts(y) then
-						strTemp = strTemp & x & " "
+						strTemp = strTemp & x-1 & " "
 					end if
 				next
 				' objFileOut.writeline "bCont=True; strTemp=" & strTemp & "; strTest=" & strTest
 				if strTemp = "" then 
 					strTest = strTest & "Pass"
 				else
-					strTest = strTest & "Line(s) " & strTemp & "do not match. "
+					strTest = strTest & "Prefix(s) " & strTemp & "does not match. "
 				end if 
 			end if
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)

@@ -27,7 +27,7 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bOneMissing
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, VerifyCmd, iLineCount
+	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, VerifyCmd, iLineCount, iCompare 
 
 	VerifyCmd = "show run prefix-set " & strPrefixName
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
@@ -132,8 +132,12 @@ Sub Main
 			end if
 			if bCont = True then
 				strTemp = ""
-				if bOneMissing then iStartCompare=3
-				for x=iStartCompare to iLineCount
+				if bOneMissing then 
+					iCompare=3
+				else
+					iCompare = iStartCompare
+				end if 
+				for x=iCompare to iLineCount
 					if bOneMissing Then
 						y=x-1
 					else 
@@ -147,7 +151,7 @@ Sub Main
 				if strTemp = "" then 
 					strTest = strTest & "Pass"
 				else
-					strTest = strTest & "Prefix(s) " & strTemp & "does not match. "
+					strTest = strTest & "Prefix " & strTemp & "does not match. "
 				end if 
 			end if
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)

@@ -6,7 +6,7 @@ Sub ConfigGen()
 Dim strWBFullName, strLBName1, strLBName2, iPathLen, strWBPath, strSavePath, strScriptName, strCRNum, strProject, ObjScript, ObjLog, x, strCurSG, strSPName, strSGName, iExtPos, strLogName, strPersistType
 Dim strSGProt, strSGMethod, strSGHealth, iSGRow, bSGGood, strServerName, strServerIP, strServerPort, strVIPName, strVIPip, strVIPPort, strVIPProt, strSNAT, strHA, strPersist, strAflex, strSSL, strSNATPart2
 Dim strBaselineName, strValidateName, strRollbackName, objBaseline, objValidate, objRollback, strBaseTemp, strValtemp, strRBTemp, strPriority, strProfile, strSNAT1, strSNAT2, strSNATMask, strSNATParts
-Dim strOutput, dictServer, strBaseline, strVerify
+Dim strOutput, dictServer, strBaseline, strVerify, strServiceName
 
 Set fso = CreateObject("Scripting.FileSystemObject")
 Set dictSG = CreateObject("Scripting.Dictionary")
@@ -164,6 +164,7 @@ Do
   strVIPPort = Worksheets("VIP details").Cells(x, 3).Value
   If strVIPPort = "any" Then strVIPPort = 0
   strVIPProt = Worksheets("VIP details").Cells(x, 4).Value
+  strServiceName = Worksheets("VIP details").Cells(x, 13).Value
   If strVIPProt = "any" Then strVIPProt = "others"
   strSNAT = Worksheets("VIP details").Cells(x, 5).Value
   strSPName = ""
@@ -214,6 +215,7 @@ Do
   ObjScript.writeline "slb virtual-server " & strVIPName & " " & strVIPip
   ObjScript.writeline " ha-group " & strHA
   ObjScript.writeline " port " & strVIPPort & " " & strVIPProt
+  ObjScript.writeline "  name " & strServiceName
   If strSPName <> "" Then
     If strSPName = "auto" Then
       ObjScript.writeline "  source-nat auto "

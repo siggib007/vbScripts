@@ -183,39 +183,46 @@ Do
   If strSNAT <> "" Then
     If strSNAT = "automap" Then strSNAT = "auto"
     If strSNAT = "auto" Then
-      strSPName = "auto"
+        strSPName = "auto"
     Else
-        strSPName = strVIPName & "-SP"
-        If dictSNAT.exists(strSNAT) Then
-          strSPName = dictSNAT.Item(strSNAT)
-        Else
-          dictSNAT.Add strSNAT, strSPName
-          If InStr(strSNAT, "-") > 0 Then
-            strSNATParts = Split(strSNAT, "-")
-            strSNAT1 = strSNATParts(0)
-            strSNATPart2 = Split(strSNATParts(1), "/")
-            strSNAT2 = strSNATPart2(0)
-            If UBound(strSNATPart2) > 0 Then
-              strSNATMask = strSNATPart2(1)
-            Else
-              strSNATMask = ""
-            End If
+        If InStr(strSNAT, "-") > 0 Then
+          strSNATParts = Split(strSNAT, "-")
+          strSNAT1 = strSNATParts(0)
+          strSNATPart2 = Split(strSNATParts(1), "/")
+          strSNAT2 = strSNATPart2(0)
+          If UBound(strSNATPart2) > 0 Then
+            strSNATMask = strSNATPart2(1)
           Else
-            strSNAT1 = strSNAT
-            strSNAT2 = strSNAT
-            strSNATMask = 32
+            strSNATMask = ""
           End If
-          ObjScript.writeline "!" & vbCrLf & "ip nat pool " & strSPName & " " & strSNAT1 & " " & strSNAT2 & " netmask /" & strSNATMask & " ha-group-id " & strHA & vbCrLf & "!"
-          strBaseTemp = strBaseTemp & "show ip nat pool " & strSPName & vbCrLf
-          strValtemp = strValtemp & "show ip nat pool " & strSPName & vbCrLf
-          strRBTemp = strRBTemp & "no ip nat pool " & strSPName & " " & strSNAT1 & " " & strSNAT2 & " netmask /" & strSNATMask & " ha-group-id " & strHA & vbCrLf
+        Else
+          strSNAT1 = strSNAT
+          strSNAT2 = strSNAT
+          strSNATMask = 32
+        End If
+        
+        If CheckIP(strSNAT1) Then
+            strSPName = strVIPName & "-SP"
+            If dictSNAT.exists(strSNAT) Then
+              strSPName = dictSNAT.Item(strSNAT)
+            Else
+              dictSNAT.Add strSNAT, strSPName
+              ObjScript.writeline "!" & vbCrLf & "ip nat pool " & strSPName & " " & strSNAT1 & " " & strSNAT2 & " netmask /" & strSNATMask & " ha-group-id " & strHA & vbCrLf & "!"
+              strBaseTemp = strBaseTemp & "show ip nat pool " & strSPName & vbCrLf
+              strValtemp = strValtemp & "show ip nat pool " & strSPName & vbCrLf
+              strRBTemp = strRBTemp & "no ip nat pool " & strSPName & " " & strSNAT1 & " " & strSNAT2 & " netmask /" & strSNATMask & " ha-group-id " & strHA & vbCrLf
+            End If
+        Else
+            strSPName = strSNAT
         End If
     End If
   End If
   ObjScript.writeline "slb virtual-server " & strVIPName & " " & strVIPip
   ObjScript.writeline " ha-group " & strHA
   ObjScript.writeline " port " & strVIPPort & " " & strVIPProt
-  ObjScript.writeline "  name " & strServiceName
+  If strServiceName <> "" Then
+    ObjScript.writeline "  name " & strServiceName
+  End If
   If strSPName <> "" Then
     If strSPName = "auto" Then
       ObjScript.writeline "  source-nat auto "
@@ -307,6 +314,32 @@ Dim pathparts, buildpath, part
             End If
         End If
     Next
+End Function
+
+Function CheckIP(strIPAddr)
+'-------------------------------------------------------------------------------------------------'
+' Function CheckIP (strIPAddr)                                                                    '
+'                                                                                                 '
+' This function takes in a string and checks to see if it is a valid IP address or not            '
+'-------------------------------------------------------------------------------------------------'
+Dim strIPParts, bStatus, x
+
+strIPParts = Split(strIPAddr, ".")
+
+If UBound(strIPParts) = 3 Then
+    For x = 0 To 3
+        If IsNumeric(strIPParts(x)) And strIPParts(x) > -1 And strIPParts(x) < 256 Then
+            bStatus = True
+        Else
+            bStatus = False
+        End If
+    Next
+Else
+    bStatus = False
+End If
+
+CheckIP = bStatus
+
 End Function
 
 

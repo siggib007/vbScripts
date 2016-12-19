@@ -23,9 +23,9 @@ Sub Main
 	const ForAppending  = 8
 	Const Timeout = 5
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt
-	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, bBound, strIntDescr
- 
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt, strResultParts
+	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, strIntDescr, strIPVer, strInt, x
+
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 	Set fso = CreateObject("Scripting.FileSystemObject")
 	set objACLDict = CreateObject("Scripting.Dictionary")
@@ -81,59 +81,61 @@ Sub Main
 			end if
 			crt.Screen.Send("term len 0" & vbcr)
 			crt.Screen.WaitForString "#",Timeout
-			crt.Screen.Send("show running-config | include ipv4 access-list" & vbcr)
+			crt.Screen.Send("show running-config | include access-list" & vbcr)
 			crt.Screen.WaitForString vbcr,Timeout
 			do while true
-				iPrompt=crt.Screen.WaitForStrings ("access-list", "#", Timeout)
-				select case iPrompt
-					case 0
-						msgbox "Timeout"
-						exit do
-					case 2
-						exit do
-					case 1
-						crt.Screen.WaitForString "",Timeout
-						strResult=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-						if not objACLDict.exists(strResult) then
-							objACLDict.add strResult, host
-						end if						
-					case else
-						msgbox "Unexpected choice #" & iPrompt
-						exit do
-				end select
+				strResult=trim(crt.Screen.Readstring (vbcrlf,"RP/0/RS",Timeout))
+				if strResult = "" then
+					exit do
+				end if
+				strResultParts = split (strResult," ")
+				' objFileOut.writeline  strResult & " has " & ubound(strResultParts) & " parts"
+				if ubound(strResultParts) = 2 then
+					if strResultParts(1) = "access-list" then
+						strIPVer = strResultParts(0)
+						strACL = strResultParts(2)
+						if not objACLDict.exists(strACL) then
+							objACLDict.add strACL, strIPVer
+						end if
+					end if
+				end if
 			loop
 			for each strACL in objACLDict
-				bBound = false
-				crt.Screen.Send("show access-lists " & strACL & " | utility wc lines" & vbcr)
+				strInterface = ""
+				crt.Screen.Send("show access-lists " & objACLDict(strACL) & " " & strACL & " | utility wc lines" & vbcr)
 				crt.Screen.WaitForString "GMT" & vbcrlf,Timeout
 				iLineCount=trim(crt.Screen.Readstring (vbcrlf,Timeout))
 				crt.Screen.WaitForString "#",Timeout
-				crt.Screen.Send("show access-lists " & strACL & "  usage pfilter location all " & vbcr)
+				crt.Screen.Send("show access-lists " & objACLDict(strACL) & " " & strACL & "  usage pfilter location all " & vbcr)
 				do while true
 					iPrompt=crt.Screen.WaitForStrings ("Interface :", "#", Timeout)
 					select case iPrompt
 						case 0
-							msgbox "Timeout"
-							exit do
+							objFileOut.writeline IPAddr & "," & host & "," & strACL & ",Timeout"
 						case 2
-							if bBound = false Then
-								objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & ",unbound" 
-							end if
 							exit do
 						case 1
-							strInterface=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-							crt.Screen.WaitForString "#",Timeout
-							crt.Screen.Send("show interfaces " & strInterface & "  description " & vbcr)
-							crt.Screen.WaitForString "up          up   ",Timeout
-							strIntDescr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-							objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & "," & strInterface	& "," & strIntDescr
-							bBound = True						
+							strInterface=strInterface & "|" & trim(crt.Screen.Readstring (vbcrlf,Timeout))
 						case else
 							msgbox "Unexpected choice #" & iPrompt
 							exit do
 					end select
-				loop				
-			next 			
+				loop
+				if strInterface = "" then
+					objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & ",unbound"
+				else
+					strResultParts = split (strInterface,"|")
+					for x=0 to ubound(strResultParts)
+						strInt = strResultParts(x)
+						if strInt <> "" then
+							crt.Screen.Send("show interfaces " & strInt & "  description " & vbcr)
+							crt.Screen.WaitForStrings "up          up   ","admin-down  admin-down",Timeout
+							strIntDescr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+							objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & "," & strInt & "," & strIntDescr
+						end if
+					next
+				end if
+			next
 			crt.Session.Disconnect
 		else
 			nError = crt.GetLastError

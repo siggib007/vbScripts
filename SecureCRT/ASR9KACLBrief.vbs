@@ -8,7 +8,7 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile
+dim strInFile, strOutFile, dictSubnets
 
 ' User Spefified values, specify values here per your needs
 strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\search_result.csv"
@@ -23,12 +23,15 @@ Sub Main
 	const ForAppending  = 8
 	Const Timeout = 5
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt, strResultParts
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt, strResultParts, strLineParts
 	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, strIntDescr, strIPVer, strInt, x, strIntIP
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 	Set fso = CreateObject("Scripting.FileSystemObject")
 	set objACLDict = CreateObject("Scripting.Dictionary")
+	set dictSubnets = CreateObject("Scripting.Dictionary")
+
+	InitializeDicts
 
 	strOut = ""
 	if not fso.FileExists(strInFile) Then
@@ -123,18 +126,43 @@ Sub Main
 					end select
 				loop
 				if strInterface = "" then
-					objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & ",unbound"
+					crt.Screen.WaitForString "#",Timeout
+					crt.Screen.Send("show running-config | include " & strACL & vbcr)
+					crt.Screen.WaitForStrings "configuration...",Timeout
+					strResult=trim(crt.Screen.Readstring ("RP/0/RS",Timeout))
+					strResultParts = split(strResult,vbcrlf)
+					for x=0 to ubound(strResultParts)
+						if InStr(strResultParts(x),"access-list")=0 then
+							strLineParts=split(strResultParts(x)," ")
+							strInterface=strLineParts(0)
+							if strInterface = "access-class" then
+								strInterface = "line default"
+							end if
+						end if
+					next
+					if strInterface = "" then
+						strInterface = "unbound"
+					end if
+					objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & "," & strInterface
 				else
 					strResultParts = split (strInterface,"|")
 					for x=0 to ubound(strResultParts)
 						strInt = strResultParts(x)
 						if strInt <> "" then
-							crt.Screen.Send("show interfaces " & strInt & "  | include ""Description|Internet address""" & vbcr)
-							crt.Screen.WaitForStrings "Description: ",Timeout
+							crt.Screen.Send("show running-config interface " & strInt & vbcr)
+							crt.Screen.WaitForStrings "description",Timeout
 							strIntDescr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
 							strIntDescr=replace(strIntDescr,",",";")
-							crt.Screen.WaitForStrings "address is ",Timeout
+							crt.Screen.WaitForStrings "address",Timeout
 							strIntIP=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+							strLineParts=split(strIntIP," ")
+							if ubound(strLineParts)=1 then
+								if dictSubnets.exists(strLineParts(1)) then
+									strIntIP = strLineParts(0) & "/" & dictSubnets.Item(strLineParts(1))
+								else
+									strIntIP = strLineParts(0) & "***" & strLineParts(1) & "***"
+								end if
+							end if
 							objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & "," & strInt & "," & strIntDescr & "," & strIntIP
 						end if
 					next
@@ -191,3 +219,38 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 		end if
 	next
 end function
+
+sub InitializeDicts
+	dictSubnets.add "255.255.255.255", "/32"
+	dictSubnets.add "255.255.255.254", "/31"
+	dictSubnets.add "255.255.255.252", "/30"
+	dictSubnets.add "255.255.255.248", "/29"
+	dictSubnets.add "255.255.255.240", "/28"
+	dictSubnets.add "255.255.255.224", "/27"
+	dictSubnets.add "255.255.255.192", "/26"
+	dictSubnets.add "255.255.255.128", "/25"
+	dictSubnets.add "255.255.255.0", "/24"
+	dictSubnets.add "255.255.254.0", "/23"
+	dictSubnets.add "255.255.252.0", "/22"
+	dictSubnets.add "255.255.248.0", "/21"
+	dictSubnets.add "255.255.240.0", "/20"
+	dictSubnets.add "255.255.224.0", "/19"
+	dictSubnets.add "255.255.192.0", "/18"
+	dictSubnets.add "255.255.128.0", "/17"
+	dictSubnets.add "255.255.0.0", "/16"
+	dictSubnets.add "255.254.0.0", "/15"
+	dictSubnets.add "255.252.0.0", "/14"
+	dictSubnets.add "255.248.0.0", "/13"
+	dictSubnets.add "255.240.0.0", "/12"
+	dictSubnets.add "255.224.0.0", "/11"
+	dictSubnets.add "255.192.0.0", "/10"
+	dictSubnets.add "255.128.0.0", "/9"
+	dictSubnets.add "255.0.0.0", "/8"
+	dictSubnets.add "254.0.0.0", "/7"
+	dictSubnets.add "252.0.0.0", "/6"
+	dictSubnets.add "248.0.0.0", "/5"
+	dictSubnets.add "240.0.0.0", "/4"
+	dictSubnets.add "224.0.0.0", "/3"
+	dictSubnets.add "192.0.0.0", "/2"
+	dictSubnets.add "128.0.0.0", "/1"
+end sub

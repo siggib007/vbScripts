@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\ARGList.csv"
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\ARG-ACLs-Brief.csv"
+strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\search_result.csv"
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ARG-ACLs-Brief.csv"
 
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -24,7 +24,7 @@ Sub Main
 	Const Timeout = 5
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt, strResultParts
-	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, strIntDescr, strIPVer, strInt, x
+	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, strIntDescr, strIPVer, strInt, x, strIntIP
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 	Set fso = CreateObject("Scripting.FileSystemObject")
@@ -52,7 +52,7 @@ Sub Main
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
-	objFileOut.writeline "primaryIPAddress,hostName,ACL Name,Line Count,Interface, Interface description"
+	objFileOut.writeline "primaryIPAddress,hostName,ACL Name,Line Count,Interface, Interface description,IP Address"
 	strLine = objFileIn.readline
 	While not objFileIn.atendofstream
 		objACLDict.RemoveAll
@@ -101,6 +101,7 @@ Sub Main
 				end if
 			loop
 			for each strACL in objACLDict
+			  if strACL <> "3" and strACL <> "4" then
 				strInterface = ""
 				crt.Screen.Send("show access-lists " & objACLDict(strACL) & " " & strACL & " | utility wc lines" & vbcr)
 				crt.Screen.WaitForString "GMT" & vbcrlf,Timeout
@@ -128,13 +129,17 @@ Sub Main
 					for x=0 to ubound(strResultParts)
 						strInt = strResultParts(x)
 						if strInt <> "" then
-							crt.Screen.Send("show interfaces " & strInt & "  description " & vbcr)
-							crt.Screen.WaitForStrings "up          up   ","admin-down  admin-down",Timeout
+							crt.Screen.Send("show interfaces " & strInt & "  | include ""Description|Internet address""" & vbcr)
+							crt.Screen.WaitForStrings "Description: ",Timeout
 							strIntDescr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-							objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & "," & strInt & "," & strIntDescr
+							strIntDescr=replace(strIntDescr,",",";")
+							crt.Screen.WaitForStrings "address is ",Timeout
+							strIntIP=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+							objFileOut.writeline IPAddr & "," & host & "," & strACL & "," & iLineCount & "," & strInt & "," & strIntDescr & "," & strIntIP
 						end if
 					next
 				end if
+			  end if
 			next
 			crt.Session.Disconnect
 		else

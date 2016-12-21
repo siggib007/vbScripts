@@ -21,7 +21,7 @@ Sub Main
 	const ForReading    = 1
 	const ForWriting    = 2
 	const ForAppending  = 8
-	Const Timeout = 2
+	Const Timeout = 5
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt, strResultParts, strLineParts
 	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, strIntDescr, strIPVer, strInt, x, strIntIP
@@ -87,8 +87,8 @@ Sub Main
 			crt.Screen.Send("show running-config | include access-list" & vbcr)
 			crt.Screen.WaitForString vbcr,Timeout
 			do while true
-				strResult=trim(crt.Screen.Readstring (vbcrlf,"RP/0/RS",Timeout))
-				if strResult = "" then
+				strResult=trim(crt.Screen.Readstring (vbcrlf,"#",Timeout))
+				if crt.Screen.MatchIndex = 2 or crt.Screen.MatchIndex = 0 then
 					exit do
 				end if
 				strResultParts = split (strResult," ")
@@ -103,7 +103,6 @@ Sub Main
 				end if
 			loop
 			for each strACL in objACLDict
-			  if strACL <> "3" and strACL <> "4" then
 				strInterface = ""
 				crt.Screen.Send("show access-lists " & objACLDict(strACL) & " " & strACL & " | utility wc lines" & vbcr)
 				crt.Screen.WaitForString "GMT" & vbcrlf,Timeout
@@ -125,20 +124,23 @@ Sub Main
 					end select
 				loop
 				if strInterface = "" then
-					crt.Screen.WaitForString "#",Timeout
-					crt.Screen.Send("show running-config | include " & strACL & vbcr)
-					crt.Screen.WaitForStrings "configuration...",Timeout
-					strResult=trim(crt.Screen.Readstring ("RP/0/RS",Timeout))
-					strResultParts = split(strResult,vbcrlf)
-					for x=0 to ubound(strResultParts)
-						if InStr(strResultParts(x),"access-list")=0 and strResultParts(x)<>"" then
-							strLineParts=split(strResultParts(x)," ")
-							strInterface=strLineParts(0)
-							if strInterface = "access-class" then
-								strInterface = "line default"
+			    	if strACL <> "3" and strACL <> "4" then
+						crt.Screen.Send("show running-config | include " & strACL & vbcr)
+						crt.Screen.WaitForStrings "configuration...",Timeout
+						strResult=trim(crt.Screen.Readstring ("RP/0/R",Timeout))
+						strResultParts = split(strResult,vbcrlf)
+						for x=0 to ubound(strResultParts)
+							if InStr(strResultParts(x),"access-list")=0 and strResultParts(x)<>"" then
+								strLineParts=split(trim(strResultParts(x))," ")
+								strInterface=strLineParts(0)
+								if strInterface = "access-class" then
+									strInterface = "line default"
+								end if
 							end if
-						end if
-					next
+						next
+					else
+						strInterface = "Assumed NTP"
+					end if
 					if strInterface = "" then
 						strInterface = "unbound"
 					end if
@@ -166,7 +168,6 @@ Sub Main
 						end if
 					next
 				end if
-			  end if
 			next
 			crt.Session.Disconnect
 		else

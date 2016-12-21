@@ -11,10 +11,8 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, strACLName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\ARGList118.csv" ' Input file, comma seperated. format:IP, DeviceName
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\ARG-OMW-ABF-IN-List.csv" ' The name of the output file, CSV file listing results
-strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\OMW-ABF-IN" ' Folder to save individual ACL's to
-strACLName    = "OMW-ABF-IN" ' Name of the ACL to look at and compare
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\ARGList31-32.csv" ' Input file, comma seperated. format:IP, DeviceName
+strACLName    = "FWG-Untrust" ' Name of the ACL to look at and compare
 iStartCompare    = 1    ' 0 based. 1,2 or 3 recomended. What line in the ACL should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 const CompareAll = False ' Compare ACL even if they are different lengths. False is recomended.
@@ -27,10 +25,9 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bBase
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare 
+	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare
 
 	VerifyCmd = "show run ipv4 access-list " & strACLName
-	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
 	strOut = ""
@@ -38,11 +35,8 @@ Sub Main
 		msgbox "Input file " & strInFile & " not found, exiting"
 		exit sub
 	end if
-	if not fso.FolderExists(strFolder) then
-		CreatePath (strFolder)
-		strOut = strOut & """" & strFolder & """ did not exists so I created it" & vbcrlf
-	end if
 
+	strOutPath = left (strInFile, InStrRev (strInFile,"\"))
 	if not fso.FolderExists(strOutPath) then
 		CreatePath (strOutPath)
 		strOut = strOut & vbcrlf & """" & strOutPath & """ did not exists so I created it" & vbcrlf
@@ -51,8 +45,20 @@ Sub Main
 		msgbox strOut
 	end if
 
-	if right(strFolder,1)<>"\" then
-		strFolder = strFolder & "\"
+	if right(strOutPath,1)<>"\" then
+		strOutPath = strOutPath & "\"
+	end if
+
+	strOutFile = strOutPath & strACLName & "-List.csv"
+
+	strFolder = strOutPath & strACLName & "\"
+
+	if not fso.FolderExists(strFolder) then
+		CreatePath (strFolder)
+		strOut = strOut & """" & strFolder & """ did not exists so I created it" & vbcrlf
+	end if
+	if strOut <> "" then
+		msgbox strOut
 	end if
 
 	crt.screen.synchronous = true
@@ -118,27 +124,27 @@ Sub Main
 					iLineCount = ubound(strResultParts)
 				else
 					iLineCount = ubound(strBaseLine)
-				end if	
+				end if
 			end if
 			if bBase Then
 				strTest = "Baseline ACL " & ubound(strBaseLine) & " lines."
 				bCont=False
-			end if 
+			end if
 			if bCont = True then
 				strTemp = ""
 				iCompare = iStartCompare
 				for x=iCompare to iLineCount
-					y=x 
+					y=x
 					if strBaseLine(x) <> strResultParts(y) then
 						strTemp = strTemp & x-1 & " "
 					end if
 				next
 				' objFileOut.writeline "bCont=True; strTemp=" & strTemp & "; strTest=" & strTest
-				if strTemp = "" then 
+				if strTemp = "" then
 					strTest = strTest & "Pass"
 				else
 					strTest = strTest & "ACL line " & strTemp & "does not match. "
-				end if 
+				end if
 			end if
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
 			objDevName.writeline strResult

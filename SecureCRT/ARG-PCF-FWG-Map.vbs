@@ -8,12 +8,12 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile
+dim strInFile, strOutFile, strPCFOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGList.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGFWGPCFMap.csv"
-
+strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGList.csv"
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGFWGPCFMap.csv"
+strPCFOutFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\PCFARGMap.csv"
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -22,10 +22,10 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 	Const Timeout = 2
-	const VerifyCmd = "show interfaces description"
+	const VerifyCmd = "show interfaces description | include up          up"
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult
-	dim strResultParts, strPCFList, strFWGList, objPCF, objFWG, iPrompt, strTemp, bcont
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strPCF
+	dim strResultParts, strPCFList, strFWGList, objPCF, objFWG, iPrompt, strTemp, bcont, strTemp2, objPCFOut
 
 	crt.screen.synchronous = true
 	crt.screen.IgnoreEscape = True
@@ -34,20 +34,21 @@ Sub Main
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
+	set objPCFOut = fso.OpenTextFile(strPCFOutFile, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 	set objPCF = CreateObject("Scripting.Dictionary")
 	set objFWG = CreateObject("Scripting.Dictionary")
 	bcont = True
 
 	objFileOut.writeline "ARG,PCF,FWG"
+	objPCFOut.writeline "PCF,ARG Pair"
 
 	strLine = objFileIn.readline
 	While not objFileIn.atendofstream
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(0)
-		objPCF.RemoveAll
-		objFWG.RemoveAll
+
 		strPCFList=""
 		strFWGList=""
 
@@ -76,7 +77,6 @@ Sub Main
 				select case iPrompt
 					case 0
 						' msgbox "Timeout"
-						' bcont=false
 						exit do
 					case 3
 						' msgbox "Found prompt"
@@ -85,7 +85,17 @@ Sub Main
 						strTemp=trim(crt.Screen.Readstring (vbcrlf,Timeout))
 						if instr(strTemp,"PCF") > 0 then
 							strTemp = mid(strTemp,instr(strTemp,"PCF")-2,8)
-							if not objPCF.exists(strTemp) then
+							if objPCF.exists(strTemp) then
+								if instr(objPCF(strTemp),host)=0 then
+									strTemp2 = objPCF(strTemp) & "/" & host
+									objPCF(strTemp) = strTemp2
+									if strPCFList = "" then
+										strPCFList = strPCFList & strTemp
+									else
+										strPCFList = strPCFList & ";" & strTemp
+									end if
+								end if
+							else
 								objPCF.add strTemp, host
 								if strPCFList = "" then
 									strPCFList = strPCFList & strTemp
@@ -98,13 +108,11 @@ Sub Main
 							strTemp = mid(strTemp,instr(strTemp,"FWG"),8)
 							if not objFWG.exists(strTemp) then
 								objFWG.add strTemp, host
-								' if IsNumeric(mid(strTemp,7,2)) then strFWGList = strFWGList & ";" & strTemp
-								' strFWGList = strFWGList & ";" & strTemp
 								if strFWGList = "" then
 									strFWGList = strFWGList & strTemp
 								else
 									strFWGList = strFWGList & ";" & strTemp
-								end if								
+								end if
 							end if
 						end if
 					case else
@@ -121,6 +129,9 @@ Sub Main
 		end if
 	wend
 
+	for each strPCF in objPCF
+		objPCFOut.writeline strPCF & "," & objPCF(strPCF)
+	next
 	objFileOut.close
 	objFileIn.close
 	Set objFileIn  = Nothing

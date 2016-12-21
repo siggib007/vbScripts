@@ -21,7 +21,7 @@ Sub Main
 	const ForReading    = 1
 	const ForWriting    = 2
 	const ForAppending  = 8
-	Const Timeout = 5
+	Const Timeout = 2
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, iPrompt, strResultParts, strLineParts
 	dim strOut, strOutPath, IPAddr, objACLDict, strACL, strInterface, iLineCount, strIntDescr, strIPVer, strInt, x, strIntIP
@@ -92,7 +92,6 @@ Sub Main
 					exit do
 				end if
 				strResultParts = split (strResult," ")
-				' objFileOut.writeline  strResult & " has " & ubound(strResultParts) & " parts"
 				if ubound(strResultParts) = 2 then
 					if strResultParts(1) = "access-list" then
 						strIPVer = strResultParts(0)
@@ -132,7 +131,7 @@ Sub Main
 					strResult=trim(crt.Screen.Readstring ("RP/0/RS",Timeout))
 					strResultParts = split(strResult,vbcrlf)
 					for x=0 to ubound(strResultParts)
-						if InStr(strResultParts(x),"access-list")=0 then
+						if InStr(strResultParts(x),"access-list")=0 and strResultParts(x)<>"" then
 							strLineParts=split(strResultParts(x)," ")
 							strInterface=strLineParts(0)
 							if strInterface = "access-class" then
@@ -158,7 +157,7 @@ Sub Main
 							strLineParts=split(strIntIP," ")
 							if ubound(strLineParts)=1 then
 								if dictSubnets.exists(strLineParts(1)) then
-									strIntIP = strLineParts(0) & "/" & dictSubnets.Item(strLineParts(1))
+									strIntIP = strLineParts(0) & dictSubnets.Item(strLineParts(1))
 								else
 									strIntIP = strLineParts(0) & "***" & strLineParts(1) & "***"
 								end if

@@ -11,9 +11,9 @@ Option Explicit
 dim strInFile, strOutFile, strPCFOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGList.csv"
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGFWGPCFMap.csv"
-strPCFOutFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\PCFARGMap.csv"
+strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\test.csv"
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\testARGFWGPCFMap.csv"
+strPCFOutFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\testPCFARGMap.csv"
 
 'Nothing below here is user configurable proceed at your own risk.
 

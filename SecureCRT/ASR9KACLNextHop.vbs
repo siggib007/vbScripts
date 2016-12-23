@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\Failures.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ACLs2.csv"
+strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\search_result.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ARGNextHops.csv"
 
 const DelNum       = 38
 const DelCount     = 4
@@ -48,7 +48,7 @@ Sub Main
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(0)
-		
+
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
 		end if
@@ -69,7 +69,7 @@ Sub Main
 			crt.Screen.Send("term len 0" & vbcr)
 			crt.Screen.WaitForString "#",Timeout
 			crt.Screen.Send(VerifyCmd & vbcr)
-			do while true 
+			do while true
 				iPrompt=crt.Screen.WaitForStrings ("ipv4 access-list ", "nexthop1 ipv4", "#", Timeout)
 				select case iPrompt
 					case 0
@@ -87,12 +87,12 @@ Sub Main
 						if not objNetHop.exists(strNextHop) then
 							objNetHop.add strNextHop,""
 							objFileOut.writeline host & "," & strACLName  & "," & strNextHop
-						end if 
+						end if
 					case else
 						msgbox "Unexpected choice #" & iPrompt
 						exit do
-				end select 
-			loop 
+				end select
+			loop
 			crt.Session.Disconnect
 		else
 			nError = crt.GetLastError
@@ -102,7 +102,7 @@ Sub Main
 	wend
 
 	objFileOut.close
-	objFileIn.close	
+	objFileIn.close
 	Set objFileIn  = Nothing
 	Set objFileOut = Nothing
 

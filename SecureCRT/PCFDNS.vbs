@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PCFList2.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PCFAudit2.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PCFList.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PCFDNSSetting.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 35    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -22,10 +22,17 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strARGPair
-	dim strOut, strOutPath, iRespone, strTracFone, strGiV4, strGiV6, bContinue, strTwilio, strCintex
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strARGPair, ObjDNSServer
+	dim strOut, strOutPath, iRespone, strDNS_IP, ObjIgnore
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
+
+	set ObjDNSServer = CreateObject("Scripting.Dictionary")
+	set ObjIgnore = CreateObject("Scripting.Dictionary")
+
+	ObjIgnore.add "0.0.0.0",""
+	ObjIgnore.add "<none>",""
+	ObjIgnore.add "::",""
 
 	' Creating a File System Object to interact with the File System
 	Set fso = CreateObject("Scripting.FileSystemObject")
@@ -50,7 +57,7 @@ Sub Main
 	'Opening both intput and output files
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
-	objFileOut.writeline "PCF,ARG,Gi v4,Gi v6,TracFone,Twilio,Cintext"
+	objFileOut.writeline "PCF,ARG,Primary IPv4,Secondary IPv4,Primary IPv6,Secondary IPv6,Others"
 
 	'Skip over the first header line
 	strLine = objFileIn.readline
@@ -60,10 +67,7 @@ Sub Main
 		strParts = split(strLine,",")
 		host = strParts(0)
 		strARGPair = strParts(1)
-		strTracFone = "--"
-		strGiV4 = "--"
-		strGiV6 = "--"
-		bContinue=True
+		ObjDNSServer.removeall
 
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
@@ -79,10 +83,10 @@ Sub Main
 			iRespone = crt.Screen.WaitForStrings ("WARNING","#",Timeout)
 			select case iRespone
 				case 0
-					objFileOut.writeline host & ",Not Connected,timeout waiting for prompt "
+					ObjDNSServer.add ",Not Connected,timeout waiting for prompt "
 					crt.Session.Disconnect
 				case 1
-					objFileOut.writeline host & ",Not Connected,Critical Warning on login "
+					ObjDNSServer.add ",Not Connected,Critical Warning on login "
 					crt.Session.Disconnect
 				case 2
 					nError = Err.Number
@@ -90,52 +94,52 @@ Sub Main
 					If nError <> 0 Then
 						result = "Error " & nError & ": " & strErr
 					end if
-					crt.Screen.Send("context gi" & vbcr)
-					crt.Screen.WaitForString "#",Timeout
-					crt.Screen.Send("show ip interface name tracfone_loopback" & vbcr)
-					iRespone = crt.Screen.WaitForStrings ("IP Address: ","does not exist!",Timeout)
-					if iRespone = 1 then
-						strTracFone=trim(crt.Screen.Readstring("Subnet Mask:",Timeout))
-					else
-						strTracFone = "None"
-					end if
-					crt.Screen.WaitForString "#",Timeout
-					crt.Screen.Send("show ip interface name twilio_loopback" & vbcr)
-					iRespone = crt.Screen.WaitForStrings ("IP Address: ","does not exist!",Timeout)
-					if iRespone = 1 then
-						strTwilio=trim(crt.Screen.Readstring("Subnet Mask:",Timeout))
-					else
-						strTwilio = "None"
-					end if
-					crt.Screen.WaitForString "#",Timeout
-					crt.Screen.Send("show ip interface name radius_nas_cintex" & vbcr)
-					iRespone = crt.Screen.WaitForStrings ("IP Address: ","does not exist!",Timeout)
-					if iRespone = 1 then
-						strCintex=trim(crt.Screen.Readstring("Subnet Mask:",Timeout))
-					else
-						strCintex = "None"
-					end if
-					crt.Screen.WaitForString "#",Timeout
-					crt.Screen.Send("show ip interface name gi_loopback" & vbcr)
-					iRespone = crt.Screen.WaitForStrings ("IP Address: ",Timeout)
-					if iRespone = 1 then
-						strGiV4=trim(crt.Screen.Readstring("Subnet Mask:",Timeout))
-					else
-						strGiV4 = "None"
-					end if
-					crt.Screen.WaitForString "#",Timeout
-					crt.Screen.Send("show ipv6 interface name gi_ipv6_loopback" & vbcr)
-					iRespone = crt.Screen.WaitForStrings ("Unicast Address: ",Timeout)
-					if iRespone = 1 then
-						strGiV6=trim(crt.Screen.Readstring(vbcrlf,Timeout))
-					else
-						strGiV6 = "does not exist!"
-					end if
-					objFileOut.writeline host & "," & strARGPair & "," & strGiV4 & "," & strGiV6 & "," & strTracFone & "," & strTwilio & "," & strCintex
+					crt.Screen.Send("show apn all" & vbcr)
+					do while true
+						iRespone = crt.Screen.WaitForStrings ("primary dns: ","#",Timeout)
+						if iRespone = 2 then
+							exit do
+						end if
+						strDNS_IP=trim(crt.Screen.Readstring("secondary dns:",Timeout))
+						if not ObjDNSServer.exists(strDNS_IP) then
+							ObjDNSServer.add strDNS_IP,""
+						end if
+						strDNS_IP=trim(crt.Screen.Readstring(vbcrlf,Timeout))
+						if not ObjDNSServer.exists(strDNS_IP) then
+							ObjDNSServer.add strDNS_IP,""
+						end if
+						crt.Screen.WaitForString "ipv6 dns primary server :",Timeout
+						strDNS_IP=trim(crt.Screen.Readstring(vbcrlf,Timeout))
+						if not ObjDNSServer.exists(strDNS_IP) then
+							ObjDNSServer.add strDNS_IP,""
+						end if
+						crt.Screen.WaitForString "ipv6 dns secondary server :",Timeout
+						strDNS_IP=trim(crt.Screen.Readstring(vbcrlf,Timeout))
+						if not ObjDNSServer.exists(strDNS_IP) then
+							ObjDNSServer.add strDNS_IP,""
+						end if
+						crt.Screen.WaitForString "IPv6 Primary DNS server address:",Timeout
+						strDNS_IP=trim(crt.Screen.Readstring(vbcrlf,Timeout))
+						if not ObjDNSServer.exists(strDNS_IP) then
+							ObjDNSServer.add strDNS_IP,""
+						end if
+						crt.Screen.WaitForString "IPv6 Secondary DNS server address:",Timeout
+						strDNS_IP=trim(crt.Screen.Readstring(vbcrlf,Timeout))
+						if not ObjDNSServer.exists(strDNS_IP) then
+							ObjDNSServer.add strDNS_IP,""
+						end if
+					loop
 				case else
-					objFileOut.write host & ",Not Connected,Unexpected choice #" & iRespone
+					ObjDNSServer.add ",Not Connected,Unexpected choice #" & iRespone
 					crt.Session.Disconnect
 			end select
+			strOut = host & "," & strARGPair
+			for each strDNS_IP in ObjDNSServer
+				if not ObjIgnore.exists(strDNS_IP) then
+					strOut = strOut & "," & strDNS_IP
+				end if
+			next
+			objFileOut.writeline strOut
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage

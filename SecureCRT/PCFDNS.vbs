@@ -12,7 +12,7 @@ dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
 strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PCFList.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PCFDNSSetting.csv" ' The name of the output file, CSV file listing results
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\AllPCFDNSSetting.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 35    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -83,10 +83,10 @@ Sub Main
 			iRespone = crt.Screen.WaitForStrings ("WARNING","#",Timeout)
 			select case iRespone
 				case 0
-					ObjDNSServer.add ",Not Connected,timeout waiting for prompt "
+					ObjDNSServer.add ",Not Connected,timeout waiting for prompt ",""
 					crt.Session.Disconnect
 				case 1
-					ObjDNSServer.add ",Not Connected,Critical Warning on login "
+					ObjDNSServer.add ",Not Connected,Critical Warning on login ",""
 					crt.Session.Disconnect
 				case 2
 					nError = Err.Number
@@ -130,7 +130,7 @@ Sub Main
 						end if
 					loop
 				case else
-					ObjDNSServer.add ",Not Connected,Unexpected choice #" & iRespone
+					ObjDNSServer.add ",Not Connected,Unexpected choice #" & iRespone, ""
 					crt.Session.Disconnect
 			end select
 			strOut = host & "," & strARGPair

@@ -170,12 +170,6 @@ Sub Main
 			strResultParts = split (strResult,vbcrlf)
 			strTest = ""
 
-			' if ubound(strResultParts) = 2 Then
-			' 	objFileOut.writeline strACLName & " on " & host & " has three lines"
-			' 	objFileOut.writeline "line 1: " & strResultParts(0)
-			' 	objFileOut.writeline "line 2: " & strResultParts(1)
-			' 	objFileOut.writeline "line 3: " & strResultParts(2)
-			' end if
 			if not isarray(strBaseLine) then
 				strBaseLine = strResultParts
 				bBase = True
@@ -187,7 +181,7 @@ Sub Main
 				iLineCount = ubound(strBaseLine)
 			else
 				if strResultParts(1) = "% No such configuration item(s)" or ubound(strResultParts) < 2 Then
-					strTest = "ACL doesn't exists"
+					strTest = strIPVer & " ACL " & strACLName & " doesn't exists"
 					bCont = False
 				else
 					if CompareAll = True then
@@ -205,7 +199,7 @@ Sub Main
 			end if
 			if bBase Then
 				if strBaseLine(1) = "% No such configuration item(s)" or ubound(strBaseLine) < 2 Then
-					strTest = "ACL doesn't exists"
+					strTest = strIPVer & " ACL " & strACLName & " doesn't exists"
 					strBaseLine = empty
 				else
 					strTest = "Baseline ACL " & ubound(strBaseLine) & " lines."
@@ -248,7 +242,7 @@ Sub Main
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage
-			objFileOut.writeline IPAddr & "," & host & ",Not Connected,Error " & nError & ": " & strErr
+			objFileOut.write IPAddr & "," & host & ",Not Connected,Error " & nError & ": " & strErr
 		end if
 	wend
 

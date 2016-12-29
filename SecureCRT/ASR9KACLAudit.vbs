@@ -30,6 +30,7 @@ Sub Main
 	const ForReading    = 1
 	const ForWriting    = 2
 	const ForAppending  = 8
+
 	' button parameter options
 	Const ICON_STOP = 16                 ' display the ERROR/STOP icon.
 	Const ICON_QUESTION = 32             ' display the '?' icon
@@ -41,6 +42,7 @@ Sub Main
 	Const BUTTON_YESNOCANCEL = 3         ' Yes, No, and Cancel buttons
 	Const BUTTON_YESNO = 4               ' Yes and No buttons
 	Const BUTTON_RETRYCANCEL = 5         ' Retry and Cancel buttons
+
 	Const DEFBUTTON1 = 0        ' First button is default
 	Const DEFBUTTON2 = 256      ' Second button is default
 	Const DEFBUTTON3 = 512      ' Third button is default
@@ -54,8 +56,8 @@ Sub Main
 	Const IDYES = 6             ' Yes button clicked
 	Const IDNO = 7              ' No button clicked
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bBase
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare, iResult
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bBase, strIPVer
+	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare, iResult, iLastLine, bRange
 
 	strInFile = crt.Dialog.FileOpenDialog("Please select CSV input file", "Open", "", "CSV Files (*.csv)|*.csv||")
 
@@ -64,13 +66,30 @@ Sub Main
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 	strLine = objFileIn.readline
 	strParts = split(strLine,",")
-	strACLName = strParts(1)
+	if ubound(strParts) >= 3 then
+		strACLName = strParts(1)
+		strIPVer = strParts(3)
+	else
+		msgbox "Please include the ACL you want to audit along with IP version (ipv4/ipv6) in the first line of the CSV file. " _
+		 & "Please make sure the ACL name is in second field and the IP version is in the fourth field of the first line "
+		exit sub
+	end if
+
+	select case right(strIPVer,1)
+		case "4"
+			strIPVer = "ipv4"
+		case "6"
+			strIPVer = "ipv6"
+		case else
+			msgbox "IP version '" & strIPVer & "' is not recognized, please correct. Existing!"
+			exit sub
+	end select
 
 	if strACLName = "" Then
 		msgbox "Please include the ACL you want to audit in the first line of the CSV file. Please make sure it is in second field of the first line."
 		exit sub
 	else
-		iResult = crt.Dialog.MessageBox("Confirm to Audit ACL " & strACLName & "?", "Confirmation", ICON_QUESTION Or BUTTON_YESNO Or DEFBUTTON1 )
+		iResult = crt.Dialog.MessageBox("Confirm to Audit ACL " & strACLName & " and it is " & strIPVer & "?", "Confirmation", ICON_QUESTION Or BUTTON_YESNO Or DEFBUTTON1 )
 		If iResult = IDNO Then
 		    msgbox "Understand ACL name is wrong, exiting"
 		    Exit Sub
@@ -96,7 +115,7 @@ Sub Main
 	end if
 
 
-	VerifyCmd = "show run ipv4 access-list " & strACLName
+	VerifyCmd = "show run " & strIPVer & " access-list " & strACLName
 
 	strOutFile = strOutPath & strACLName & "-List.csv"
 
@@ -121,12 +140,14 @@ Sub Main
 		strParts = split(strLine,",")
 		host = strParts(0)
 		IPAddr = strParts(1)
+		bRange=False
+		iLastLine=0
 
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
 		end if
 
-		ConCmd = "/SSH2 "  & host
+		ConCmd = "/SSH2 /ACCEPTHOSTKEYS "  & host
 		on error resume next
 		crt.Session.Connect ConCmd
 		on error goto 0
@@ -149,6 +170,12 @@ Sub Main
 			strResultParts = split (strResult,vbcrlf)
 			strTest = ""
 
+			' if ubound(strResultParts) = 2 Then
+			' 	objFileOut.writeline strACLName & " on " & host & " has three lines"
+			' 	objFileOut.writeline "line 1: " & strResultParts(0)
+			' 	objFileOut.writeline "line 2: " & strResultParts(1)
+			' 	objFileOut.writeline "line 3: " & strResultParts(2)
+			' end if
 			if not isarray(strBaseLine) then
 				strBaseLine = strResultParts
 				bBase = True
@@ -159,20 +186,30 @@ Sub Main
 				bCont = True
 				iLineCount = ubound(strBaseLine)
 			else
-				if CompareAll = True then
-					bCont = True
-				else
+				if strResultParts(1) = "% No such configuration item(s)" or ubound(strResultParts) < 2 Then
+					strTest = "ACL doesn't exists"
 					bCont = False
-				end if
-				strTest = "ACL length does not match, " & ubound(strResultParts) & " lines. "
-				if ubound(strBaseLine) > ubound(strResultParts) then
-					iLineCount = ubound(strResultParts)
 				else
-					iLineCount = ubound(strBaseLine)
+					if CompareAll = True then
+						bCont = True
+					else
+						bCont = False
+					end if
+					strTest = "ACL length does not match, " & ubound(strResultParts) & " lines. "
+					if ubound(strBaseLine) > ubound(strResultParts) then
+						iLineCount = ubound(strResultParts)
+					else
+						iLineCount = ubound(strBaseLine)
+					end if
 				end if
 			end if
 			if bBase Then
-				strTest = "Baseline ACL " & ubound(strBaseLine) & " lines."
+				if strBaseLine(1) = "% No such configuration item(s)" or ubound(strBaseLine) < 2 Then
+					strTest = "ACL doesn't exists"
+					strBaseLine = empty
+				else
+					strTest = "Baseline ACL " & ubound(strBaseLine) & " lines."
+				end if
 				bCont=False
 			end if
 			if bCont = True then
@@ -181,14 +218,26 @@ Sub Main
 				for x=iCompare to iLineCount
 					y=x
 					if strBaseLine(x) <> strResultParts(y) then
-						strTemp = strTemp & x-1 & " "
+						if iLastLine>0 and iLastLine+1 = x-1 then
+							bRange = True
+						else
+							if bRange = True Then
+								strTemp = strTemp & "-" & iLastLine & " " & x-1
+							else
+								strTemp = strTemp & " " & x-1
+							end if
+							bRange=False
+						end if
+						iLastLine = x-1
 					end if
 				next
-				' objFileOut.writeline "bCont=True; strTemp=" & strTemp & "; strTest=" & strTest
+				if bRange = True Then
+					strTemp = strTemp & "-" & iLastLine
+				end if
 				if strTemp = "" then
 					strTest = strTest & "Pass"
 				else
-					strTest = strTest & "ACL line " & strTemp & "does not match. "
+					strTest = strTest & "ACL line " & trim(strTemp) & " does not match. "
 				end if
 			end if
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)

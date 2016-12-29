@@ -11,8 +11,14 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, strACLName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiACL\ARGList31-32.csv" ' Input file, comma seperated. format:IP, DeviceName
-strACLName    = "FWG-Untrust" ' Name of the ACL to look at and compare
+
+' Input file, comma seperated.
+' First line needs to be "ACL Name," followed by the name of the ACL you want audited.
+' First cell (i.e. A1 or R1C1) isn't important, the script looks for the ACL name in R1C2 (or B1).
+' Second line should be header and is ignored by the script
+' remaining lines should be a list of ASR9K's to audit. Format:DeviceName, IP Address.
+' User is prompted for the input file via file browser dialog.
+
 iStartCompare    = 1    ' 0 based. 1,2 or 3 recomended. What line in the ACL should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 const CompareAll = False ' Compare ACL even if they are different lengths. False is recomended.
@@ -20,16 +26,56 @@ const CompareAll = False ' Compare ACL even if they are different lengths. False
 'Nothing below here is user configurable proceed at your own risk.
 
 Sub Main
+	' File handling constants
 	const ForReading    = 1
 	const ForWriting    = 2
 	const ForAppending  = 8
+	' button parameter options
+	Const ICON_STOP = 16                 ' display the ERROR/STOP icon.
+	Const ICON_QUESTION = 32             ' display the '?' icon
+	Const ICON_WARN = 48                 ' display a '!' icon.
+	Const ICON_INFO= 64                  ' displays "info" icon.
+	Const BUTTON_OK = 0                  ' OK button only
+	Const BUTTON_CANCEL = 1              ' OK and Cancel buttons
+	Const BUTTON_ABORTRETRYIGNORE = 2    ' Abort, Retry, and Ignore buttons
+	Const BUTTON_YESNOCANCEL = 3         ' Yes, No, and Cancel buttons
+	Const BUTTON_YESNO = 4               ' Yes and No buttons
+	Const BUTTON_RETRYCANCEL = 5         ' Retry and Cancel buttons
+	Const DEFBUTTON1 = 0        ' First button is default
+	Const DEFBUTTON2 = 256      ' Second button is default
+	Const DEFBUTTON3 = 512      ' Third button is default
+
+	' Possible MessageBox() return values
+	Const IDOK = 1              ' OK button clicked
+	Const IDCANCEL = 2          ' Cancel button clicked
+	Const IDABORT = 3           ' Abort button clicked
+	Const IDRETRY = 4           ' Retry button clicked
+	Const IDIGNORE = 5          ' Ignore button clicked
+	Const IDYES = 6             ' Yes button clicked
+	Const IDNO = 7              ' No button clicked
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bBase
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare
+	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare, iResult
 
-	VerifyCmd = "show run ipv4 access-list " & strACLName
+	strInFile = crt.Dialog.FileOpenDialog("Please select CSV input file", "Open", "", "CSV Files (*.csv)|*.csv||")
+
+	' Creating a File System Object to interact with the File System
 	Set fso = CreateObject("Scripting.FileSystemObject")
+	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
+	strLine = objFileIn.readline
+	strParts = split(strLine,",")
+	strACLName = strParts(1)
 
+	if strACLName = "" Then
+		msgbox "Please include the ACL you want to audit in the first line of the CSV file. Please make sure it is in second field of the first line."
+		exit sub
+	else
+		iResult = crt.Dialog.MessageBox("Confirm to Audit ACL " & strACLName & "?", "Confirmation", ICON_QUESTION Or BUTTON_YESNO Or DEFBUTTON1 )
+		If iResult = IDNO Then
+		    msgbox "Understand ACL name is wrong, exiting"
+		    Exit Sub
+		End If
+	end if
 	strOut = ""
 	if not fso.FileExists(strInFile) Then
 		msgbox "Input file " & strInFile & " not found, exiting"
@@ -49,6 +95,9 @@ Sub Main
 		strOutPath = strOutPath & "\"
 	end if
 
+
+	VerifyCmd = "show run ipv4 access-list " & strACLName
+
 	strOutFile = strOutPath & strACLName & "-List.csv"
 
 	strFolder = strOutPath & strACLName & "\"
@@ -61,13 +110,9 @@ Sub Main
 		msgbox strOut
 	end if
 
+	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
 	crt.screen.synchronous = true
 	crt.screen.IgnoreEscape = True
-
-	' Creating a File System Object to interact with the File System
-
-	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
-	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
 	objFileOut.writeline "primaryIPAddress,hostName,CompareTest"
 	strLine = objFileIn.readline

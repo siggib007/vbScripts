@@ -21,7 +21,6 @@ dim strInFile, strOutFile, strFolder, strACLName, iStartCompare
 
 iStartCompare    = 1    ' 0 based. 1,2 or 3 recomended. What line in the ACL should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
-const CompareAll = False ' Compare ACL even if they are different lengths. False is recomended.
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -56,8 +55,10 @@ Sub Main
 	Const IDYES = 6             ' Yes button clicked
 	Const IDNO = 7              ' No button clicked
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bBase, strIPVer
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bBase, strIPVer, bCompareAll, strCompare
 	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, IPAddr, VerifyCmd, iLineCount, iCompare, iResult, iLastLine, bRange
+
+	bCompareAll = False ' Compare ACL even if they are different lengths. False is recomended.
 
 	strInFile = crt.Dialog.FileOpenDialog("Please select CSV input file", "Open", "", "CSV Files (*.csv)|*.csv||")
 
@@ -73,6 +74,13 @@ Sub Main
 		msgbox "Please include the ACL you want to audit along with IP version (ipv4/ipv6) in the first line of the CSV file. " _
 		 & "Please make sure the ACL name is in second field and the IP version is in the fourth field of the first line "
 		exit sub
+	end if
+	if ubound(strParts) >= 5 then
+		strCompare = lcase(strParts(5))
+		if strCompare = "yes" or strCompare = "true" then
+			bCompareAll = True
+			msgbox "Per R1C6 in the CSV file, forcing full comparison regardless of ACL length"
+		end if
 	end if
 
 	select case right(strIPVer,1)
@@ -184,7 +192,7 @@ Sub Main
 					strTest = strIPVer & " ACL " & strACLName & " doesn't exists"
 					bCont = False
 				else
-					if CompareAll = True then
+					if bCompareAll = True then
 						bCont = True
 					else
 						bCont = False

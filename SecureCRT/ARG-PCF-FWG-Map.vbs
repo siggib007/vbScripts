@@ -11,9 +11,9 @@ Option Explicit
 dim strInFile, strOutFile, strPCFOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\test.csv"
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\testARGFWGPCFMap.csv"
-strPCFOutFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\testPCFARGMap.csv"
+strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGList.csv"
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\ARGFWGPCFMap2.csv"
+strPCFOutFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGMap\PCFARGMap2.csv"
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -73,7 +73,7 @@ Sub Main
 			crt.Screen.WaitForString "#",Timeout
 			crt.Screen.Send(VerifyCmd & vbcr)
 			do while true
-				iPrompt=crt.Screen.WaitForStrings ("Te0", "Hu0", "#", Timeout)
+				iPrompt=crt.Screen.WaitForStrings ("Te0", "Hu0", "#","BE", Timeout)
 				select case iPrompt
 					case 0
 						' msgbox "Timeout"
@@ -81,7 +81,7 @@ Sub Main
 					case 3
 						' msgbox "Found prompt"
 						exit do
-					case 1,2
+					case 1,2,4
 						strTemp=trim(crt.Screen.Readstring (vbcrlf,Timeout))
 						if instr(strTemp,"PCF") > 0 then
 							strTemp = mid(strTemp,instr(strTemp,"PCF")-2,8)

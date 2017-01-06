@@ -11,9 +11,9 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, AuditCmd
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ASYStorm\AkamaiInts.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ASYStorm\AkamaiIntConfigs.txt" ' The name of the output file, CSV file listing results
-strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ASYStorm\Configs" ' Folder to save individual prefix sets to
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\CDNVlans.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\CDNAudit.txt" ' The name of the output file, CSV file listing results
+strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\Configs" ' Folder to save individual command output to
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -65,7 +65,7 @@ Sub Main
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
-	'Skip over the first header line 
+	'Skip over the first header line
 	strLine = objFileIn.readline
 	'Start Looping through the input file
 	While not objFileIn.atendofstream
@@ -76,7 +76,7 @@ Sub Main
 		strInterface = strParts(1)
 		AuditCmd = "show running-config interface " & strInterface
 
-		if strLastHost <> host then 
+		if strLastHost <> host then
 			If crt.Session.Connected Then
 				crt.Session.Disconnect
 			end if

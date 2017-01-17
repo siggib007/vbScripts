@@ -12,7 +12,7 @@ dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
 strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\search_result.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ARGNextHops.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ARGNextHops2017.csv"
 
 const DelNum       = 38
 const DelCount     = 4

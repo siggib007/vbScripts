@@ -15,6 +15,7 @@ dim strInFile, strOutFile, strFolder, strACLName, iStartCompare
 ' Input file, comma seperated.
 ' First line needs to be "ACL Name," followed by the name of the ACL you want audited.
 ' First cell (i.e. A1 or R1C1) isn't important, the script looks for the ACL name in R1C2 (or B1).
+' Also IP version should be indicated in R1C4 and you can force full comparison despite ACL length mismatch by putting yes or true in R1C6
 ' Second line should be header and is ignored by the script
 ' remaining lines should be a list of ASR9K's to audit. Format:DeviceName, IP Address.
 ' User is prompted for the input file via file browser dialog.
@@ -71,8 +72,22 @@ Sub Main
 		strACLName = strParts(1)
 		strIPVer = strParts(3)
 	else
-		msgbox "Please include the ACL you want to audit along with IP version (ipv4/ipv6) in the first line of the CSV file. " _
-		 & "Please make sure the ACL name is in second field and the IP version is in the fourth field of the first line "
+		if ubound(strParts)>=1 Then
+			strACLName = strParts(1)
+			iResult = crt.Dialog.MessageBox("Is this an IPv4 ACL? Yes=IPv4 No=IPv6", "Is ACL IPv4 or IPv6", ICON_QUESTION Or BUTTON_YESNO Or DEFBUTTON1 )
+			If iResult = IDYES Then
+				strIPVer = "ipv4"
+			else
+				strIPVer = "ipv6"
+			end if
+		else
+			msgbox "Please include the ACL you want to audit along with IP version (ipv4/ipv6) in the first line of the CSV file. " _
+		 	& "Please make sure the ACL name is in second field and the IP version is in the fourth field of the first line "
+			exit sub
+		end if
+	end if
+	if strACLName = "" Then
+		msgbox "Please include the ACL you want to audit in the first line of the CSV file. Please make sure it is in second field of the first line."
 		exit sub
 	end if
 	if ubound(strParts) >= 5 then
@@ -89,8 +104,12 @@ Sub Main
 		case "6"
 			strIPVer = "ipv6"
 		case else
-			msgbox "IP version '" & strIPVer & "' is not recognized, please correct. Existing!"
-			exit sub
+			iResult = crt.Dialog.MessageBox("IP version '" & strIPVer & "' is not recognized. Is this an IPv4 ACL? Yes=IPv4 No=IPv6", "Is ACL IPv4 or IPv6", ICON_QUESTION Or BUTTON_YESNO Or DEFBUTTON1 )
+			If iResult = IDYES Then
+				strIPVer = "ipv4"
+			else
+				strIPVer = "ipv6"
+			end if
 	end select
 
 	if strACLName = "" Then

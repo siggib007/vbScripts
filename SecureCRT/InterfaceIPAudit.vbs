@@ -23,7 +23,7 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strInterface, strIPAddr
-	dim strOut, strOutPath, strLastHost, strDescription, strIPAddrV6
+	dim strOut, strOutPath, strLastHost, strDescription, strIPAddrV6, iResponse
 
 	If crt.Session.Connected Then
 		crt.Session.Disconnect
@@ -93,12 +93,18 @@ Sub Main
 
 		If crt.Session.Connected Then
 			crt.Screen.Send(AuditCmd & vbcr)
-			crt.Screen.WaitForString "description ",Timeout
-			strDescription=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-			crt.Screen.WaitForString "ip address ",Timeout
-			strIPAddr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-			crt.Screen.WaitForString "ipv6 address ",Timeout
-			strIPAddrV6=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+			iResponse = crt.Screen.WaitForStrings ("description ","%",Timeout)
+			if iResponse = 1 then
+				strDescription=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+				crt.Screen.WaitForString "ip address ",Timeout
+				strIPAddr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+				crt.Screen.WaitForString "ipv6 address ",Timeout
+				strIPAddrV6=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+			else
+				strDescription = "not found"
+				strIPAddr = ""
+				strIPAddrV6 = ""
+			end if
 			objFileOut.writeline host & "," & strInterface & "," & strDescription & "," & strIPAddr & "," & strIPAddrV6
 		else
 			nError = crt.GetLastError

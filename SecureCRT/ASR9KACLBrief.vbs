@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile, dictSubnets
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\search_result.csv"
-strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ARG-ACLs-Brief.csv"
+strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\ARGSYO.csv"
+strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\SYO-ARG-ACLs-Brief.csv"
 
 
 'Nothing below here is user configurable proceed at your own risk.

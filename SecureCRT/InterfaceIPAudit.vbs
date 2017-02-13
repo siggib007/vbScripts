@@ -8,11 +8,11 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile, AuditCmd
+dim strInFile, strOutFile, AuditCmd, dictSubnets
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\FacebookCDNInts.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\FacebookCDNAudit.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PHISYOFWG3132.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\ARGACLs\PHI-SYO-FWG31-32-Audit.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -23,7 +23,11 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strInterface, strIPAddr
-	dim strOut, strOutPath, strLastHost, strDescription, strIPAddrV6, iResponse
+	dim strOut, strOutPath, strLastHost, strDescription, strIPAddrV6, iResponse, strLineParts
+
+	set dictSubnets = CreateObject("Scripting.Dictionary")
+
+	InitializeDicts
 
 	If crt.Session.Connected Then
 		crt.Session.Disconnect
@@ -96,10 +100,22 @@ Sub Main
 			iResponse = crt.Screen.WaitForStrings ("description ","%",Timeout)
 			if iResponse = 1 then
 				strDescription=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-				crt.Screen.WaitForString "ip address ",Timeout
+				crt.Screen.WaitForStrings "ip address ", "ipv4 address ",Timeout
 				strIPAddr=trim(crt.Screen.Readstring (vbcrlf,Timeout))
-				crt.Screen.WaitForString "ipv6 address ",Timeout
-				strIPAddrV6=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+				strLineParts=split(strIPAddr," ")
+				if ubound(strLineParts)=1 then
+					if dictSubnets.exists(strLineParts(1)) then
+						strIPAddr = strLineParts(0) & dictSubnets.Item(strLineParts(1))
+					else
+						strIPAddr = strLineParts(0) & "***" & strLineParts(1) & "***"
+					end if
+				end if
+				iResponse = crt.Screen.WaitForStrings ("ipv6 address ","RP/0","#",Timeout)
+				if iResponse = 1 then
+					strIPAddrV6=trim(crt.Screen.Readstring (vbcrlf,Timeout))
+				else
+					strIPAddrV6 = ""
+				end if
 			else
 				strDescription = "not found"
 				strIPAddr = ""
@@ -120,6 +136,9 @@ Sub Main
 	Set objFileOut = Nothing
 
 	Set fso = Nothing
+	If crt.Session.Connected Then
+		crt.Session.Disconnect
+	end if
 
 	msgbox "All Done, Cleanup complete"
 
@@ -156,3 +175,38 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 		end if
 	next
 end function
+
+sub InitializeDicts
+	dictSubnets.add "255.255.255.255", "/32"
+	dictSubnets.add "255.255.255.254", "/31"
+	dictSubnets.add "255.255.255.252", "/30"
+	dictSubnets.add "255.255.255.248", "/29"
+	dictSubnets.add "255.255.255.240", "/28"
+	dictSubnets.add "255.255.255.224", "/27"
+	dictSubnets.add "255.255.255.192", "/26"
+	dictSubnets.add "255.255.255.128", "/25"
+	dictSubnets.add "255.255.255.0", "/24"
+	dictSubnets.add "255.255.254.0", "/23"
+	dictSubnets.add "255.255.252.0", "/22"
+	dictSubnets.add "255.255.248.0", "/21"
+	dictSubnets.add "255.255.240.0", "/20"
+	dictSubnets.add "255.255.224.0", "/19"
+	dictSubnets.add "255.255.192.0", "/18"
+	dictSubnets.add "255.255.128.0", "/17"
+	dictSubnets.add "255.255.0.0", "/16"
+	dictSubnets.add "255.254.0.0", "/15"
+	dictSubnets.add "255.252.0.0", "/14"
+	dictSubnets.add "255.248.0.0", "/13"
+	dictSubnets.add "255.240.0.0", "/12"
+	dictSubnets.add "255.224.0.0", "/11"
+	dictSubnets.add "255.192.0.0", "/10"
+	dictSubnets.add "255.128.0.0", "/9"
+	dictSubnets.add "255.0.0.0", "/8"
+	dictSubnets.add "254.0.0.0", "/7"
+	dictSubnets.add "252.0.0.0", "/6"
+	dictSubnets.add "248.0.0.0", "/5"
+	dictSubnets.add "240.0.0.0", "/4"
+	dictSubnets.add "224.0.0.0", "/3"
+	dictSubnets.add "192.0.0.0", "/2"
+	dictSubnets.add "128.0.0.0", "/1"
+end sub

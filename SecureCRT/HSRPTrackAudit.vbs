@@ -11,9 +11,9 @@ Option Explicit
 dim strInFile, strOutFile, dictSubnets, objVlanDict, strOutVlanFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K-Results.csv" ' The name of the output file, CSV file listing results
-strOutVlanFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K-Vlan-Results.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNexus3K.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNexus3K-Results.csv" ' The name of the output file, CSV file listing results
+strOutVlanFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNexus3K-Vlan-Results.csv" ' The name of the output file, CSV file listing results
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 
@@ -112,7 +112,7 @@ Sub Main
 					strComment = strComment & "Couldn't find Lo101;"
 					bLo101 = false
 				case else
-					msgbox "Unexpected choice #" & iResponse
+					msgbox "at Lo101, Unexpected choice #" & iResponse
 			end select
 			' crt.Screen.Send(vbcr)
 			crt.Screen.WaitForString "#",Timeout
@@ -137,7 +137,7 @@ Sub Main
 					bcont=false
 					bTrack=false
 				case else
-					msgbox "Unexpected choice #" & iResponse
+					msgbox "at show track, Unexpected choice #" & iResponse
 			end select
 			bTrack = false
 			do while bcont
@@ -153,7 +153,7 @@ Sub Main
 							bTrack = True
 						else
 							if crt.Screen.MatchIndex=0 then
-								strComment = strComment & "Timeout on reading show track;"
+								strComment = strComment & "Timeout on reading show track loop;"
 							end if
 							exit do
 						end if
@@ -161,7 +161,7 @@ Sub Main
 						' Found prompt, done
 						exit do
 					case else
-						msgbox "Unexpected choice #" & iResponse
+						msgbox "at show track loop, Unexpected choice #" & iResponse
 						exit do
 				end select
 			loop
@@ -180,7 +180,7 @@ Sub Main
 					' strComment = strComment & "No HSRP;"
 					bcont=false
 				case else
-					msgbox "Unexpected choice #" & iResponse
+					msgbox "at show hsrp, Unexpected choice #" & iResponse
 			end select
 			do while bcont
 				iResponse=crt.Screen.WaitForStrings (vbcrlf, "#", Timeout)
@@ -195,14 +195,14 @@ Sub Main
 								objVlanDict.add strTemp, ""
 							end if
 						else
-							if crt.Screen.MatchIndex=0 then strComment = strComment & "Timeout on reading show HSRP;"
+							if crt.Screen.MatchIndex=0 then strComment = strComment & "Timeout on reading show HSRP loop;"
 							exit do
 						end if
 					case 2
 						' Found prompt, done
 						exit do
 					case else
-						msgbox "Unexpected choice #" & iResponse
+						msgbox "at show hsrp loop, Unexpected choice #" & iResponse
 						exit do
 				end select
 			loop
@@ -223,19 +223,24 @@ Sub Main
 							exit do
 						case 1
 							strTemp=trim(crt.Screen.Readstring (" decrement","#", vbcrlf, Timeout))
-							if crt.Screen.MatchIndex = 1 or crt.Screen.MatchIndex = 3 then
-								strTrack = strTrack & strTemp & " "
-							else
-								if crt.Screen.MatchIndex=0 then
-									strVlanComment = strVlanComment & "Timeout on reading show track;"
-								end if
-								exit do
-							end if
+							select case crt.Screen.MatchIndex
+								case 0
+									strVlanComment = strVlanComment & "Timeout on reading show Vlan details;"
+									exit do
+								case 1,3
+									strTrack = strTrack & strTemp & " "
+								case 2
+									exit do
+									'found prompt so we're done
+								case else
+									msgbox "at show svi, Unexpected choice #" & iResponse
+									exit do
+							end select
 						case 2
 							' Found prompt, done.
 							exit do
 						case else
-							msgbox "Unexpected choice #" & iResponse
+							msgbox "at reading svi, Unexpected choice #" & iResponse
 					end select
 				loop
 				strTrack = trim(strTrack)

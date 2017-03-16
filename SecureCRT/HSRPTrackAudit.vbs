@@ -216,14 +216,14 @@ Sub Main
 				strCommand = "show running-config interface " & strVlan
 				crt.Screen.Send(strCommand & vbcr)
 				do while true
-					iResponse = crt.Screen.WaitForStrings ("track","#",Timeout)
+					iResponse = crt.Screen.WaitForStrings (" track ","#",Timeout)
 					select case iResponse
 						case 0
 							strVlanComment = strVlanComment & "Timeout on show Vlan details;"
 							exit do
 						case 1
-							strTemp=trim(crt.Screen.Readstring (" ","#",Timeout))
-							if crt.Screen.MatchIndex = 1 then
+							strTemp=trim(crt.Screen.Readstring (" decrement","#", vbcrlf, Timeout))
+							if crt.Screen.MatchIndex = 1 or crt.Screen.MatchIndex = 3 then
 								strTrack = strTrack & strTemp & " "
 							else
 								if crt.Screen.MatchIndex=0 then
@@ -238,6 +238,7 @@ Sub Main
 							msgbox "Unexpected choice #" & iResponse
 					end select
 				loop
+				strTrack = trim(strTrack)
 				objFileVlan.writeline strIPAddr & "," & host & "," & strVlan & "," & strTrack & ","	& strComment
 			next
 			objFileOut.writeline strIPAddr & "," & host & "," & strAvailTrack & "," & bLo101 & ","	& iVlanCount & "," & strComment

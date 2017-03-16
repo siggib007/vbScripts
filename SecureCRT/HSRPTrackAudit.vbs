@@ -27,7 +27,7 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, objFileVlan, host, ConCmd, fso, nError, strErr, strIPAddr, strAvailTrack
-	dim strOut, strOutPath, iResponse, strLineParts, strCommand, strComment, strTemp, bCont, strVlan, strTrack
+	dim strOut, strOutPath, iResponse, strLineParts, strCommand, strComment, strTemp, bCont, strVlan, strTrack, strVlanComment
 	dim bTrack, bLo101, iVlanCount
 
 
@@ -57,11 +57,12 @@ Sub Main
 	crt.screen.IgnoreEscape = True
 
 	'Opening both intput and output files
-	set objFileOut = fso.OpenTextFile(strOutVlanFile, ForWriting, True)
-	set objFileVlan = fso.OpenTextFile(strOutFile, ForWriting, True)
+	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
+	set objFileVlan = fso.OpenTextFile(strOutVlanFile, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
 	objFileOut.writeline "primaryIPAddress,hostName,AvailTrack,Lo101,SVIcount,comment"
+	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track,comment"
 
 	'Skip over the first header line
 	strLine = objFileIn.readline
@@ -73,7 +74,6 @@ Sub Main
 		strIPAddr = strParts(1)
 		strComment = ""
 		strAvailTrack = ""
-		strTrack = ""
 		strVlan = ""
 		objVlanDict.RemoveAll
 
@@ -207,16 +207,39 @@ Sub Main
 				end select
 			loop
 			iVlanCount = objVlanDict.count
-			' strComment = strComment & "Vlan count " & iVlanCount
 			if right(strComment,1)=";" then
 				strComment = left(strComment,len(strComment)-1)
 			end if
 			strAvailTrack = trim(strAvailTrack)
-			if iVlanCount>0 then
-				for each strVlan in objVlanDict
-
-				next
-			end if
+			for each strVlan in objVlanDict
+				strTrack = ""
+				strCommand = "show running-config interface " & strVlan
+				crt.Screen.Send(strCommand & vbcr)
+				do while true
+					iResponse = crt.Screen.WaitForStrings ("track","#",Timeout)
+					select case iResponse
+						case 0
+							strVlanComment = strVlanComment & "Timeout on show Vlan details;"
+							exit do
+						case 1
+							strTemp=trim(crt.Screen.Readstring (" ","#",Timeout))
+							if crt.Screen.MatchIndex = 1 then
+								strTrack = strTrack & strTemp & " "
+							else
+								if crt.Screen.MatchIndex=0 then
+									strVlanComment = strVlanComment & "Timeout on reading show track;"
+								end if
+								exit do
+							end if
+						case 2
+							' Found prompt, done.
+							exit do
+						case else
+							msgbox "Unexpected choice #" & iResponse
+					end select
+				loop
+				objFileVlan.writeline strIPAddr & "," & host & "," & strVlan & "," & strTrack & ","	& strComment
+			next
 			objFileOut.writeline strIPAddr & "," & host & "," & strAvailTrack & "," & bLo101 & ","	& iVlanCount & "," & strComment
 		else
 			nError = crt.GetLastError
@@ -227,8 +250,10 @@ Sub Main
 
 	objFileOut.close
 	objFileIn.close
-	Set objFileIn  = Nothing
-	Set objFileOut = Nothing
+	objFileVlan.close
+	Set objFileIn   = Nothing
+	Set objFileOut  = Nothing
+	set objFileVlan = Nothing
 
 	Set fso = Nothing
 	If crt.Session.Connected Then

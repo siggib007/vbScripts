@@ -73,7 +73,7 @@ Sub Main
 	end if
 	strOutFile      = left (strInFile, InStrRev (strInFile,".")-1)&"-Results.csv"
 	strOutVlanFile  = left (strInFile, InStrRev (strInFile,".")-1)&"-Vlan-Results.csv"
-	strDebugOutFile = strOutPath & "Debug.txt"
+	strDebugOutFile = left (strInFile, InStrRev (strInFile,".")-1)&"-Debug.txt"
 
 	strOut = ""
 
@@ -131,7 +131,7 @@ Sub Main
 		on error goto 0
 		If crt.Session.Connected Then
 			crt.Screen.Synchronous = True
-			crt.Screen.WaitForString "#",Timeout
+			crt.Screen.WaitForString "#",Timeout, True
 			nError = Err.Number
 			strErr = Err.Description
 			If nError <> 0 Then
@@ -139,10 +139,10 @@ Sub Main
 			end if
 			objDebugOut.writeline "Connected to " & host & " at " & now()
 			crt.Screen.Send("term len 0" & vbcr)
-			crt.Screen.WaitForString "#",Timeout
+			crt.Screen.WaitForString "#",Timeout, True
 			strCommand = "show interface Lo101"
 			crt.Screen.Send(strCommand & vbcr)
-			iResponse = crt.Screen.WaitForStrings ("loopback101 ","Invalid","#",Timeout)
+			iResponse = crt.Screen.WaitForStrings ("Loopback101 ","Invalid","#",Timeout,True)
 			select case iResponse
 				case 0
 					strComment = strComment & "Timeout on Lo101;"
@@ -160,10 +160,10 @@ Sub Main
 					msgbox "at Lo101, Unexpected choice #" & iResponse
 			end select
 			' crt.Screen.Send(vbcr)
-			crt.Screen.WaitForString "#",Timeout
+			crt.Screen.WaitForString "#",Timeout, True
 			strCommand = "show track brief"
 			crt.Screen.Send(strCommand & vbcr)
-			iResponse = crt.Screen.WaitForStrings ("Last Change","#",Timeout)
+			iResponse = crt.Screen.WaitForStrings ("Last Change","#",Timeout,True)
 			select case iResponse
 				case 0
 					strComment = strComment & "Timeout on show track;"
@@ -186,13 +186,13 @@ Sub Main
 			end select
 			bTrack = false
 			do while bcont
-				iResponse=crt.Screen.WaitForStrings (vbcrlf, "#", Timeout)
+				iResponse=crt.Screen.WaitForStrings (vbcrlf, "#", Timeout,True)
 				select case iResponse
 					case 0
 						strComment = strComment & "Timeout on show track loop;"
 						exit do
 					case 1
-						strTemp=trim(crt.Screen.Readstring (" ","#",Timeout))
+						strTemp=trim(crt.Screen.Readstring (" ","#",Timeout, True))
 						if crt.Screen.MatchIndex = 1 then
 							strAvailTrack = strAvailTrack & strTemp & " "
 							bTrack = True
@@ -210,12 +210,12 @@ Sub Main
 						exit do
 				end select
 			loop
-			' crt.Screen.WaitForString "#",Timeout
-			strCommand = "show hsrp brief"
+			' crt.Screen.WaitForString "#",Timeout, True
+			strCommand = "show standby brief"
 			crt.Screen.Send(strCommand & vbcr)
 			bCont=True
 			do while bcont
-				iResponse=crt.Screen.WaitForStrings ("lan", "# ", Timeout)
+				iResponse=crt.Screen.WaitForStrings ("Vl", "#", Timeout,True)
 				objDebugOut.writeline "WaitForStrings results:" & iResponse
 				select case iResponse
 					case 0
@@ -223,7 +223,7 @@ Sub Main
 						objDebugOut.writeline strComment
 						exit do
 					case 1
-						strTemp=trim(crt.Screen.Readstring (" ","#",Timeout))
+						strTemp=trim(crt.Screen.Readstring (" ","#",Timeout, True))
 						objDebugOut.writeline "read: '" & strTemp & "'"
 						objDebugOut.writeline "MatchIndex:" & crt.Screen.MatchIndex
 						if crt.Screen.MatchIndex = 1 then
@@ -256,13 +256,13 @@ Sub Main
 				strCommand = "show running-config interface " & strVlan
 				crt.Screen.Send(strCommand & vbcr)
 				do while true
-					iResponse = crt.Screen.WaitForStrings (" track ","#",Timeout)
+					iResponse = crt.Screen.WaitForStrings (" track ","#",Timeout,True)
 					select case iResponse
 						case 0
 							strVlanComment = strVlanComment & "Timeout on show Vlan details;"
 							exit do
 						case 1
-							strTemp=trim(crt.Screen.Readstring (" decrement","#", vbcrlf, Timeout))
+							strTemp=trim(crt.Screen.Readstring (" decrement","#", vbcrlf, Timeout, True))
 							select case crt.Screen.MatchIndex
 								case 0
 									strVlanComment = strVlanComment & "Timeout on reading show Vlan details;"

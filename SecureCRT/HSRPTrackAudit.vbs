@@ -75,9 +75,6 @@ Sub Main
 	strOutVlanFile  = left (strInFile, InStrRev (strInFile,".")-1)&"-Vlan-Results.csv"
 	strDebugOutFile = strOutPath & "Debug.txt"
 
-	msgbox "strInFile:" & strInFile & vbcrlf & "strOutFile:" & strOutFile & vbcrlf & "strOutVlanFile:" & strOutVlanFile & vbcrlf & "strDebugOutFile:" & strDebugOutFile
-
-
 	strOut = ""
 
 	if not fso.FolderExists(strOutPath) then

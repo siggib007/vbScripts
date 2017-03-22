@@ -11,16 +11,41 @@ Option Explicit
 dim strInFile, strOutFile, dictSubnets, objVlanDict, strOutVlanFile, strDebugOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K-Results.csv" ' The name of the output file, CSV file listing results
-strOutVlanFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K-Vlan-Results.csv" ' The name of the output file, CSV file listing results
-strDebugOutFile  = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\Debug.txt" ' File to write debug info to.
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 
 'Nothing below here is user configurable proceed at your own risk.
 set dictSubnets = CreateObject("Scripting.Dictionary")
 set objVlanDict = CreateObject("Scripting.Dictionary")
+
+const ForReading    = 1
+const ForWriting    = 2
+const ForAppending  = 8
+
+' button parameter options
+Const ICON_STOP = 16                 ' display the ERROR/STOP icon.
+Const ICON_QUESTION = 32             ' display the '?' icon
+Const ICON_WARN = 48                 ' display a '!' icon.
+Const ICON_INFO= 64                  ' displays "info" icon.
+Const BUTTON_OK = 0                  ' OK button only
+Const BUTTON_CANCEL = 1              ' OK and Cancel buttons
+Const BUTTON_ABORTRETRYIGNORE = 2    ' Abort, Retry, and Ignore buttons
+Const BUTTON_YESNOCANCEL = 3         ' Yes, No, and Cancel buttons
+Const BUTTON_YESNO = 4               ' Yes and No buttons
+Const BUTTON_RETRYCANCEL = 5         ' Retry and Cancel buttons
+
+Const DEFBUTTON1 = 0        ' First button is default
+Const DEFBUTTON2 = 256      ' Second button is default
+Const DEFBUTTON3 = 512      ' Third button is default
+
+' Possible MessageBox() return values
+Const IDOK = 1              ' OK button clicked
+Const IDCANCEL = 2          ' Cancel button clicked
+Const IDABORT = 3           ' Abort button clicked
+Const IDRETRY = 4           ' Retry button clicked
+Const IDIGNORE = 5          ' Ignore button clicked
+Const IDYES = 6             ' Yes button clicked
+Const IDNO = 7              ' No button clicked
 
 Sub Main
 	const ForReading    = 1
@@ -29,20 +54,32 @@ Sub Main
 
 	dim strParts, strLine, objFileIn, objFileOut, objFileVlan, host, ConCmd, fso, nError, strErr, strIPAddr, strAvailTrack
 	dim strOut, strOutPath, iResponse, strLineParts, strCommand, strComment, strTemp, bCont, strVlan, strTrack, strVlanComment
-	dim bTrack, bLo101, iVlanCount, strTempParts, objDebugOut
-
-	InitializeDicts
-
-	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
+	dim bTrack, bLo101, iVlanCount, strTempParts, objDebugOut, strUID, strPWD
 
 	' Creating a File System Object to interact with the File System
 	Set fso = CreateObject("Scripting.FileSystemObject")
 
-	strOut = ""
+	InitializeDicts
+
+	strInFile = crt.Dialog.FileOpenDialog("Please select CSV input file", "Open", "", "CSV Files (*.csv)|*.csv||")
 	if not fso.FileExists(strInFile) Then
 		msgbox "Input file " & strInFile & " not found, exiting"
 		exit sub
 	end if
+	strOutPath      = left (strInFile, InStrRev (strInFile,"\"))
+	if right(strOutPath,1)<>"\" then
+		strOutPath = strOutPath & "\"
+	end if
+	strOutFile      = left (strInFile, InStrRev (strInFile,".")-1)&"-Results.csv"
+	strOutVlanFile  = left (strInFile, InStrRev (strInFile,".")-1)&"-Vlan-Results.csv"
+	strDebugOutFile = strOutPath & "Debug.txt"
+
+	msgbox "strInFile:" & strInFile & vbcrlf & "strOutFile:" & strOutFile & vbcrlf & "strOutVlanFile:" & strOutVlanFile & vbcrlf & "strDebugOutFile:" & strDebugOutFile
+
+	strUID = crt.Dialog.Prompt("Enter your username:", "Credentials", "", false)
+	strPWD = crt.Dialog.Prompt("Enter your password:", "Credentials", "", True)
+
+	strOut = ""
 
 	if not fso.FolderExists(strOutPath) then
 		CreatePath (strOutPath)
@@ -56,10 +93,10 @@ Sub Main
 	crt.screen.IgnoreEscape = True
 
 	'Opening both intput and output files
-	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
+	set objFileOut  = fso.OpenTextFile(strOutFile, ForWriting, True)
 	set objDebugOut = fso.OpenTextFile(strDebugOutFile, ForWriting, True)
 	set objFileVlan = fso.OpenTextFile(strOutVlanFile, ForWriting, True)
-	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
+	Set objFileIn   = fso.OpenTextFile(strInFile, ForReading, false)
 
 	objFileOut.writeline "primaryIPAddress,hostName,AvailTrack,Lo101,SVIcount,comment"
 	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track,comment"
@@ -82,9 +119,9 @@ Sub Main
 			crt.Session.Disconnect
 		end if
 
-		ConCmd = "/SSH2 /ACCEPTHOSTKEYS "  & host
+		ConCmd = "/SSH2 /ACCEPTHOSTKEYS /L " & strUID & " /PASSWORD " & strPWD & " " & host
 		on error resume next
-		crt.Session.Connect ConCmd
+		crt.Session.Connect ConCmd, True, True
 		on error goto 0
 		If crt.Session.Connected Then
 			crt.Screen.Synchronous = True

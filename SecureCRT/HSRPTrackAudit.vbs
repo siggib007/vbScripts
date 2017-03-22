@@ -8,12 +8,13 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile, dictSubnets, objVlanDict, strOutVlanFile
+dim strInFile, strOutFile, dictSubnets, objVlanDict, strOutVlanFile, strDebugOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNexus3K.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNexus3K-Results.csv" ' The name of the output file, CSV file listing results
-strOutVlanFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNexus3K-Vlan-Results.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K-Results.csv" ' The name of the output file, CSV file listing results
+strOutVlanFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\AllNX7K-Vlan-Results.csv" ' The name of the output file, CSV file listing results
+strDebugOutFile  = "C:\Users\sbjarna\Documents\IP Projects\Automation\TrackingAudit\Debug.txt" ' File to write debug info to.
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 
@@ -28,9 +29,7 @@ Sub Main
 
 	dim strParts, strLine, objFileIn, objFileOut, objFileVlan, host, ConCmd, fso, nError, strErr, strIPAddr, strAvailTrack
 	dim strOut, strOutPath, iResponse, strLineParts, strCommand, strComment, strTemp, bCont, strVlan, strTrack, strVlanComment
-	dim bTrack, bLo101, iVlanCount
-
-
+	dim bTrack, bLo101, iVlanCount, strTempParts, objDebugOut
 
 	InitializeDicts
 
@@ -58,6 +57,7 @@ Sub Main
 
 	'Opening both intput and output files
 	set objFileOut = fso.OpenTextFile(strOutFile, ForWriting, True)
+	set objDebugOut = fso.OpenTextFile(strDebugOutFile, ForWriting, True)
 	set objFileVlan = fso.OpenTextFile(strOutVlanFile, ForWriting, True)
 	Set objFileIn  = fso.OpenTextFile(strInFile, ForReading, false)
 
@@ -70,8 +70,9 @@ Sub Main
 	While not objFileIn.atendofstream
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
-		host = strParts(0)
-		strIPAddr = strParts(1)
+		host = trim(replace(strParts(0),"""",""))
+		strIPAddr = trim(replace(strParts(1),"""",""))
+
 		strComment = ""
 		strAvailTrack = ""
 		strVlan = ""
@@ -93,6 +94,7 @@ Sub Main
 			If nError <> 0 Then
 				result = "Error " & nError & ": " & strErr
 			end if
+			objDebugOut.writeline "Connected to " & host & " at " & now()
 			crt.Screen.Send("term len 0" & vbcr)
 			crt.Screen.WaitForString "#",Timeout
 			strCommand = "show interface Lo101"
@@ -168,34 +170,29 @@ Sub Main
 			' crt.Screen.WaitForString "#",Timeout
 			strCommand = "show hsrp brief"
 			crt.Screen.Send(strCommand & vbcr)
-			iResponse = crt.Screen.WaitForStrings ("Group addr","#",Timeout)
-			select case iResponse
-				case 0
-					strComment = strComment & "Timeout on show HSRP;"
-					bcont=false
-				case 1
-					bCont=True
-					' found end of header line
-				case 2
-					' strComment = strComment & "No HSRP;"
-					bcont=false
-				case else
-					msgbox "at show hsrp, Unexpected choice #" & iResponse
-			end select
+			bCont=True
 			do while bcont
-				iResponse=crt.Screen.WaitForStrings (vbcrlf, "#", Timeout)
+				iResponse=crt.Screen.WaitForStrings ("lan", "# ", Timeout)
+				objDebugOut.writeline "WaitForStrings results:" & iResponse
 				select case iResponse
 					case 0
 						strComment = strComment & "Timeout on show HSRP Loop;"
+						objDebugOut.writeline strComment
 						exit do
 					case 1
 						strTemp=trim(crt.Screen.Readstring (" ","#",Timeout))
+						objDebugOut.writeline "read: '" & strTemp & "'"
+						objDebugOut.writeline "MatchIndex:" & crt.Screen.MatchIndex
 						if crt.Screen.MatchIndex = 1 then
+							strTemp = "Vlan" & strTemp
+							objDebugOut.writeline "Parsed line: '" & strTemp & "'"
 							if not objVlanDict.exists(strTemp) then
 								objVlanDict.add strTemp, ""
 							end if
 						else
 							if crt.Screen.MatchIndex=0 then strComment = strComment & "Timeout on reading show HSRP loop;"
+							if crt.Screen.MatchIndex=2 then strComment = strComment & "Found prompt reading show HSRP loop;"
+							objDebugOut.writeline strComment
 							exit do
 						end if
 					case 2
@@ -250,16 +247,18 @@ Sub Main
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage
-			objFileOut.write host & ",Not Connected,Error " & nError & ": " & strErr
+			objFileOut.write strIPAddr & "," & host & ",Not Connected,Error " & nError & ": " & strErr
 		end if
 	wend
 
 	objFileOut.close
 	objFileIn.close
 	objFileVlan.close
+	objDebugOut.close
 	Set objFileIn   = Nothing
 	Set objFileOut  = Nothing
 	set objFileVlan = Nothing
+	set objDebugOut = Nothing
 
 	Set fso = Nothing
 	If crt.Session.Connected Then

@@ -12,6 +12,7 @@ dim strInFile, strOutFile, dictSubnets, objVlanDict, strOutVlanFile, strDebugOut
 
 ' User Spefified values, specify values here per your needs
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
+Const PromptForCred = False ' Set to true to have the script prompt you for username and password. False lets SecureCRT handle it through Global settings.
 
 
 'Nothing below here is user configurable proceed at your own risk.
@@ -76,8 +77,6 @@ Sub Main
 
 	msgbox "strInFile:" & strInFile & vbcrlf & "strOutFile:" & strOutFile & vbcrlf & "strOutVlanFile:" & strOutVlanFile & vbcrlf & "strDebugOutFile:" & strDebugOutFile
 
-	strUID = crt.Dialog.Prompt("Enter your username:", "Credentials", "", false)
-	strPWD = crt.Dialog.Prompt("Enter your password:", "Credentials", "", True)
 
 	strOut = ""
 
@@ -101,6 +100,11 @@ Sub Main
 	objFileOut.writeline "primaryIPAddress,hostName,AvailTrack,Lo101,SVIcount,comment"
 	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track,comment"
 
+	if PromptForCred then
+		strUID = crt.Dialog.Prompt("Enter your username:", "Credentials", "", false)
+		strPWD = crt.Dialog.Prompt("Enter your password:", "Credentials", "", True)
+	end if
+
 	'Skip over the first header line
 	strLine = objFileIn.readline
 	'Start Looping through the input file
@@ -119,7 +123,12 @@ Sub Main
 			crt.Session.Disconnect
 		end if
 
-		ConCmd = "/SSH2 /ACCEPTHOSTKEYS /L " & strUID & " /PASSWORD " & strPWD & " " & host
+		if PromptForCred then
+			ConCmd = "/SSH2 /ACCEPTHOSTKEYS /L " & strUID & " /PASSWORD " & strPWD & " " & host
+		else
+			ConCmd = "/SSH2 /ACCEPTHOSTKEYS " & host
+		end if
+
 		on error resume next
 		crt.Session.Connect ConCmd, True, True
 		on error goto 0

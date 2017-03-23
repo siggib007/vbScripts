@@ -95,7 +95,7 @@ Sub Main
 	Set objFileIn   = fso.OpenTextFile(strInFile, ForReading, false)
 
 	objFileOut.writeline "primaryIPAddress,hostName,AvailTrack,Lo101,SVIcount,comment"
-	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track,comment"
+	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track"
 
 	if PromptForCred then
 		strUID = crt.Dialog.Prompt("Enter your username:", "Credentials", "", false)
@@ -129,6 +129,7 @@ Sub Main
 		on error resume next
 		crt.Session.Connect ConCmd, True, True
 		on error goto 0
+
 		If crt.Session.Connected Then
 			crt.Screen.Synchronous = True
 			crt.Screen.WaitForString "#",Timeout, True
@@ -215,7 +216,7 @@ Sub Main
 			crt.Screen.Send(strCommand & vbcr)
 			bCont=True
 			do while bcont
-				iResponse=crt.Screen.WaitForStrings ("Vl", "#", Timeout,True)
+				iResponse=crt.Screen.WaitForStrings ("vl", "#", Timeout,True)
 				objDebugOut.writeline "WaitForStrings results:" & iResponse
 				select case iResponse
 					case 0
@@ -234,7 +235,7 @@ Sub Main
 							end if
 						else
 							if crt.Screen.MatchIndex=0 then strComment = strComment & "Timeout on reading show HSRP loop;"
-							if crt.Screen.MatchIndex=2 then strComment = strComment & "Found prompt reading show HSRP loop;"
+							' if crt.Screen.MatchIndex=2 then strComment = strComment & "Found prompt reading show HSRP loop;"
 							objDebugOut.writeline strComment
 							exit do
 						end if
@@ -284,7 +285,7 @@ Sub Main
 					end select
 				loop
 				strTrack = trim(strTrack)
-				objFileVlan.writeline strIPAddr & "," & host & "," & strVlan & "," & strTrack & ","	& strComment
+				objFileVlan.writeline strIPAddr & "," & host & "," & strVlan & "," & strTrack
 			next
 			objFileOut.writeline strIPAddr & "," & host & "," & strAvailTrack & "," & bLo101 & ","	& iVlanCount & "," & strComment
 		else

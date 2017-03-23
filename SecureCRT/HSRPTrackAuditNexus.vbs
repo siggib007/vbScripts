@@ -95,7 +95,7 @@ Sub Main
 	Set objFileIn   = fso.OpenTextFile(strInFile, ForReading, false)
 
 	objFileOut.writeline "primaryIPAddress,hostName,AvailTrack,Lo101,SVIcount,comment"
-	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track,comment"
+	objFileVlan.writeline "primaryIPAddress,hostName,Vlan,Track"
 
 	if PromptForCred then
 		strUID = crt.Dialog.Prompt("Enter your username:", "Credentials", "", false)
@@ -140,11 +140,10 @@ Sub Main
 			end if
 			objDebugOut.writeline "Connected to " & host & " at " & now()
 			crt.Screen.Send("term len 0" & vbcr)
-			iResponse = crt.Screen.WaitForStrings ("#","Password",Timeout,True)
-			if iResponse = 2 then msgbox "found password prompt"
+			crt.Screen.WaitForString "#",Timeout,True
 			strCommand = "show interface Lo101"
 			crt.Screen.Send(strCommand & vbcr)
-			iResponse = crt.Screen.WaitForStrings ("loopback101 ","Invalid","#",Timeout,True)
+			iResponse = crt.Screen.WaitForStrings ("Loopback101 ","Invalid","#",Timeout,True)
 			select case iResponse
 				case 0
 					strComment = strComment & "Timeout on Lo101;"
@@ -217,7 +216,7 @@ Sub Main
 			crt.Screen.Send(strCommand & vbcr)
 			bCont=True
 			do while bcont
-				iResponse=crt.Screen.WaitForStrings ("lan", "# ", Timeout,True)
+				iResponse=crt.Screen.WaitForStrings ("vl", "# ", Timeout,True)
 				objDebugOut.writeline "WaitForStrings results:" & iResponse
 				select case iResponse
 					case 0
@@ -236,7 +235,7 @@ Sub Main
 							end if
 						else
 							if crt.Screen.MatchIndex=0 then strComment = strComment & "Timeout on reading show HSRP loop;"
-							if crt.Screen.MatchIndex=2 then strComment = strComment & "Found prompt reading show HSRP loop;"
+							' if crt.Screen.MatchIndex=2 then strComment = strComment & "Found prompt reading show HSRP loop;"
 							objDebugOut.writeline strComment
 							exit do
 						end if
@@ -286,7 +285,7 @@ Sub Main
 					end select
 				loop
 				strTrack = trim(strTrack)
-				objFileVlan.writeline strIPAddr & "," & host & "," & strVlan & "," & strTrack & ","	& strComment
+				objFileVlan.writeline strIPAddr & "," & host & "," & strVlan & "," & strTrack
 			next
 			objFileOut.writeline strIPAddr & "," & host & "," & strAvailTrack & "," & bLo101 & ","	& iVlanCount & "," & strComment
 		else

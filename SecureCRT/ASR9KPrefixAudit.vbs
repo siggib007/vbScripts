@@ -11,9 +11,9 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, strPrefixName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList.csv" ' Input file, comma seperated. format:IP, DeviceName
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-IPV4-GI-Out-List-3.csv" ' The name of the output file, CSV file listing results
-strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\IPv4-3-Out" ' Folder to save individual prefix sets to
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList032917.csv" ' Input file, comma seperated. format:IP, DeviceName
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-GI-Out-Audit032917.csv" ' The name of the output file, CSV file listing results
+strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\Romani" ' Folder to save individual prefix sets to
 strPrefixName    = "Gi-Out" ' Name of prefix set to look at and compare
 iStartCompare    = 1    ' 0 based. 1,2 or 3 recomended. What line in the prefix set should the comparison start. Line 0 is the time stamp at the top of all IOS-XR show run commands.
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
@@ -27,7 +27,7 @@ Sub Main
 	const ForAppending  = 8
 
 	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont, bOneMissing
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, VerifyCmd, iLineCount, iCompare 
+	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, VerifyCmd, iLineCount, iCompare
 
 	VerifyCmd = "show run prefix-set " & strPrefixName
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
@@ -120,39 +120,39 @@ Sub Main
 					strTest = "First line Missing otherwise "
 					bCont = True
 					bOneMissing = True
-				else 
+				else
 					strTest = "Prefix set length does not match. Baseline is " & ubound(strBaseLine) & " lines, this is " & ubound(strResultParts) & " lines. "
 					bOneMissing = False
-				end if 
+				end if
 				if ubound(strBaseLine) > ubound(strResultParts) then
 					iLineCount = ubound(strResultParts)
 				else
 					iLineCount = ubound(strBaseLine)
-				end if	
+				end if
 			end if
 			if bCont = True then
 				strTemp = ""
-				if bOneMissing then 
+				if bOneMissing then
 					iCompare=3
 				else
 					iCompare = iStartCompare
-				end if 
+				end if
 				for x=iCompare to iLineCount
 					if bOneMissing Then
 						y=x-1
-					else 
-						y=x 
-					end if 
+					else
+						y=x
+					end if
 					if strBaseLine(x) <> strResultParts(y) then
 						strTemp = strTemp & x-1 & " "
 					end if
 				next
 				' objFileOut.writeline "bCont=True; strTemp=" & strTemp & "; strTest=" & strTest
-				if strTemp = "" then 
+				if strTemp = "" then
 					strTest = strTest & "Pass"
 				else
 					strTest = strTest & "Prefix " & strTemp & "does not match. "
-				end if 
+				end if
 			end if
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
 			objDevName.writeline strResult

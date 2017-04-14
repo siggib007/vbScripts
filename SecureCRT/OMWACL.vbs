@@ -16,11 +16,11 @@ dim AutoCloseResults, AutoSaveResults, wbNameIn, DateInFileName, ExcelVisible
 	DateInFileName = True
 	AutoSaveResults = True
 	AutoCloseResults = True
-  ExcelVisible = True
+  ExcelVisible = False
   const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 
 ' Non user section, changes to this section can have undesired results
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp
+  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp, strNotes
   Dim wsNames, wsVars, wsACL, wbin, fso, objFileOut, objLogOut, objACLGen, objACLAsIs
   Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol, iIPCol, iError, iResult
   Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar, strErr, strIPVer
@@ -189,7 +189,7 @@ dim AutoCloseResults, AutoSaveResults, wbNameIn, DateInFileName, ExcelVisible
       end if
     end if
     strVerifyCmd = "show run " & strIPVer & " access-list " & strACLName
-    objLogOut.writeline "Starting on router " & strHostname & " with ACL " & strACLName
+    ' objLogOut.writeline "Starting on router " & strHostname & " with ACL " & strACLName
     If crt.Session.Connected Then
       crt.Session.Disconnect
     end if
@@ -217,7 +217,7 @@ dim AutoCloseResults, AutoSaveResults, wbNameIn, DateInFileName, ExcelVisible
       objACLAsIs.write strResult
       objACLAsIs.close
       strResultParts = split (strResult,vbcrlf)
-      objLogOut.writeline strACLName & " contains " & ubound(strResultParts) & " on " & strHostname
+      ' objLogOut.writeline strACLName & " contains " & ubound(strResultParts) & " on " & strHostname
     else
       objLogOut.writeline "No connection to " & strHostname & " will generate what the ACL should be, no as-is"
     end if
@@ -226,6 +226,8 @@ dim AutoCloseResults, AutoSaveResults, wbNameIn, DateInFileName, ExcelVisible
     iACLRow=2
     iResult=1
     do
+      bComp = False
+      strNotes = ""
       if wsACL.Cells(iACLRow,iACLCol).value <> "" then
         iStartPos = instr (1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare)
         if iStartPos > 0 then
@@ -234,35 +236,39 @@ dim AutoCloseResults, AutoSaveResults, wbNameIn, DateInFileName, ExcelVisible
           if strACLVar = "ACLName" then
             strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName)
             objACLGen.writeline strTempOut
+            bComp = True
           end if
           if dictVars.Exists(strACLVar) then
             iVarCol = dictVars(strACLVar)
             if wsVars.Cells(iVarRow, iVarCol) <> "" then
               strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$"&strACLVar&"$",wsVars.Cells(iVarRow, iVarCol))
               objACLGen.writeline strTempOut
+              bComp = True
             end if
           end if
         else
           strTempOut = wsACL.Cells(iACLRow,1).value
           objACLGen.writeline strTempOut
+          bComp = True
         end if
-        if strTempOut = trim(strResultParts(iResult)) Then
-          objLogOut.writeline "Line " & iACLRow & " matches"
-          objLogOut.writeline "strTempOut: " & strTempOut
-        else
-          objLogOut.writeline "--------------"&vbcrlf&"start Line mismatch"&vbcrlf&"---------------"
-          objLogOut.writeline "strTempOut: " & strTempOut
-          objLogOut.writeline "strResultParts(" & iResult & "): " & strResultParts(iResult)
-          objLogOut.writeline "--------------"&vbcrlf&"end Line mismatch"&vbcrlf&"---------------"
+        if bComp then
+          if strTempOut <> trim(strResultParts(iResult)) Then
+            strNotes = strNotes & iResult & " "
+          end if
+          if iResult < ubound(strResultParts) then iResult = iResult + 1
         end if
-        if iResult < ubound(strResultParts) then iResult = iResult + 1
       end if
       iACLRow = iACLRow + 1
     loop until wsACL.Cells(iACLRow,1).Value = ""
     iVarRow = iVarRow + 1
     objACLGen.Close
-    objFileOut.writeline strIPAddr & "," & strHostname & ", Asis contains" & ubound(strResultParts)
-  loop until wsVars.Cells(iVarRow,1).Value = "10.250.80.98"
+    if strNotes = "" then
+      strNotes = "Good"
+    else
+      strNotes = "Lines " & trim(strNotes) & " Don't match"
+    end if
+    objFileOut.writeline strIPAddr & "," & strHostname & "," & strNotes
+  loop until wsVars.Cells(iVarRow,1).Value = ""
   objLogOut.writeline "All done at " & now()
 
   if AutoCloseResults = True then

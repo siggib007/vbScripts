@@ -19,8 +19,8 @@ Sub main
   const MaxError   = 5 ' If connection error occurs how often to retry
 
 ' Non user section, changes to this section can have undesired results
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp, strNotes
-  Dim wsNames, wsVars, wsACL, wbin, wbNameIn, fso, objFileOut, objLogOut, objACLGen, objACLAsIs
+  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp, strNotes, iLastLine, iRangeStart
+  Dim wsNames, wsVars, wsACL, wbin, wbNameIn, fso, objFileOut, objLogOut, objACLGen, objACLAsIs, bRange
   Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol, iIPCol, iError, iResult
   Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar, strErr, strIPVer
   Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath, strVerifyCmd
@@ -240,6 +240,8 @@ Sub main
     on error goto 0
 
     strNotes = ""
+    bRange=False
+    iLastLine=0
     If crt.Session.Connected Then ' If we have a successful connection, run the verification command, write the ACL to a file and keep it in a variable.
       iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
       crt.Screen.Synchronous = True
@@ -292,7 +294,18 @@ Sub main
           end if ' End if analyzing the current line of the ACL standard.
           if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
             if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-              strNotes = strNotes & iResult & " "
+              if iLastLine > 0 and iLastLine + 1 = iResult Then
+                if bRange = False then iRangeStart = iResult
+                bRange = True
+              else
+                if bRange = True Then
+                  strNotes = trim(strNotes) & "-" & iLastLine & " " & iResult & " "
+                else
+                  strNotes = strNotes & iResult & " "
+                end if
+                bRange = False
+              end if
+              iLastLine = iResult
               objLogOut.writeline strHostname & " " & strACLName & " no matchy on line " & iResult
               objLogOut.writeline " Gen: " & strTempOut
               objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
@@ -305,6 +318,10 @@ Sub main
       loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
       objACLGen.Close
     end if ' End of checking for error prior to analysis
+    if bRange = True then
+      strNotes = trim(strNotes) & "-" & iLastLine
+    end if
+    strNotes = trim(strNotes)
     if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
     if iError = 1 or iError > MaxError then
       iVarRow = iVarRow + 1

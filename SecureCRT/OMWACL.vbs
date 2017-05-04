@@ -14,16 +14,18 @@ Sub main
 ' User Spefified values, specify values here per your needs
 
 	Const AutoCloseResults = True
-  Const ExcelVisible     = False
+  Const ExcelVisible     = True
   const Timeout    = 5 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
   const MaxError   = 5 ' If connection error occurs how often to retry
 
 ' Non user section, changes to this section can have undesired results
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp, strNotes, iLastLine, iRangeStart
-  Dim wsNames, wsVars, wsACL, wbin, wbNameIn, fso, objFileOut, objLogOut, objACLGen, objACLAsIs, bRange
+  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp, bRange
+  Dim wsNames, wsVars, wsACL, wbin, wbNameIn, fso, objFileOut, objLogOut, objACLGen, objACLAsIs
   Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol, iIPCol, iError, iResult
+  Dim iGSeq, iASeq, iLastLine, iRangeStart
   Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar, strErr, strIPVer
   Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath, strVerifyCmd
+  Dim strNotes, strNoMatch, strMissing
 
 
   ' File handling constants
@@ -293,28 +295,40 @@ Sub main
             bComp = True
           end if ' End if analyzing the current line of the ACL standard.
           if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
+            iGSeq = trim(left(strTempOut,instr(1,trim(strTempOut)," ",vbTextCompare))) ' Grab the sequence number of the generated ACL line we're looking at
+            iASeq = trim(left(strResultParts(iResult),instr(1,trim(strResultParts(iResult))," ",vbTextCompare))) ' Grab the sequence number of the router ACL line we're looking at
             if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-              if iLastLine > 0 and iLastLine + 1 = iResult Then
-                if bRange = False then iRangeStart = iResult
-                bRange = True
-              else
-                if bRange = True Then
-                  strNotes = trim(strNotes) & "-" & iLastLine & " " & iResult & " "
-                else
-                  strNotes = strNotes & iResult & " "
-                end if
-                bRange = False
+              if iGSeq > iASeq Then
+                objLogOut.writeline "Extra line on router not in standard: " & trim(strResultParts(iResult))
+                strNotes = strNotes & iResult & "(missing from standard) "
               end if
-              iLastLine = iResult
-              objLogOut.writeline strHostname & " " & strACLName & " no matchy on line " & iResult
-              objLogOut.writeline " Gen: " & strTempOut
-              objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
-              objLogOut.writeline "--------------------------------"
+              if iGSeq < iASeq Then
+                objLogOut.writeline "Standard line missing from router: " & strTempOut
+                strNotes = strNotes & iResult & "(missing from router) "
+              end if
+              if iGSeq = iASeq then
+                if iLastLine > 0 and iLastLine + 1 = iResult Then
+                  if bRange = False then iRangeStart = iResult
+                  bRange = True
+                else
+                  if bRange = True Then
+                    strNotes = trim(strNotes) & "-" & iLastLine & " " & iResult & " "
+                  else
+                    strNotes = strNotes & iResult & " "
+                  end if
+                  bRange = False
+                end if
+                iLastLine = iResult
+                objLogOut.writeline strHostname & " " & strACLName & " no matchy on line " & iResult
+                objLogOut.writeline " Gen: " & strTempOut
+                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
+                objLogOut.writeline "--------------------------------"
+              end if
             end if ' End if generated and AsIs are different.
-            if iResult < ubound(strResultParts) then iResult = iResult + 1 ' If there are lines left in the captured ACL move on to the next line.
+            if iResult < ubound(strResultParts) and iGSeq >= iASeq then iResult = iResult + 1 ' If there are lines left in the captured ACL move on to the next line.
           end if ' End If ACL is applicable
         end if ' end Is current ACL standard line non-blank.
-        iACLRow = iACLRow + 1 ' Move down line in the ACL sheet.
+        if iGSeq <= iASeq then iACLRow = iACLRow + 1 ' Move down line in the ACL sheet.
       loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
       objACLGen.Close
     end if ' End of checking for error prior to analysis

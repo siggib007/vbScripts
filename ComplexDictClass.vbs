@@ -2,8 +2,9 @@
 Class employeeclass
     Public first, last, salary
 End Class
-Dim employeedict, employee
+Dim employeedict, employee, testDict
 Set employeedict = CreateObject("Scripting.Dictionary")
+Set testDict = CreateObject("Scripting.Dictionary")
 
 Set employee = new employeeclass
 With employee
@@ -32,3 +33,9 @@ wscript.echo "ID: 3;" & employeedict.item("3").first & " " & employeedict.item("
 employeedict.item("3").last = employeedict.item("3").last & "-Joe"
 
 wscript.echo "ID:3; " & employeedict.item("3").first & " " & employeedict.item("3").last & " salary: " & employeedict.item("3").salary
+
+wscript.echo "testing empty dict"
+test = testDict.keys
+for each t in test
+	wscript.echo "test:" & t & "-" & testDict.item(t)
+next

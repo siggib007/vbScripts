@@ -18,14 +18,15 @@ Sub main
   const Timeout    = 5 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
   const MaxError   = 5 ' If connection error occurs how often to retry
 
-' Non user section, changes to this section can have undesired results
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, bComp, bRange
-  Dim wsNames, wsVars, wsACL, wbin, wbNameIn, fso, objFileOut, objLogOut, objACLGen, objACLAsIs
-  Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol, iIPCol, iError, iResult
-  Dim iGSeq, iASeq, iLastLine, iRangeStart
-  Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar, strErr, strIPVer
-  Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath, strVerifyCmd
-  Dim strNotes, strNoMatch, strMissing
+  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange
+  Dim bComp, bRange, bNewChange, dkey, dkeys
+  Dim wsNames, wsVars, wsACL, wbin, wbNameIn
+  Dim fso, objFileOut, objLogOut, objACLGen, objACLAsIs, objChangeOut
+  Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
+  Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID
+  Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
+  Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath
+  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strVerifyCmd, strChange, strMOPPath
 
 
   ' File handling constants
@@ -85,10 +86,11 @@ Sub main
   strlogFile = left (wbNameIn, InStrRev (wbNameIn,".")-1)&"-log.txt"
 
   ' Creating some dictionaries
-  Set dictNames = CreateObject("Scripting.Dictionary")
-  Set dictVars = CreateObject("Scripting.Dictionary")
-  Set dictACLs = CreateObject("Scripting.Dictionary")
+  Set dictNames       = CreateObject("Scripting.Dictionary")
+  Set dictVars        = CreateObject("Scripting.Dictionary")
+  Set dictACLs        = CreateObject("Scripting.Dictionary")
   Set dictACLVarNames = CreateObject("Scripting.Dictionary")
+  Set dictChange      = CreateObject("Scripting.Dictionary")
 
   ' Get a direct hook into specific sheets in the workbook, as well a command line hook.
   Set objShell = CreateObject("WScript.Shell")
@@ -162,6 +164,13 @@ Sub main
     End If
     iACLCol = iACLCol + 1
   loop
+
+  strChange  = ""
+  strMOPPath = strOutPath & "Changes\"
+  if not fso.FolderExists(strMOPPath) then
+    CreatePath (strMOPPath)
+    objLogOut.writeline """" & strMOPPath & """ did not exists so I created it"
+  end if
 
   ' For testing and dev purpose, focus on a single ACL from ACL Name sheet. Looping throught them all comes later.
   iNameRow = 4
@@ -241,9 +250,12 @@ Sub main
     end if
     on error goto 0
 
-    strNotes = ""
-    bRange=False
-    iLastLine=0
+    strNotes   = ""
+    strNoMatch = ""
+    strMissing = ""
+    strChange  = strIPVer & " access-list " & strACLName & vbcrlf
+    bRange     = False
+    iLastLine  = 0
     If crt.Session.Connected Then ' If we have a successful connection, run the verification command, write the ACL to a file and keep it in a variable.
       iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
       crt.Screen.Synchronous = True
@@ -299,56 +311,77 @@ Sub main
             iASeq = trim(left(strResultParts(iResult),instr(1,trim(strResultParts(iResult))," ",vbTextCompare))) ' Grab the sequence number of the router ACL line we're looking at
             if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
               if iGSeq > iASeq Then
-                objLogOut.writeline "Extra line on router not in standard: " & trim(strResultParts(iResult))
-                strNotes = strNotes & iResult & "(missing from standard) "
+                objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
+                strMissing = strMissing & iResult & "(not standard) "
+                bRange = False
+                strChange = strChange & "no " & iASeq & vbcrlf
               end if
               if iGSeq < iASeq Then
-                objLogOut.writeline "Standard line missing from router: " & strTempOut
-                strNotes = strNotes & iResult & "(missing from router) "
+                objLogOut.writeline "Line " & iResult & ": This standard line missing from router: " & strTempOut
+                strMissing = strMissing & iResult & "(missing from router) "
+                bRange = False
+                strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
               end if
-              if iGSeq = iASeq then
-                if iLastLine > 0 and iLastLine + 1 = iResult Then
-                  if bRange = False then iRangeStart = iResult
+              if iGSeq = iASeq then ' If seqences match report the lines don't match
+                if iLastLine > 0 and iLastLine + 1 = iResult Then ' If last line didn't match
                   bRange = True
                 else
                   if bRange = True Then
-                    strNotes = trim(strNotes) & "-" & iLastLine & " " & iResult & " "
+                    strNoMatch = trim(strNoMatch) & "-" & iLastLine & " " & iResult & " "
                   else
-                    strNotes = strNotes & iResult & " "
-                  end if
+                    strNoMatch = strNoMatch & iResult & " "
+                  end if ' end if in a range
                   bRange = False
-                end if
-                iLastLine = iResult
+                end if ' end if last line didn't match.
                 objLogOut.writeline strHostname & " " & strACLName & " no matchy on line " & iResult
                 objLogOut.writeline " Gen: " & strTempOut
                 objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
                 objLogOut.writeline "--------------------------------"
-              end if
+                strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
+              end if ' end if seqences match
+              iLastLine = iResult
             end if ' End if generated and AsIs are different.
-            if iResult < ubound(strResultParts) and iGSeq >= iASeq then iResult = iResult + 1 ' If there are lines left in the captured ACL move on to the next line.
+            ' If there are lines left in the captured ACL and router ACL sequence is lower or equal move on to the next line.
+            if iResult < ubound(strResultParts) and iGSeq >= iASeq then iResult = iResult + 1
           end if ' End If ACL is applicable
         end if ' end Is current ACL standard line non-blank.
-        if iGSeq <= iASeq then iACLRow = iACLRow + 1 ' Move down line in the ACL sheet.
+        if iGSeq <= iASeq then iACLRow = iACLRow + 1 ' Move down line in the ACL sheet if we are in sync or we are too low
       loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
       objACLGen.Close
     end if ' End of checking for error prior to analysis
     if bRange = True then
-      strNotes = trim(strNotes) & "-" & iLastLine
+      strNoMatch = trim(strNoMatch) & "-" & iLastLine
     end if
-    strNotes = trim(strNotes)
+
     if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
     if iError = 1 or iError > MaxError then
       iVarRow = iVarRow + 1
-      if strNotes = "" then
+      if strNoMatch = "" and strMissing = "" and strNotes = "" then
         strNotes = "Good"
       else
-        if strNotes <> "Failed to connect " then
-          strNotes = "Lines " & trim(strNotes) & " Don't match"
+        if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
+        if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side" & trim(strMissing) & ";"
+        bNewChange = True
+        if dictChange.Exists(strChange) then
+          bNewChange = False
+          dictChange.item(strChange) = dictChange.item(strChange) & ", " & strHostname
+        else
+          dictChange.add strChange,strHostname
         end if
       end if
       objFileOut.writeline strIPAddr & "," & strHostname & "," & strACLName & "," & strNotes
     end if
   loop until wsVars.Cells(iVarRow,1).Value = "" ' This is the end of the loop to go through the Variable sheet
+  dkeys = dictChange.keys
+  iChangeID = 1
+  for each dkey in dkeys
+    set objChangeOut = fso.OpenTextFile(strMOPPath & "Change" & iChangeID & ".txt", ForWriting, True)
+    objChangeOut.writeline "****** Changes needed on: " & dictChange.item(dkey) & " ****** "
+    objChangeOut.writeline dkey
+    iChangeID = iChangeID + 1
+    objChangeOut.close
+  next
+
   objLogOut.writeline "All done at " & now()
 
   if AutoCloseResults = True then
@@ -362,7 +395,6 @@ Sub main
   Set wsACL = Nothing
   Set app = Nothing
   objShell.run ("notepad " & strlogFile)
-  ' msgbox "Done"
 
 End Sub
 

@@ -19,7 +19,7 @@ Sub main
   const MaxError   = 5 ' If connection error occurs how often to retry
 
   Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange
-  Dim bComp, bRange, bNewChange, dkey, dkeys
+  Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg
   Dim wsNames, wsVars, wsACL, wbin, wbNameIn
   Dim fso, objFileOut, objLogOut, objACLGen, objACLAsIs, objChangeOut
   Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
@@ -226,8 +226,10 @@ Sub main
   iError = 1
   do ' Now start looping throught the variable sheet.
     strIPAddr = wsVars.Cells(iVarRow,iIPCol).value
-    strHostname = wsVars.Cells(iVarRow,iHostCol).value
-    iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
+    if strHostname <> wsVars.Cells(iVarRow,iHostCol).value then
+      strHostname = wsVars.Cells(iVarRow,iHostCol).value
+      iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
+    end if
 
     ' If this ACL has variability in the name find the column number in the variable sheet.
     if strACLNameVar <> "" then
@@ -248,10 +250,14 @@ Sub main
     strConnection = "/SSH2 /ACCEPTHOSTKEYS "  & strHostname ' connect string
     on error resume next
     crt.Session.Connect strConnection
-    if err.number > 0 Then
-      MsgBox ("connect Error # " & CStr(Err.Number) & " " & Err.Description)
-      exit sub
-    end if
+    ' errcode = crt.GetLastError
+    ' errmsg = crt.GetLastErrorMessage
+    ' crt.ClearLastError
+    ' objLogOut.writeline "ErrNum:" & err.number & " ErrCode:" & errcode & " Msg:" & errmsg
+    ' if err.number > 0 or errcode > 0 Then
+    '   MsgBox ("connect Error # " & CStr(Err.Number) & " " & Err.Description & " Code:" & errcode)
+    '   exit sub
+    ' end if
     on error goto 0
 
     strNotes   = ""

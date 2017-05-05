@@ -227,12 +227,16 @@ Sub main
   do ' Now start looping throught the variable sheet.
     strIPAddr = wsVars.Cells(iVarRow,iIPCol).value
     strHostname = wsVars.Cells(iVarRow,iHostCol).value
+    iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
 
     ' If this ACL has variability in the name find the column number in the variable sheet.
     if strACLNameVar <> "" then
       if dictVars.Exists(strACLNameVar) then
         strACLName = wsVars.Cells(iVarRow,dictVars(strACLNameVar)).value
       end if
+      strChange  = strIPVer & " access-list $" & strACLNameVar & "$" &vbcrlf
+    else
+      strChange  = strIPVer & " access-list " & strACLName & vbcrlf
     end if
     strVerifyCmd = "show run " & strIPVer & " access-list " & strACLName ' construct the verification command to run.
     objLogOut.writeline "Starting on router " & strHostname & " with ACL " & strACLName ' Log that we are about to log into a router.
@@ -253,7 +257,6 @@ Sub main
     strNotes   = ""
     strNoMatch = ""
     strMissing = ""
-    strChange  = strIPVer & " access-list " & strACLName & vbcrlf
     bRange     = False
     iLastLine  = 0
     If crt.Session.Connected Then ' If we have a successful connection, run the verification command, write the ACL to a file and keep it in a variable.
@@ -312,7 +315,7 @@ Sub main
             if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
               if iGSeq > iASeq Then
                 objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
-                strMissing = strMissing & iResult & "(not standard) "
+                strMissing = strMissing & iResult & "(only on router) "
                 bRange = False
                 strChange = strChange & "no " & iASeq & vbcrlf
               end if
@@ -359,14 +362,16 @@ Sub main
       if strNoMatch = "" and strMissing = "" and strNotes = "" then
         strNotes = "Good"
       else
-        if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
-        if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side" & trim(strMissing) & ";"
-        bNewChange = True
-        if dictChange.Exists(strChange) then
-          bNewChange = False
-          dictChange.item(strChange) = dictChange.item(strChange) & ", " & strHostname
-        else
-          dictChange.add strChange,strHostname
+        if strNotes <> "Failed to connect " then
+          if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
+          if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side: " & trim(strMissing) & ";"
+          bNewChange = True
+          if dictChange.Exists(strChange) then
+            bNewChange = False
+            dictChange.item(strChange) = dictChange.item(strChange) & ", " & strHostname
+          else
+            dictChange.add strChange,strHostname
+          end if
         end if
       end if
       objFileOut.writeline strIPAddr & "," & strHostname & "," & strACLName & "," & strNotes

@@ -1,7 +1,5 @@
 Option Explicit
 
-Sub main
-
 '|----------------------------------------------------------------------------------------------------------|
 '|  This script will log into each ARG in a specified spreadsheet and confirm ACLs are up to standards.     |
 '|  If deviations are found, will generate configuration files for HPNA or manual MOP.                      |
@@ -11,28 +9,19 @@ Sub main
 '|  Copyright: Siggi Bjarnason 2017                                                                         |
 '|----------------------------------------------------------------------------------------------------------|
 
-' User Spefified values, specify values here per your needs
+ ' User Spefified values, specify values here per your needs
 
-	Const AutoCloseResults = True
+  Const AutoCloseResults = True
   Const ExcelVisible     = True
   const Timeout    = 5 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
   const MaxError   = 5 ' If connection error occurs how often to retry
 
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange
-  Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg
-  Dim wsNames, wsVars, wsACL, wbin, wbNameIn
-  Dim fso, objFileOut, objLogOut, objACLGen, objACLAsIs, objChangeOut
-  Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
-  Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID
-  Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
-  Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath
-  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strVerifyCmd, strChange, strMOPPath
-
-
-  ' File handling constants
+ ' Nothing below here is user values, proceed with caution and at your own risk.
+ ' File handling constants
   const ForReading    = 1
   const ForWriting    = 2
   const ForAppending  = 8
+
 
   ' button parameter options
   Const ICON_STOP = 16                 ' display the ERROR/STOP icon.
@@ -59,6 +48,18 @@ Sub main
   Const IDYES = 6             ' Yes button clicked
   Const IDNO = 7              ' No button clicked
 
+  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange
+  Dim wsNames, wsVars, wsACL, wbin, wbNameIn
+  Dim fso, objFileOut, objLogOut, objACLGen, objACLAsIs, objChangeOut
+
+Sub main
+  Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg
+  Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
+  Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID
+  Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
+  Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath
+  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strVerifyCmd, strChange, strMOPPath
+
   ' comparison constants
   Const vbBinaryCompare = 0 'Perform a binary comparison, i.e case sensitive
   Const vbTextCompare = 1 'Perform a textual comparison, i.e. case insensitive
@@ -72,6 +73,7 @@ Sub main
   ' Doublecheck the input workbook actually does exists
   if not fso.FileExists(wbNameIn) Then
     msgbox "Input file " & wbNameIn & " not found, exiting"
+    CleanUp
     exit sub
   end if
 
@@ -101,26 +103,8 @@ Sub main
   Set wsACL = wbin.Worksheets("ACL Lines")
 
   ' Create output files and catch any errros in the process
-  on error resume next
-  set objLogOut = fso.OpenTextFile(strlogFile, ForWriting, True)
-  if err.number > 0 Then
-    if err.number = 70 then
-      msgbox "Permission denied error when attempting to create log file. Please make sure the file isn't locked by another application."
-    else
-      MsgBox ("Create Log Error # " & CStr(Err.Number) & " " & Err.Description)
-    end if
-    exit sub
-  end if
-  set objFileOut  = fso.OpenTextFile(strOutFile, ForWriting, True)
-  if err.number > 0 Then
-    if err.number = 70 then
-      msgbox "Permission denied error when attempting to create results file. Please make sure the file isn't locked by another application."
-    else
-      MsgBox ("Create Outfile Error # " & CStr(Err.Number) & " " & Err.Description)
-    end if
-    exit sub
-  end if
-  on error goto 0
+  set objLogOut = CreateFile(strlogFile)
+  set objFileOut = CreateFile(strOutFile)
 
   ' Now start the real work
   objLogOut.writeline "Starting at " & now()
@@ -200,6 +184,7 @@ Sub main
   else
     objLogOut.writeline "couldn't find " & strACLID & " in dictACLs :-("
     msgbox "couldn't find " & strACLID & " in dictACLs, exiting :-("
+    CleanUp
     exit sub
   end if
 
@@ -209,6 +194,7 @@ Sub main
   else
     objLogOut.writeline "couldn't find primaryIPAddress in dictVars :-("
     msgbox "couldn't find primaryIPAddress in dictACLs, exiting :-("
+    CleanUp
     exit sub
   end if
 
@@ -218,6 +204,7 @@ Sub main
   else
     objLogOut.writeline "couldn't find hostName in dictVars :-("
     msgbox "couldn't find hostName in dictACLs, exiting :-("
+    CleanUp
     exit sub
   end if
 
@@ -250,14 +237,6 @@ Sub main
     strConnection = "/SSH2 /ACCEPTHOSTKEYS "  & strHostname ' connect string
     on error resume next
     crt.Session.Connect strConnection
-    ' errcode = crt.GetLastError
-    ' errmsg = crt.GetLastErrorMessage
-    ' crt.ClearLastError
-    ' objLogOut.writeline "ErrNum:" & err.number & " ErrCode:" & errcode & " Msg:" & errmsg
-    ' if err.number > 0 or errcode > 0 Then
-    '   MsgBox ("connect Error # " & CStr(Err.Number) & " " & Err.Description & " Code:" & errcode)
-    '   exit sub
-    ' end if
     on error goto 0
 
     strNotes   = ""
@@ -275,8 +254,8 @@ Sub main
       crt.Screen.WaitForString vbcrlf,Timeout
       strResult=trim(crt.Screen.Readstring (vbcrlf&"RP/",Timeout))
       crt.Session.Disconnect
-      set objACLAsIs = fso.OpenTextFile(strAsIsOutPath & strHostname & "-" & strACLName & ".txt", ForWriting, True)
-      set objACLGen = fso.OpenTextFile(strGenOutPath & strHostname & "-" & strACLName & ".txt", ForWriting, True)
+      set objACLAsIs = CreateFile(strAsIsOutPath & strHostname & "-" & strACLName & ".txt")
+      set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
       objACLAsIs.write strResult
       objACLAsIs.close
       strResultParts = split (strResult,vbcrlf)
@@ -369,12 +348,13 @@ Sub main
         strNotes = "Good"
       else
         if strNotes <> "Failed to connect " then
-          if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
-          if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side: " & trim(strMissing) & ";"
+          ' if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
+          ' if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side: " & trim(strMissing) & ";"
+          if strNoMatch <> "" or strMissing <> "" then strNotes = strNotes & "Updates required"
           bNewChange = True
           if dictChange.Exists(strChange) then
             bNewChange = False
-            dictChange.item(strChange) = dictChange.item(strChange) & ", " & strHostname
+            dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname
           else
             dictChange.add strChange,strHostname
           end if
@@ -386,29 +366,45 @@ Sub main
   dkeys = dictChange.keys
   iChangeID = 1
   for each dkey in dkeys
-    set objChangeOut = fso.OpenTextFile(strMOPPath & "Change" & iChangeID & ".txt", ForWriting, True)
-    objChangeOut.writeline "****** Changes needed on: " & dictChange.item(dkey) & " ****** "
+    set objChangeOut = CreateFile(strMOPPath & "Change" & iChangeID & ".txt")
+    objChangeOut.writeline "************ Devices Affected ************ " & vbcrlf & dictChange.item(dkey) & "****************************** "
     objChangeOut.writeline dkey
     iChangeID = iChangeID + 1
     objChangeOut.close
   next
 
+  CleanUp
   objLogOut.writeline "All done at " & now()
 
+
+End Sub
+
+Sub CleanUp()
+'-------------------------------------------------------------------------------------------------'
+' Sub CleanUp()                                                               '
+'                                                                                                 '
+' This is a cleanup function.             '
+'-------------------------------------------------------------------------------------------------'
   if AutoCloseResults = True then
     wbin.Close
-    app.Quit
+    ' app.Quit
   end if
+
+  Set wbin = app.Workbooks.Open (strOutFile,0,False)
+  objShell.run ("notepad " & strlogFile)
 
   Set wbin = Nothing
   Set wsNames = Nothing
   Set wsVars = Nothing
   Set wsACL = Nothing
   Set app = Nothing
-  objShell.run ("notepad " & strlogFile)
-
-End Sub
-
+  set objShell = Nothing
+  set objACLGen = Nothing
+  set objChangeOut = Nothing
+  set objLogOut = Nothing
+  set objFileOut = Nothing
+  set objACLAsIs = Nothing
+end Sub
 
 Function CreatePath (strFullPath)
 '-------------------------------------------------------------------------------------------------'
@@ -418,7 +414,7 @@ Function CreatePath (strFullPath)
 '-------------------------------------------------------------------------------------------------'
 dim pathparts, buildpath, part, fso
 
-Set fso = CreateObject("Scripting.FileSystemObject")
+  Set fso = CreateObject("Scripting.FileSystemObject")
 
   pathparts = split(strFullPath,"\")
   buildpath = ""
@@ -440,4 +436,37 @@ Set fso = CreateObject("Scripting.FileSystemObject")
       end if
     end if
   next
-end function
+end Function
+
+Function CreateFile (strFilePath)
+'-----------------------------------------------------------------------------------------------------'
+' Function CreateFile (strFilePath)                                                                    '
+'                                                                                                     '
+' This function takes a filepath and returns a file handle, while doing all nessisary error handling. '
+'-----------------------------------------------------------------------------------------------------'
+dim objFileOut, iInt, strOrigional, fso, iPos, iLen
+
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  iInt = 1
+  strOrigional = strFilePath
+  iPos = InStrRev (strFilePath,".") - 1
+  iLen = len(strFilePath)
+  on error resume next
+  set objFileOut = fso.OpenTextFile(strFilePath, ForWriting, True)
+  if err.number <> 0 Then
+    if err.number = 70 then
+      while err.number = 70
+        strFilePath = left(strFilePath, iPos) & "-" & iInt & right(strFilePath, iLen-iPos)
+        set objFileOut = fso.OpenTextFile(strFilePath, ForWriting, True)
+        iInt = iInt + 1
+        objLogOut.writeline "trying " & strFilePath
+      wend
+      objLogOut.writeline "Permission denied error when attempting to create file " & strOrigional & ". Created " & strFilePath & " instead."
+    else
+      MsgBox ("Create file Error # " & CStr(Err.Number) & " " & Err.Description)
+      crt.quit
+    end if
+  end if
+  on error goto 0
+  set CreateFile = objFileOut
+end Function

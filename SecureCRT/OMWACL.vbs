@@ -48,17 +48,17 @@ Option Explicit
   Const IDYES = 6             ' Yes button clicked
   Const IDNO = 7              ' No button clicked
 
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange
-  Dim wsNames, wsVars, wsACL, wbin, wbNameIn
-  Dim fso, objFileOut, objLogOut, objACLGen, objACLAsIs, objChangeOut
+  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange, dictDevAffected
+  Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, wsNames, wsVars, wsACL, wbin, wbNameIn
+  Dim fso, objFileOut, objLogOut, objACLGen, objChangeOut
 
 Sub main
   Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg
   Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
   Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID
-  Dim strOutPath, strOutFile, strlogFile, strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
-  Dim strHostname, strIPAddr, strResult, strResultParts, strConnection, strGenOutPath, strAsIsOutPath
-  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strVerifyCmd, strChange, strMOPPath
+  Dim strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
+  Dim strHostname, strIPAddr, strResultParts, strGenOutPath
+  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strChange, strMOPPath
 
   ' comparison constants
   Const vbBinaryCompare = 0 'Perform a binary comparison, i.e case sensitive
@@ -66,14 +66,17 @@ Sub main
 
   ' Display File Open dialog so that the user can selelct the input workbook.
   wbNameIn = crt.Dialog.FileOpenDialog("Please select OMW ACL Standard Spreadsheet", "Open", "", "Excel Files (*.xlsx)|*.xlsx||")
-
+  if wbNameIn = "" then
+    msgbox "No file provided, exiting"
+    exit Sub
+  end if
   ' Hook to the filesystem
   Set fso = CreateObject("Scripting.FileSystemObject")
 
   ' Doublecheck the input workbook actually does exists
   if not fso.FileExists(wbNameIn) Then
     msgbox "Input file " & wbNameIn & " not found, exiting"
-    CleanUp
+    set fso = nothing
     exit sub
   end if
 
@@ -93,6 +96,7 @@ Sub main
   Set dictACLs        = CreateObject("Scripting.Dictionary")
   Set dictACLVarNames = CreateObject("Scripting.Dictionary")
   Set dictChange      = CreateObject("Scripting.Dictionary")
+  Set dictDevAffected = CreateObject("Scripting.Dictionary")
 
   ' Get a direct hook into specific sheets in the workbook, as well a command line hook.
   Set objShell = CreateObject("WScript.Shell")
@@ -150,7 +154,7 @@ Sub main
   loop
 
   strChange  = ""
-  strMOPPath = strOutPath & "Changes\"
+  strMOPPath = left (wbNameIn, InStrRev (wbNameIn,".")-1)& "-Changes\"
   if not fso.FolderExists(strMOPPath) then
     CreatePath (strMOPPath)
     objLogOut.writeline """" & strMOPPath & """ did not exists so I created it"
@@ -162,6 +166,7 @@ Sub main
   strACLName = wsNames.Cells(iNameRow,2).value
   strACLNameVar = wsNames.Cells(iNameRow,3).value
   strIPVer = "ipv4"
+  dictDevAffected.RemoveAll
 
   ' Setup the output paths to be ACL specific
   ' First Folder for the Generated ACL's
@@ -227,47 +232,31 @@ Sub main
     else
       strChange  = strIPVer & " access-list " & strACLName & vbcrlf
     end if
-    strVerifyCmd = "show run " & strIPVer & " access-list " & strACLName ' construct the verification command to run.
     objLogOut.writeline "Starting on router " & strHostname & " with ACL " & strACLName ' Log that we are about to log into a router.
-    ' If session is connected, disconnect it.
-    If crt.Session.Connected Then
-      crt.Session.Disconnect
-    end if
-
-    strConnection = "/SSH2 /ACCEPTHOSTKEYS "  & strHostname ' connect string
-    on error resume next
-    crt.Session.Connect strConnection
-    on error goto 0
 
     strNotes   = ""
     strNoMatch = ""
     strMissing = ""
     bRange     = False
     iLastLine  = 0
-    If crt.Session.Connected Then ' If we have a successful connection, run the verification command, write the ACL to a file and keep it in a variable.
-      iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
-      crt.Screen.Synchronous = True
-      crt.Screen.WaitForString "#",Timeout
-      crt.Screen.Send("term len 0" & vbcr)
-      crt.Screen.WaitForString "#",Timeout
-      crt.Screen.Send(strVerifyCmd & vbcr)
-      crt.Screen.WaitForString vbcrlf,Timeout
-      strResult=trim(crt.Screen.Readstring (vbcrlf&"RP/",Timeout))
-      crt.Session.Disconnect
-      set objACLAsIs = CreateFile(strAsIsOutPath & strHostname & "-" & strACLName & ".txt")
-      set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
-      objACLAsIs.write strResult
-      objACLAsIs.close
-      strResultParts = split (strResult,vbcrlf)
-    else ' If no connection, increase an error counter and note the failure.
-      objLogOut.writeline "No connection to " & strHostname & " " & strACLName & ". Attempt #" & iError
-      iError = iError + 1
+
+    strResultParts = GetAsIsACL(strIPVer, strACLName, strHostname, iError)
+    if isArray(strResultParts) then
+      iError = 1
+    else
       strNotes = "Failed to connect "
-    end if ' End of connection verification
+      if IsNumeric(strResultParts) then
+        iError = strResultParts
+      else
+        objLogOut.writeline "GetAsIsACL returned neither array nor a number, this shouldn't happen so I'm quitting. I got back: " & strResultParts
+        exit Sub
+      end if
+    end if
     strTempOut = ""
     iACLRow=2
     iResult=1
     if iError = 1 then ' If there has been no connection errors, analyse the results.
+      set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
       do
         bComp = False
         if wsACL.Cells(iACLRow,iACLCol).value <> "" then ' Is current ACL standard line non-blank.
@@ -354,7 +343,10 @@ Sub main
           bNewChange = True
           if dictChange.Exists(strChange) then
             bNewChange = False
-            dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname
+            if not dictDevAffected.Exists(strHostname) then
+              dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname
+              dictDevAffected.add strHostname,""
+            end if
           else
             dictChange.add strChange,strHostname
           end if
@@ -367,17 +359,17 @@ Sub main
   iChangeID = 1
   for each dkey in dkeys
     set objChangeOut = CreateFile(strMOPPath & "Change" & iChangeID & ".txt")
-    objChangeOut.writeline "************ Devices Affected ************ " & vbcrlf & dictChange.item(dkey) & "****************************** "
+    objChangeOut.writeline "************ Devices Affected ************" & vbcrlf & dictChange.item(dkey) & vbcrlf & "******************************************"
     objChangeOut.writeline dkey
     iChangeID = iChangeID + 1
     objChangeOut.close
   next
 
-  CleanUp
   objLogOut.writeline "All done at " & now()
-
-
-End Sub
+  objLogOut.close
+  objFileOut.close
+  CleanUp
+End Sub ' End of the Main sub
 
 Sub CleanUp()
 '-------------------------------------------------------------------------------------------------'
@@ -385,26 +377,38 @@ Sub CleanUp()
 '                                                                                                 '
 ' This is a cleanup function.             '
 '-------------------------------------------------------------------------------------------------'
+  crt.Session.Disconnect
   if AutoCloseResults = True then
-    wbin.Close
+    if IsObject(wbin) then wbin.Close
     ' app.Quit
   end if
 
-  Set wbin = app.Workbooks.Open (strOutFile,0,False)
-  objShell.run ("notepad " & strlogFile)
+  if IsObject(app) then Set wbin = app.Workbooks.Open (strOutFile,0,False)
+  if IsObject(objShell) then objShell.run ("notepad " & strlogFile)
 
-  Set wbin = Nothing
-  Set wsNames = Nothing
-  Set wsVars = Nothing
-  Set wsACL = Nothing
-  Set app = Nothing
-  set objShell = Nothing
-  set objACLGen = Nothing
-  set objChangeOut = Nothing
-  set objLogOut = Nothing
-  set objFileOut = Nothing
-  set objACLAsIs = Nothing
-end Sub
+  if IsObject(wbin) then Set wbin = Nothing
+  if IsObject(wsNames) then Set wsNames = Nothing
+  if IsObject(wsVars) then Set wsVars = Nothing
+  if IsObject(wsACL) then Set wsACL = Nothing
+  if IsObject(app) then Set app = Nothing
+  if IsObject(objShell) then set objShell = Nothing
+  if IsObject(objACLGen) then
+    objACLGen.close
+    set objACLGen = Nothing
+  end if
+  if IsObject(objChangeOut) then
+    objChangeOut.Close
+    set objChangeOut = Nothing
+  end if
+  if IsObject(objLogOut) then
+    objLogOut.Close
+    set objLogOut = Nothing
+  end if
+  if IsObject(objFileOut) then
+    objFileOut.Close
+    set objFileOut = Nothing
+  end if
+end Sub ' End of CleanUp sub
 
 Function CreatePath (strFullPath)
 '-------------------------------------------------------------------------------------------------'
@@ -412,9 +416,7 @@ Function CreatePath (strFullPath)
 '                                                                                                 '
 ' This function takes a complete path as input and builds that path out as nessisary.             '
 '-------------------------------------------------------------------------------------------------'
-dim pathparts, buildpath, part, fso
-
-  Set fso = CreateObject("Scripting.FileSystemObject")
+dim pathparts, buildpath, part
 
   pathparts = split(strFullPath,"\")
   buildpath = ""
@@ -436,7 +438,7 @@ dim pathparts, buildpath, part, fso
       end if
     end if
   next
-end Function
+end Function ' End of CreatePath Function
 
 Function CreateFile (strFilePath)
 '-----------------------------------------------------------------------------------------------------'
@@ -444,9 +446,8 @@ Function CreateFile (strFilePath)
 '                                                                                                     '
 ' This function takes a filepath and returns a file handle, while doing all nessisary error handling. '
 '-----------------------------------------------------------------------------------------------------'
-dim objFileOut, iInt, strOrigional, fso, iPos, iLen
+dim objFileOut, iInt, strOrigional, iPos, iLen
 
-  Set fso = CreateObject("Scripting.FileSystemObject")
   iInt = 1
   strOrigional = strFilePath
   iPos = InStrRev (strFilePath,".") - 1
@@ -457,6 +458,7 @@ dim objFileOut, iInt, strOrigional, fso, iPos, iLen
     if err.number = 70 then
       while err.number = 70
         strFilePath = left(strFilePath, iPos) & "-" & iInt & right(strFilePath, iLen-iPos)
+        err.clear
         set objFileOut = fso.OpenTextFile(strFilePath, ForWriting, True)
         iInt = iInt + 1
         objLogOut.writeline "trying " & strFilePath
@@ -464,9 +466,58 @@ dim objFileOut, iInt, strOrigional, fso, iPos, iLen
       objLogOut.writeline "Permission denied error when attempting to create file " & strOrigional & ". Created " & strFilePath & " instead."
     else
       MsgBox ("Create file Error # " & CStr(Err.Number) & " " & Err.Description)
-      crt.quit
+      Exit Function
     end if
   end if
   on error goto 0
   set CreateFile = objFileOut
-end Function
+end Function ' End of CreateFile Function
+
+Function GetAsIsACL(strIPVer, strACLName, strHostname, iError)
+'-----------------------------------------------------------------------------------------------------'
+' Function GetAsIsACL()                                                                               '
+'                                                                                                     '
+' This function logs into a router and feteches the current AsIs ACL.                                 '
+'-----------------------------------------------------------------------------------------------------'
+dim strVerifyCmd, strConnection, strResult, objACLAsIs, szHostName, objTab, objConfig
+
+    strVerifyCmd = "show run " & strIPVer & " access-list " & strACLName ' construct the verification command to run.
+
+    ' If session is connected, disconnect it.
+    If crt.Session.Connected Then
+      Set objTab = crt.GetScriptTab ' Hook into the current SecureCRT Tab
+      Set objConfig = objTab.Session.Config ' Grab the session configuration for the current tab
+      szHostName = objConfig.GetOption("Hostname") ' Get the currently connected hostname from the current session configuration
+      if szHostName <> strHostname then crt.Session.Disconnect ' Unless the current connection is to the router we need disconnect
+    end if
+
+    ' Make new connection unless already connected.
+    If not crt.Session.Connected Then
+      strConnection = "/SSH2 /ACCEPTHOSTKEYS "  & strHostname ' connect string
+      on error resume next
+      crt.Session.Connect strConnection
+      on error goto 0
+    end if
+
+    If crt.Session.Connected Then ' If we have a successful connection, run the verification command, write the ACL to a file and keep it in a variable.
+      iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
+      crt.Screen.Synchronous = True
+      crt.Screen.WaitForString "#",Timeout
+      crt.Screen.Send("term len 0" & vbcr)
+      crt.Screen.WaitForString "#",Timeout
+      crt.Screen.Send(strVerifyCmd & vbcr)
+      crt.Screen.WaitForString vbcrlf,Timeout
+      strResult=trim(crt.Screen.Readstring (vbcrlf&"RP/",Timeout))
+      ' crt.Session.Disconnect
+      set objACLAsIs = CreateFile(strAsIsOutPath & strHostname & "-" & strACLName & ".txt")
+      objACLAsIs.write strResult
+      objACLAsIs.close
+      set objACLAsIs = Nothing
+      GetAsIsACL = split (strResult,vbcrlf)
+    else ' If no connection, increase an error counter and note the failure.
+      objLogOut.writeline "No connection to " & strHostname & " " & strACLName & ". Attempt #" & iError
+      GetAsIsACL = iError + 1
+      ' strNotes = "Failed to connect "
+    end if ' End of connection verification
+
+end Function ' End GetAsIsACL function

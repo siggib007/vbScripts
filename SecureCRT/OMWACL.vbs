@@ -50,7 +50,7 @@ Option Explicit
 
   Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange, dictDevAffected
   Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, wsNames, wsVars, wsACL, wbin, wbNameIn
-  Dim fso, objFileOut, objLogOut, objACLGen, objChangeOut
+  Dim fso, objFileOut, objLogOut, objACLGen, objChangeOut, strMOPPath
 
 Sub main
   Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg
@@ -58,7 +58,7 @@ Sub main
   Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID
   Dim strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
   Dim strHostname, strIPAddr, strResultParts, strGenOutPath
-  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strChange, strMOPPath
+  Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strChange
 
   ' comparison constants
   Const vbBinaryCompare = 0 'Perform a binary comparison, i.e case sensitive
@@ -358,9 +358,10 @@ Sub main
   dkeys = dictChange.keys
   iChangeID = 1
   for each dkey in dkeys
-    set objChangeOut = CreateFile(strMOPPath & "Change" & iChangeID & ".txt")
+    set objChangeOut = CreateFile(strMOPPath & "HPNAScript-Change" & iChangeID & ".txt")
     objChangeOut.writeline "************ Devices Affected ************" & vbcrlf & dictChange.item(dkey) & vbcrlf & "******************************************"
     objChangeOut.writeline dkey
+    CreateCSVs dictChange.item(dkey),dkey,iChangeID
     iChangeID = iChangeID + 1
     objChangeOut.close
   next
@@ -370,6 +371,74 @@ Sub main
   objFileOut.close
   CleanUp
 End Sub ' End of the Main sub
+
+Sub CreateCSVs (strDevlist, strChange, iChangeID)
+'-------------------------------------------------------------------------------------------------'
+' Sub CreateCSVs (strDevlist, strChange, iChangeID)                                               '
+'                                                                                                 '
+' This sub takes a Devicelist (CRLF seperated), configuration script and changeID and generates   '
+' all the CSV files to be used by both HPNA and PIER to push out those changes.                   '
+'-------------------------------------------------------------------------------------------------'
+dim strDevListParts, strChangeLines, x, y, strVarCol, dictDevices, iRow, iVarColList, objHPNAout
+dim iStartPos, iStopPos, strACLVar, strColHead, iCol
+
+  set objHPNAout = CreateFile(strMOPPath & "HPNAVars-Change" & iChangeID & ".csv")
+  Set dictDevices = CreateObject("Scripting.Dictionary")
+  strDevListParts = split(strDevlist,vbcrlf)
+  strChangeLines  = split(strChange,vbcrlf)
+  strVarCol = ""
+  objLogOut.writeline "in CreateCSVs, checking change ID " & iChangeID
+  for x = 0 to ubound(strChangeLines)
+    objLogOut.writeline "checking for variable in " & strChangeLines(x)
+    iStartPos = instr (1,strChangeLines(x),"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
+    if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
+      iStopPos = instr (iStartPos+1,strChangeLines(x),"$",vbTextCompare) ' Locate the end of the variable name.
+      strACLVar = mid(strChangeLines(x),iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
+      objLogOut.writeline "found variable: " & strACLVar
+      if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
+        strVarCol = strVarCol & dictVars(strACLVar) & ","
+        objLogOut.writeline "it's in column " & dictVars(strACLVar)
+      end if ' end if variable exists
+    end if
+  next
+  ' Grab the device name column of the variable sheet and stick them into a dictionary.
+  iRow=2
+  dictDevices.removeall
+  Do until wsVars.Cells(iRow,2).Value = ""
+    If not dictDevices.Exists(wsVars.Cells(iRow,2).value) then
+      dictDevices.Add wsVars.Cells(iRow,2).value, iRow
+    End If
+    iRow = iRow + 1
+  loop
+  objLogOut.writeline "strVarCol:" & strVarCol
+  iVarColList = split(strVarCol,",")
+  objLogOut.writeline "contains " & ubound(iVarColList) & " elements"
+  objHPNAout.write wsVars.Cells(1,1).value
+  objHPNAout.write "," & wsVars.Cells(1,2).value
+  for x=0 to ubound(iVarColList)
+    if IsNumeric(iVarColList(x)) then
+      iCol = cint(iVarColList(x))
+      objHPNAout.write "," & wsVars.Cells(1,iCol).value
+    end if
+  next
+  objHPNAout.writeline
+  for x=0 to ubound(strDevListParts)
+    if dictDevices.Exists(strDevListParts(x)) then
+      iRow = dictDevices(strDevListParts(x))
+    else
+      objLogOut "something weird just happened, can't find " & strDevListParts(x) & " in the spreadsheet!"
+    end if
+    objHPNAout.write wsVars.Cells(iRow,1).value
+    objHPNAout.write "," & wsVars.Cells(iRow,2).value
+    for y=0 to ubound(iVarColList)
+      if IsNumeric(iVarColList(y)) then
+        iCol = cint(iVarColList(y))
+        objHPNAout.write "," & wsVars.Cells(iRow,iCol).value
+      end if
+    next
+    objHPNAout.writeline
+  next
+End Sub
 
 Sub CleanUp()
 '-------------------------------------------------------------------------------------------------'

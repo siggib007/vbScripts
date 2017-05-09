@@ -20,3 +20,18 @@ for each oKey in OutKey
 	next
 next
 
+wscript.echo "now testing showkeys"
+wscript.echo ShowKeys
+
+Function ShowKeys
+   Dim a, d, i, s   ' Create some variables.
+   Set d = CreateObject("Scripting.Dictionary")
+   d.Add "a", "Athens"   ' Add some keys and items.
+   d.Add "b", "Belgrade"
+   d.Add "c", "Cairo"
+   a = d.Items
+   For i = 0 To d.Count -1 ' Iterate the array.
+      s = s & a(i) & "<BR>" ' Create return string.
+   Next
+   ShowKeys = s
+End Function

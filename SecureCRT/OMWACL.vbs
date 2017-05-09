@@ -48,14 +48,14 @@ Option Explicit
   Const IDYES = 6             ' Yes button clicked
   Const IDNO = 7              ' No button clicked
 
-  Dim app, objShell, dictNames, dictVars, dictACLs, dictACLVarNames, dictChange, dictDevAffected
-  Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, wsNames, wsVars, wsACL, wbin, wbNameIn
-  Dim fso, objFileOut, objLogOut, objACLGen, objChangeOut, strMOPPath
+  Dim dictNames, dictVars, dictACLs, dictACLVarNames, dictChange, dictDevAffected, dictFailed
+  Dim app, objShell, fso, objFileOut, objLogOut, objACLGen, objChangeOut, wsNames, wsVars, wsACL, wbin
+  Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, strMOPPath, strWBin
 
 Sub main
-  Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg
+  Dim bComp, bRange, bNewChange, dkey, dkeys, errcode, errmsg, dItems
   Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
-  Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID
+  Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID, iFailed
   Dim strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
   Dim strHostname, strIPAddr, strResultParts, strGenOutPath
   Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strChange
@@ -65,8 +65,8 @@ Sub main
   Const vbTextCompare = 1 'Perform a textual comparison, i.e. case insensitive
 
   ' Display File Open dialog so that the user can selelct the input workbook.
-  wbNameIn = crt.Dialog.FileOpenDialog("Please select OMW ACL Standard Spreadsheet", "Open", "", "Excel Files (*.xlsx)|*.xlsx||")
-  if wbNameIn = "" then
+  strWBin = crt.Dialog.FileOpenDialog("Please select OMW ACL Standard Spreadsheet", "Open", "", "Excel Files (*.xlsx)|*.xlsx||")
+  if strWBin = "" then
     msgbox "No file provided, exiting"
     exit Sub
   end if
@@ -74,21 +74,21 @@ Sub main
   Set fso = CreateObject("Scripting.FileSystemObject")
 
   ' Doublecheck the input workbook actually does exists
-  if not fso.FileExists(wbNameIn) Then
-    msgbox "Input file " & wbNameIn & " not found, exiting"
+  if not fso.FileExists(strWBin) Then
+    msgbox "Input file " & strWBin & " not found, exiting"
     set fso = nothing
     exit sub
   end if
 
   ' Parse out the path only from the workbook file name, make sure the path ends in a \
-  strOutPath = left (wbNameIn, InStrRev (wbNameIn,"\"))
+  strOutPath = left (strWBin, InStrRev (strWBin,"\"))
   if right(strOutPath,1)<>"\" then
     strOutPath = strOutPath & "\"
   end if
 
   ' Create file names for log file and results file based on the input file
-  strOutFile = left (wbNameIn, InStrRev (wbNameIn,".")-1)&"-Results.csv"
-  strlogFile = left (wbNameIn, InStrRev (wbNameIn,".")-1)&"-log.txt"
+  strOutFile = left (strWBin, InStrRev (strWBin,".")-1)&"-Results.csv"
+  strlogFile = left (strWBin, InStrRev (strWBin,".")-1)&"-log.txt"
 
   ' Creating some dictionaries
   Set dictNames       = CreateObject("Scripting.Dictionary")
@@ -97,11 +97,12 @@ Sub main
   Set dictACLVarNames = CreateObject("Scripting.Dictionary")
   Set dictChange      = CreateObject("Scripting.Dictionary")
   Set dictDevAffected = CreateObject("Scripting.Dictionary")
+  Set dictFailed      = CreateObject("Scripting.Dictionary")
 
   ' Get a direct hook into specific sheets in the workbook, as well a command line hook.
   Set objShell = CreateObject("WScript.Shell")
   Set app = CreateObject("Excel.Application")
-  Set wbin = app.Workbooks.Open (wbNameIn,0,true)
+  Set wbin = app.Workbooks.Open (strWBin,0,true)
   Set wsNames = wbin.Worksheets("ACL Names")
   Set wsVars = wbin.Worksheets("OMW-Vars")
   Set wsACL = wbin.Worksheets("ACL Lines")
@@ -154,7 +155,7 @@ Sub main
   loop
 
   strChange  = ""
-  strMOPPath = left (wbNameIn, InStrRev (wbNameIn,".")-1)& "-Changes\"
+  strMOPPath = left (strWBin, InStrRev (strWBin,".")-1)& "-Changes\"
   if not fso.FolderExists(strMOPPath) then
     CreatePath (strMOPPath)
     objLogOut.writeline """" & strMOPPath & """ did not exists so I created it"
@@ -167,6 +168,7 @@ Sub main
   strACLNameVar = wsNames.Cells(iNameRow,3).value
   strIPVer = "ipv4"
   dictDevAffected.RemoveAll
+  dictFailed.RemoveAll
 
   ' Setup the output paths to be ACL specific
   ' First Folder for the Generated ACL's
@@ -216,6 +218,7 @@ Sub main
 
   iVarRow=2
   iError = 1
+  iFailed = 0
   do ' Now start looping throught the variable sheet.
     strIPAddr = wsVars.Cells(iVarRow,iIPCol).value
     if strHostname <> wsVars.Cells(iVarRow,iHostCol).value then
@@ -247,6 +250,7 @@ Sub main
       strNotes = "Failed to connect "
       if IsNumeric(strResultParts) then
         iError = strResultParts
+        if not dictFailed.Exists(strHostname) then dictFailed.add strHostname,iVarRow
       else
         objLogOut.writeline "GetAsIsACL returned neither array nor a number, this shouldn't happen so I'm quitting. I got back: " & strResultParts
         exit Sub
@@ -331,7 +335,7 @@ Sub main
     end if
 
     if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
-    if iError = 1 or iError > MaxError then
+    if (iError = 1 or iError > MaxError) and iFailed = 0 then
       iVarRow = iVarRow + 1
       if strNoMatch = "" and strMissing = "" and strNotes = "" then
         strNotes = "Good"
@@ -354,7 +358,29 @@ Sub main
       end if
       objFileOut.writeline strIPAddr & "," & strHostname & "," & strACLName & "," & strNotes
     end if
-  loop until wsVars.Cells(iVarRow,1).Value = "" ' This is the end of the loop to go through the Variable sheet
+    if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
+      if dictFailed.count > 0 then
+        if iFailed = 0 then
+          objLogOut.writeline "There are " & dictFailed.count & " devices I couldn't connect to. Here is the list:"
+          dkeys = dictFailed.keys
+          for each dkey in dkeys
+            objLogOut.writeline dkey & " on line " & dictFailed(dkey)
+          next
+          objLogOut.writeline "Going to retry those one more time"
+          dItems = dictFailed.items
+        end if
+        if iFailed = dictFailed.count then exit do
+        iVarRow = dItems(iFailed)
+        if iFailed < dictFailed.count then
+          iFailed = iFailed + 1
+        else
+          exit do
+        end if
+      else
+        exit do
+      end if
+    end if
+  loop  ' This is the end of the loop to go through the Variable sheet
   dkeys = dictChange.keys
   iChangeID = 1
   for each dkey in dkeys

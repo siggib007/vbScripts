@@ -387,17 +387,13 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol
   strDevListParts = split(strDevlist,vbcrlf)
   strChangeLines  = split(strChange,vbcrlf)
   strVarCol = ""
-  objLogOut.writeline "in CreateCSVs, checking change ID " & iChangeID
   for x = 0 to ubound(strChangeLines)
-    objLogOut.writeline "checking for variable in " & strChangeLines(x)
     iStartPos = instr (1,strChangeLines(x),"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
     if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
       iStopPos = instr (iStartPos+1,strChangeLines(x),"$",vbTextCompare) ' Locate the end of the variable name.
       strACLVar = mid(strChangeLines(x),iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
-      objLogOut.writeline "found variable: " & strACLVar
       if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
         strVarCol = strVarCol & dictVars(strACLVar) & ","
-        objLogOut.writeline "it's in column " & dictVars(strACLVar)
       end if ' end if variable exists
     end if
   next
@@ -410,9 +406,7 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol
     End If
     iRow = iRow + 1
   loop
-  objLogOut.writeline "strVarCol:" & strVarCol
   iVarColList = split(strVarCol,",")
-  objLogOut.writeline "contains " & ubound(iVarColList) & " elements"
   objHPNAout.write wsVars.Cells(1,1).value
   objHPNAout.write "," & wsVars.Cells(1,2).value
   for x=0 to ubound(iVarColList)
@@ -438,7 +432,7 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol
     next
     objHPNAout.writeline
   next
-End Sub
+End Sub ' End of CreateCSVs Sub
 
 Sub CleanUp()
 '-------------------------------------------------------------------------------------------------'

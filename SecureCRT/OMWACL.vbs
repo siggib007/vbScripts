@@ -335,7 +335,7 @@ Sub main
     end if
 
     if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
-    if (iError = 1 or iError > MaxError) and iFailed = 0 then
+    if (iError = 1 or iError > MaxError) then
       iVarRow = iVarRow + 1
       if strNoMatch = "" and strMissing = "" and strNotes = "" then
         strNotes = "Good"
@@ -406,13 +406,15 @@ Sub CreateCSVs (strDevlist, strChange, iChangeID)
 ' all the CSV files to be used by both HPNA and PIER to push out those changes.                   '
 '-------------------------------------------------------------------------------------------------'
 dim strDevListParts, strChangeLines, x, y, strVarCol, dictDevices, iRow, iVarColList, objHPNAout
-dim iStartPos, iStopPos, strACLVar, strColHead, iCol
+dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout
 
   set objHPNAout = CreateFile(strMOPPath & "HPNAVars-Change" & iChangeID & ".csv")
+  set objPIERout = CreateFile(strMOPPath & "PIERDuplicate-Change" & iChangeID & ".csv")
   Set dictDevices = CreateObject("Scripting.Dictionary")
   strDevListParts = split(strDevlist,vbcrlf)
   strChangeLines  = split(strChange,vbcrlf)
   strVarCol = ""
+  objPIERout.writeline "CR_Id,TaskOrder_to_Duplicate,Config_Item,Copy_Attachment,Copy_Manual_Approver,Copy_Assignee,Copy_Schedules"
   for x = 0 to ubound(strChangeLines)
     iStartPos = instr (1,strChangeLines(x),"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
     if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
@@ -450,6 +452,7 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol
     end if
     objHPNAout.write wsVars.Cells(iRow,1).value
     objHPNAout.write "," & wsVars.Cells(iRow,2).value
+    objPIERout.writeline ",," & wsVars.Cells(iRow,2).value & ",No,Yes,Yes,No"
     for y=0 to ubound(iVarColList)
       if IsNumeric(iVarColList(y)) then
         iCol = cint(iVarColList(y))
@@ -458,6 +461,12 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol
     next
     objHPNAout.writeline
   next
+  objHPNAout.Close
+  objPIERout.Close
+  set objHPNAout = Nothing
+  set objPIERout = Nothing
+  Set dictDevices = Nothing
+
 End Sub ' End of CreateCSVs Sub
 
 Sub CleanUp()

@@ -48,7 +48,7 @@ Option Explicit
   Const IDYES = 6             ' Yes button clicked
   Const IDNO = 7              ' No button clicked
 
-  Dim dictNames, dictVars, dictACLs, dictACLVarNames, dictChange, dictDevAffected, dictFailed
+  Dim dictVars, dictACLs, dictChange, dictDevAffected, dictFailed
   Dim app, objShell, fso, objFileOut, objLogOut, objACLGen, objChangeOut, wsNames, wsVars, wsACL, wbin
   Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, strMOPPath, strWBin
 
@@ -91,10 +91,8 @@ Sub main
   strlogFile = left (strWBin, InStrRev (strWBin,".")-1)&"-log.txt"
 
   ' Creating some dictionaries
-  Set dictNames       = CreateObject("Scripting.Dictionary")
   Set dictVars        = CreateObject("Scripting.Dictionary")
   Set dictACLs        = CreateObject("Scripting.Dictionary")
-  Set dictACLVarNames = CreateObject("Scripting.Dictionary")
   Set dictChange      = CreateObject("Scripting.Dictionary")
   Set dictDevAffected = CreateObject("Scripting.Dictionary")
   Set dictFailed      = CreateObject("Scripting.Dictionary")
@@ -115,22 +113,6 @@ Sub main
   objLogOut.writeline "Starting at " & now()
   objFileOut.writeline "primaryIPAddress,hostName,ACL Name, comment"
   app.visible = ExcelVisible
-
-  ' Grab all the ACL names and stick them in a dictionary, store the Abriviated ID, the Actual ACL and the variable name if applcible.
-  iNameRow = 4
-  dictNames.removeall
-  dictACLVarNames.removeall
-  Do
-  	If wsNames.Cells(iNameRow,1).Value = "" Then Exit Do
-  	If not dictNames.Exists(wsNames.Cells(iNameRow,1).value) then
-  		dictNames.Add wsNames.Cells(iNameRow,1).value, wsNames.Cells(iNameRow,2).value
-  	End If
-    If not dictACLVarNames.Exists(wsNames.Cells(iNameRow,1).value) then
-      dictACLVarNames.Add wsNames.Cells(iNameRow,1).value, wsNames.Cells(iNameRow,3).value
-    End If
-  	iNameRow = iNameRow + 1
-  loop
-
 
   ' Grab the column headers of the variable sheet and stick them into a dictionary.
   iVarCol=1
@@ -159,40 +141,6 @@ Sub main
   if not fso.FolderExists(strMOPPath) then
     CreatePath (strMOPPath)
     objLogOut.writeline """" & strMOPPath & """ did not exists so I created it"
-  end if
-
-  ' For testing and dev purpose, focus on a single ACL from ACL Name sheet. Looping throught them all comes later.
-  iNameRow = 4
-  strACLID = wsNames.Cells(iNameRow,1).value
-  strACLName = wsNames.Cells(iNameRow,2).value
-  strACLNameVar = wsNames.Cells(iNameRow,3).value
-  strIPVer = "ipv4"
-  dictDevAffected.RemoveAll
-  dictFailed.RemoveAll
-
-  ' Setup the output paths to be ACL specific
-  ' First Folder for the Generated ACL's
-  strGenOutPath = strOutPath & strACLName & "-Gen\"
-  if not fso.FolderExists(strGenOutPath) then
-    CreatePath (strGenOutPath)
-    objLogOut.writeline """" & strGenOutPath & """ did not exists so I created it"
-  end if
-
-  ' Then a folder for the ACL's we grab from the router
-  strAsIsOutPath = strOutPath & strACLName & "-AsIs\"
-  if not fso.FolderExists(strAsIsOutPath) then
-    CreatePath (strAsIsOutPath)
-    objLogOut.writeline """" & strAsIsOutPath & """ did not exists so I created it"
-  end if
-
-  ' There should be column in the ACL sheet whose header is the same as the ACLID we're working on. Get that column number or report an issue and exit.
-  if dictACLs.Exists(strACLID) then
-    iACLCol = dictACLs(strACLID)
-  else
-    objLogOut.writeline "couldn't find " & strACLID & " in dictACLs :-("
-    msgbox "couldn't find " & strACLID & " in dictACLs, exiting :-("
-    CleanUp
-    exit sub
   end if
 
   ' Get the column number for the Router IP address in the Variable sheet, report an error and exit if can't be deteremined.
@@ -226,160 +174,198 @@ Sub main
       iError = 1 ' Ensure the error counter is set back to 1, which is default and means no error.
     end if
 
-    ' If this ACL has variability in the name find the column number in the variable sheet.
-    if strACLNameVar <> "" then
-      if dictVars.Exists(strACLNameVar) then
-        strACLName = wsVars.Cells(iVarRow,dictVars(strACLNameVar)).value
+    ' For testing and dev purpose, focus on a single ACL from ACL Name sheet. Looping throught them all comes later.
+    iNameRow = 4
+    do
+      strACLID = wsNames.Cells(iNameRow,1).value
+      strACLName = wsNames.Cells(iNameRow,2).value
+      strACLNameVar = wsNames.Cells(iNameRow,3).value
+      strIPVer = wsNames.Cells(iNameRow,4).value
+      dictDevAffected.RemoveAll
+      dictFailed.RemoveAll
+
+      ' Setup the output paths to be ACL specific
+      ' First Folder for the Generated ACL's
+      strGenOutPath = strOutPath & strACLName & "-Gen\"
+      if not fso.FolderExists(strGenOutPath) then
+        CreatePath (strGenOutPath)
+        objLogOut.writeline """" & strGenOutPath & """ did not exists so I created it"
       end if
-      strChange  = strIPVer & " access-list $" & strACLNameVar & "$" &vbcrlf
-    else
-      strChange  = strIPVer & " access-list " & strACLName & vbcrlf
-    end if
-    objLogOut.writeline "Starting on router " & strHostname & " with ACL " & strACLName ' Log that we are about to log into a router.
 
-    strNotes   = ""
-    strNoMatch = ""
-    strMissing = ""
-    bRange     = False
-    iLastLine  = 0
+      ' Then a folder for the ACL's we grab from the router
+      strAsIsOutPath = strOutPath & strACLName & "-AsIs\"
+      if not fso.FolderExists(strAsIsOutPath) then
+        CreatePath (strAsIsOutPath)
+        objLogOut.writeline """" & strAsIsOutPath & """ did not exists so I created it"
+      end if
 
-    strResultParts = GetAsIsACL(strIPVer, strACLName, strHostname, iError)
-    if isArray(strResultParts) then
-      iError = 1
-    else
-      strNotes = "Failed to connect "
-      if IsNumeric(strResultParts) then
-        iError = strResultParts
-        if not dictFailed.Exists(strHostname) then dictFailed.add strHostname,iVarRow
+      ' There should be column in the ACL sheet whose header is the same as the ACLID we're working on. Get that column number or report an issue and exit.
+      if dictACLs.Exists(strACLID) then
+        iACLCol = dictACLs(strACLID)
       else
-        objLogOut.writeline "GetAsIsACL returned neither array nor a number, this shouldn't happen so I'm quitting. I got back: " & strResultParts
-        exit Sub
+        objLogOut.writeline "couldn't find " & strACLID & " in dictACLs :-("
+        msgbox "couldn't find " & strACLID & " in dictACLs, exiting :-("
+        CleanUp
+        exit sub
       end if
-    end if
-    strTempOut = ""
-    iACLRow=2
-    iResult=1
-    if iError = 1 then ' If there has been no connection errors, analyse the results.
-      set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
-      do
-        bComp = False
-        if wsACL.Cells(iACLRow,iACLCol).value <> "" then ' Is current ACL standard line non-blank.
-          iStartPos = instr (1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
-          if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
-            iStopPos = instr (iStartPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Locate the end of the variable name.
-            strACLVar = mid(wsACL.Cells(iACLRow,1).value,iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
-            if strACLVar = "ACLName" then ' If the variable is "ACLName" then substitute it with the actual ACL Name
-              strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName)
-              objACLGen.writeline strTempOut
-              bComp = True
-            end if ' End if the Variable is ACLName.
 
-            if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
-              iVarCol = dictVars(strACLVar)
-              if wsVars.Cells(iVarRow, iVarCol) <> "" then ' If the varible value is not an empty string do the substitution and write the generate ACL line to file.
-                strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$"&strACLVar&"$",wsVars.Cells(iVarRow, iVarCol))
+      ' If this ACL has variability in the name find the column number in the variable sheet.
+      if strACLNameVar <> "" then
+        if dictVars.Exists(strACLNameVar) then
+          strACLName = wsVars.Cells(iVarRow,dictVars(strACLNameVar)).value
+        end if
+        strChange  = strIPVer & " access-list $" & strACLNameVar & "$" &vbcrlf
+      else
+        strChange  = strIPVer & " access-list " & strACLName & vbcrlf
+      end if
+      objLogOut.writeline "Starting on router " & strHostname & " with ACL " & strACLName ' Log that we are about to log into a router.
+
+      strNotes   = ""
+      strNoMatch = ""
+      strMissing = ""
+      bRange     = False
+      iLastLine  = 0
+
+      strResultParts = GetAsIsACL(strIPVer, strACLName, strHostname, iError)
+      if isArray(strResultParts) then
+        iError = 1
+        if dictFailed.Exists(strHostname) then dictFailed.remove(strHostname)
+      else
+        strNotes = "Failed to connect "
+        if IsNumeric(strResultParts) then
+          iError = strResultParts
+          if not dictFailed.Exists(strHostname) then dictFailed.add strHostname,iVarRow
+        else
+          objLogOut.writeline "GetAsIsACL returned neither array nor a number, this shouldn't happen so I'm quitting. I got back: " & strResultParts
+          exit Sub
+        end if
+      end if
+      strTempOut = ""
+      iACLRow=2
+      iResult=1
+      if iError = 1 then ' If there has been no connection errors, analyse the results.
+        set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
+        do
+          bComp = False
+          if wsACL.Cells(iACLRow,iACLCol).value <> "" then ' Is current ACL standard line non-blank.
+            iStartPos = instr (1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
+            if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
+              iStopPos = instr (iStartPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Locate the end of the variable name.
+              strACLVar = mid(wsACL.Cells(iACLRow,1).value,iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
+              if strACLVar = "ACLName" then ' If the variable is "ACLName" then substitute it with the actual ACL Name
+                strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName)
                 objACLGen.writeline strTempOut
                 bComp = True
-              end if ' End if Variable is not empty string.
-            end if ' end if variable exists
-          else ' If the current line has no variables, just write it to the file.
-            strTempOut = wsACL.Cells(iACLRow,1).value
-            objACLGen.writeline strTempOut
-            bComp = True
-          end if ' End if analyzing the current line of the ACL standard.
-          if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
-            iGSeq = trim(left(strTempOut,instr(1,trim(strTempOut)," ",vbTextCompare))) ' Grab the sequence number of the generated ACL line we're looking at
-            iASeq = trim(left(strResultParts(iResult),instr(1,trim(strResultParts(iResult))," ",vbTextCompare))) ' Grab the sequence number of the router ACL line we're looking at
-            if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-              if iGSeq > iASeq Then
-                objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
-                strMissing = strMissing & iResult & "(only on router) "
-                bRange = False
-                strChange = strChange & "no " & iASeq & vbcrlf
-              end if
-              if iGSeq < iASeq Then
-                objLogOut.writeline "Line " & iResult & ": This standard line missing from router: " & strTempOut
-                strMissing = strMissing & iResult & "(missing from router) "
-                bRange = False
-                strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
-              end if
-              if iGSeq = iASeq then ' If seqences match report the lines don't match
-                if iLastLine > 0 and iLastLine + 1 = iResult Then ' If last line didn't match
-                  bRange = True
-                else
-                  if bRange = True Then
-                    strNoMatch = trim(strNoMatch) & "-" & iLastLine & " " & iResult & " "
-                  else
-                    strNoMatch = strNoMatch & iResult & " "
-                  end if ' end if in a range
-                  bRange = False
-                end if ' end if last line didn't match.
-                objLogOut.writeline strHostname & " " & strACLName & " no matchy on line " & iResult
-                objLogOut.writeline " Gen: " & strTempOut
-                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
-                objLogOut.writeline "--------------------------------"
-                strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
-              end if ' end if seqences match
-              iLastLine = iResult
-            end if ' End if generated and AsIs are different.
-            ' If there are lines left in the captured ACL and router ACL sequence is lower or equal move on to the next line.
-            if iResult < ubound(strResultParts) and iGSeq >= iASeq then iResult = iResult + 1
-          end if ' End If ACL is applicable
-        end if ' end Is current ACL standard line non-blank.
-        if iGSeq <= iASeq then iACLRow = iACLRow + 1 ' Move down line in the ACL sheet if we are in sync or we are too low
-      loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
-      objACLGen.Close
-    end if ' End of checking for error prior to analysis
-    if bRange = True then
-      strNoMatch = trim(strNoMatch) & "-" & iLastLine
-    end if
+              end if ' End if the Variable is ACLName.
 
-    if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
-    if (iError = 1 or iError > MaxError) then
-      iVarRow = iVarRow + 1
-      if strNoMatch = "" and strMissing = "" and strNotes = "" then
-        strNotes = "Good"
-      else
-        if strNotes <> "Failed to connect " then
-          ' if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
-          ' if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side: " & trim(strMissing) & ";"
-          if strNoMatch <> "" or strMissing <> "" then strNotes = strNotes & "Updates required"
-          bNewChange = True
-          if dictChange.Exists(strChange) then
-            bNewChange = False
-            if not dictDevAffected.Exists(strHostname) then
-              dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname
-              dictDevAffected.add strHostname,""
+              if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
+                iVarCol = dictVars(strACLVar)
+                if wsVars.Cells(iVarRow, iVarCol) <> "" then ' If the varible value is not an empty string do the substitution and write the generate ACL line to file.
+                  strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$"&strACLVar&"$",wsVars.Cells(iVarRow, iVarCol))
+                  objACLGen.writeline strTempOut
+                  bComp = True
+                end if ' End if Variable is not empty string.
+              end if ' end if variable exists
+            else ' If the current line has no variables, just write it to the file.
+              strTempOut = wsACL.Cells(iACLRow,1).value
+              objACLGen.writeline strTempOut
+              bComp = True
+            end if ' End if analyzing the current line of the ACL standard.
+            if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
+              iGSeq = trim(left(strTempOut,instr(1,trim(strTempOut)," ",vbTextCompare))) ' Grab the sequence number of the generated ACL line we're looking at
+              iASeq = trim(left(strResultParts(iResult),instr(1,trim(strResultParts(iResult))," ",vbTextCompare))) ' Grab the sequence number of the router ACL line we're looking at
+              if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
+                if iGSeq > iASeq Then
+                  objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
+                  strMissing = strMissing & iResult & "(only on router) "
+                  bRange = False
+                  strChange = strChange & "no " & iASeq & vbcrlf
+                end if
+                if iGSeq < iASeq Then
+                  objLogOut.writeline "Line " & iResult & ": This standard line missing from router: " & strTempOut
+                  strMissing = strMissing & iResult & "(missing from router) "
+                  bRange = False
+                  strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
+                end if
+                if iGSeq = iASeq then ' If seqences match report the lines don't match
+                  if iLastLine > 0 and iLastLine + 1 = iResult Then ' If last line didn't match
+                    bRange = True
+                  else
+                    if bRange = True Then
+                      strNoMatch = trim(strNoMatch) & "-" & iLastLine & " " & iResult & " "
+                    else
+                      strNoMatch = strNoMatch & iResult & " "
+                    end if ' end if in a range
+                    bRange = False
+                  end if ' end if last line didn't match.
+                  objLogOut.writeline strHostname & " " & strACLName & " no matchy on line " & iResult
+                  objLogOut.writeline " Gen: " & strTempOut
+                  objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
+                  objLogOut.writeline "--------------------------------"
+                  strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
+                end if ' end if seqences match
+                iLastLine = iResult
+              end if ' End if generated and AsIs are different.
+              ' If there are lines left in the captured ACL and router ACL sequence is lower or equal move on to the next line.
+              if iResult < ubound(strResultParts) and iGSeq >= iASeq then iResult = iResult + 1
+            end if ' End If ACL is applicable
+          end if ' end Is current ACL standard line non-blank.
+          if iGSeq <= iASeq then iACLRow = iACLRow + 1 ' Move down line in the ACL sheet if we are in sync or we are too low
+        loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
+        objACLGen.Close
+      end if ' End of checking for error prior to analysis
+      if bRange = True then
+        strNoMatch = trim(strNoMatch) & "-" & iLastLine
+      end if
+
+      if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
+      if (iError = 1 or iError > MaxError) then
+        iVarRow = iVarRow + 1
+        if strNoMatch = "" and strMissing = "" and strNotes = "" then
+          strNotes = "Good"
+        else
+          if strNotes <> "Failed to connect " then
+            ' if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
+            ' if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side: " & trim(strMissing) & ";"
+            if strNoMatch <> "" or strMissing <> "" then strNotes = strNotes & "Updates required"
+            bNewChange = True
+            if dictChange.Exists(strChange) then
+              bNewChange = False
+              if not dictDevAffected.Exists(strHostname) then
+                dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname
+                dictDevAffected.add strHostname,""
+              end if
+            else
+              dictChange.add strChange,strHostname
             end if
-          else
-            dictChange.add strChange,strHostname
           end if
         end if
+        objFileOut.writeline strIPAddr & "," & strHostname & "," & strACLName & "," & strNotes
       end if
-      objFileOut.writeline strIPAddr & "," & strHostname & "," & strACLName & "," & strNotes
-    end if
-    if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
-      if dictFailed.count > 0 then
-        if iFailed = 0 then
-          objLogOut.writeline "There are " & dictFailed.count & " devices I couldn't connect to. Here is the list:"
-          dkeys = dictFailed.keys
-          for each dkey in dkeys
-            objLogOut.writeline dkey & " on line " & dictFailed(dkey)
-          next
-          objLogOut.writeline "Going to retry those one more time"
-          dItems = dictFailed.items
-        end if
-        if iFailed = dictFailed.count then exit do
-        iVarRow = dItems(iFailed)
-        if iFailed < dictFailed.count then
-          iFailed = iFailed + 1
+      if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
+        if dictFailed.count > 0 then
+          if iFailed = 0 then
+            objLogOut.writeline "There are " & dictFailed.count & " devices I couldn't connect to. Here is the list:"
+            dkeys = dictFailed.keys
+            for each dkey in dkeys
+              objLogOut.writeline dkey & " on line " & dictFailed(dkey)
+            next
+            objLogOut.writeline "Going to retry those one more time"
+            dItems = dictFailed.items
+          end if
+          if iFailed = dictFailed.count then exit do
+          iVarRow = dItems(iFailed)
+          if iFailed < dictFailed.count then
+            iFailed = iFailed + 1
+          else
+            exit do
+          end if
         else
           exit do
         end if
-      else
-        exit do
       end if
-    end if
+      iNameRow = iNameRow + 1
+    loop until wsNames.Cells(iNameRow,1).value = ""
   loop  ' This is the end of the loop to go through the Variable sheet
   dkeys = dictChange.keys
   iChangeID = 1

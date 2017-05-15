@@ -235,8 +235,10 @@ Sub main
       if isArray(strResultParts) then
         iError = 1
         if dictFailed.Exists(strHostname) then dictFailed.remove(strHostname)
+        objLogOut.writeline "connected to " & strHostname
       else
         strNotes = "Failed to connect "
+        objLogOut.writeline "Failed to connect to " & strHostname
         if IsNumeric(strResultParts) then
           iError = strResultParts
           if not dictFailed.Exists(strHostname) then dictFailed.add strHostname,iVarRow
@@ -260,8 +262,8 @@ Sub main
               if strACLVar = "ACLName" then ' If the variable is "ACLName" then substitute it with the actual ACL Name
                 strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName)
                 objACLGen.writeline strTempOut
-                bComp = True
                 bOut = True
+                bComp = True
               end if ' End if the Variable is ACLName.
 
               if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
@@ -269,29 +271,31 @@ Sub main
                 if wsVars.Cells(iVarRow, iVarCol) <> "" and bOut = False then ' If the varible value is not an empty string do the substitution and write the generate ACL line to file.
                   strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$" & strACLVar & "$",wsVars.Cells(iVarRow, iVarCol))
                   objACLGen.writeline strTempOut
-                  bComp = True
                   bOut = True
                 end if ' End if Variable is not empty string.
+                bComp = True
               end if ' end if variable exists
             else ' If the current line has no variables, just write it to the file.
               if bOut = False then
                 strTempOut = wsACL.Cells(iACLRow,1).value
                 objACLGen.writeline strTempOut
-                bComp = True
                 bOut = True
               end if
+              bComp = True
             end if ' End if analyzing the current line of the ACL standard.
-            ' objLogOut.writeline "bComp:" & bComp
-            ' objLogOut.writeline "iACLRow" & iACLRow & "; strTempOut:" & strTempOut
-            ' objLogOut.writeline "strResultParts(" & iResult & "):" & strResultParts(iResult)
+            objLogOut.writeline "bComp:" & bComp
+            objLogOut.writeline "iACLRow-" & iACLRow & "; strTempOut:" & strTempOut
+            objLogOut.writeline "strResultParts(" & iResult & "):" & strResultParts(iResult)
             if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
               ' Grab the sequence number of the generated ACL line we're looking at
               iTemp = GetSeq(strTempOut)
+              objLogOut.writeline "iTemp Gen:" & iTemp
               if iTemp > 0 then iGSeq = iTemp
               iTemp = GetSeq(strResultParts(iResult))
+              objLogOut.writeline "iTemp AsIs:" & iTemp
               if iTemp > 0 then iASeq = iTemp
-              ' objLogOut.writeline "iGSeq:" & iGSeq & " is a number: " & IsNumeric(iGSeq)
-              ' objLogOut.writeline "iASeq:" & iASeq & " is a number: " & IsNumeric(iASeq)
+              objLogOut.writeline "iGSeq:" & iGSeq & " is a number: " & IsNumeric(iGSeq)
+              objLogOut.writeline "iASeq:" & iASeq & " is a number: " & IsNumeric(iASeq)
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
                 objLogOut.writeline "iGSeq:" & iGSeq & " iASeq:" & iASeq '& " Same? " & iGSeq = iASeq
                 objLogOut.writeline " Gen: " & strTempOut
@@ -329,10 +333,12 @@ Sub main
               end if ' End if generated and AsIs are different.
               ' If there are lines left in the captured ACL and router ACL sequence is lower or equal move on to the next line.
               if iResult < ubound(strResultParts) then
+                objLogOut.writeline "iResult=" & iResult & " < ubound(strResultParts)"
                 if iGSeq >= iASeq then iResult = iResult + 1
+                objLogOut.writeline "iResult now " & iResult
               else
-                ' objLogOut.writeline "strTempOut:" & strTempOut
-                ' objLogOut.writeline "strResultParts(" & iResult & "):" & strResultParts(iResult)
+                objLogOut.writeline "Not iResult < ubound(strResultParts). strTempOut:" & strTempOut
+                objLogOut.writeline "strResultParts(" & iResult & "):" & strResultParts(iResult)
                 exit do
               end if
             end if ' End If ACL is applicable
@@ -340,6 +346,9 @@ Sub main
           if iGSeq <= iASeq then
             iACLRow = iACLRow + 1 ' Move down line in the ACL sheet if we are in sync or we are too low
             bOut = False
+            objLogOut.writeline "moving on to next iACLRow"
+          else
+            objLogOut.writeline "iGSeq:" & iGSeq & " > " & " iASeq:" & iASeq
           end if
         loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
         objACLGen.Close
@@ -399,6 +408,14 @@ Sub main
   loop  ' This is the end of the loop to go through the Variable sheet
   dkeys = dictChange.keys
   iChangeID = 1
+  ' dictDevAffected.RemoveAll
+  ' for each dkey in dkeys
+  '   if dictDevAffected.Exists(dictChange.item(dkey)) then
+
+  '   else
+  '     dictDevAffected.add
+  '   end if
+  ' next
   for each dkey in dkeys
     set objChangeOut = CreateFile(strMOPPath & "HPNAScript-Change" & iChangeID & ".txt")
     objChangeOut.writeline "************ Devices Affected ************" & vbcrlf & dictChange.item(dkey) & vbcrlf & "******************************************"

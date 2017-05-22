@@ -176,7 +176,6 @@ Sub main
     if wsVars.Cells(iVarRow,iHostCol).value = "" then exit do
 
 
-    ' For testing and dev purpose, focus on a single ACL from ACL Name sheet. Looping throught them all comes later.
     iNameRow = 4
     do
       strACLID = wsNames.Cells(iNameRow,1).value
@@ -283,23 +282,13 @@ Sub main
               end if
               bComp = True
             end if ' End if analyzing the current line of the ACL standard.
-            objLogOut.writeline "bComp:" & bComp
-            objLogOut.writeline "iACLRow-" & iACLRow & "; strTempOut:" & strTempOut
-            objLogOut.writeline "strResultParts(" & iResult & "):" & strResultParts(iResult)
             if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
               ' Grab the sequence number of the generated ACL line we're looking at
               iTemp = GetSeq(strTempOut)
-              objLogOut.writeline "iTemp Gen:" & iTemp
               if iTemp > 0 then iGSeq = iTemp
               iTemp = GetSeq(strResultParts(iResult))
-              objLogOut.writeline "iTemp AsIs:" & iTemp
               if iTemp > 0 then iASeq = iTemp
-              objLogOut.writeline "iGSeq:" & iGSeq & " is a number: " & IsNumeric(iGSeq)
-              objLogOut.writeline "iASeq:" & iASeq & " is a number: " & IsNumeric(iASeq)
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-                objLogOut.writeline "iGSeq:" & iGSeq & " iASeq:" & iASeq '& " Same? " & iGSeq = iASeq
-                objLogOut.writeline " Gen: " & strTempOut
-                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
                 if iGSeq > iASeq Then
                   objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
                   strMissing = strMissing & iResult & "(only on router) "
@@ -333,12 +322,8 @@ Sub main
               end if ' End if generated and AsIs are different.
               ' If there are lines left in the captured ACL and router ACL sequence is lower or equal move on to the next line.
               if iResult < ubound(strResultParts) then
-                objLogOut.writeline "iResult=" & iResult & " < ubound(strResultParts)"
                 if iGSeq >= iASeq then iResult = iResult + 1
-                objLogOut.writeline "iResult now " & iResult
               else
-                objLogOut.writeline "Not iResult < ubound(strResultParts). strTempOut:" & strTempOut
-                objLogOut.writeline "strResultParts(" & iResult & "):" & strResultParts(iResult)
                 exit do
               end if
             end if ' End If ACL is applicable
@@ -346,9 +331,6 @@ Sub main
           if iGSeq <= iASeq then
             iACLRow = iACLRow + 1 ' Move down line in the ACL sheet if we are in sync or we are too low
             bOut = False
-            objLogOut.writeline "moving on to next iACLRow"
-          else
-            objLogOut.writeline "iGSeq:" & iGSeq & " > " & " iASeq:" & iASeq
           end if
         loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
         objACLGen.Close
@@ -364,8 +346,6 @@ Sub main
           strNotes = "Good"
         else
           if strNotes <> "Failed to connect " then
-            ' if strNoMatch <> "" then strNotes = trim(strNotes) & " " & "Lines " & trim(strNoMatch) & " Don't match; "
-            ' if strMissing <> "" then strNotes = trim(strNotes) & " " & "These lines are only on one side: " & trim(strMissing) & ";"
             if strNoMatch <> "" or strMissing <> "" then strNotes = strNotes & "Updates required"
             bNewChange = True
             if dictChange.Exists(strChange) then
@@ -408,14 +388,6 @@ Sub main
   loop  ' This is the end of the loop to go through the Variable sheet
   dkeys = dictChange.keys
   iChangeID = 1
-  ' dictDevAffected.RemoveAll
-  ' for each dkey in dkeys
-  '   if dictDevAffected.Exists(dictChange.item(dkey)) then
-
-  '   else
-  '     dictDevAffected.add
-  '   end if
-  ' next
   for each dkey in dkeys
     set objChangeOut = CreateFile(strMOPPath & "HPNAScript-Change" & iChangeID & ".txt")
     objChangeOut.writeline "************ Devices Affected ************" & vbcrlf & dictChange.item(dkey) & vbcrlf & "******************************************"

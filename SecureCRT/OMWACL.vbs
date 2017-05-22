@@ -289,6 +289,9 @@ Sub main
               iTemp = GetSeq(strResultParts(iResult))
               if iTemp > 0 then iASeq = iTemp
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
+                objLogOut.writeline "iGSeq:" & iGSeq & " iASeq:" & iASeq '& " Same? " & iGSeq = iASeq
+                objLogOut.writeline " Gen: " & strTempOut
+                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
                 if iGSeq > iASeq Then
                   objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
                   strMissing = strMissing & iResult & "(only on router) "

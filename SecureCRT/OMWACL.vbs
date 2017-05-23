@@ -263,7 +263,7 @@ Sub main
               iStopPos = instr (iStartPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Locate the end of the variable name.
               strACLVar = mid(wsACL.Cells(iACLRow,1).value,iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
               if strACLVar = "ACLName" then ' If the variable is "ACLName" then substitute it with the actual ACL Name
-                strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName)
+                strTempOut = trim(replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName))
                 objACLGen.writeline strTempOut
                 bOut = True
                 bComp = True
@@ -274,7 +274,7 @@ Sub main
               if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
                 iVarCol = dictVars(strACLVar)
                 if wsVars.Cells(iVarRow, iVarCol) <> "" and bOut = False then ' If the varible value is not an empty string do the substitution and write the generate ACL line to file.
-                  strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$" & strACLVar & "$",wsVars.Cells(iVarRow, iVarCol))
+                  strTempOut = trim(replace(wsACL.Cells(iACLRow,1).value,"$" & strACLVar & "$",wsVars.Cells(iVarRow, iVarCol)))
                   objACLGen.writeline strTempOut
                   bOut = True
                   bComp = True
@@ -284,7 +284,7 @@ Sub main
               end if ' end if variable exists
             else ' If the current line has no variables, just write it to the file.
               if bOut = False then
-                strTempOut = wsACL.Cells(iACLRow,1).value
+                strTempOut = trim(wsACL.Cells(iACLRow,1).value)
                 objACLGen.writeline strTempOut
                 bOut = True
                 bComp = True

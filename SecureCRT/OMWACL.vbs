@@ -252,7 +252,7 @@ Sub main
       if iError = 1 then ' If there has been no connection errors, analyse the results.
         set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
         do
-          bComp = False
+          ' bComp = False
           if wsACL.Cells(iACLRow,iACLCol).value <> "" then ' Is current ACL standard line non-blank.
             iStartPos = instr (1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
             if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
@@ -263,6 +263,8 @@ Sub main
                 objACLGen.writeline strTempOut
                 bOut = True
                 bComp = True
+              else
+                bComp = False
               end if ' End if the Variable is ACLName.
 
               if dictVars.Exists(strACLVar) then ' If the variable we found exists in the variable sheet.
@@ -271,27 +273,30 @@ Sub main
                   strTempOut = replace(wsACL.Cells(iACLRow,1).value,"$" & strACLVar & "$",wsVars.Cells(iVarRow, iVarCol))
                   objACLGen.writeline strTempOut
                   bOut = True
+                  bComp = True
+                else
+                  bComp = False
                 end if ' End if Variable is not empty string.
-                bComp = True
               end if ' end if variable exists
             else ' If the current line has no variables, just write it to the file.
               if bOut = False then
                 strTempOut = wsACL.Cells(iACLRow,1).value
                 objACLGen.writeline strTempOut
                 bOut = True
+                bComp = True
               end if
-              bComp = True
             end if ' End if analyzing the current line of the ACL standard.
+            ' objLogOut.writeline "bComp:" & bComp & " ACL Line:" & wsACL.Cells(iACLRow,1).value
             if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
               ' Grab the sequence number of the generated ACL line we're looking at
               iTemp = GetSeq(strTempOut)
               if iTemp > 0 then iGSeq = iTemp
               iTemp = GetSeq(strResultParts(iResult))
               if iTemp > 0 then iASeq = iTemp
+              ' objLogOut.writeline "iGSeq:" & iGSeq & " iASeq:" & iASeq & " iResult:" & iResult & " iACLRow:" & iACLRow
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-                objLogOut.writeline "iGSeq:" & iGSeq & " iASeq:" & iASeq '& " Same? " & iGSeq = iASeq
-                objLogOut.writeline " Gen: " & strTempOut
-                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
+                ' objLogOut.writeline " Gen: " & strTempOut
+                ' objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
                 if iGSeq > iASeq Then
                   objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
                   strMissing = strMissing & iResult & "(only on router) "

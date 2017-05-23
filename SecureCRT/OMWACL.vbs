@@ -234,7 +234,7 @@ Sub main
       if isArray(strResultParts) then
         iError = 1
         if dictFailed.Exists(strHostname) then dictFailed.remove(strHostname)
-        objLogOut.writeline "connected to " & strHostname
+        ' objLogOut.writeline "connected to " & strHostname
       else
         strNotes = "Failed to connect "
         objLogOut.writeline "Failed to connect to " & strHostname
@@ -250,6 +250,10 @@ Sub main
       iACLRow=2
       iResult=1
       if iError = 1 then ' If there has been no connection errors, analyse the results.
+        if left(trim(strResultParts(iResult)),1)="%" then
+         objLogOut.writeline "encountered error: " & strResultParts(iResult) & " moving on to next ACL"
+         exit do
+        end if
         set objACLGen = CreateFile(strGenOutPath & strHostname & "-" & strACLName & ".txt")
         do
           ' bComp = False
@@ -286,17 +290,13 @@ Sub main
                 bComp = True
               end if
             end if ' End if analyzing the current line of the ACL standard.
-            ' objLogOut.writeline "bComp:" & bComp & " ACL Line:" & wsACL.Cells(iACLRow,1).value
             if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
               ' Grab the sequence number of the generated ACL line we're looking at
               iTemp = GetSeq(strTempOut)
               if iTemp > 0 then iGSeq = iTemp
               iTemp = GetSeq(strResultParts(iResult))
               if iTemp > 0 then iASeq = iTemp
-              ' objLogOut.writeline "iGSeq:" & iGSeq & " iASeq:" & iASeq & " iResult:" & iResult & " iACLRow:" & iACLRow
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-                ' objLogOut.writeline " Gen: " & strTempOut
-                ' objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
                 if iGSeq > iASeq Then
                   objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
                   strMissing = strMissing & iResult & "(only on router) "
@@ -346,10 +346,8 @@ Sub main
       if bRange = True then
         strNoMatch = trim(strNoMatch) & "-" & iLastLine
       end if
-
-      if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
+      iNameRow = iNameRow + 1
       if (iError = 1 or iError > MaxError) then
-        iVarRow = iVarRow + 1
         if strNoMatch = "" and strMissing = "" and strNotes = "" then
           strNotes = "Good"
         else
@@ -369,30 +367,35 @@ Sub main
         end if
         objFileOut.writeline strIPAddr & "," & strHostname & "," & strACLName & "," & strNotes
       end if
-      if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
-        if dictFailed.count > 0 then
-          if iFailed = 0 then
-            objLogOut.writeline "There are " & dictFailed.count & " devices I couldn't connect to. Here is the list:"
-            dkeys = dictFailed.keys
-            for each dkey in dkeys
-              objLogOut.writeline dkey & " on line " & dictFailed(dkey)
-            next
-            objLogOut.writeline "Going to retry those one more time"
-            dItems = dictFailed.items
-          end if
-          if iFailed = dictFailed.count then exit do
-          iVarRow = dItems(iFailed)
-          if iFailed < dictFailed.count then
-            iFailed = iFailed + 1
-          else
-            exit do
-          end if
+    loop until wsNames.Cells(iNameRow,1).value = ""
+    ' objLogOut.writeline "iError:" & iError & " MaxError:" & MaxError & " iVarRow:" & iVarRow
+    if iError > MaxError then objLogOut.writeline "No connection after " & MaxError & " attempts, giving up and moving on."
+    if (iError = 1 or iError > MaxError) then
+      iVarRow = iVarRow + 1
+      objLogOut.writeline "iVarRow now:" & iVarRow
+    end if
+    if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
+      if dictFailed.count > 0 then
+        if iFailed = 0 then
+          objLogOut.writeline "There are " & dictFailed.count & " devices I couldn't connect to. Here is the list:"
+          dkeys = dictFailed.keys
+          for each dkey in dkeys
+            objLogOut.writeline dkey & " on line " & dictFailed(dkey)
+          next
+          objLogOut.writeline "Going to retry those one more time"
+          dItems = dictFailed.items
+        end if
+        if iFailed = dictFailed.count then exit do
+        iVarRow = dItems(iFailed)
+        if iFailed < dictFailed.count then
+          iFailed = iFailed + 1
         else
           exit do
         end if
+      else
+        exit do
       end if
-      iNameRow = iNameRow + 1
-    loop until wsNames.Cells(iNameRow,1).value = ""
+    end if
   loop  ' This is the end of the loop to go through the Variable sheet
   dkeys = dictChange.keys
   iChangeID = 1

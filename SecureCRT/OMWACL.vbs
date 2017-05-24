@@ -289,7 +289,7 @@ Sub main
                     objLogOut.writeline "translated it into: " & strTempOut
                   else ' Variable had no value, skipping.
                     bComp = False
-                    bOut = True
+                    bOut = False
                     objLogOut.writeline strACLVar & " has no value for " & strHostname & " " & strACLName
                   end if ' End if Variable is not empty string.
                 else

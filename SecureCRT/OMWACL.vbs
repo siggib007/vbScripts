@@ -11,10 +11,10 @@ Option Explicit
 
  ' User Spefified values, specify values here per your needs
 
-  Const AutoCloseResults = True
-  Const ExcelVisible     = True
-  const Timeout    = 5 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
-  const MaxError   = 5 ' If connection error occurs how often to retry
+  Const AutoCloseInput = True
+  Const ExcelVisible   = True
+  const Timeout        = 5 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
+  const MaxError       = 5 ' If connection error occurs how often to retry
 
  ' Nothing below here is user values, proceed with caution and at your own risk.
  ' File handling constants
@@ -227,8 +227,7 @@ Sub main
       strNotes   = ""
       strNoMatch = ""
       strMissing = ""
-      ' bRange     = False
-      ' iLastLine  = 0
+
       iGSeq = 0
       iASeq = 0
       bOut = False
@@ -262,18 +261,18 @@ Sub main
         do
           ' bComp = False
           if wsACL.Cells(iACLRow,iACLCol).value <> "" then ' Is current ACL standard line applicable to this ACL (X in the proper column)
-            objLogOut.writeline "Looking at standard ACL line " & iACLRow & ": " & wsACL.Cells(iACLRow,1).value & ", bComp:" & bComp & " bOut:" & bOut
+            ' objLogOut.writeline "Looking at standard ACL line " & iACLRow & ": " & wsACL.Cells(iACLRow,1).value & ", bComp:" & bComp & " bOut:" & bOut
             iStartPos = instr (1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
             if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
               iStopPos = instr (iStartPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Locate the end of the variable name.
               strACLVar = mid(wsACL.Cells(iACLRow,1).value,iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
-              objLogOut.writeline "Parsed out ACL Variable: " & strACLVar
+              ' objLogOut.writeline "Parsed out ACL Variable: " & strACLVar
               if strACLVar = "ACLName" then ' If the variable is "ACLName" then substitute it with the actual ACL Name
                 strTempOut = trim(replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName))
                 objACLGen.writeline strTempOut
                 bOut = True
                 bComp = True
-                objLogOut.writeline "Found ACLName"
+                ' objLogOut.writeline "Found ACLName"
               ' else
               '   bComp = False
               end if ' End if the Variable is ACLName.
@@ -286,17 +285,17 @@ Sub main
                     objACLGen.writeline strTempOut
                     bOut = True
                     bComp = True
-                    objLogOut.writeline "translated it into: " & strTempOut
+                    ' objLogOut.writeline "translated it into: " & strTempOut
                   else ' Variable had no value, skipping.
                     bComp = False
                     bOut = False
-                    objLogOut.writeline strACLVar & " has no value for " & strHostname & " " & strACLName
+                    ' objLogOut.writeline strACLVar & " has no value for " & strHostname & " " & strACLName
                   end if ' End if Variable is not empty string.
                 else
-                  objLogOut.writeline "been here before"
+                  ' objLogOut.writeline "been here before"
                 end if ' if processed before
               else
-                objLogOut.writeline "Error: Variable " & strACLVar & " not found in dictVars"
+                ' objLogOut.writeline "Error: Variable " & strACLVar & " not found in dictVars"
               end if ' end if variable exists
             else ' If the current line has no variables, just write it to the file.
               if bOut = False then ' Only process if not processed before.
@@ -304,16 +303,16 @@ Sub main
                 objACLGen.writeline strTempOut
                 bOut = True
                 bComp = True
-                objLogOut.writeline strTempOut & " has no variable"
+                ' objLogOut.writeline strTempOut & " has no variable"
               else
                 ' bComp = False
-                objLogOut.writeline "Line already processed"
+                ' objLogOut.writeline "Line already processed"
               end if ' if processed before
             end if ' End if analyzing the current line of the ACL standard.
-            objLogOut.writeline "Completed analyzing ACL Line, next compare"
-            objLogOut.writeline "Standard ACL line " & iACLRow & ": " & wsACL.Cells(iACLRow,1).value & ", bComp:" & bComp & " bOut:" & bOut
-            objLogOut.writeline "Router ACL Line " & iResult & ": " & strResultParts(iResult)
-            objLogOut.writeline "Old Seq. iGSeq:" & iGSeq & " iASeq:" & iASeq
+            ' objLogOut.writeline "Completed analyzing ACL Line, next compare"
+            ' objLogOut.writeline "Standard ACL line " & iACLRow & ": " & wsACL.Cells(iACLRow,1).value & ", bComp:" & bComp & " bOut:" & bOut
+            ' objLogOut.writeline "Router ACL Line " & iResult & ": " & strResultParts(iResult)
+            ' objLogOut.writeline "Old Seq. iGSeq:" & iGSeq & " iASeq:" & iASeq
             if bComp then ' If the ACL line was found applicable, compare the generated line with the same line in the ACL capture.
               ' Grab the sequence number of the generated ACL line we're looking at
               iTemp = GetSeq(strTempOut)
@@ -322,10 +321,10 @@ Sub main
               if iTemp > 0 then iASeq = iTemp
               objLogOut.writeline "New Seq. iGSeq:" & iGSeq & " iASeq:" & iASeq & " iResult:" & iResult & " iACLRow:" & iACLRow
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
-                objLogOut.writeline strHostname & " " & strACLName & " Not identical, analyzing how"
-                objLogOut.writeline " Gen: " & strTempOut
-                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
-                objLogOut.writeline "------------End different--------------------"
+                ' objLogOut.writeline strHostname & " " & strACLName & " Not identical, analyzing how"
+                ' objLogOut.writeline " Gen: " & strTempOut
+                ' objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
+                ' objLogOut.writeline "------------End different--------------------"
                 if iGSeq > iASeq Then
                   objLogOut.writeline "Line " & iResult & ": Extra line on router not in standard: " & trim(strResultParts(iResult))
                   strMissing = strMissing & iResult & "(only on router) "
@@ -339,45 +338,34 @@ Sub main
                   strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
                 end if
                 if iGSeq = iASeq then ' If seqences match report the lines don't match
-                  ' if iLastLine > 0 and iLastLine + 1 = iResult Then ' If last line didn't match
-                  '   bRange = True
-                  ' else
-                  '   if bRange = True Then
-                  '     strNoMatch = trim(strNoMatch) & "-" & iLastLine & " " & iResult & " "
-                  '   else
-                  '     strNoMatch = strNoMatch & iResult & " "
-                  '   end if ' end if in a range
-                  '   bRange = False
-                  ' end if ' end if last line didn't match.
                   objLogOut.writeline strHostname & " " & strACLName & " NO matchy on line with same Seq " & iResult
                   objLogOut.writeline " Gen: " & strTempOut
                   objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
                   objLogOut.writeline "------------End NO Match--------------------"
                   strChange = strChange & wsACL.Cells(iACLRow,1).value & vbcrlf
                 end if ' end if seqences match
-                ' iLastLine = iResult
               else
-                objLogOut.writeline strHostname & " " & strACLName & " matching on line " & iResult
-                objLogOut.writeline " Gen: " & strTempOut
-                objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
-                objLogOut.writeline "-------------End Match-------------------"
+                ' objLogOut.writeline strHostname & " " & strACLName & " matching on line " & iResult
+                ' objLogOut.writeline " Gen: " & strTempOut
+                ' objLogOut.writeline "AsIs: " & trim(strResultParts(iResult))
+                ' objLogOut.writeline "-------------End Match-------------------"
               end if ' End if generated and AsIs are different.
             end if ' End If ACL is applicable
           else ' This line isn't a part of this ACL
             bComp = False
-            objLogOut.writeline "Not this ACL"
+            ' objLogOut.writeline "Not this ACL"
           end if ' Is current ACL standard line applicable to this ACL (X in the proper column).
-          objLogOut.writeline "Next Line time: bComp:" & bComp & " bOut: " & bOut & " currently on iResult:" & iResult & " and iACLRow:" & iACLRow
+          ' objLogOut.writeline "Next Line time: bComp:" & bComp & " bOut: " & bOut & " currently on iResult:" & iResult & " and iACLRow:" & iACLRow
           if bComp = True or bOut = True then
             ' If there are lines left in the captured ACL and router ACL sequence is lower or equal move on to the next line.
-            objLogOut.writeline "iResult:" & iResult & " size:" & ubound(strResultParts)
+            ' objLogOut.writeline "iResult:" & iResult & " size:" & ubound(strResultParts)
             if iResult < ubound(strResultParts) then
               if iGSeq >= iASeq then iResult = iResult + 1
             else
-              objLogOut.writeline "Reached end of AsIs ACL"
+              ' objLogOut.writeline "Reached end of AsIs ACL"
               exit do
             end if
-            objLogOut.writeline "now iResult: " & iResult
+            ' objLogOut.writeline "now iResult: " & iResult
           end if
           if iGSeq <= iASeq then
             iACLRow = iACLRow + 1 ' Move down line in the ACL sheet if we are in sync or we are too low
@@ -385,11 +373,8 @@ Sub main
           end if
         loop until wsACL.Cells(iACLRow,1).Value = "" ' Unless the new line is blank, loop back and repeat.
         objACLGen.Close
-        objLogOut.writeline "iACLRow " & iACLRow & " is blank, done with ACL " & strACLName & " on " & strHostname
+        ' objLogOut.writeline "iACLRow " & iACLRow & " is blank, done with ACL " & strACLName & " on " & strHostname
       end if ' End of checking for error prior to analysis
-      ' if bRange = True then
-      '   strNoMatch = trim(strNoMatch) & "-" & iLastLine
-      ' end if
       iNameRow = iNameRow + 1
       if (iError = 1 or iError > MaxError) then
         if strNoMatch = "" and strMissing = "" and strNotes = "" then
@@ -536,9 +521,8 @@ Sub CleanUp()
 ' This is a cleanup function.             '
 '-------------------------------------------------------------------------------------------------'
   crt.Session.Disconnect
-  if AutoCloseResults = True then
+  if AutoCloseInput = True then
     if IsObject(wbin) then wbin.Close
-    ' app.Quit
   end if
 
   if IsObject(app) then Set wbin = app.Workbooks.Open (strOutFile,0,False)
@@ -690,17 +674,17 @@ dim iSeq
 
   if instr(1,trim(strLine)," ",vbTextCompare) > 0 then
     iSeq = trim(left(strLine,instr(1,trim(strLine)," ",vbTextCompare)))
-    objLogOut.writeline "Found seq:" & iSeq
+    ' objLogOut.writeline "Found seq:" & iSeq
     if IsNumeric(iSeq) then
-      objLogOut.writeline "confirmed it's a number"
+      ' objLogOut.writeline "confirmed it's a number"
       GetSeq = CLng(iSeq)
     else
       GetSeq = -1
-      objLogOut.writeline GetSeq & " is not a number"
+      ' objLogOut.writeline GetSeq & " is not a number"
     end if
   else
     GetSeq = -1
-    objLogOut.writeline "No space in: " & strLine
+    ' objLogOut.writeline "No space in: " & strLine
   end if
 
 end Function ' Function GetSeq

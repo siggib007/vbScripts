@@ -403,7 +403,7 @@ Sub main
       iVarRow = iVarRow + 1
       ' objLogOut.writeline "iVarRow now:" & iVarRow
     end if
-    if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
+    if wsVars.Cells(iVarRow,2).Value = "" or iFailed > 0 then
       ' objLogOut.writeline "evalute complete. wsVars.Cells(" & iVarRow & ",1).Value=" & wsVars.Cells(iVarRow,1).Value
       ' objLogOut.writeline "iFailed:" & iFailed
       if dictFailed.count > 0 then

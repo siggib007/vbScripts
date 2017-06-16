@@ -386,11 +386,11 @@ Sub main
             if dictChange.Exists(strChange) then
               bNewChange = False
               if not dictDevAffected.Exists(strHostname) then
-                dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname
+                dictChange.item(strChange) = dictChange.item(strChange) & vbcrlf & strHostname & " " & strACLName
                 dictDevAffected.add strHostname,""
               end if
             else
-              dictChange.add strChange,strHostname
+              dictChange.add strChange,strHostname & " " & strACLName
             end if
           end if
         end if
@@ -453,7 +453,7 @@ Sub CreateCSVs (strDevlist, strChange, iChangeID)
 ' all the CSV files to be used by both HPNA and PIER to push out those changes.                   '
 '-------------------------------------------------------------------------------------------------'
 dim strDevListParts, strChangeLines, x, y, strVarCol, dictDevices, iRow, iVarColList, objHPNAout
-dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout
+dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp
 
   set objHPNAout = CreateFile(strMOPPath & "HPNAVars-Change" & iChangeID & ".csv")
   set objPIERout = CreateFile(strMOPPath & "PIERDuplicate-Change" & iChangeID & ".csv")
@@ -492,10 +492,11 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout
   next
   objHPNAout.writeline
   for x=0 to ubound(strDevListParts)
-    if dictDevices.Exists(strDevListParts(x)) then
-      iRow = dictDevices(strDevListParts(x))
+    strDevTemp = split(strDevListParts(x), " ")
+    if dictDevices.Exists(strDevTemp(0)) then
+      iRow = dictDevices(strDevTemp(0))
     else
-      objLogOut "something weird just happened, can't find " & strDevListParts(x) & " in the spreadsheet!"
+      objLogOut.writeline "something weird just happened, can't find " & strDevListParts(x) & " in the spreadsheet!"
     end if
     objHPNAout.write wsVars.Cells(iRow,1).value
     objHPNAout.write "," & wsVars.Cells(iRow,2).value

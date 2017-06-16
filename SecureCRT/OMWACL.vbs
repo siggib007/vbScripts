@@ -404,6 +404,8 @@ Sub main
       ' objLogOut.writeline "iVarRow now:" & iVarRow
     end if
     if wsVars.Cells(iVarRow,1).Value = "" or iFailed > 0 then
+      ' objLogOut.writeline "evalute complete. wsVars.Cells(" & iVarRow & ",1).Value=" & wsVars.Cells(iVarRow,1).Value
+      ' objLogOut.writeline "iFailed:" & iFailed
       if dictFailed.count > 0 then
         if iFailed = 0 then
           objLogOut.writeline "There are " & dictFailed.count & " devices I couldn't connect to. Here is the list:"

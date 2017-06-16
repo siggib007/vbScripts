@@ -319,7 +319,7 @@ Sub main
               if iTemp > 0 then iGSeq = iTemp
               iTemp = GetSeq(strResultParts(iResult))
               if iTemp > 0 then iASeq = iTemp
-              objLogOut.writeline "New Seq. iGSeq:" & iGSeq & " iASeq:" & iASeq & " iResult:" & iResult & " iACLRow:" & iACLRow
+              ' objLogOut.writeline "New Seq. iGSeq:" & iGSeq & " iASeq:" & iASeq & " iResult:" & iResult & " iACLRow:" & iACLRow
               if strTempOut <> trim(strResultParts(iResult)) Then ' If generated and AsIs lines aren't identical, note it.
                 ' objLogOut.writeline strHostname & " " & strACLName & " Not identical, analyzing how"
                 ' objLogOut.writeline " Gen: " & strTempOut

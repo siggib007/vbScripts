@@ -11,10 +11,10 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, AuditCmd
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\TwoPeerNexusDevices.csv" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\Nexus2pBGPBFDAuditOut.csv" ' The name of the output file, CSV file listing results
-strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\BGPTimers\Configs" ' Folder to save individual command output to
-AuditCmd = "sh ip bgp neighbors | in ""BGP neighbor is|BFD|state ="""
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\AllGGSN.txt" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\AuditOut.csv" ' The name of the output file, CSV file listing results
+strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\Configs" ' Folder to save individual command output to
+AuditCmd = "show run router bgp 65137 neighbor-group Cisco_VNF"
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 const CompareAll = True ' Compare prefix sets even if they are different lengths. False is recomended.
 
@@ -25,8 +25,7 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, x,y, strTemp, bCont
-	dim strResultParts, strOut, strOutPath, objDevName, strBaseLine, strTest, strPrefix1, IPAddr, iLineCount
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strResultParts, strOut, strOutPath, objDevName, iLineCount
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 
@@ -94,14 +93,17 @@ Sub Main
 			strResult=trim(crt.Screen.Readstring ("#",Timeout))
 			crt.Session.Disconnect
 
+			strResultParts = split(strResult,vbcrlf)
+			iLineCount = ubound(strResultParts)
+
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
 			objDevName.writeline strResult
 			objDevName.close
-			objFileOut.writeline host & vbcrlf & strResult
+			objFileOut.writeline host & "," & iLineCount
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage
-			objFileOut.writeline IPAddr & "," & host & ",Not Connected,Error " & nError & ": " & strErr
+			objFileOut.writeline host & ",Not Connected,Error " & nError & ": " & strErr
 		end if
 	wend
 

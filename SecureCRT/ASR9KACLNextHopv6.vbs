@@ -11,8 +11,8 @@ Option Explicit
 dim strInFile, strOutFile
 
 ' User Spefified values, specify values here per your needs
-strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\OMWIPv6ACL\SL3-ARGlist.csv"
-strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\OMWIPv6ACL\SL3-ARGIPv6NextHop.csv"
+strInFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\OMWIPv6ACL\SL3-ARGlist1.csv"
+strOutFile   = "C:\Users\sbjarna\Documents\IP Projects\Automation\OMWIPv6ACL\SL3-ARGIPv6NextHop1.csv"
 
 'Nothing below here is user configurable proceed at your own risk.
 
@@ -45,6 +45,8 @@ Sub Main
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
 		host = strParts(0)
+		strNextHop = ""
+		strACLName = "n/a"
 
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
@@ -91,6 +93,7 @@ Sub Main
 				end select
 			loop
 			crt.Session.Disconnect
+			if strNextHop = "" then objFileOut.writeline host & "," & strACLName  & ",-"
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage

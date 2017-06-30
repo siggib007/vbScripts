@@ -1,8 +1,8 @@
 const ForReading    = 1
 const ForWriting    = 2
 const ForAppending  = 8
-  
-strInFile = "C:\Users\sbjarna\Documents\IP Projects\F5 MAC Masquerade\F5MACMasqueradeProblmes.txt"
+
+strInFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\NewGGSN.txt"
 ' Creating a File System Object to interact with the File System
 Set fso = CreateObject("Scripting.FileSystemObject")
 if not fso.FileExists(strInFile) then
@@ -26,7 +26,7 @@ While not objFileIn.atendofstream
 wend
 
 objFileIn.close
-set objFileIn = Nothing	
+set objFileIn = Nothing
 set fso = nothing
 
 function GetIP (strHostNmae)

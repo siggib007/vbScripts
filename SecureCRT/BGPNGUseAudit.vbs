@@ -8,13 +8,17 @@
 '|----------------------------------------------------------------------------------------------------------|
 
 Option Explicit
-dim strInFile, strOutFile, strFolder, AuditCmd, user
+dim strInFile, strOutFile, strFolder, AuditCmd(4), user
 
 ' User Spefified values, specify values here per your needs
-strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\AllGGSN.txt" ' Input file, comma seperated. First value device name, first line header
-strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\AuditOut.csv" ' The name of the output file, CSV file listing results
+strInFile        = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\ARGList072417.csv" ' Input file, comma seperated. First value device name, first line header
+strOutFile       = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\BGPAuditOut.csv" ' The name of the output file, CSV file listing results
 strFolder        = "C:\Users\sbjarna\Documents\IP Projects\Automation\UltraMPeerGroup\Configs" ' Folder to save individual command output to
-AuditCmd = "show run router bgp 65137 neighbor-group Cisco_VNF"
+AuditCmd(0)      = "show bgp neighbor-group Cisco_VNF users"
+AuditCmd(1)      = "show bgp neighbor-group Cisco_VNF-S1u users"
+AuditCmd(2)      = "show bgp neighbor-group Cisco_VNF-v6 users"
+AuditCmd(3)      = "show bgp neighbor-group Cisco_VNF-v6-bypass users"
+AuditCmd(4)      = "show bgp neighbor-group Cisco_VNF_OptIn users"
 const Timeout    = 5    ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
 const CompareAll = True ' Compare prefix sets even if they are different lengths. False is recomended.
 user = "sbjarna"
@@ -26,7 +30,7 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strResultParts, strOut, strOutPath, objDevName, iLineCount, passwd
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strResultParts, strOut, strOutPath, objDevName, iLineCount, passwd, cmd
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 
@@ -69,7 +73,7 @@ Sub Main
 	While not objFileIn.atendofstream
 		strLine = objFileIn.readline
 		strParts = split(strLine,",")
-		host = strParts(0)
+		host = strParts(1)
 
 		If crt.Session.Connected Then
 			crt.Session.Disconnect
@@ -81,6 +85,7 @@ Sub Main
 		on error goto 0
 
 		If crt.Session.Connected Then
+			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
 			crt.Screen.Synchronous = True
 			crt.Screen.WaitForString "#",Timeout
 			nError = Err.Number
@@ -90,18 +95,19 @@ Sub Main
 			end if
 			crt.Screen.Send("term len 0" & vbcr)
 			crt.Screen.WaitForString "#",Timeout
-			crt.Screen.Send(AuditCmd & vbcr)
-			crt.Screen.WaitForString vbcrlf,Timeout
-			strResult=trim(crt.Screen.Readstring ("#",Timeout))
-			crt.Session.Disconnect
+			for each cmd in AuditCmd
+				crt.Screen.Send(Cmd & vbcr)
+				crt.Screen.WaitForString vbcrlf,Timeout
+				strResult=trim(crt.Screen.Readstring ("#",Timeout))
 
-			strResultParts = split(strResult,vbcrlf)
-			iLineCount = ubound(strResultParts)
+				strResultParts = split(strResult,vbcrlf)
+				iLineCount = ubound(strResultParts)
 
-			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
-			objDevName.writeline strResult
+				objDevName.writeline strResult
+				objFileOut.writeline host & "," & cmd & "," & iLineCount
+			next
 			objDevName.close
-			objFileOut.writeline host & "," & iLineCount
+			crt.Session.Disconnect
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage

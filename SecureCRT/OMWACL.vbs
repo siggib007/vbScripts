@@ -476,8 +476,8 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp
   iRow=2
   dictDevices.removeall
   Do until wsVars.Cells(iRow,2).Value = ""
-    If not dictDevices.Exists(wsVars.Cells(iRow,2).value) then
-      dictDevices.Add wsVars.Cells(iRow,2).value, iRow
+    If not dictDevices.Exists(wsVars.Cells(iRow,2).value & " " & wsVars.Cells(iRow,4).value) then
+      dictDevices.Add wsVars.Cells(iRow,2).value & " " & wsVars.Cells(iRow,4).value, iRow
     End If
     iRow = iRow + 1
   loop
@@ -493,8 +493,8 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp
   objHPNAout.writeline
   for x=0 to ubound(strDevListParts)
     strDevTemp = split(strDevListParts(x), " ")
-    if dictDevices.Exists(strDevTemp(0)) then
-      iRow = dictDevices(strDevTemp(0))
+    if dictDevices.Exists(strDevListParts(x)) then
+      iRow = dictDevices(strDevListParts(x))
     else
       objLogOut.writeline "something weird just happened, can't find " & strDevListParts(x) & " in the spreadsheet!"
     end if

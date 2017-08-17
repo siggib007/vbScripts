@@ -50,13 +50,13 @@ Option Explicit
 
   Dim dictVars, dictACLs, dictChange, dictDevAffected, dictFailed
   Dim app, objShell, fso, objFileOut, objLogOut, objACLGen, objChangeOut, wsNames, wsVars, wsACL, wbin
-  Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, strMOPPath, strWBin
+  Dim strOutPath, strOutFile, strLogFile, strAsIsOutPath, strMOPPath, strWBin, strACLNameVar
+  Dim iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol, iIPCol, iACLNameCol
 
 Sub main
   Dim bComp, bRange, bNewChange, bOut, dkey, dkeys, errcode, errmsg, dItems
-  Dim iNameRow, iVarRow, iACLRow, iNameCol, iACLCol, iVarCol, iStartPos, iStopPos, iHostCol
-  Dim iGSeq, iASeq, iLastLine, iError, iResult, iIPCol, iChangeID, iFailed, iTemp
-  Dim strACLVar, strTempOut, strACLName, strACLID, strACLNameVar
+  Dim iNameRow, iVarRow, iACLRow, iGSeq, iASeq, iLastLine, iError, iResult, iChangeID, iFailed, iTemp
+  Dim strACLVar, strTempOut, strACLName, strACLID
   Dim strHostname, strIPAddr, strResultParts, strGenOutPath
   Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strChange
 
@@ -163,7 +163,6 @@ Sub main
     exit sub
   end if
 
-
   iVarRow=2
   iError = 1
   do ' Now start looping throught the variable sheet.
@@ -187,6 +186,19 @@ Sub main
       strIPVer = wsNames.Cells(iNameRow,4).value
       dictDevAffected.RemoveAll
       dictFailed.RemoveAll
+
+      ' objLogOut.writeline "Working on ACL " & strACLID & " / " & strACLName & " / " & strACLNameVar & " / " & strIPVer
+      ' Get the column number for the ACL Name in the Variable sheet, report an error and exit if can't be deteremined.
+      if dictVars.Exists(strACLNameVar) then
+        iACLNameCol = dictVars(strACLNameVar)
+      else
+        if strACLNameVar <> "" then
+          objLogOut.writeline "couldn't find ACL Name, " & strACLNameVar & ", in dictVars :-("
+          msgbox "couldn't find ACL name, " & strACLNameVar & ", in dictACLs, exiting :-("
+          CleanUp
+          exit sub
+        end if
+      end if
 
       ' Setup the output paths to be ACL specific
       ' First Folder for the Generated ACL's
@@ -403,7 +415,7 @@ Sub main
       iVarRow = iVarRow + 1
       ' objLogOut.writeline "iVarRow now:" & iVarRow
     end if
-    if wsVars.Cells(iVarRow,2).Value = "" or iFailed > 0 then
+    if wsVars.Cells(iVarRow,iHostCol).Value = "" or iFailed > 0 then
       ' objLogOut.writeline "evalute complete. wsVars.Cells(" & iVarRow & ",1).Value=" & wsVars.Cells(iVarRow,1).Value
       ' objLogOut.writeline "iFailed:" & iFailed
       if dictFailed.count > 0 then
@@ -453,11 +465,12 @@ Sub CreateCSVs (strDevlist, strChange, iChangeID)
 ' all the CSV files to be used by both HPNA and PIER to push out those changes.                   '
 '-------------------------------------------------------------------------------------------------'
 dim strDevListParts, strChangeLines, x, y, strVarCol, dictDevices, iRow, iVarColList, objHPNAout
-dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp
+dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp, dictDev
 
-  set objHPNAout = CreateFile(strMOPPath & "HPNAVars-Change" & iChangeID & ".csv")
-  set objPIERout = CreateFile(strMOPPath & "PIERDuplicate-Change" & iChangeID & ".csv")
+  set objHPNAout  = CreateFile(strMOPPath & "HPNAVars-Change" & iChangeID & ".csv")
+  set objPIERout  = CreateFile(strMOPPath & "PIERDuplicate-Change" & iChangeID & ".csv")
   Set dictDevices = CreateObject("Scripting.Dictionary")
+  Set dictDev     = CreateObject("Scripting.Dictionary")
   strDevListParts = split(strDevlist,vbcrlf)
   strChangeLines  = split(strChange,vbcrlf)
   strVarCol = ""
@@ -475,15 +488,25 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp
   ' Grab the device name column of the variable sheet and stick them into a dictionary.
   iRow=2
   dictDevices.removeall
-  Do until wsVars.Cells(iRow,2).Value = ""
-    If not dictDevices.Exists(wsVars.Cells(iRow,2).value & " " & wsVars.Cells(iRow,4).value) then
-      dictDevices.Add wsVars.Cells(iRow,2).value & " " & wsVars.Cells(iRow,4).value, iRow
+  Do until wsVars.Cells(iRow,iHostCol).Value = ""
+    ' objLogOut.writeline "dictDevices.Add " & wsVars.Cells(iRow,iHostCol).value & " " & wsVars.Cells(iRow,iACLNameCol).value & ", " & iRow
+    If not dictDevices.Exists(wsVars.Cells(iRow,iHostCol).value & " " & wsVars.Cells(iRow,iACLNameCol).value) then
+      dictDevices.Add wsVars.Cells(iRow,iHostCol).value & " " & wsVars.Cells(iRow,iACLNameCol).value, iRow
+    End If
+    iRow = iRow + 1
+  loop
+  iRow=2
+  dictDev.removeall
+  Do until wsVars.Cells(iRow,iHostCol).Value = ""
+    ' objLogOut.writeline "dictDev.Add " & wsVars.Cells(iRow,iHostCol).value & ", " & iRow
+    If not dictDev.Exists(wsVars.Cells(iRow,iHostCol).value) then
+      dictDev.Add wsVars.Cells(iRow,iHostCol).value, iRow
     End If
     iRow = iRow + 1
   loop
   iVarColList = split(strVarCol,",")
-  objHPNAout.write wsVars.Cells(1,1).value
-  objHPNAout.write "," & wsVars.Cells(1,2).value
+  objHPNAout.write wsVars.Cells(1,iIPCol).value
+  objHPNAout.write "," & wsVars.Cells(1,iHostCol).value
   for x=0 to ubound(iVarColList)
     if IsNumeric(iVarColList(x)) then
       iCol = cint(iVarColList(x))
@@ -492,15 +515,26 @@ dim iStartPos, iStopPos, strACLVar, strColHead, iCol, objPIERout, strDevTemp
   next
   objHPNAout.writeline
   for x=0 to ubound(strDevListParts)
+    ' objLogOut.writeline "strDevListParts(" & x & ") = " & strDevListParts(x)
     strDevTemp = split(strDevListParts(x), " ")
-    if dictDevices.Exists(strDevListParts(x)) then
-      iRow = dictDevices(strDevListParts(x))
+    if strACLNameVar = "" then
+      if dictDev.Exists(strDevTemp(0)) then
+        iRow = dictDev(strDevTemp(0))
+        ' objLogOut.writeline "iRow=" & iRow
+      else
+        objLogOut.writeline "something weird just happened, can't find " & strDevTemp(0) & " in the spreadsheet!"
+      end if
     else
-      objLogOut.writeline "something weird just happened, can't find " & strDevListParts(x) & " in the spreadsheet!"
+      if dictDevices.Exists(strDevListParts(x)) then
+        iRow = dictDevices(strDevListParts(x))
+        ' objLogOut.writeline "iRow=" & iRow
+      else
+        objLogOut.writeline "something weird just happened, can't find " & strDevListParts(x) & " in the spreadsheet!"
+      end if
     end if
-    objHPNAout.write wsVars.Cells(iRow,1).value
-    objHPNAout.write "," & wsVars.Cells(iRow,2).value
-    objPIERout.writeline ",," & wsVars.Cells(iRow,2).value & ",No,Yes,Yes,No"
+    objHPNAout.write wsVars.Cells(iRow,iIPCol).value
+    objHPNAout.write "," & wsVars.Cells(iRow,iHostCol).value
+    objPIERout.writeline ",," & wsVars.Cells(iRow,iHostCol).value & ",No,Yes,Yes,No"
     for y=0 to ubound(iVarColList)
       if IsNumeric(iVarColList(y)) then
         iCol = cint(iVarColList(y))

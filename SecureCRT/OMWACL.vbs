@@ -13,7 +13,7 @@ Option Explicit
 
   Const AutoCloseInput = True
   Const ExcelVisible   = True
-  const Timeout        = 5 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
+  const Timeout        = 250 ' Timeout in seconds for each command, if expected results aren't received withing this time, the script moves on.
   const MaxError       = 5 ' If connection error occurs how often to retry
 
  ' Nothing below here is user values, proceed with caution and at your own risk.
@@ -56,7 +56,7 @@ Option Explicit
 Sub main
   Dim bComp, bRange, bNewChange, bOut, dkey, dkeys, errcode, errmsg, dItems
   Dim iNameRow, iVarRow, iACLRow, iGSeq, iASeq, iLastLine, iError, iResult, iChangeID, iFailed, iTemp
-  Dim strACLVar, strTempOut, strACLName, strACLID
+  Dim strACLVar, strACLVar2, strTempOut, strACLName, strACLID
   Dim strHostname, strIPAddr, strResultParts, strGenOutPath
   Dim strNotes, strNoMatch, strMissing, strErr, strIPVer, strChange
 
@@ -249,6 +249,11 @@ Sub main
         iError = 1
         if dictFailed.Exists(strHostname) then dictFailed.remove(strHostname)
         ' objLogOut.writeline "connected to " & strHostname
+        ' objLogOut.writeline "Size of the result array: " & ubound(strResultParts)
+        if ubound(strResultParts) < 2 then
+          redim strResultParts(5)
+          strResultParts(1) = "% No response to the command"
+        end if
       else
         strNotes = "Failed to connect "
         objLogOut.writeline "Failed to connect to " & strHostname
@@ -273,12 +278,21 @@ Sub main
         do
           ' bComp = False
           if wsACL.Cells(iACLRow,iACLCol).value <> "" then ' Is current ACL standard line applicable to this ACL (X in the proper column)
-            ' objLogOut.writeline "Looking at standard ACL line " & iACLRow & ": " & wsACL.Cells(iACLRow,1).value & ", bComp:" & bComp & " bOut:" & bOut
             iStartPos = instr (1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
             if iStartPos > 0 then ' If the current line has a variable parse out the variable, and substitute it with the proper value.
+              objLogOut.writeline "Looking at standard ACL line " & iACLRow & ": " & wsACL.Cells(iACLRow,1).value & ", bComp:" & bComp & " bOut:" & bOut
               iStopPos = instr (iStartPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Locate the end of the variable name.
               strACLVar = mid(wsACL.Cells(iACLRow,1).value,iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
-              ' objLogOut.writeline "Parsed out ACL Variable: " & strACLVar
+              objLogOut.writeline "Parsed out ACL Variable: " & strACLVar
+              iStartPos = instr (iStopPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Look for $ which indicates a start of a variable in the ACL standard.
+              objLogOut.writeline "Second iStartPos: " & iStartPos & " last iStopPos: " & iStopPos
+              if iStartPos > 0 then ' you have second variables per line
+                iStopPos = instr (iStartPos+1,wsACL.Cells(iACLRow,1).value,"$",vbTextCompare) ' Locate the end of the variable name.
+                strACLVar2 = mid(wsACL.Cells(iACLRow,1).value,iStartPos+1,iStopPos-iStartPos-1) ' Store the name of the variable.
+                objLogOut.writeline "Parsed out second ACL Variable: " & strACLVar2
+              else
+                strACLVar2 = ""
+              end if
               if strACLVar = "ACLName" then ' If the variable is "ACLName" then substitute it with the actual ACL Name
                 strTempOut = trim(replace(wsACL.Cells(iACLRow,1).value,"$ACLName$",strACLName))
                 objACLGen.writeline strTempOut
@@ -294,6 +308,14 @@ Sub main
                 if bOut = False then ' Only process if not processed before.
                   if wsVars.Cells(iVarRow, iVarCol) <> "" then ' If the varible value is not an empty string do the substitution and write the generate ACL line to file.
                     strTempOut = trim(replace(wsACL.Cells(iACLRow,1).value,"$" & strACLVar & "$",wsVars.Cells(iVarRow, iVarCol)))
+                    if strACLVar2 <> "" then
+                      if dictVars.Exists(strACLVar2) then ' If the variable we found exists in the variable sheet.
+                        iVarCol = dictVars(strACLVar2)
+                        if wsVars.Cells(iVarRow, iVarCol) <> "" then ' If the varible value is not an empty string do the substitution and write the generate ACL line to file.
+                          strTempOut = trim(replace(wsACL.Cells(iACLRow,1).value,"$" & strACLVar2 & "$",wsVars.Cells(iVarRow, iVarCol)))
+                        end if
+                      end if
+                    end if
                     objACLGen.writeline strTempOut
                     bOut = True
                     bComp = True

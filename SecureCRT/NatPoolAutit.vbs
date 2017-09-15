@@ -26,7 +26,8 @@ Sub Main
 	const ForWriting    = 2
 	const ForAppending  = 8
 
-	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strResultParts, strOut, strOutPath, objDevName, iLineCount, passwd
+	dim strParts, strLine, objFileIn, objFileOut, host, ConCmd, fso, nError, strErr, strResult, strResultParts, strOut, strOutPath, objDevName
+	dim iLineCount, passwd, strTemp, strTempParts, strPool
 
 	strOutPath = left (strOutFile, InStrRev (strOutFile,"\"))
 
@@ -97,11 +98,21 @@ Sub Main
 
 			strResultParts = split(strResult,vbcrlf)
 			iLineCount = ubound(strResultParts)
+			strPool = ""
+			for each strTemp in strResultParts
+				strTempParts = split(strTemp," ")
+				if ubound(strTempParts) > 9 then
+					strPool = strPool & strTempParts(4) & strTempParts(7) & ","
+				end if
+			next
+			if right(strTemp,1)="," then
+				strTemp = left(strTemp,len(strTemp)-1)
+			end if
 
 			set objDevName = fso.OpenTextFile(strFolder & host & ".txt", ForWriting, True)
 			objDevName.writeline strResult
 			objDevName.close
-			objFileOut.writeline host & "," & iLineCount
+			objFileOut.writeline host & "," & strPool
 		else
 			nError = crt.GetLastError
 			strErr = crt.GetLastErrorMessage

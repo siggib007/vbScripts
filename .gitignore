@@ -57,3 +57,4 @@ ASR9KPrefixAuditv6.vbs
 SecureCRT/F5VIPs_bad.vbs
 *.txt
 *.log
+*.key

@@ -2,7 +2,9 @@ Const olFolderInbox = 6
 Const olMail = 43
 Const olEmbeddeditem = 5
 Const PropName = "http://schemas.microsoft.com/mapi/proptag/0x007D001E"
+const TempMsg = "c:\temp\TempEmail.msg"
 
+Set fso = CreateObject("Scripting.FileSystemObject")
 Set app = CreateObject("Outlook.Application")
 set objNamespace = app.GetNamespace("MAPI")
 set objInboxItems = objNameSpace.GetDefaultFolder(olFolderInbox).items
@@ -24,8 +26,8 @@ for each objItem in objInboxItems
 				if objAttachment.type = olEmbeddeditem then
 					wscript.echo "Has Attachment. From: " & .Sender & " at: " & .ReceivedTime & " subjet: " & .Subject
 					wscript.echo " - Filename: " & objAttachment.Filename
-					objAttachment.SaveAsFile ("c:\temp\TempEmail.msg")
-					set objExtMsg = app.CreateItemFromTemplate("c:\temp\TempEmail.msg")
+					objAttachment.SaveAsFile (TempMsg)
+					set objExtMsg = app.CreateItemFromTemplate(TempMsg)
 					strExtHeader = objExtMsg.PropertyAccessor.GetProperty(PropName)
 					iLoc1 = instr(1,strExtHeader,"X-Testing",1)
 					if iLoc1 > 0 then wscript.echo " ++ This is a plain test message"
@@ -36,4 +38,7 @@ for each objItem in objInboxItems
 		end with
 	end if
 next
+If fso.FileExists(TempMsg) Then
+    fso.DeleteFile TempMsg,true
+End If
 wscript.echo "That's all folks"

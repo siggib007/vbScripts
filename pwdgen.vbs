@@ -5,7 +5,7 @@ Dim ipwdlen, strpwd, iUBound, iLBound, iULDiff, x
 ' Password generator                                                            '
 ' Written by Siggib on 5/31/05                                                  '
 ' Last Changed by Siggib at 01:33AM 5/31/05                                     '
-' Usage: csscript pwdgen num                                                    '
+' Usage: cscript pwdgen num                                                    '
 '         where num is the number of characters you wish in your password.      '
 '                                                                               '
 ' Generates a random password by repeatedly picking a random character out      '
@@ -16,9 +16,11 @@ Dim ipwdlen, strpwd, iUBound, iLBound, iULDiff, x
 '-------------------------------------------------------------------------------'
 
 
-iUBound = 127 ' Upper bound of ascii table we want to use
+'iUBound = 127 ' Upper bound of ascii table we want to use
 'iLBound = 33  ' Lower bound of ascii table we want to use
-iLBound = 48  ' Lower bound of ascii table we want to use
+'iLBound = 48  ' Lower bound of ascii table we want to use
+iUBound = 90 ' Upper bound of ascii table we want to use
+iLBound = 65  ' Lower bound of ascii table we want to use
 iULDiff	= iUBound - iLBound + 1 ' The number of acceptable char
 strpwd = ""
 

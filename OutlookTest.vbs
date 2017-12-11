@@ -11,7 +11,7 @@ Set app = CreateObject("Outlook.Application")
 set objNamespace = app.GetNamespace("MAPI")
 set objInbox = objNameSpace.GetDefaultFolder(olFolderInbox)
 set objRootFolder = objInbox.Parent
-Set objDestFolder = objRootFolder.Folders("00PhisingTest")
+Set objDestFolder = objRootFolder.Folders("01 Phising Test")
 ' set objInboxItems = objInbox.items
 set objInboxItems = objRootFolder.Folders("A0Test 1").Items
 set dictItems = CreateObject("Scripting.Dictionary")
@@ -35,7 +35,7 @@ for each objItem in objInboxItems
 	                    Set objReplyMsg = .Reply
 	                    objReplyMsg.Body = "Thanks for reporting this. This message was a phishing test"
 	                    objReplyMsg.save
-	                    wscript.echo "reply sent"
+	                    wscript.echo "   reply sent"
 					else
 						wscript.echo " -- Just a normal email attachment"
 					end if
@@ -47,7 +47,8 @@ for each objItem in objInboxItems
 				strHeader = .PropertyAccessor.GetProperty(PropName)
 				iLoc1 = instr(1,strHeader,"X-PHISHTEST",1)
 				if iLoc1 > 0 then
-					wscript.echo "++ Go Fish. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
+					wscript.echo "No Attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
+					wscript.echo " ++ This is a phish test message"
 					dictItems.add .entryid, objItem
 				else
 					wscript.echo "Normal message, no attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
@@ -58,13 +59,14 @@ for each objItem in objInboxItems
 		end if
 	end with
 next
+wscript.echo vbcrlf & "Done Analysing inbox, filing the messages identified as test messages." & vbcrlf
 for each ItemID in dictItems
 	with dictItems(ItemID)
+		wscript.echo "Moving message ID " & right(.EntryID,10)
 		.move objDestFolder
-		wscript.echo "message ID " & right(.EntryID,10) & " moved"
 	end with
 next
 If fso.FileExists(strTempmsg) Then
     fso.DeleteFile strTempmsg,true
 End If
-wscript.echo "That's all folks"
+wscript.echo vbcrlf & "That's all folks"

@@ -1,4 +1,7 @@
-wscript.echo ShowFolderList ("%temp%")
+Set oShell = CreateObject( "WScript.Shell" )
+strTemp=oShell.ExpandEnvironmentStrings("%temp%")
+wscript.echo "Listing directory for " & strTemp
+wscript.echo ShowFolderList (strTemp)
 
 Function ShowFolderList(folderspec)
    Dim fso, f, f1, s, sf

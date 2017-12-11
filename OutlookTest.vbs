@@ -14,6 +14,7 @@ set objRootFolder = objInbox.Parent
 Set objDestFolder = objRootFolder.Folders("00PhisingTest")
 ' set objInboxItems = objInbox.items
 set objInboxItems = objRootFolder.Folders("A0Test 1").Items
+set dictItems = CreateObject("Scripting.Dictionary")
 
 wscript.echo "Have your inbox open checking for fish tests or emails as attachments"
 for each objItem in objInboxItems
@@ -30,12 +31,11 @@ for each objItem in objInboxItems
 					iLoc1 = instr(1,strExtHeader,"X-PHISHTEST",1)
 					if iLoc1 > 0 then
 						wscript.echo " ++ This is a phish test message"
-						.Move objDestFolder
+						dictItems.add .entryid, objItem
 	                    Set objReplyMsg = .Reply
 	                    objReplyMsg.Body = "Thanks for reporting this. This message was a phishing test"
-	                    objReplyMsg.Send
-	                    wscript.sleep 20
-	                    wscript.echo "Message moved, reply sent"
+	                    objReplyMsg.save
+	                    wscript.echo "reply sent"
 					else
 						wscript.echo " -- Just a normal email attachment"
 					end if
@@ -48,9 +48,7 @@ for each objItem in objInboxItems
 				iLoc1 = instr(1,strHeader,"X-PHISHTEST",1)
 				if iLoc1 > 0 then
 					wscript.echo "++ Go Fish. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
-					.Move objDestFolder
-					wscript.sleep 20
-					wscript.echo "message moved"
+					dictItems.add .entryid, objItem
 				else
 					wscript.echo "Normal message, no attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
 				end if
@@ -58,6 +56,12 @@ for each objItem in objInboxItems
 		else
 			wscript.echo "Class: " & .class &  " From: " & .SenderName &  " subject: " & .Subject
 		end if
+	end with
+next
+for each ItemID in dictItems
+	with dictItems(ItemID)
+		.move objDestFolder
+		wscript.echo "message ID " & right(.EntryID,10) & " moved"
 	end with
 next
 If fso.FileExists(strTempmsg) Then

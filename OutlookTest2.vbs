@@ -11,15 +11,17 @@ for each objFolder in objFolders
 next
 set objInbox = objNameSpace.GetDefaultFolder(olFolderInbox)
 set objRootFolder = objInbox.parent
-set objFolderItems = objRootFolder.folders("A10").items
-wscript.echo "Have your folder A10 open listing items"
+set objFolderItems = objRootFolder.folders("A0Test 1").items
+wscript.echo "Have your folder open listing items"
 for each objItem in objFolderItems
-	if objItem.Class = olMail then
-		with objItem
-			wscript.echo "From: " & .Sender & " at: " & .ReceivedTime & " subjet: " & .Subject
-		end with
-  else
-    wscript.echo "Class: " & objItem.Class
-	end if
+	with objItem
+		if objItem.Class = olMail then
+			wscript.echo "Mail Item subject: " & .Subject
+			wscript.echo " - ID:" & right(.EntryID,10)
+		else
+    		wscript.echo "Class: " & objItem.Class & " subject: " & .Subject
+    		wscript.echo " - ID:" & right(.EntryID,10)
+		end if
+	end with
 next
 wscript.echo "That's all folks"

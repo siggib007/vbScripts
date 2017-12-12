@@ -2,19 +2,46 @@ Const olFolderInbox = 6
 Const olMail = 43
 Const olEmbeddeditem = 5
 Const PropName = "http://schemas.microsoft.com/mapi/proptag/0x007D001E"
+Const strRootFolderName = "Siggi.Bjarnason@T-Mobile.com"
+Const strDestFolderName = "01 Phising Test"
+Const strInboxName = "A0 Test 1"
+Const PhisingIndicate = "X-PHISHTEST"
+Const MsgBody = "Thanks for reporting this. This message was a phishing test"
 
+strMonthYear = monthname(month(now))&year(now)
+wscript.echo "It is now " & strMonthYear
 Set oShell = CreateObject( "WScript.Shell" )
-strTemp=oShell.ExpandEnvironmentStrings("%temp%")
-strTempmsg = strTemp & "\DPHJITSQHEAFEMTTBCGF.msg"
+set dictItems = CreateObject("Scripting.Dictionary")
 Set fso = CreateObject("Scripting.FileSystemObject")
 Set app = CreateObject("Outlook.Application")
 set objNamespace = app.GetNamespace("MAPI")
-set objInbox = objNameSpace.GetDefaultFolder(olFolderInbox)
-set objRootFolder = objInbox.Parent
-Set objDestFolder = objRootFolder.Folders("01 Phising Test")
-' set objInboxItems = objInbox.items
-set objInboxItems = objRootFolder.Folders("A0Test 1").Items
-set dictItems = CreateObject("Scripting.Dictionary")
+' set objInbox = objNameSpace.GetDefaultFolder(olFolderInbox)
+set objRootFolder = objNameSpace.folders(strRootFolderName)
+if not FolderExists(objRootFolder,strDestFolderName) then
+	objRootFolder.folders.add strDestFolderName
+	wscript.echo strDestFolderName & " did not exists so I created it"
+else
+	wscript.echo strDestFolderName & " exists"
+end if
+if not FolderExists(objRootFolder,strInboxName) then
+	' objRootFolder.folders.add strInboxName
+	wscript.echo strInboxName & " does not exists, can't continue without a valid inbox"
+	wscript.quit
+else
+	wscript.echo strInboxName & " exists"
+end if
+Set objDestRoot = objRootFolder.Folders(strDestFolderName)
+if not FolderExists (objDestRoot,strMonthYear) then
+	objDestRoot.folders.add strMonthYear
+	wscript.echo strMonthYear & " did not exists inside " & strDestFolderName & " so I created it."
+else
+	wscript.echo strMonthYear & "esists inside " & strDestFolderName
+end if
+set objDestFolder = objDestRoot.folders(strMonthYear)
+set objInboxItems = objRootFolder.Folders(strInboxName).Items
+
+strTemp=oShell.ExpandEnvironmentStrings("%temp%")
+strTempmsg = strTemp & "\DPHJITSQHEAFEMTTBCGF.msg"
 
 wscript.echo "Have your inbox open checking for fish tests or emails as attachments"
 for each objItem in objInboxItems
@@ -28,12 +55,12 @@ for each objItem in objInboxItems
 					objAttachment.SaveAsFile (strTempmsg)
 					set objExtMsg = app.CreateItemFromTemplate(strTempmsg)
 					strExtHeader = objExtMsg.PropertyAccessor.GetProperty(PropName)
-					iLoc1 = instr(1,strExtHeader,"X-PHISHTEST",1)
+					iLoc1 = instr(1,strExtHeader,PhisingIndicate,1)
 					if iLoc1 > 0 then
 						wscript.echo " ++ This is a phish test message"
 						dictItems.add .entryid, objItem
 	                    Set objReplyMsg = .Reply
-	                    objReplyMsg.Body = "Thanks for reporting this. This message was a phishing test"
+	                    objReplyMsg.Body = MsgBody
 	                    objReplyMsg.save
 	                    wscript.echo "   reply sent"
 					else
@@ -45,7 +72,7 @@ for each objItem in objInboxItems
 				end if
 			else
 				strHeader = .PropertyAccessor.GetProperty(PropName)
-				iLoc1 = instr(1,strHeader,"X-PHISHTEST",1)
+				iLoc1 = instr(1,strHeader,PhisingIndicate,1)
 				if iLoc1 > 0 then
 					wscript.echo "No Attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
 					wscript.echo " ++ This is a phish test message"
@@ -70,3 +97,13 @@ If fso.FileExists(strTempmsg) Then
     fso.DeleteFile strTempmsg,true
 End If
 wscript.echo vbcrlf & "That's all folks"
+
+Function FolderExists (objFolder, strFolderName)
+	for each objSubFolder in objFolder.folders
+		if lcase(objSubFolder.Name) = lcase(strFolderName) then
+			FolderExists = true
+			exit Function
+		end if
+	next
+	FolderExists = false
+End Function

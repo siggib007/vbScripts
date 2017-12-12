@@ -70,16 +70,17 @@ for each objItem in objInboxItems
 					wscript.echo "Has a file Attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
 					wscript.echo " - Filename: " & objAttachment.Filename
 				end if
+			end if
+			strHeader = .PropertyAccessor.GetProperty(PropName)
+			if .attachments.count = 0 then
+				wscript.echo "No Attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
+			end if
+			iLoc1 = instr(1,strHeader,PhisingIndicate,1)
+			if iLoc1 > 0 then
+				wscript.echo " ++ This is a phish test message"
+				dictItems.add .entryid, objItem
 			else
-				strHeader = .PropertyAccessor.GetProperty(PropName)
-				iLoc1 = instr(1,strHeader,PhisingIndicate,1)
-				if iLoc1 > 0 then
-					wscript.echo "No Attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
-					wscript.echo " ++ This is a phish test message"
-					dictItems.add .entryid, objItem
-				else
-					wscript.echo "Normal message, no attachment. From: " & .SenderName & " at: " & .ReceivedTime & " subject: " & .Subject
-				end if
+				wscript.echo " -- Normal message"
 			end if
 		else
 			wscript.echo "Class: " & .class &  " From: " & .SenderName &  " subject: " & .Subject

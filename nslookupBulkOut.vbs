@@ -2,8 +2,8 @@ const ForReading    = 1
 const ForWriting    = 2
 const ForAppending  = 8
 
-strInFile  = "C:\Users\sbjarna\Documents\IP Projects\Automation\BRXOSPF\DeviceList.txt"
-strOutFile = "C:\Users\sbjarna\Documents\IP Projects\Automation\BRXOSPF\DeviceListIPs.csv"
+strInFile  = "C:\temp\UnixHosts.txt"
+strOutFile = "C:\temp\UnixListIPs2.csv"
 
 ' Creating a File System Object to interact with the File System
 Set fso = CreateObject("Scripting.FileSystemObject")

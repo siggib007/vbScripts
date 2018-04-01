@@ -1,20 +1,27 @@
 Option Explicit
-Dim FileObj, fso, strOutFileName, objFileOut, HTTP, strDeadLinkFolder
-Dim WshShell, strFavorite, strDocuments, subfolder, subfiles, subFlds2, fld2
+Dim FileObj, fso, strOutFileName, objFileOut, HTTP, strDeadLinkFolder, strGoodLinkFolder
+Dim WshShell, strFavorite, strDocuments, subfolder, subfiles, subFlds2, fld2, objLinks
 
 set WshShell = WScript.CreateObject("WScript.Shell")
 strFavorite = WshShell.SpecialFolders("Favorites")
 strDocuments = WshShell.SpecialFolders("MyDocuments")
+set objLinks = CreateObject("Scripting.Dictionary")
+
 
 strOutFileName = "FavoritesValidation.log"
 
 strDeadLinkFolder = "DeadLinks"
+strGoodLinkFolder = "C:\ValidFavorites"
 
 Set fso = CreateObject("Scripting.FileSystemObject")
 Set objFileOut = fso.createtextfile(strDocuments & "\" & strOutFileName)
 Set HTTP = CreateObject("Microsoft.XMLHTTP")
 
 FolderContent strFavorite
+	
+For Each strLink in objLinks
+	wscript.echo objLinks.item(strLink) & "; " & strLink
+Next
 
 Sub FolderContent (strCurrentFolder)
 	Dim folder, files, file, subFlds, fld, strPath, strLine, strLineParts, bFoundURL
@@ -36,23 +43,32 @@ Sub FolderContent (strCurrentFolder)
 				strLineParts = split (strLine, "=")
 				If strLineParts(0) = "URL" Then
 '					wscript.echo "testing URL " & strLineParts(1)
-				on error resume next
-					HTTP.Open "GET", strLineParts(1), False
-					HTTP.Send
-					if Err.Number > 0 then
-						writeout strpath & file.name & "; " & strLineParts(1) & "; " & Err.Number & Err.Description
-					else
-						writeout strpath & file.name & "; " & strLineParts(1) & "; " & HTTP.statusText
-					end if
-				on error goto 0
-					If HTTP.statusText <> "OK" Then
-'						writeout strLineParts(1) & " is not OK, moving to c:\" & strDeadLinkFolder & "\" & file.name
-'						file.copy ("c:\" & strDeadLinkFolder & "\" & file.name)
-'						file.move ("c:\" & strDeadLinkFolder & "\" & file.name)
-'						file.delete (true)
-'						fso.movefile file.path, "c:\" & strDeadLinkFolder & "\" & file.name
+					If not objLinks.Exists(strLineParts(1)) then 
+						objLinks.Add strLineParts(1), strpath & file.name
+						on error resume next
+						HTTP.Open "GET", strLineParts(1), False
+						HTTP.Send
+						if Err.Number > 0 then
+							writeout strpath & file.name & "; " & strLineParts(1) & "; " & Err.Number & Err.Description
+						else
+							writeout strpath & file.name & "; " & strLineParts(1) & "; " & HTTP.statusText
+						end if
+						on error goto 0
+						If HTTP.statusText = "OK" Then
+							writeout strLineParts(1) & " is good, copying to " & strGoodLinkFolder & "\" & strpath & file.name
+							If Not fso.FolderExists(strGoodLinkFolder & "\" & strpath) Then
+								fso.CreateFolder(strGoodLinkFolder & "\" & strpath)
+							End If
+							file.copy (strGoodLinkFolder & "\" & strpath & file.name)
+						else
+'							writeout strLineParts(1) & " is not OK, moving to c:\" & strDeadLinkFolder & "\" & file.name
+'							file.copy ("c:\" & strDeadLinkFolder & "\" & file.name)
+'							file.move ("c:\" & strDeadLinkFolder & "\" & file.name)
+'							file.delete (true)
+'							fso.movefile file.path, "c:\" & strDeadLinkFolder & "\" & file.name
+						End If
+						bFoundURL = true
 					End If
-					bFoundURL = true
 				End If 
 			Wend
 			if bFoundURL = false Then

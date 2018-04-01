@@ -24,7 +24,6 @@ Sub Main
   ' doing send/wait operations.
   '
   crt.Screen.Synchronous = True
-  crt.Screen.WaitForString( "ARGSNQ01#" )
   crt.Screen.Send( "show clock" & vbCR )
   crt.Screen.WaitForString( "ARGSNQ01#" )
 
@@ -42,6 +41,6 @@ Sub Main
   '
   msgbox "results are: " & result
   crt.Screen.Synchronous = False
-  crt.session.disconnect
 
 End Sub
+main

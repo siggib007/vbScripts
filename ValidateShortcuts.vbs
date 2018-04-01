@@ -1,6 +1,6 @@
 Option Explicit
 Dim FileObj, fso, strOutFileName, objFileOut, HTTP, strDeadLinkFolder, strGoodLinkFolder
-Dim WshShell, strFavorite, strDocuments, subfolder, subfiles, subFlds2, fld2, objLinks
+Dim WshShell, strFavorite, strDocuments, subfolder, subfiles, subFlds2, fld2, objLinks, strStripped
 
 set WshShell = WScript.CreateObject("WScript.Shell")
 strFavorite = WshShell.SpecialFolders("Favorites")
@@ -10,7 +10,7 @@ set objLinks = CreateObject("Scripting.Dictionary")
 
 strOutFileName = "FavoritesValidation.log"
 
-strDeadLinkFolder = "DeadLinks"
+strDeadLinkFolder = "c:\DeadLinks"
 strGoodLinkFolder = "C:\ValidFavorites"
 
 Set fso = CreateObject("Scripting.FileSystemObject")
@@ -55,15 +55,17 @@ Sub FolderContent (strCurrentFolder)
 						end if
 						on error goto 0
 						If HTTP.statusText = "OK" Then
-							writeout strLineParts(1) & " is good, copying to " & strGoodLinkFolder & "\" & strpath & file.name
-							If Not fso.FolderExists(strGoodLinkFolder & "\" & strpath) Then
-								fso.CreateFolder(strGoodLinkFolder & "\" & strpath)
+							strStripped = Replace (strpath, " ", "", 1, -1, vbTextCompare)
+							strStripped = Replace (strpath, ",", "", 1, -1, vbTextCompare)
+							writeout strLineParts(1) & " is good, copying to " & strGoodLinkFolder & "\" & strStripped & file.name
+							If Not fso.FolderExists(strGoodLinkFolder & "\" & strStripped) Then
+								fso.CreateFolder(strGoodLinkFolder & "\" & strStripped)
 							End If
-							file.copy (strGoodLinkFolder & "\" & strpath & file.name)
+							file.copy (strGoodLinkFolder & "\" & strStripped & file.name)
 						else
-'							writeout strLineParts(1) & " is not OK, moving to c:\" & strDeadLinkFolder & "\" & file.name
-'							file.copy ("c:\" & strDeadLinkFolder & "\" & file.name)
-'							file.move ("c:\" & strDeadLinkFolder & "\" & file.name)
+							writeout strLineParts(1) & " is not OK" ', moving to " & strDeadLinkFolder & "\" & file.name
+'							file.copy (strDeadLinkFolder & "\" & file.name)
+'							file.move (strDeadLinkFolder & "\" & file.name)
 '							file.delete (true)
 '							fso.movefile file.path, "c:\" & strDeadLinkFolder & "\" & file.name
 						End If

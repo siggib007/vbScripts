@@ -59,3 +59,5 @@ SecureCRT/F5VIPs_bad.vbs
 *.log
 *.key
 *.xlsx
+.bzr/
+*.bak

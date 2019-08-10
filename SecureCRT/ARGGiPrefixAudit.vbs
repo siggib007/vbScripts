@@ -11,7 +11,7 @@ Option Explicit
 dim strInFile, strOutFile, strFolder, strPrefixName, iStartCompare
 
 ' User Spefified values, specify values here per your needs
-strInFile     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARGList.csv"
+strInFile     = "C:\Temp\testips.txt"
 strOutFile    = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\ARG-Prefix-Gi-Out-List.csv"
 strFolder     = "C:\Users\sbjarna\Documents\IP Projects\Automation\GiPrefix\Out"
 strPrefixName = "Gi-Out"
